@@ -23,6 +23,8 @@ import * as Joi from 'joi';
         POSTGRES_DB_HOST: Joi.string().required(),
         PGADMIN_DEFAULT_EMAIL: Joi.string().required(),
         PGADMIN_DEFAULT_PASSWORD: Joi.string().required(),
+        JWT_SECRET: Joi.string().required(),
+        JWT_EXPIRATION: Joi.number().required(),
       }),
     }),
     AuthModule,
