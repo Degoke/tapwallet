@@ -1,0 +1,54 @@
+version: "3.8"
+services:
+  api:
+    container_name: tapmoney_api_${NODE_ENV}
+    image: tapmoney_api_${NODE_ENV}
+    environment:
+    - NODE_ENV:${NODE_ENV}
+    build:
+      context: .
+      target: ${NODE_ENV}
+      dockerfile: Dockerfile
+    volumes:
+    - .:/usr/src/app
+    - /usr/src/app/node_modules
+    ports:
+    - ${PORT}:${PORT}
+    - 9229:9229
+    command: npm run start:${NODE_ENV}
+    env_file: 
+    - .env
+    networks: 
+    - tapmoney
+    depends_on:
+      - postgres
+    restart: unless-stopped
+  postgres:
+    container_name: postgres
+    image: postgres:latest
+    ports:
+    - ${POSTGRES_DB_PORT}:${POSTGRES_DB_PORT}
+    volumes:
+    - ./pgdata:/postgresdata
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_DB: ${POSTGRES_DB_PREFIX}_${POSTGRES_DB_NAME}
+      PGDATA: /var/lib/postgresql/postgresdata
+    networks:
+      - tapmoney
+  pgadmin:
+    links:
+    - postgres:postgres
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    ports:
+    - "8080:80"
+    volumes:
+    - ./pgdata/pgadmin:/root/ .pgadmin
+    env_file:
+    - .env
+    networks: 
+    - tapmoney
+networks: 
+ tapmoney:
