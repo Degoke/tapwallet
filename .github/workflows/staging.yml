@@ -3,7 +3,7 @@ name: Deploy-staging
 on: 
   push:
     branches:
-      - develop
+      - main
 
 jobs:
   custom-deploy:
@@ -31,4 +31,4 @@ jobs:
         env:
           HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
       - name: Push to Heroku
-        run: git push heroku develop
+        run: git push heroku main
