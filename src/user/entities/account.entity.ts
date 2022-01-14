@@ -4,7 +4,7 @@ import User from './user.entity';
 @Entity()
 class Account {
   @PrimaryGeneratedColumn()
-  public accountId: number;
+  public id: number;
 
   @Column()
   public accountNumber: string;

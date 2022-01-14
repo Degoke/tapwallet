@@ -1,14 +1,15 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { WalletService } from 'src/wallet/wallet.service';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 import User from './entities/user.entity';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User) private userRepository: Repository<User>,
+    private readonly walletService: WalletService,
   ) {}
 
   async create(createUserDto: CreateUserDto) {
@@ -23,7 +24,13 @@ export class UserService {
 
       const newUser = await this.userRepository.create(createUserDto);
 
-      await this.userRepository.save(newUser);
+      const newWallet = await this.walletService.create({
+        balance: 0.0,
+        owner: newUser,
+        type: 'NAIRA',
+      });
+
+      await this.userRepository.save({ ...newUser, wallet: newWallet });
 
       return newUser;
     } catch (error) {
@@ -33,33 +40,28 @@ export class UserService {
 
   async findByEmail(email: string) {
     try {
-      return this.userRepository.findOne(email);
+      return await this.userRepository.findOne(
+        { email },
+        { relations: ['wallet'] },
+      );
     } catch (error) {
       throw error;
     }
   }
 
-  async findById(userId: number) {
+  async findById(id: number) {
     try {
-      return this.userRepository.findOne(userId);
+      return await this.userRepository.findOne(id, { relations: ['wallet'] });
     } catch (error) {
       throw error;
     }
   }
 
-  findAll() {
-    return `This action returns all user`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
-  }
-
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async find() {
+    try {
+      return await this.userRepository.findOne({ relations: ['wallet'] });
+    } catch (error) {
+      throw error;
+    }
   }
 }

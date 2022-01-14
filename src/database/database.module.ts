@@ -4,7 +4,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { join } from 'path';
 import User from 'src/user/entities/user.entity';
 import Account from 'src/user/entities/account.entity';
-import Wallet from 'src/user/entities/wallet.entity';
+import Wallet from 'src/wallet/entities/wallet.entity';
 
 @Module({
   imports: [
