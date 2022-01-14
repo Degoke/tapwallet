@@ -4,14 +4,12 @@ import { UserController } from './user.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import User from './entities/user.entity';
 import Account from './entities/account.entity';
-import Wallet from './entities/wallet.entity';
+import Wallet from 'src/wallet/entities/wallet.entity';
+import { WalletService } from 'src/wallet/wallet.service';
+import { WalletModule } from 'src/wallet/wallet.module';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([User]),
-    TypeOrmModule.forFeature([Account]),
-    TypeOrmModule.forFeature([Wallet]),
-  ],
+  imports: [TypeOrmModule.forFeature([User]), WalletModule],
   controllers: [UserController],
   providers: [UserService],
   exports: [UserService],

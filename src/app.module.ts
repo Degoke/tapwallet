@@ -5,15 +5,12 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from './database/database.module';
-import { AirtimeController } from './airtime/airtime.controller';
-import { AirtimeService } from './airtime/airtime.service';
-import { InternetService } from './internet/internet.service';
-import { InternetController } from './internet/internet.controller';
+import { WalletModule } from './wallet/wallet.module';
 import * as Joi from 'joi';
 
 @Module({
-  controllers: [AppController, AirtimeController, InternetController],
-  providers: [AppService, AirtimeService, InternetService],
+  controllers: [AppController],
+  providers: [AppService],
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
@@ -28,12 +25,13 @@ import * as Joi from 'joi';
         PGADMIN_DEFAULT_EMAIL: Joi.string().required(),
         PGADMIN_DEFAULT_PASSWORD: Joi.string().required(),
         JWT_SECRET: Joi.string().required(),
-        JWT_EXPIRATION: Joi.number().required(),
+        JWT_EXPIRATION: Joi.string().required(),
       }),
     }),
     AuthModule,
     UserModule,
     DatabaseModule,
+    WalletModule,
   ],
 })
 export class AppModule {}

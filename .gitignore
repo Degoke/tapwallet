@@ -36,5 +36,6 @@ lerna-debug.log*
 
 # ENv
 docker.env
+.env
 
 pgdata

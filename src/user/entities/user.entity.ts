@@ -1,18 +1,21 @@
 import { Exclude } from 'class-transformer';
+import Wallet from 'src/wallet/entities/wallet.entity';
 import {
   Column,
+  CreateDateColumn,
   Entity,
+  JoinColumn,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import Account from './account.entity';
-import Wallet from './wallet.entity';
 
 @Entity()
 class User {
   @PrimaryGeneratedColumn()
-  public userId: number;
+  public id: number;
 
   @Column()
   public firstName: string;
@@ -42,10 +45,22 @@ class User {
   @Column({ default: false })
   isBvnVerified: boolean;
 
+  @Column({ default: false })
+  isSuspended: boolean;
+
+  @CreateDateColumn()
+  createdDate: Date;
+
+  @UpdateDateColumn()
+  updatedDate: Date;
+
   @OneToMany(() => Account, (account: Account) => account.owner)
   public accounts: Account[];
 
-  @OneToOne(() => Wallet, (wallet: Wallet) => wallet.owner)
+  @OneToOne(() => Wallet, (wallet: Wallet) => wallet.owner, {
+    cascade: true,
+  })
+  @JoinColumn()
   public wallet: Wallet;
 }
 
