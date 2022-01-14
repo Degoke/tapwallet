@@ -15,7 +15,7 @@ export class UserService {
     try {
       const { email } = createUserDto;
 
-      const user = this.userRepository.findOne({ email });
+      const user = await this.userRepository.findOne({ email });
 
       if (user) {
         throw new HttpException('Email Already in use', HttpStatus.CONFLICT);
