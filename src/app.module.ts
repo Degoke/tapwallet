@@ -5,11 +5,15 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from './database/database.module';
+import { AirtimeController } from './airtime/airtime.controller';
+import { AirtimeService } from './airtime/airtime.service';
+import { InternetService } from './internet/internet.service';
+import { InternetController } from './internet/internet.controller';
 import * as Joi from 'joi';
 
 @Module({
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController, AirtimeController, InternetController],
+  providers: [AppService, AirtimeService, InternetService],
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
