@@ -1,9 +1,11 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import Wallet from 'src/wallet/entities/wallet.entity';
 import { WalletService } from 'src/wallet/wallet.service';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import User from './entities/user.entity';
+import { UserInterface } from './interfaces/User.interface';
 
 @Injectable()
 export class UserService {
@@ -38,12 +40,9 @@ export class UserService {
     }
   }
 
-  async findByEmail(email: string) {
+  async findByEmail(email: string): Promise<UserInterface> {
     try {
-      return await this.userRepository.findOne(
-        { email },
-        { relations: ['wallet'] },
-      );
+      return await this.userRepository.findOne({ email });
     } catch (error) {
       throw error;
     }

@@ -6,6 +6,7 @@ import { UserModule } from './user/user.module';
 import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from './database/database.module';
 import { WalletModule } from './wallet/wallet.module';
+import { TransfersModule } from './transfers/transfers.module';
 import * as Joi from 'joi';
 
 @Module({
@@ -32,6 +33,7 @@ import * as Joi from 'joi';
     UserModule,
     DatabaseModule,
     WalletModule,
+    TransfersModule,
   ],
 })
 export class AppModule {}
