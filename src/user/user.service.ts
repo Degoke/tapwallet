@@ -70,7 +70,7 @@ export class UserService {
 
   async find() {
     try {
-      return await this.userRepository.findOne({ relations: ['wallet'] });
+      return await this.userRepository.find({ relations: ['wallet'] });
     } catch (error) {
       throw error;
     }

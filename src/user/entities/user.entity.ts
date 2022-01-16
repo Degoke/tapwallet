@@ -58,12 +58,12 @@ class User {
   @OneToMany(() => Account, (account: Account) => account.owner)
   public accounts: Account[];
 
-  @OneToOne(() => Wallet, (wallet: Wallet) => wallet.owner, {
-    cascade: true,
-  })
   @OneToMany(() => Transaction, (transaction) => transaction.user)
   transaction: Transaction[];
 
+  @OneToOne(() => Wallet, (wallet: Wallet) => wallet.owner, {
+    cascade: true,
+  })
   @JoinColumn()
   public wallet: Wallet;
 }

@@ -6,18 +6,27 @@ import {
   Patch,
   Param,
   Delete,
+  Request,
+  UseGuards,
 } from '@nestjs/common';
 import { TransfersService } from './transfers.service';
 import { CreateTransferDto } from './dto/create-transfer.dto';
 import { UpdateTransferDto } from './dto/update-transfer.dto';
+import { JwtAuthGaurd } from '../common/gaurds/jwt-auth.gaurd';
 
 @Controller('transfers')
 export class TransfersController {
   constructor(private readonly transfersService: TransfersService) {}
 
-  @Post()
-  create(@Body() createTransferDto: CreateTransferDto) {
-    return this.transfersService.create(createTransferDto);
+  @Post(':recipientemail/:amount')
+  transfer(@Body() createTransferDto: CreateTransferDto) {
+    return this.transfersService.transferFunds(createTransferDto);
+  }
+
+  @UseGuards(JwtAuthGaurd)
+  @Get('hello')
+  testguard(@Request() req) {
+    return req.user;
   }
 
   @Get()
