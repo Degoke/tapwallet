@@ -1,4 +1,4 @@
 export interface ReturnTypeContainer<T> {
-  message?: string 
+  message?: string;
   data?: T;
 }
