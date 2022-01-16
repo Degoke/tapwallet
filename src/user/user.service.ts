@@ -22,6 +22,7 @@ export class UserService {
         throw new HttpException('Email Already in use', HttpStatus.CONFLICT);
       }
 
+      // make this into a transaction
       const newUser = await this.userRepository.create(createUserDto);
 
       const newWallet = await this.walletService.create({

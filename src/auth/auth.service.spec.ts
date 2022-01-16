@@ -4,12 +4,13 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import User from 'src/user/entities/user.entity';
 import { UserService } from 'src/user/user.service';
-import { mockedConfigService } from 'src/utils/config.service';
-import { mockedJwtService } from 'src/utils/jwt.service';
+import { mockedConfigService } from 'src/utils/mocks/config.service';
+import { mockedJwtService } from 'src/utils/mocks/jwt.service';
 import { AuthService } from './auth.service';
 import * as bcrypt from 'bcrypt';
-import userMocks from 'src/utils/user.mock';
+import userMocks from 'src/utils/mocks/user.mock';
 import Wallet from 'src/wallet/entities/wallet.entity';
+import { WalletService } from 'src/wallet/wallet.service';
 
 const { userData } = userMocks;
 jest.mock('bcrypt');
@@ -18,6 +19,7 @@ describe('AuthService', () => {
   let authService: AuthService;
   let userService: UserService;
   let jwtService: JwtService;
+  let walletService: WalletService;
   const walletRepository = {};
   let bcryptCompare;
   let mockFindOne: jest.Mock;
@@ -36,6 +38,7 @@ describe('AuthService', () => {
       providers: [
         UserService,
         AuthService,
+        WalletService,
         { provide: ConfigService, useValue: mockedConfigService },
         { provide: JwtService, useValue: mockedJwtService },
         { provide: getRepositoryToken(User), useValue: userRepository },
@@ -46,6 +49,7 @@ describe('AuthService', () => {
     authService = module.get<AuthService>(AuthService);
     userService = module.get<UserService>(UserService);
     jwtService = module.get<JwtService>(JwtService);
+    walletService = module.get<WalletService>(WalletService);
   });
 
   describe('validate user', () => {

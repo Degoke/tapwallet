@@ -1,16 +1,19 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from './database/database.module';
 import { WalletModule } from './wallet/wallet.module';
+import { AccountModule } from './account/account.module';
+import { MobiledataModule } from './mobiledata/mobiledata.module';
+import { AirtimeModule } from './airtime/airtime.module';
+import { TvsubscriptionModule } from './tvsubscription/tvsubscription.module';
+import { TransactionsModule } from './transactions/transactions.module';
+import { ElectricitybillModule } from './electricitybill/electricitybill.module';
+import { GiftcardsModule } from './giftcards/giftcards.module';
 import * as Joi from 'joi';
 
 @Module({
-  controllers: [AppController],
-  providers: [AppService],
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
@@ -32,6 +35,13 @@ import * as Joi from 'joi';
     UserModule,
     DatabaseModule,
     WalletModule,
+    AccountModule,
+    MobiledataModule,
+    AirtimeModule,
+    TvsubscriptionModule,
+    TransactionsModule,
+    ElectricitybillModule,
+    GiftcardsModule,
   ],
 })
 export class AppModule {}

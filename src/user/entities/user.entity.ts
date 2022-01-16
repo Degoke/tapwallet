@@ -33,6 +33,10 @@ class User {
   @Column()
   public password: string;
 
+  @Exclude()
+  @Column()
+  public pin: number;
+
   @Column({ default: false })
   isEmailVerified: boolean;
 
@@ -47,6 +51,9 @@ class User {
 
   @Column({ default: false })
   isSuspended: boolean;
+
+  @OneToMany(() => User, (user: User) => user.email)
+  referrals: User[];
 
   @CreateDateColumn()
   createdDate: Date;
