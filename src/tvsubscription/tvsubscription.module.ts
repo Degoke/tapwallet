@@ -4,6 +4,6 @@ import { TvsubscriptionController } from './tvsubscription.controller';
 
 @Module({
   controllers: [TvsubscriptionController],
-  providers: [TvsubscriptionService]
+  providers: [TvsubscriptionService],
 })
 export class TvsubscriptionModule {}

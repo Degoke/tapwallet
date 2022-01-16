@@ -11,7 +11,9 @@ describe('ElectricitybillController', () => {
       providers: [ElectricitybillService],
     }).compile();
 
-    controller = module.get<ElectricitybillController>(ElectricitybillController);
+    controller = module.get<ElectricitybillController>(
+      ElectricitybillController,
+    );
   });
 
   it('should be defined', () => {

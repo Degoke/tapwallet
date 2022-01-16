@@ -4,6 +4,6 @@ import { MobiledataController } from './mobiledata.controller';
 
 @Module({
   controllers: [MobiledataController],
-  providers: [MobiledataService]
+  providers: [MobiledataService],
 })
 export class MobiledataModule {}

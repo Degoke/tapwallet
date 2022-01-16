@@ -4,6 +4,6 @@ import { AirtimeController } from './airtime.controller';
 
 @Module({
   controllers: [AirtimeController],
-  providers: [AirtimeService]
+  providers: [AirtimeService],
 })
 export class AirtimeModule {}

@@ -4,6 +4,6 @@ import { GiftcardsController } from './giftcards.controller';
 
 @Module({
   controllers: [GiftcardsController],
-  providers: [GiftcardsService]
+  providers: [GiftcardsService],
 })
 export class GiftcardsModule {}

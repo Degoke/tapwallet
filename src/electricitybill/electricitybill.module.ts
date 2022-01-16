@@ -4,6 +4,6 @@ import { ElectricitybillController } from './electricitybill.controller';
 
 @Module({
   controllers: [ElectricitybillController],
-  providers: [ElectricitybillService]
+  providers: [ElectricitybillService],
 })
 export class ElectricitybillModule {}
