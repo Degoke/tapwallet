@@ -1,9 +1,11 @@
 /* eslint-disable prefer-const */
 import User from 'src/user/entities/user.entity';
 import Wallet from 'src/wallet/entities/wallet.entity';
+import { Transaction } from '../transactions/entities/transaction.entity';
 
 let userData: User;
 let walletData: Wallet;
+let transactionData: Transaction;
 
 walletData = {
   id: 1,
@@ -12,6 +14,16 @@ walletData = {
   type: 'NAIRA',
   createdDate: new Date(),
   updatedDate: new Date(),
+};
+transactionData = {
+  id: 1,
+  type: 'credit',
+  amount: 200,
+  balance: 5000,
+  remarks: 'debit transfer to precious adedibu',
+  createdDate: new Date(),
+  updatedDate: new Date(),
+  user: userData,
 };
 
 userData = {
@@ -28,10 +40,11 @@ userData = {
   isSuspended: false,
   accounts: [],
   wallet: walletData,
+  transaction: [transactionData],
   createdDate: new Date(),
   updatedDate: new Date(),
 };
 
-const userMocks = { userData, walletData };
+const userMocks = { userData, walletData, transactionData };
 
 export default userMocks;

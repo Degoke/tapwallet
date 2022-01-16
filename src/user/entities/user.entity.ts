@@ -1,5 +1,6 @@
 import { Exclude } from 'class-transformer';
 import Wallet from 'src/wallet/entities/wallet.entity';
+import { Transaction } from '../../transactions/entities/transaction.entity';
 import {
   Column,
   CreateDateColumn,
@@ -60,6 +61,9 @@ class User {
   @OneToOne(() => Wallet, (wallet: Wallet) => wallet.owner, {
     cascade: true,
   })
+  @OneToMany(() => Transaction, (transaction) => transaction.user)
+  transaction: Transaction[];
+
   @JoinColumn()
   public wallet: Wallet;
 }
