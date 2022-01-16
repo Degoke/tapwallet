@@ -5,14 +5,14 @@ export interface UserInterface {
   firstName: string;
   lastName: string;
   email: string;
-  password: string;
+  password?: string;
   phoneNumber: string;
   isEmailVerified: boolean;
   isIdentityVerified: boolean;
   isPhoneNumberVerified: boolean;
   isBvnVerified: boolean;
   isSuspended: boolean;
-  wallet: Wallet;
+  wallet?: Wallet;
 }
 
 export interface Users {

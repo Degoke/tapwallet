@@ -11,6 +11,7 @@ import { TvsubscriptionModule } from './tvsubscription/tvsubscription.module';
 import { TransactionsModule } from './transactions/transactions.module';
 import { ElectricitybillModule } from './electricitybill/electricitybill.module';
 import { GiftcardsModule } from './giftcards/giftcards.module';
+import { TransfersModule } from './transfers/transfers.module';
 import * as Joi from 'joi';
 
 @Module({
@@ -42,6 +43,7 @@ import * as Joi from 'joi';
     TransactionsModule,
     ElectricitybillModule,
     GiftcardsModule,
+    TransfersModule,
   ],
 })
 export class AppModule {}

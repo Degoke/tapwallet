@@ -54,7 +54,7 @@ describe('AuthService', () => {
 
   describe('validate user', () => {
     it('should find user by email', async () => {
-      const findByEmailSpy = jest.spyOn(userService, 'findByEmail');
+      const findByEmailSpy = jest.spyOn(userService, 'getByEmail');
       await authService.validateUser(userData.email, userData.password);
       expect(findByEmailSpy).toHaveBeenCalledTimes(1);
       expect(findByEmailSpy).toBeCalledWith(userData.email);

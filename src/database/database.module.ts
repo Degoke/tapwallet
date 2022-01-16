@@ -5,6 +5,7 @@ import { join } from 'path';
 import User from 'src/user/entities/user.entity';
 import Account from 'src/user/entities/account.entity';
 import Wallet from 'src/wallet/entities/wallet.entity';
+import { Transaction } from '../transactions/entities/transaction.entity';
 
 @Module({
   imports: [
@@ -18,7 +19,7 @@ import Wallet from 'src/wallet/entities/wallet.entity';
         username: configService.get('POSTGRES_USER'),
         password: configService.get('POSTGRES_PASSWORD'),
         database: configService.get('POSTGRES_DB'),
-        entities: [User, Account, Wallet],
+        entities: [User, Account, Wallet, Transaction],
         migrations: ['migration/*.js'],
         cli: {
           migrationsDir: 'migration',
