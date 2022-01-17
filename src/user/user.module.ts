@@ -8,9 +8,15 @@ import Wallet from 'src/wallet/entities/wallet.entity';
 import { WalletService } from 'src/wallet/wallet.service';
 import { WalletModule } from 'src/wallet/wallet.module';
 import { TransactionsModule } from 'src/transactions/transactions.module';
+import { SmsModule } from 'src/sms/sms.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User]), WalletModule, TransactionsModule],
+  imports: [
+    TypeOrmModule.forFeature([User]),
+    WalletModule,
+    TransactionsModule,
+    SmsModule,
+  ],
   controllers: [UserController],
   providers: [UserService],
   exports: [UserService],

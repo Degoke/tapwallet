@@ -43,6 +43,7 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
+    "twilio": "^3.73.0",
     "typeorm": "^0.2.41"
   },
   "devDependencies": {
@@ -92,6 +93,5 @@
     "moduleNameMapper": {
       "^src/(.*)$": "<rootDir>/$1"
     }
-
   }
 }
