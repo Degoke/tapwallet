@@ -54,7 +54,10 @@ class User {
   isSuspended: boolean;
 
   @Column({ nullable: true })
-  referrals: number;
+  referralCode: string;
+
+  @OneToMany(() => User, (user: User) => user.email)
+  referrals: User[];
 
   @CreateDateColumn()
   createdDate: Date;

@@ -7,6 +7,8 @@ import { CreateUserDto } from './dto/create-user.dto';
 import User from './entities/user.entity';
 import { UserInterface } from './interfaces/User.interface';
 import { ReturnTypeContainer } from '../common/containers/Container.entity';
+import * as crypto from 'crypto';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService {
@@ -26,15 +28,31 @@ export class UserService {
       }
 
       // make this into a transaction
-      const newUser = await this.userRepository.create(createUserDto);
+      const hashedPassword = await bcrypt.hash(createUserDto.password, 10);
 
+      //create user
+      const newUser = await this.userRepository.create({
+        ...createUserDto,
+        password: hashedPassword,
+      });
+
+      //create wallet
       const newWallet = await this.walletService.create({
         balance: 0.0,
         owner: newUser,
         type: 'NAIRA',
       });
 
-      await this.userRepository.save({ ...newUser, wallet: newWallet });
+      //create referral code
+      const code = await this.createReferralCode(newUser.firstName);
+
+      await this.userRepository.save({
+        ...newUser,
+        wallet: newWallet,
+        referralCode: code,
+      });
+
+      // send email or phone number
 
       return newUser;
     } catch (error) {
@@ -79,5 +97,14 @@ export class UserService {
 
   async getByEmail(email) {
     return await this.userRepository.findOne({ email });
+  }
+
+  async createReferralCode(firstName) {
+    try {
+      const hash = await crypto.randomBytes(4).toString('hex').substring(0, 3);
+      return `${firstName} ${hash}`;
+    } catch (error) {
+      throw error;
+    }
   }
 }

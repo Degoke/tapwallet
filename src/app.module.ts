@@ -12,6 +12,7 @@ import { TransactionsModule } from './transactions/transactions.module';
 import { ElectricitybillModule } from './electricitybill/electricitybill.module';
 import { GiftcardsModule } from './giftcards/giftcards.module';
 import { TransfersModule } from './transfers/transfers.module';
+import { SmsModule } from './sms/sms.module';
 import * as Joi from 'joi';
 
 @Module({
@@ -30,6 +31,10 @@ import * as Joi from 'joi';
         PGADMIN_DEFAULT_PASSWORD: Joi.string().required(),
         JWT_SECRET: Joi.string().required(),
         JWT_EXPIRATION: Joi.string().required(),
+        TWILLIO_ACCOUNT_SID: Joi.string().required(),
+        TWILLIO_MESSAGING_SERVICE_SID: Joi.string().required(),
+        TWILLIO_AUTH_TOKEN: Joi.string().required(),
+        TWILLIO_PHONE_NUMBER: Joi.string().required(),
       }),
     }),
     AuthModule,
@@ -44,6 +49,7 @@ import * as Joi from 'joi';
     ElectricitybillModule,
     GiftcardsModule,
     TransfersModule,
+    SmsModule,
   ],
 })
 export class AppModule {}

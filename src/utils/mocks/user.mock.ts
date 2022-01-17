@@ -1,7 +1,7 @@
 /* eslint-disable prefer-const */
 import User from 'src/user/entities/user.entity';
 import Wallet from 'src/wallet/entities/wallet.entity';
-import { Transaction } from '../../transactions/entities/transaction.entity';
+import { Transaction } from 'src/transactions/entities/transaction.entity';
 
 let userData: User;
 let walletData: Wallet;
@@ -45,6 +45,9 @@ userData = {
   transaction: [transactionData],
   createdDate: new Date(),
   updatedDate: new Date(),
+  pin: 1234,
+  referrals: [],
+  referralCode: 'hhdf55679',
 };
 
 const userMocks = { userData, walletData, transactionData };
