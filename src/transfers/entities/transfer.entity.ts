@@ -1,40 +1,39 @@
-// import User from '../../user/entities/user.entity';
-// import {
-//   Column,
-//   CreateDateColumn,
-//   Entity,
-//   JoinColumn,
-//   OneToMany,
-//   OneToOne,
-//   ManyToOne,
-//   PrimaryGeneratedColumn,
-//   UpdateDateColumn,
-// } from 'typeorm';
+import User from '../../user/entities/user.entity';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  OneToMany,
+  OneToOne,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
-// @Entity()
-// export class Transfer {
-//   @PrimaryGeneratedColumn()
-//   id: number;
+@Entity()
+export class Transfer {
+  @PrimaryGeneratedColumn()
+  public id: number;
 
-//   @Column()
-//   type: string;
+  @Column()
+  public type: string;
 
-//   @Column()
-//   balance: number;
+  @Column()
+  public balance: number;
 
-//   @Column()
-//   amount: number;
+  @Column()
+  public amount: number;
 
-//   @Column()
-//   remarks: string;
+  @Column()
+  public remarks: string;
 
-//   @CreateDateColumn()
-//   createdDate: Date;
+  @CreateDateColumn()
+  public createdDate: Date;
 
-//   @UpdateDateColumn()
-//   updatedDate: Date;
+  @UpdateDateColumn()
+  public updatedDate: Date;
 
-//   @ManyToOne(() => User, (user: User) => user.transfers)
-//   public author: User;
-
-// }
+  @ManyToOne(() => User, (user) => user.transaction)
+  public user: User;
+}
