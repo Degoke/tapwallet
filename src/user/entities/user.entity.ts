@@ -35,7 +35,7 @@ class User {
   public password: string;
 
   @Exclude()
-  @Column()
+  @Column({ nullable: true })
   public pin: number;
 
   @Column({ default: false })
@@ -53,8 +53,8 @@ class User {
   @Column({ default: false })
   isSuspended: boolean;
 
-  @OneToMany(() => User, (user: User) => user.email)
-  referrals: User[];
+  @Column({ nullable: true })
+  referrals: number;
 
   @CreateDateColumn()
   createdDate: Date;

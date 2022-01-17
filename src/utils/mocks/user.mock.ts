@@ -1,7 +1,7 @@
 /* eslint-disable prefer-const */
 import User from 'src/user/entities/user.entity';
 import Wallet from 'src/wallet/entities/wallet.entity';
-import { Transaction } from '../transactions/entities/transaction.entity';
+import { Transaction } from '../../transactions/entities/transaction.entity';
 
 let userData: User;
 let walletData: Wallet;
@@ -31,6 +31,7 @@ userData = {
   firstName: 'Adegoke',
   lastName: 'Adewoye',
   password: 'password',
+  pin: 1234,
   email: 'adewoye@adegoke.comn',
   phoneNumber: '08000000000',
   isEmailVerified: false,
@@ -38,6 +39,7 @@ userData = {
   isPhoneNumberVerified: false,
   isBvnVerified: false,
   isSuspended: false,
+  referrals: null,
   accounts: [],
   wallet: walletData,
   transaction: [transactionData],

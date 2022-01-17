@@ -20,9 +20,9 @@ import { Transaction } from '../transactions/entities/transaction.entity';
         password: configService.get('POSTGRES_PASSWORD'),
         database: configService.get('POSTGRES_DB'),
         entities: [User, Account, Wallet, Transaction],
-        migrations: ['migration/*.js'],
+        migrations: ['src/migration/*.js'],
         cli: {
-          migrationsDir: 'migration',
+          migrationsDir: 'src/migration',
         },
         synchronize: true,
       }),
