@@ -34,6 +34,6 @@ export class Transfer {
   @UpdateDateColumn()
   public updatedDate: Date;
 
-  @ManyToOne(() => User, (user) => user.transaction)
+  @ManyToOne(() => User, (user) => user.transactions)
   public user: User;
 }

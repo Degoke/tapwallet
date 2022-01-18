@@ -18,9 +18,14 @@ import { JwtAuthGaurd } from '../common/gaurds/jwt-auth.gaurd';
 export class TransfersController {
   constructor(private readonly transfersService: TransfersService) {}
 
-  @Post(':recipientemail/:amount')
-  transfer(@Body() createTransferDto: CreateTransferDto) {
-    return this.transfersService.transferFunds(createTransferDto);
+  @UseGuards(JwtAuthGaurd)
+  @Post()
+  transfer(@Body() createTransferDto, @Request() req) {
+    //return req.user.email;
+    return this.transfersService.transferFunds({
+      ...createTransferDto,
+      senderEmail: req.user.email,
+    });
   }
 
   @UseGuards(JwtAuthGaurd)

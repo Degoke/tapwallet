@@ -23,7 +23,7 @@ export class UserController {
     return this.userService.create(createUserDto);
   }
 
-  @UseGuards(JwtAuthGaurd)
+  // @UseGuards(JwtAuthGaurd)
   @Get()
   getUser() {
     return this.userService.find();

@@ -49,19 +49,19 @@ export class UserService {
         password: hashedPassword,
       });
 
-      //create wallet
-      // const newWallet = await this.walletService.create({
-      //   balance: 0.0,
-      //   owner: newUser,
-      //   type: 'NAIRA',
-      // });
+      //      create wallet
+      const newWallet = await this.walletService.create({
+        balance: 100000.0,
+        owner: newUser,
+        type: 'NAIRA',
+      });
 
       //create referral code
       const code = await this.createReferralCode(newUser.firstName);
 
       await this.userRepository.save({
         ...newUser,
-        //        wallet: newWallet,
+        wallet: newWallet,
         referralCode: code,
       });
 
@@ -104,7 +104,9 @@ export class UserService {
 
   async find() {
     try {
-      return await this.userRepository.find({ relations: ['wallet'] });
+      return await this.userRepository.find({
+        relations: ['transactions', 'transfers', 'wallet'],
+      });
     } catch (error) {
       throw error;
     }

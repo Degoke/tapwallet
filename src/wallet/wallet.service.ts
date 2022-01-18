@@ -29,4 +29,10 @@ export class WalletService {
   async findById(id: number) {
     return await this.walletRepository.findOne(id);
   }
+
+  // async addMoney(balance: number, walletId: number) {
+  //   const wallet = await this.walletRepository.find({ id: walletId });
+  // }
+
+  // async removeMoney(balance: number) {}
 }

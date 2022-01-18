@@ -76,20 +76,20 @@ class User {
       cascade: true,
     },
   )
+  @JoinColumn()
+  transactions: Transaction;
+
   @OneToMany(() => Transfer, (transfer: Transfer) => transfer.user, {
     cascade: true,
   })
+  @JoinColumn()
+  transfers: Transfer;
+
   @OneToOne(() => Wallet, (wallet: Wallet) => wallet.owner, {
     cascade: true,
   })
   @JoinColumn()
-  public wallet: Wallet;
-
-  @JoinColumn()
-  public transaction: Transaction;
-
-  @JoinColumn()
-  public transfer: Transfer;
+  wallet: Wallet;
 }
 
 export default User;
