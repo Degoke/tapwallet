@@ -75,13 +75,11 @@ export class UserService {
     }
   }
 
-  async findByEmail(
-    email: string,
-  ): Promise<ReturnTypeContainer<UserInterface>> {
+  async findByEmail(email: string): Promise<ReturnTypeContainer<any>> {
     try {
       const user = await this.userRepository.findOne(
         { email },
-        { relations: ['wallet'] },
+        { relations: ['wallet', 'transfers','transactions'] },
       );
       if (!user) {
         throw new HttpException('User not found', HttpStatus.NOT_FOUND);

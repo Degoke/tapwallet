@@ -50,27 +50,50 @@ export class TransfersService {
           HttpStatus.FORBIDDEN,
         );
       }
+
+      const creditTransaction = new Transfer();
+      creditTransaction.amount = amount;
+      creditTransaction.balance =
+        Number(recipientWallet.balance) + Number(amount);
+      creditTransaction.user = recipient.data;
+      creditTransaction.type = 'credit';
+      creditTransaction.remarks = `Credit transfer from ${sender.data.firstName} ${sender.data.lastName}`;
+
+      const debitTransaction = new Transfer();
+      debitTransaction.amount = amount;
+      debitTransaction.balance = Number(senderWallet.balance) - Number(amount);
+      debitTransaction.user = sender.data;
+      debitTransaction.type = 'debit';
+      debitTransaction.remarks = `Debit transfer to ${recipient.data.firstName} ${recipient.data.lastName}`;
+
+      //   console.log({ sender: sender, recipient: recipient });
+
+      sender.data.transfers.push(debitTransaction);
+      recipient.data.transfers.push(creditTransaction);
+      await queryRunner.manager.save(sender.data);
+      await queryRunner.manager.save(recipient.data);
       await queryRunner.manager.increment(
         Wallet,
         { id: recipientWalletId },
         'balance',
-        amount,
+        Number(amount),
       );
       await queryRunner.manager.decrement(
         Wallet,
         { id: senderWalletId },
         'balance',
-        amount,
+        Number(amount),
       );
+      //      console.log({ credit: credit, debit: debit });
 
       await queryRunner.commitTransaction();
       return {
         message: 'Transfer completed successfully',
       };
     } catch (err) {
-      throw err;
       // since we have errors lets rollback the changes we made
       await queryRunner.rollbackTransaction();
+      throw err;
     } finally {
       // you need to release a queryRunner which was manually instantiated
       await queryRunner.release();
