@@ -34,6 +34,6 @@ export class Transaction {
   @UpdateDateColumn()
   public updatedDate: Date;
 
-  @ManyToOne(() => User, (user) => user.transaction)
+  @ManyToOne(() => User, (user) => user.transaction, { onDelete: 'SET NULL' })
   public user: User;
 }

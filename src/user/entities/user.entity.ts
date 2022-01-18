@@ -1,6 +1,7 @@
 import { Exclude } from 'class-transformer';
 import Wallet from 'src/wallet/entities/wallet.entity';
 import { Transaction } from '../../transactions/entities/transaction.entity';
+import { Transfer } from '../../transfers/entities/transfer.entity';
 import {
   Column,
   CreateDateColumn,
@@ -68,14 +69,27 @@ class User {
   @OneToMany(() => Account, (account: Account) => account.owner)
   public accounts: Account[];
 
-  @OneToMany(() => Transaction, (transaction) => transaction.user)
-  transaction: Transaction[];
-
+  @OneToMany(
+    () => Transaction,
+    (transaction: Transaction) => transaction.user,
+    {
+      cascade: true,
+    },
+  )
+  @OneToMany(() => Transfer, (transfer: Transfer) => transfer.user, {
+    cascade: true,
+  })
   @OneToOne(() => Wallet, (wallet: Wallet) => wallet.owner, {
     cascade: true,
   })
   @JoinColumn()
   public wallet: Wallet;
+
+  @JoinColumn()
+  public transaction: Transaction;
+
+  @JoinColumn()
+  public transfer: Transfer;
 }
 
 export default User;

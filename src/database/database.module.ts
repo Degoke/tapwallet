@@ -6,7 +6,7 @@ import User from 'src/user/entities/user.entity';
 import Account from 'src/user/entities/account.entity';
 import Wallet from 'src/wallet/entities/wallet.entity';
 import { Transaction } from '../transactions/entities/transaction.entity';
-
+import { Transfer } from '../transfers/entities/transfer.entity';
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({
@@ -19,7 +19,7 @@ import { Transaction } from '../transactions/entities/transaction.entity';
         username: configService.get('POSTGRES_USER'),
         password: configService.get('POSTGRES_PASSWORD'),
         database: configService.get('POSTGRES_DB'),
-        entities: [User, Account, Wallet, Transaction],
+        entities: [User, Account, Wallet, Transaction, Transfer],
         migrations: ['src/migration/*.js'],
         cli: {
           migrationsDir: 'src/migration',

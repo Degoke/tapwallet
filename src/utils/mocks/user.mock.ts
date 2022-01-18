@@ -2,10 +2,12 @@
 import User from 'src/user/entities/user.entity';
 import Wallet from 'src/wallet/entities/wallet.entity';
 import { Transaction } from 'src/transactions/entities/transaction.entity';
+import { Transfer } from '../../transfers/entities/transfer.entity';
 
 let userData: User;
 let walletData: Wallet;
 let transactionData: Transaction;
+let transferData: Transfer;
 
 walletData = {
   id: 1,
@@ -15,7 +17,19 @@ walletData = {
   createdDate: new Date(),
   updatedDate: new Date(),
 };
+
 transactionData = {
+  id: 1,
+  type: 'deposit',
+  amount: 300,
+  balance: 5000,
+  remarks: 'debit transfer to precious adedibu',
+  createdDate: new Date(),
+  updatedDate: new Date(),
+  user: userData,
+};
+
+transferData = {
   id: 1,
   type: 'credit',
   amount: 200,
@@ -40,7 +54,8 @@ userData = {
   isSuspended: false,
   accounts: [],
   wallet: walletData,
-  transaction: [transactionData],
+  transfer: transferData,
+  transaction: transactionData,
   createdDate: new Date(),
   updatedDate: new Date(),
   pin: 1234,

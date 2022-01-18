@@ -37,18 +37,18 @@ export class UserService {
       });
 
       //create wallet
-      const newWallet = await this.walletService.create({
-        balance: 0.0,
-        owner: newUser,
-        type: 'NAIRA',
-      });
+      // const newWallet = await this.walletService.create({
+      //   balance: 0.0,
+      //   owner: newUser,
+      //   type: 'NAIRA',
+      // });
 
       //create referral code
       const code = await this.createReferralCode(newUser.firstName);
 
       await this.userRepository.save({
         ...newUser,
-        wallet: newWallet,
+        //        wallet: newWallet,
         referralCode: code,
       });
 
