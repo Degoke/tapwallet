@@ -9,13 +9,14 @@ import { WalletService } from 'src/wallet/wallet.service';
 import { WalletModule } from 'src/wallet/wallet.module';
 import { TransfersModule } from '../transfers/transfers.module';
 import { TransactionsModule } from 'src/transactions/transactions.module';
+import { SmsModule } from 'src/sms/sms.module';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([User]),
     WalletModule,
     TransactionsModule,
-    TransfersModule,
+    SmsModule,
   ],
   controllers: [UserController],
   providers: [UserService],

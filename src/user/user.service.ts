@@ -9,22 +9,35 @@ import { UserInterface } from './interfaces/User.interface';
 import { ReturnTypeContainer } from '../common/containers/Container.entity';
 import * as crypto from 'crypto';
 import * as bcrypt from 'bcrypt';
+import { SmsService } from 'src/sms/sms.service';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User) private userRepository: Repository<User>,
     private readonly walletService: WalletService,
+    private readonly smsService: SmsService,
   ) {}
 
   async create(createUserDto: CreateUserDto) {
     try {
-      const { email } = createUserDto;
+      const { email, phoneNumber } = createUserDto;
 
-      const user = await this.userRepository.findOne({ email });
+      const emailAlreadyExists = await this.userRepository.findOne({ email });
 
-      if (user) {
+      const phoneNumberAlreadyExists = await this.userRepository.findOne({
+        phoneNumber,
+      });
+
+      if (emailAlreadyExists) {
         throw new HttpException('Email Already in use', HttpStatus.CONFLICT);
+      }
+
+      if (phoneNumberAlreadyExists) {
+        throw new HttpException(
+          'Phone Number Already in use',
+          HttpStatus.CONFLICT,
+        );
       }
 
       // make this into a transaction
@@ -53,6 +66,8 @@ export class UserService {
       });
 
       // send email or phone number
+
+      this.smsService.initiatePhoneNumberVerification(newUser.phoneNumber);
 
       return newUser;
     } catch (error) {
@@ -102,7 +117,7 @@ export class UserService {
   async createReferralCode(firstName) {
     try {
       const hash = await crypto.randomBytes(4).toString('hex').substring(0, 3);
-      return `${firstName} ${hash}`;
+      return `${firstName}${hash}`;
     } catch (error) {
       throw error;
     }

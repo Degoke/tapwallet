@@ -1,26 +1,23 @@
 import { Injectable } from '@nestjs/common';
-import { CreateSmDto } from './dto/create-sm.dto';
-import { UpdateSmDto } from './dto/update-sm.dto';
+import { ConfigService } from '@nestjs/config';
+import { Twilio } from 'twilio';
 
 @Injectable()
 export class SmsService {
-  create(createSmDto: CreateSmDto) {
-    return 'This action adds a new sm';
+  private twilioClient: Twilio;
+
+  constructor(private readonly configService: ConfigService) {
+    const accountSid = configService.get('TWILLIO_ACCOUNT_SID');
+    const authToken = configService.get('TWILLIO_AUTH_TOKEN');
+
+    this.twilioClient = new Twilio(accountSid, authToken);
   }
 
-  findAll() {
-    return `This action returns all sms`;
-  }
+  async initiatePhoneNumberVerification(phoneNumber: string) {
+    const serviceSid = this.configService.get('TWILLIO_MESSAGING_SERVICE_SID');
 
-  findOne(id: number) {
-    return `This action returns a #${id} sm`;
-  }
-
-  update(id: number, updateSmDto: UpdateSmDto) {
-    return `This action updates a #${id} sm`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} sm`;
+    return this.twilioClient.verify
+      .services(serviceSid)
+      .verifications.create({ to: phoneNumber, channel: 'sms' });
   }
 }
