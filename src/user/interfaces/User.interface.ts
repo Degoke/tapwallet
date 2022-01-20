@@ -18,8 +18,8 @@ export interface UserInterface {
   isSuspended: boolean;
   pin: number;
   referrals: User[];
-  createdDate:Date;
-  updatedDate:Date;
+  createdDate: Date;
+  updatedDate: Date;
   referralCode: string;
   wallet?: Wallet;
   accounts: Account[];

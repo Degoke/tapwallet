@@ -79,7 +79,7 @@ export class UserService {
     try {
       const user = await this.userRepository.findOne(
         { email },
-        { relations: ['wallet', 'transfers','transactions'] },
+        { relations: ['wallet', 'transfers', 'transactions'] },
       );
       if (!user) {
         throw new HttpException('User not found', HttpStatus.NOT_FOUND);

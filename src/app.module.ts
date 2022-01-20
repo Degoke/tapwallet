@@ -13,6 +13,7 @@ import { ElectricitybillModule } from './electricitybill/electricitybill.module'
 import { GiftcardsModule } from './giftcards/giftcards.module';
 import { TransfersModule } from './transfers/transfers.module';
 import { SmsModule } from './sms/sms.module';
+import { PaystackModule } from './paystack/paystack.module';
 import * as Joi from 'joi';
 
 @Module({
@@ -50,6 +51,7 @@ import * as Joi from 'joi';
     GiftcardsModule,
     TransfersModule,
     SmsModule,
+    PaystackModule,
   ],
 })
 export class AppModule {}
