@@ -46,6 +46,8 @@ userData = {
   pin: 1234,
   referrals: [],
   referralCode: 'hhdf55679',
+  profileImage: 'my image',
+  role: 'admin',
 };
 
 const userMocks = { userData, walletData, transactionData };

@@ -19,3 +19,5 @@ export interface Users {
   User: object;
   Recipient: object;
 }
+
+export type UserRoles = 'user' | 'admin';

@@ -1,4 +1,10 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import {
+  forwardRef,
+  HttpException,
+  HttpStatus,
+  Inject,
+  Injectable,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import Wallet from 'src/wallet/entities/wallet.entity';
 import { WalletService } from 'src/wallet/wallet.service';
@@ -10,13 +16,17 @@ import { ReturnTypeContainer } from '../common/containers/Container.entity';
 import * as crypto from 'crypto';
 import * as bcrypt from 'bcrypt';
 import { SmsService } from 'src/sms/sms.service';
+import * as FlutterWave from 'flutterwave-node-v3';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User) private userRepository: Repository<User>,
     private readonly walletService: WalletService,
+    @Inject(forwardRef(() => SmsService))
     private readonly smsService: SmsService,
+    private readonly configService: ConfigService,
   ) {}
 
   async create(createUserDto: CreateUserDto) {
@@ -67,7 +77,9 @@ export class UserService {
 
       // send email or phone number
 
-      this.smsService.initiatePhoneNumberVerification(newUser.phoneNumber);
+      await this.smsService.initiatePhoneNumberVerification(
+        newUser.phoneNumber,
+      );
 
       return newUser;
     } catch (error) {
@@ -121,5 +133,13 @@ export class UserService {
     } catch (error) {
       throw error;
     }
+  }
+
+  async markPhonenumberAsConfirmed(id) {
+    try {
+      return this.userRepository.update(id, {
+        isPhoneNumberVerified: true,
+      });
+    } catch (error) {}
   }
 }

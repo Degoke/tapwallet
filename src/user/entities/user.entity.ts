@@ -11,7 +11,8 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import Account from './account.entity';
+import { Account } from 'src/account/entities/account.entity';
+import { UserRoles } from '../interfaces/User.interface';
 
 @Entity()
 class User {
@@ -56,6 +57,9 @@ class User {
   @Column({ nullable: true })
   referralCode: string;
 
+  @Column({ nullable: true })
+  profileImage: string;
+
   @OneToMany(() => User, (user: User) => user.email)
   referrals: User[];
 
@@ -76,6 +80,9 @@ class User {
   })
   @JoinColumn()
   public wallet: Wallet;
+
+  @Column()
+  role: UserRoles;
 }
 
 export default User;

@@ -13,6 +13,10 @@ import { ElectricitybillModule } from './electricitybill/electricitybill.module'
 import { GiftcardsModule } from './giftcards/giftcards.module';
 import { TransfersModule } from './transfers/transfers.module';
 import { SmsModule } from './sms/sms.module';
+import { BankModule } from './bank/bank.module';
+import { FlutterwaveModule } from './flutterwave/flutterwave.module';
+import { SettingsModule } from './settings/settings.module';
+import { AdminModule } from './admin/admin.module';
 import * as Joi from 'joi';
 
 @Module({
@@ -35,6 +39,9 @@ import * as Joi from 'joi';
         TWILLIO_MESSAGING_SERVICE_SID: Joi.string().required(),
         TWILLIO_AUTH_TOKEN: Joi.string().required(),
         TWILLIO_PHONE_NUMBER: Joi.string().required(),
+        FLUTTERWAVE_PUBLIC_KEY: Joi.string().required(),
+        FLUTTERWAVE_SECRET_KEY: Joi.string().required(),
+        FLUTTERWAVE_ENCRYPT_KEY: Joi.string().required(),
       }),
     }),
     AuthModule,
@@ -50,6 +57,10 @@ import * as Joi from 'joi';
     GiftcardsModule,
     TransfersModule,
     SmsModule,
+    BankModule,
+    FlutterwaveModule,
+    SettingsModule,
+    AdminModule,
   ],
 })
 export class AppModule {}

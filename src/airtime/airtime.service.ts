@@ -1,26 +1,14 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { CreateAirtimeDto } from './dto/create-airtime.dto';
 import { UpdateAirtimeDto } from './dto/update-airtime.dto';
+import * as Flutterwave from 'flutterwave-node-v3';
+import { HttpService } from '@nestjs/axios';
+import { catchError, lastValueFrom, map, of } from 'rxjs';
+import { BuyAirtimeDto } from './dto/buy-airtime.dto';
+import { off } from 'process';
 
 @Injectable()
 export class AirtimeService {
-  create(createAirtimeDto: CreateAirtimeDto) {
-    return 'This action adds a new airtime';
-  }
-
-  findAll() {
-    return `This action returns all airtime`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} airtime`;
-  }
-
-  update(id: number, updateAirtimeDto: UpdateAirtimeDto) {
-    return `This action updates a #${id} airtime`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} airtime`;
-  }
+  // get status of bill payents
 }
