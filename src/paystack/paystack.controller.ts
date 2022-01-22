@@ -10,6 +10,9 @@ import {
 import { PaystackService } from './paystack.service';
 import { CreatePaystackDto } from './dto/create-paystack.dto';
 import { UpdatePaystackDto } from './dto/update-paystack.dto';
+import { CreateTransferRecipientDto } from './dto/create-transfer-recipient.dto';
+import { InitializeWithdrawalDto } from './dto/initialize-withdrawal.dto';
+import { FinalizeWithdrawalDto } from './dto/finalize-withdrawal.dto';
 
 @Controller('paystack')
 export class PaystackController {
@@ -18,6 +21,30 @@ export class PaystackController {
   @Post()
   create(@Body() createPaystackDto: CreatePaystackDto) {
     return this.paystackService.create(createPaystackDto);
+  }
+
+  @Post('/create_transfer_recipient')
+  createTransferRecipient(
+    @Body() createTransferRecipientDto: CreateTransferRecipientDto,
+  ) {
+    return this.paystackService.createTransferRecipient(
+      createTransferRecipientDto,
+    );
+  }
+
+  @Post('/initialize_withdrawal')
+  initializeDeposit(@Body() initializeWithdrawalDto: InitializeWithdrawalDto) {
+    return this.paystackService.initializeWithdrawal(initializeWithdrawalDto);
+  }
+
+  @Post('/finalize_withdrawal')
+  finalizeDeposit(@Body() finalizeDepositDto: FinalizeWithdrawalDto) {
+    return this.paystackService.finalizeWithdrawal(finalizeDepositDto);
+  }
+
+  @Get('banklist')
+  getBankList() {
+    return this.paystackService.bankList();
   }
 
   @Get()

@@ -3,9 +3,12 @@ import { CreatePaystackDto } from './dto/create-paystack.dto';
 import { UpdatePaystackDto } from './dto/update-paystack.dto';
 import { HttpService } from '@nestjs/axios';
 import { AxiosResponse } from 'axios';
-import { Observable, map, lastValueFrom, catchError } from 'rxjs';
+import { Observable, map, lastValueFrom, catchError, of } from 'rxjs';
 import { ConfigService } from '@nestjs/config';
 import { CreateTransactionDto } from 'src/transactions/dto/create-transaction.dto';
+import { CreateTransferRecipientDto } from './dto/create-transfer-recipient.dto';
+import { InitializeWithdrawalDto } from './dto/initialize-withdrawal.dto';
+import { FinalizeWithdrawalDto } from './dto/finalize-withdrawal.dto';
 
 @Injectable()
 export class PaystackService {
@@ -82,6 +85,67 @@ export class PaystackService {
             error.response.data.message.error,
             error.response.status,
           );
+        }),
+      );
+    return await lastValueFrom(response);
+  }
+
+  async createTransferRecipient(
+    createTransferRecipientDto: CreateTransferRecipientDto,
+  ) {
+    const response = this.httpService
+      .post(
+        'https://api.paystack.co/transferrecipient',
+        createTransferRecipientDto,
+        this.requestHeaders,
+      )
+      .pipe(
+        map((res) => res.data),
+        catchError((error) => {
+          //          throw error;
+          throw new HttpException(error.message, error.response.status);
+        }),
+      );
+    return await lastValueFrom(response);
+  }
+
+  async initializeWithdrawal(
+    initializeWithdrawalDto: InitializeWithdrawalDto,
+  ) // : Promise<Observable<AxiosResponse<any>>>
+  {
+    const response = this.httpService
+      .post(
+        'https://api.paystack.co/transfer/',
+        initializeWithdrawalDto,
+        this.requestHeaders,
+      )
+      .pipe(
+        map((res) => res.data),
+        catchError((err) => of([])),
+      )
+      .subscribe(
+        (x) => console.log('Observer got a next value: ' + x),
+        (err) => console.error('Observer got an error: ' + err),
+        () => console.log('Observer got a complete notification'),
+        // res => console.log('HTTP response', res),
+        // err => console.log('HTTP Error', err),
+        // () => console.log('HTTP request completed.')
+      );
+    // return await lastValueFrom(response);
+  }
+
+  async finalizeWithdrawal(finalizeWithdrawalDto: FinalizeWithdrawalDto) {
+    const response = this.httpService
+      .post(
+        'https://api.paystack.co/transfer/finalize_transfer',
+        finalizeWithdrawalDto,
+        this.requestHeaders,
+      )
+      .pipe(
+        map((res) => res.data),
+        catchError((error) => {
+          //        throw error;
+          throw new HttpException(error.message, error.response.status);
         }),
       );
     return await lastValueFrom(response);

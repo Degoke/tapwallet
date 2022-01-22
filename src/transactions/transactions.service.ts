@@ -48,7 +48,7 @@ export class TransactionsService {
       }
       await queryRunner.commitTransaction();
       return {
-        message: 'Transfer completed successfully',
+        message: 'Deposit completed successfully',
       };
     } catch (err) {
       // since we have errors lets rollback the changes we made

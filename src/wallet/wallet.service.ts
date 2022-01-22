@@ -56,7 +56,6 @@ export class WalletService {
     }
   }
 
-
   async find() {
     return await this.walletRepository.find({ relations: ['owner'] });
   }
