@@ -14,6 +14,7 @@ import { GiftcardsModule } from './giftcards/giftcards.module';
 import { TransfersModule } from './transfers/transfers.module';
 import { SmsModule } from './sms/sms.module';
 import { PaystackModule } from './paystack/paystack.module';
+import { VtpassModule } from './vtpass/vtpass.module';
 import * as Joi from 'joi';
 
 @Module({
@@ -52,6 +53,7 @@ import * as Joi from 'joi';
     TransfersModule,
     SmsModule,
     PaystackModule,
+    VtpassModule,
   ],
 })
 export class AppModule {}

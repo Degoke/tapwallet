@@ -1,13 +1,10 @@
-import { IsNotEmpty, IsString } from "class-validator";
+import { IsNotEmpty, IsString } from 'class-validator';
 
-
-export class CreateTransferRecipientDto{
-
+export class CreateTransferRecipientDto {
   @IsNotEmpty()
   @IsString()
   type: string;
 
-  
   @IsNotEmpty()
   @IsString()
   name: string;
@@ -15,7 +12,7 @@ export class CreateTransferRecipientDto{
   @IsNotEmpty()
   @IsString()
   account_number: string;
-  
+
   @IsNotEmpty()
   @IsString()
   bank_code: string;

@@ -110,9 +110,8 @@ export class PaystackService {
   }
 
   async initializeWithdrawal(
-    initializeWithdrawalDto: InitializeWithdrawalDto,
-  ) // : Promise<Observable<AxiosResponse<any>>>
-  {
+    initializeWithdrawalDto: InitializeWithdrawalDto, // : Promise<Observable<AxiosResponse<any>>>
+  ) {
     const response = this.httpService
       .post(
         'https://api.paystack.co/transfer/',
