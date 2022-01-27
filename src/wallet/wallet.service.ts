@@ -69,4 +69,18 @@ export class WalletService {
   // }
 
   // async removeMoney(balance: number) {}
+  async getWalletByOwnerId(id: number) {
+    try {
+      return await this.walletRepository.findOne({
+        relations: ['owner'],
+        where: {
+          owner: {
+            id: id,
+          },
+        },
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
 }
