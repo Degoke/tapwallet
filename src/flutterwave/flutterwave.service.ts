@@ -13,6 +13,10 @@ import { UssdDepositData } from './interfaces/deposits.interface';
 import { UssdDepositDto } from './dto/ussd-deposit.dto';
 import { InitiateWithdrawalDto } from './dto/initiate-withdrawal.dto';
 import { InitiateWithdrawalData } from './interfaces/withdrawal.interface';
+import { BillCategoryType } from 'src/common/types/bill-categories.type';
+import { getTransactionReference } from 'src/utils/generate-transaction-reference';
+import { CreateReservedAccountDto } from './dto/create-reserved-account.dto';
+import { compare } from 'bcrypt';
 
 @Injectable()
 export class FlutterwaveService {
@@ -34,7 +38,7 @@ export class FlutterwaveService {
     };
   }
 
-  async getAllBillCategories(category: BillCategories) {
+  async getAllBillCategories(category: BillCategoryType) {
     const response = this.httpService
       .get(
         `https://api.flutterwave.com/v3/bill-categories?${category}=1`,
@@ -181,7 +185,7 @@ export class FlutterwaveService {
   }
 
   async initiateCardDeposit(initiateDepositDto: InitiateDepositDto) {
-    const reference = await this.generateTransactionReference();
+    const reference = await getTransactionReference();
     const initiateDepositData = { ...initiateDepositDto, tx_ref: reference };
     const payload = {
       client: this.encrypt(JSON.stringify(initiateDepositData)),
@@ -270,7 +274,7 @@ export class FlutterwaveService {
   }
 
   async initiateUssdDeposit(ussdDepositDto: UssdDepositDto) {
-    const reference = await this.generateTransactionReference();
+    const reference = await getTransactionReference();
     const ussdDepositData: UssdDepositData = {
       ...ussdDepositDto,
       tx_ref: reference,
@@ -295,7 +299,7 @@ export class FlutterwaveService {
   }
 
   async initiateWithdrawal(initiateWithdrawalDto: InitiateWithdrawalDto) {
-    const reference = await this.generateTransactionReference();
+    const reference = await getTransactionReference();
     const initiateWithdrawalData: InitiateWithdrawalData = {
       ...initiateWithdrawalDto,
       reference: reference,
@@ -319,9 +323,46 @@ export class FlutterwaveService {
     return await lastValueFrom(response);
   }
 
-  async generateTransactionReference() {
-    const hash = await crypto.randomBytes(4).toString('hex').substring(0, 6);
-    return `TM-${hash}`;
+  async createReservedAccount(
+    createReservedAccountDto: CreateReservedAccountDto,
+  ) {
+    const response = this.httpService
+      .post(
+        `https://api.flutterwave.com/v3/virtual-account-numbers`,
+        createReservedAccountDto,
+        this.requestHeaders,
+      )
+      .pipe(
+        map((res) => res.data),
+        catchError((error) => {
+          throw new HttpException(
+            error.response.data.message,
+            error.response.status,
+          );
+        }),
+      );
+
+    return await lastValueFrom(response);
+  }
+
+  async deleteReservedAccount(orderRef: string) {
+    const response = this.httpService
+      .post(
+        `https://api.flutterwave.com/v3/virtual-account-numbers/${orderRef}`,
+        null,
+        this.requestHeaders,
+      )
+      .pipe(
+        map((res) => res.data),
+        catchError((error) => {
+          throw new HttpException(
+            error.response.data.message,
+            error.response.status,
+          );
+        }),
+      );
+
+    return await lastValueFrom(response);
   }
 
   encrypt(text: string) {

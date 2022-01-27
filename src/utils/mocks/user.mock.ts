@@ -2,6 +2,8 @@
 import User from 'src/user/entities/user.entity';
 import Wallet from 'src/wallet/entities/wallet.entity';
 import { Transaction } from 'src/transactions/entities/transaction.entity';
+import { Role } from 'src/user/interfaces/user-role.type';
+import { number } from 'joi';
 
 let userData: User;
 let walletData: Wallet;
@@ -47,7 +49,9 @@ userData = {
   referrals: [],
   referralCode: 'hhdf55679',
   profileImage: 'my image',
-  role: 'admin',
+  role: Role.User,
+  permissions: [],
+  airtimeActivities: [],
 };
 
 const userMocks = { userData, walletData, transactionData };

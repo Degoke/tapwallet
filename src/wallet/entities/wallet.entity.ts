@@ -8,6 +8,7 @@ import {
   JoinColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  RelationId,
 } from 'typeorm';
 import { WalletType } from '../dto/create-wallet.dto';
 

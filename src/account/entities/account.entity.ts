@@ -1,6 +1,14 @@
 import User from 'src/user/entities/user.entity';
-import { Column, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  RelationId,
+} from 'typeorm';
 
+@Entity()
 export class Account {
   @PrimaryGeneratedColumn()
   id: number;
@@ -14,8 +22,12 @@ export class Account {
   @Column()
   accountNumber: string;
 
-  @ManyToOne(() => User, (user: User) => user.id)
+  @ManyToOne(() => User, (user: User) => user.accounts)
   owner: User;
 
-  isPrimaryAccount: boolean;
+  @Column()
+  ownerId: number;
+
+  @CreateDateColumn()
+  createdAt: Date;
 }

@@ -15,4 +15,9 @@ import { request } from 'http';
 @Controller('flutterwave')
 export class FlutterwaveController {
   constructor(private readonly flutterwaveService: FlutterwaveService) {}
+
+  @Get()
+  test() {
+    return this.flutterwaveService.getAllBankCodes();
+  }
 }

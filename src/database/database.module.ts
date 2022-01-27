@@ -6,9 +6,10 @@ import User from 'src/user/entities/user.entity';
 import Wallet from 'src/wallet/entities/wallet.entity';
 import { Transaction } from '../transactions/entities/transaction.entity';
 import { Setting } from 'src/settings/entities/setting.entity';
-import { Giftcard } from 'src/giftcards/entities/giftcard.entity';
-import { Batch } from 'src/giftcards/entities/batch.entity';
 import { Account } from 'src/account/entities/account.entity';
+import Log from 'src/log/entities/log.entity';
+import DatabaseLogger from './database-logger';
+import { Airtime } from 'src/airtime/entities/airtime.entity';
 
 @Module({
   imports: [
@@ -17,25 +18,19 @@ import { Account } from 'src/account/entities/account.entity';
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
         type: 'postgres',
+        logger: new DatabaseLogger(),
         host: configService.get('POSTGRES_DB_HOST'),
         port: configService.get('POSTGRES_DB_PORT'),
         username: configService.get('POSTGRES_USER'),
         password: configService.get('POSTGRES_PASSWORD'),
         database: configService.get('POSTGRES_DB'),
-        entities: [
-          User,
-          Account,
-          Wallet,
-          Transaction,
-          Setting,
-          Giftcard,
-          Batch,
-        ],
+        entities: [User, Account, Wallet, Transaction, Setting, Log, Airtime],
         migrations: ['src/migration/*.js'],
         cli: {
           migrationsDir: 'src/migration',
         },
-        synchronize: true,
+        synchronize: false,
+        autoLoadEntities: true,
       }),
     }),
   ],

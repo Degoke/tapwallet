@@ -1,5 +1,13 @@
-import { Column, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { ServicesType } from 'src/common/types/service.type';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
+@Entity()
 export class Setting {
   @PrimaryGeneratedColumn()
   id: number;
@@ -8,10 +16,13 @@ export class Setting {
   name: string;
 
   @Column()
-  isActive: true;
+  value: ServicesType;
 
   @Column()
-  value: string;
+  isActive: boolean;
+
+  @CreateDateColumn()
+  createdAt: Date;
 
   @UpdateDateColumn()
   updatedAt: Date;

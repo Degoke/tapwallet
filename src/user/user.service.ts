@@ -77,9 +77,9 @@ export class UserService {
 
       // send email or phone number
 
-      await this.smsService.initiatePhoneNumberVerification(
+      /*await this.smsService.initiatePhoneNumberVerification(
         newUser.phoneNumber,
-      );
+      );*/
 
       return newUser;
     } catch (error) {
@@ -93,7 +93,7 @@ export class UserService {
     try {
       const user = await this.userRepository.findOne(
         { email },
-        { relations: ['wallet'] },
+        { relations: ['wallet', 'accounts', 'airtimeActivities'] },
       );
       if (!user) {
         throw new HttpException('User not found', HttpStatus.NOT_FOUND);
@@ -116,7 +116,9 @@ export class UserService {
 
   async find() {
     try {
-      return await this.userRepository.find({ relations: ['wallet'] });
+      return await this.userRepository.find({
+        relations: ['wallet', 'accounts'],
+      });
     } catch (error) {
       throw error;
     }
@@ -142,4 +144,6 @@ export class UserService {
       });
     } catch (error) {}
   }
+
+  markBvnAsConfirmed;
 }

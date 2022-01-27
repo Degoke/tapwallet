@@ -16,8 +16,4 @@ export class BuyAirtimeDto {
   @IsString()
   @IsNotEmpty()
   type: string;
-
-  @IsString()
-  @IsNotEmpty()
-  reference: string;
 }

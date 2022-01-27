@@ -29,4 +29,19 @@ export class WalletService {
   async findById(id: number) {
     return await this.walletRepository.findOne(id);
   }
+
+  async getWalletByOwnerId(id: number) {
+    try {
+      return await this.walletRepository.findOne({
+        relations: ['owner'],
+        where: {
+          owner: {
+            id: id,
+          },
+        },
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
 }
