@@ -25,7 +25,16 @@ import { Airtime } from 'src/airtime/entities/airtime.entity';
         username: configService.get('POSTGRES_USER'),
         password: configService.get('POSTGRES_PASSWORD'),
         database: configService.get('POSTGRES_DB'),
-        entities: [User, Account, Wallet, Transaction, Setting, Log, Airtime,Transfer],
+        entities: [
+          User,
+          Account,
+          Wallet,
+          Transaction,
+          Setting,
+          Log,
+          Airtime,
+          Transfer,
+        ],
         migrations: ['src/migration/*.js'],
         cli: {
           migrationsDir: 'src/migration',

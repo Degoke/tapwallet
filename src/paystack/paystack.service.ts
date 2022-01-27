@@ -9,6 +9,7 @@ import { CreateTransactionDto } from 'src/transactions/dto/create-transaction.dt
 import { CreateTransferRecipientDto } from './dto/create-transfer-recipient.dto';
 import { InitializeWithdrawalDto } from './dto/initialize-withdrawal.dto';
 import { FinalizeWithdrawalDto } from './dto/finalize-withdrawal.dto';
+import { VerifyAccountNumberDto } from './dto/verify-account-number.dto';
 
 @Injectable()
 export class PaystackService {
@@ -59,10 +60,7 @@ export class PaystackService {
         map((res) => res.data),
         catchError((error) => {
           //          throw error;
-          throw new HttpException(
-            error.response.data.message.error,
-            error.response.status,
-          );
+          throw new HttpException(error.message, error.response.status);
         }),
       );
     return await lastValueFrom(response);
@@ -81,10 +79,7 @@ export class PaystackService {
         map((res) => res.data),
         catchError((error) => {
           //          throw error;
-          throw new HttpException(
-            error.response.data.message.error,
-            error.response.status,
-          );
+          throw new HttpException(error.message, error.response.status);
         }),
       );
     return await lastValueFrom(response);
@@ -120,17 +115,17 @@ export class PaystackService {
       )
       .pipe(
         map((res) => res.data),
-        catchError((err) => of([])),
-      )
-      .subscribe(
-        (x) => console.log('Observer got a next value: ' + x),
-        (err) => console.error('Observer got an error: ' + err),
-        () => console.log('Observer got a complete notification'),
-        // res => console.log('HTTP response', res),
-        // err => console.log('HTTP Error', err),
-        // () => console.log('HTTP request completed.')
+        catchError((error) => {
+          console.log(error);
+
+          //          throw error;
+          throw new HttpException(
+            error.response.data.message,
+            error.response.status,
+          );
+        }),
       );
-    // return await lastValueFrom(response);
+    return await lastValueFrom(response);
   }
 
   async finalizeWithdrawal(finalizeWithdrawalDto: FinalizeWithdrawalDto) {
@@ -147,6 +142,24 @@ export class PaystackService {
           throw new HttpException(error.message, error.response.status);
         }),
       );
+    return await lastValueFrom(response);
+  }
+
+  async verifyAccountNumber(params: VerifyAccountNumberDto) {
+    const { accountNumber, bankID } = params;
+
+    const response = this.httpService
+      .get(
+        `https://api.paystack.co/bank/resolve?account_number=${accountNumber}&bank_code=${bankID}`,
+        this.requestHeaders,
+      )
+      .pipe(
+        map((res) => res.data),
+        catchError((error) => {
+          throw new HttpException(error.message, error.response.status);
+        }),
+      );
+
     return await lastValueFrom(response);
   }
 

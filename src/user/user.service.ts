@@ -91,7 +91,15 @@ export class UserService {
     try {
       const user = await this.userRepository.findOne(
         { email },
-        { relations: ['wallet', 'transfers', 'transactions','accounts', 'airtimeActivities'] },
+        {
+          relations: [
+            'wallet',
+            'transfers',
+            'transactions',
+            'accounts',
+            'airtimeActivities',
+          ],
+        },
       );
       if (!user) {
         throw new HttpException('User not found', HttpStatus.NOT_FOUND);
@@ -115,7 +123,7 @@ export class UserService {
   async find() {
     try {
       return await this.userRepository.find({
-        relations: ['wallet', 'accounts','transactions', 'transfers',],
+        relations: ['wallet', 'accounts', 'transactions', 'transfers'],
       });
     } catch (error) {
       throw error;

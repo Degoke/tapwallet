@@ -6,6 +6,17 @@ import { AxiosResponse } from 'axios';
 import { Observable, map, lastValueFrom, catchError, of } from 'rxjs';
 import { ConfigService } from '@nestjs/config';
 import { BuyAirtimeDto } from './dto/buy-airtime.dto';
+import { BuyDataDto } from './dto/buy-data.dto';
+import { QueryTransactionStatusDto } from './dto/query-transaction-status.dto';
+import { VerifySmilePhoneDto } from './dto/verify-smile-phone.dto';
+import { VerifySmileEmailDto } from './dto/verify-smile-email.dto';
+import { VerifySmartCardDto } from './dto/verify-smart-card.dto';
+import { BouquetChangeDto } from './dto/bouquet-change.dto';
+import { BouquetRenewalDto } from './dto/bouquet-renewal.dto';
+import { BuyStartimesDto } from './dto/buy-startimes.dto';
+import { BuyShowmaxDto } from './dto/buy-showmax.dto';
+import { BuyWAECDto } from './dto/buy-waec.dto';
+import { BuyElectricityDto } from './dto/buy-electricity.dto';
 
 @Injectable()
 export class VtpassService {
@@ -18,9 +29,12 @@ export class VtpassService {
   ) {
     this.secretKey = this.configService.get('VTPASS_SECRET_KEY');
     this.publicKey = this.configService.get('VTPASS_PUBLIC_KEY');
+    const base64encodedData = Buffer.from(
+      'adedibuprecious@gmail.com' + ':' + 'Snowflakes',
+    ).toString('base64');
     this.requestHeaders = {
       headers: {
-        Authorization: 'Bearer' + ' ' + this.secretKey,
+        Authorization: 'Basic ' + base64encodedData,
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
@@ -28,12 +42,32 @@ export class VtpassService {
   }
 
   async buyAirtime(
-    createTransactionDto: BuyAirtimeDto,
+    buyAirtimeDto: BuyAirtimeDto,
   ): Promise<Observable<AxiosResponse<any>>> {
     const response = this.httpService
       .post(
-        'https://api.paystack.co/transaction/initialize',
-        createTransactionDto,
+        'https://sandbox.vtpass.com/api/pay',
+        buyAirtimeDto,
+        this.requestHeaders,
+      )
+      .pipe(
+        map((res) => res.data),
+        catchError((error) => {
+          //        console.log(error);
+          throw new HttpException(error.response.data, error.response.status);
+        }),
+      );
+    return await lastValueFrom(response);
+  }
+
+  async getVariationCodes(
+    params: object,
+  ): Promise<Observable<AxiosResponse<any>>> {
+    const serviceID = params['serviceID'];
+
+    const response = this.httpService
+      .get(
+        `https://sandbox.vtpass.com/api/service-variations?serviceID=${serviceID}`,
         this.requestHeaders,
       )
       .pipe(
@@ -44,6 +78,215 @@ export class VtpassService {
             error.response.data.message.error,
             error.response.status,
           );
+        }),
+      );
+    return await lastValueFrom(response);
+  }
+
+  async buyData(
+    buyDataDto: BuyDataDto,
+  ): Promise<Observable<AxiosResponse<any>>> {
+    const response = this.httpService
+      .post(
+        'https://sandbox.vtpass.com/api/pay',
+        buyDataDto,
+        this.requestHeaders,
+      )
+      .pipe(
+        map((res) => res.data),
+        catchError((error) => {
+          //          console.log(error);
+          throw new HttpException(error.response.data, error.response.status);
+        }),
+      );
+    return await lastValueFrom(response);
+  }
+
+  async queryTransactionStatus(
+    queryTransactionStatusDto: QueryTransactionStatusDto,
+  ): Promise<Observable<AxiosResponse<any>>> {
+    const response = this.httpService
+      .post(
+        'https://sandbox.vtpass.com/api/requery',
+        queryTransactionStatusDto,
+        this.requestHeaders,
+      )
+      .pipe(
+        map((res) => res.data),
+        catchError((error) => {
+          //          console.log(error);
+          throw new HttpException(error.response.data, error.response.status);
+        }),
+      );
+    return await lastValueFrom(response);
+  }
+
+  async verifySmilePhone(
+    verifySmilePhoneDto: VerifySmilePhoneDto,
+  ): Promise<Observable<AxiosResponse<any>>> {
+    const response = this.httpService
+      .post(
+        'https://sandbox.vtpass.com/api/merchant-verify/smile/phone',
+        verifySmilePhoneDto,
+        this.requestHeaders,
+      )
+      .pipe(
+        map((res) => res.data),
+        catchError((error) => {
+          //          console.log(error);
+          throw new HttpException(error.response.data, error.response.status);
+        }),
+      );
+    return await lastValueFrom(response);
+  }
+
+  async verifySmileEmail(
+    verifySmileEmailDto: VerifySmileEmailDto,
+  ): Promise<Observable<AxiosResponse<any>>> {
+    const response = this.httpService
+      .post(
+        ' https://sandbox.vtpass.com/api/merchant-verify/smile/email',
+        verifySmileEmailDto,
+        this.requestHeaders,
+      )
+      .pipe(
+        map((res) => res.data),
+        catchError((error) => {
+          //          console.log(error);
+          throw new HttpException(error.response.data, error.response.status);
+        }),
+      );
+    return await lastValueFrom(response);
+  }
+
+  async verifySmartCardNumber(
+    verifySmartCardDto: VerifySmartCardDto,
+  ): Promise<Observable<AxiosResponse<any>>> {
+    const response = this.httpService
+      .post(
+        'https://sandbox.vtpass.com/api/merchant-verify',
+        verifySmartCardDto,
+        this.requestHeaders,
+      )
+      .pipe(
+        map((res) => res.data),
+        catchError((error) => {
+          //          console.log(error);
+          throw new HttpException(error.response.data, error.response.status);
+        }),
+      );
+    return await lastValueFrom(response);
+  }
+
+  async bouquetChange(
+    bouquetChangeDto: BouquetChangeDto,
+  ): Promise<Observable<AxiosResponse<any>>> {
+    const response = this.httpService
+      .post(
+        'https://sandbox.vtpass.com/api/pay',
+        bouquetChangeDto,
+        this.requestHeaders,
+      )
+      .pipe(
+        map((res) => res.data),
+        catchError((error) => {
+          //          console.log(error);
+          throw new HttpException(error.response.data, error.response.status);
+        }),
+      );
+    return await lastValueFrom(response);
+  }
+
+  async bouquetRenewal(
+    bouquetRenewalDto: BouquetRenewalDto,
+  ): Promise<Observable<AxiosResponse<any>>> {
+    const response = this.httpService
+      .post(
+        'https://sandbox.vtpass.com/api/pay',
+        bouquetRenewalDto,
+        this.requestHeaders,
+      )
+      .pipe(
+        map((res) => res.data),
+        catchError((error) => {
+          //          console.log(error);
+          throw new HttpException(error.response.data, error.response.status);
+        }),
+      );
+    return await lastValueFrom(response);
+  }
+
+  async buyStartimes(
+    buyStartimesDto: BuyStartimesDto,
+  ): Promise<Observable<AxiosResponse<any>>> {
+    const response = this.httpService
+      .post(
+        'https://sandbox.vtpass.com/api/pay',
+        buyStartimesDto,
+        this.requestHeaders,
+      )
+      .pipe(
+        map((res) => res.data),
+        catchError((error) => {
+          //          console.log(error);
+          throw new HttpException(error.response.data, error.response.status);
+        }),
+      );
+    return await lastValueFrom(response);
+  }
+
+  async buyShowmax(
+    buyShowmaxDto: BuyShowmaxDto,
+  ): Promise<Observable<AxiosResponse<any>>> {
+    const response = this.httpService
+      .post(
+        'https://sandbox.vtpass.com/api/pay',
+        buyShowmaxDto,
+        this.requestHeaders,
+      )
+      .pipe(
+        map((res) => res.data),
+        catchError((error) => {
+          //          console.log(error);
+          throw new HttpException(error.response.data, error.response.status);
+        }),
+      );
+    return await lastValueFrom(response);
+  }
+
+  async buyWAEC(
+    buyWAECDto: BuyWAECDto,
+  ): Promise<Observable<AxiosResponse<any>>> {
+    const response = this.httpService
+      .post(
+        'https://sandbox.vtpass.com/api/pay',
+        buyWAECDto,
+        this.requestHeaders,
+      )
+      .pipe(
+        map((res) => res.data),
+        catchError((error) => {
+          //          console.log(error);
+          throw new HttpException(error.response.data, error.response.status);
+        }),
+      );
+    return await lastValueFrom(response);
+  }
+
+  async buyElectricity(
+    buyElectricityDto: BuyElectricityDto,
+  ): Promise<Observable<AxiosResponse<any>>> {
+    const response = this.httpService
+      .post(
+        'https://sandbox.vtpass.com/api/pay',
+        buyElectricityDto,
+        this.requestHeaders,
+      )
+      .pipe(
+        map((res) => res.data),
+        catchError((error) => {
+          //          console.log(error);
+          throw new HttpException(error.response.data, error.response.status);
         }),
       );
     return await lastValueFrom(response);

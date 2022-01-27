@@ -13,6 +13,7 @@ import { UpdatePaystackDto } from './dto/update-paystack.dto';
 import { CreateTransferRecipientDto } from './dto/create-transfer-recipient.dto';
 import { InitializeWithdrawalDto } from './dto/initialize-withdrawal.dto';
 import { FinalizeWithdrawalDto } from './dto/finalize-withdrawal.dto';
+import { VerifyAccountNumberDto } from './dto/verify-account-number.dto';
 
 @Controller('paystack')
 export class PaystackController {
@@ -45,6 +46,12 @@ export class PaystackController {
   @Get('banklist')
   getBankList() {
     return this.paystackService.bankList();
+  }
+
+  @Get('verify_account_number/:accountNumber/:bankID')
+  verifyAccountNumber(@Param() params: VerifyAccountNumberDto) {
+    //    return params;
+    return this.paystackService.verifyAccountNumber(params);
   }
 
   @Get()
