@@ -5,7 +5,6 @@ import { join } from 'path';
 import User from 'src/user/entities/user.entity';
 import Wallet from 'src/wallet/entities/wallet.entity';
 import { Transaction } from '../transactions/entities/transaction.entity';
-import { Transfer } from '../transfers/entities/transfer.entity';
 import { Setting } from 'src/settings/entities/setting.entity';
 import { Account } from 'src/account/entities/account.entity';
 import Log from 'src/log/entities/log.entity';

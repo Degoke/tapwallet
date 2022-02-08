@@ -9,7 +9,7 @@ async function bootstrap() {
     bufferLogs: true,
   });
 
-  // app.useLogger(app.get(CustomLogger));
+  app.useLogger(app.get(CustomLogger));
 
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
 
