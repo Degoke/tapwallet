@@ -35,9 +35,9 @@ import { Airtime } from 'src/airtime/entities/airtime.entity';
           Airtime,
           Transfer,
         ],
-        migrations: ['src/migration/*.js'],
+        migrations: ['src/migrations/*.ts'],
         cli: {
-          migrationsDir: 'src/migration',
+          migrationsDir: 'src/migrations',
         },
         synchronize: false,
         autoLoadEntities: true,

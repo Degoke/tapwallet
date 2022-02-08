@@ -16,7 +16,6 @@ import { ReturnTypeContainer } from '../common/containers/Container.entity';
 import * as crypto from 'crypto';
 import * as bcrypt from 'bcrypt';
 import { SmsService } from 'src/sms/sms.service';
-import * as FlutterWave from 'flutterwave-node-v3';
 import { ConfigService } from '@nestjs/config';
 
 @Injectable()
