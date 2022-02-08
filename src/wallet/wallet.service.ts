@@ -1,7 +1,12 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, forwardRef, Inject } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { number } from 'joi';
+import { ReturnTypeContainer } from 'src/common/containers/Container.entity';
+import { Transaction } from 'src/transactions/entities/transaction.entity';
+import { UserService } from 'src/user/user.service';
 import { Repository } from 'typeorm';
 import { CreateWalletDto } from './dto/create-wallet.dto';
+import { TransactionDto } from './dto/transaction.dto';
 import { UpdateWalletDto } from './dto/update-wallet.dto';
 import Wallet from './entities/wallet.entity';
 
@@ -9,6 +14,8 @@ import Wallet from './entities/wallet.entity';
 export class WalletService {
   constructor(
     @InjectRepository(Wallet) private walletRepository: Repository<Wallet>,
+    @Inject(forwardRef(() => UserService))
+    private readonly userService: UserService,
   ) {}
   async create(createWalletDto: CreateWalletDto) {
     try {
@@ -22,6 +29,33 @@ export class WalletService {
     }
   }
 
+  async deposit(
+    transactionDto: TransactionDto,
+  ): Promise<ReturnTypeContainer<any>> {
+    const { email, amount } = transactionDto;
+    // return {
+    //   message: 'hello',
+    //   data: transactionDto,
+    // };
+
+    try {
+      const user = await this.userService.findByEmail(email);
+      const walletId = user.data.wallet.id;
+      await this.walletRepository.increment(
+        { id: walletId },
+        'balance',
+        amount,
+      );
+      const wallet = await this.walletRepository.findOne({ id: walletId });
+      return {
+        message: 'success',
+        data: { balance: wallet.balance },
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async find() {
     return await this.walletRepository.find({ relations: ['owner'] });
   }
@@ -30,6 +64,11 @@ export class WalletService {
     return await this.walletRepository.findOne(id);
   }
 
+  // async addMoney(balance: number, walletId: number) {
+  //   const wallet = await this.walletRepository.find({ id: walletId });
+  // }
+
+  // async removeMoney(balance: number) {}
   async getWalletByOwnerId(id: number) {
     try {
       return await this.walletRepository.findOne({

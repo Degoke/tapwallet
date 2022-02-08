@@ -12,6 +12,8 @@ import { TransactionsModule } from './transactions/transactions.module';
 import { ElectricitybillModule } from './electricitybill/electricitybill.module';
 import { TransfersModule } from './transfers/transfers.module';
 import { SmsModule } from './sms/sms.module';
+import { PaystackModule } from './paystack/paystack.module';
+import { VtpassModule } from './vtpass/vtpass.module';
 import { BankModule } from './bank/bank.module';
 import { FlutterwaveModule } from './flutterwave/flutterwave.module';
 import { SettingsModule } from './settings/settings.module';
@@ -74,6 +76,8 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
     ElectricitybillModule,
     TransfersModule,
     SmsModule,
+    PaystackModule,
+    VtpassModule,
     BankModule,
     FlutterwaveModule,
     SettingsModule,

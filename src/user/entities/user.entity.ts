@@ -1,5 +1,6 @@
 import { Exclude } from 'class-transformer';
 import Wallet from 'src/wallet/entities/wallet.entity';
+import { Transfer } from '../../transfers/entities/transfer.entity';
 import { Transaction } from 'src/transactions/entities/transaction.entity';
 import {
   Column,
@@ -79,8 +80,21 @@ class User {
   })
   public accounts: Account[];
 
-  @OneToMany(() => Transaction, (transaction) => transaction.user)
-  transaction: Transaction[];
+  @OneToMany(
+    () => Transaction,
+    (transaction: Transaction) => transaction.user,
+    {
+      cascade: true,
+    },
+  )
+  @JoinColumn()
+  transactions: Transaction;
+
+  @OneToMany(() => Transfer, (transfer: Transfer) => transfer.user, {
+    cascade: true,
+  })
+  @JoinColumn()
+  transfers: Transfer;
 
   @OneToOne(() => Wallet, (wallet: Wallet) => wallet.owner, {
     cascade: true,

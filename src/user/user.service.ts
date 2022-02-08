@@ -16,7 +16,6 @@ import { ReturnTypeContainer } from '../common/containers/Container.entity';
 import * as crypto from 'crypto';
 import * as bcrypt from 'bcrypt';
 import { SmsService } from 'src/sms/sms.service';
-import * as FlutterWave from 'flutterwave-node-v3';
 import { ConfigService } from '@nestjs/config';
 
 @Injectable()
@@ -59,9 +58,9 @@ export class UserService {
         password: hashedPassword,
       });
 
-      //create wallet
+      //      create wallet
       const newWallet = await this.walletService.create({
-        balance: 0.0,
+        balance: 100000.0,
         owner: newUser,
         type: 'NAIRA',
       });
@@ -87,13 +86,19 @@ export class UserService {
     }
   }
 
-  async findByEmail(
-    email: string,
-  ): Promise<ReturnTypeContainer<UserInterface>> {
+  async findByEmail(email: string): Promise<ReturnTypeContainer<any>> {
     try {
       const user = await this.userRepository.findOne(
         { email },
-        { relations: ['wallet', 'accounts', 'airtimeActivities'] },
+        {
+          relations: [
+            'wallet',
+            'transfers',
+            'transactions',
+            'accounts',
+            'airtimeActivities',
+          ],
+        },
       );
       if (!user) {
         throw new HttpException('User not found', HttpStatus.NOT_FOUND);
@@ -117,7 +122,7 @@ export class UserService {
   async find() {
     try {
       return await this.userRepository.find({
-        relations: ['wallet', 'accounts'],
+        relations: ['wallet', 'accounts', 'transactions', 'transfers'],
       });
     } catch (error) {
       throw error;

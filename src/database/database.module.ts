@@ -5,6 +5,7 @@ import { join } from 'path';
 import User from 'src/user/entities/user.entity';
 import Wallet from 'src/wallet/entities/wallet.entity';
 import { Transaction } from '../transactions/entities/transaction.entity';
+import { Transfer } from '../transfers/entities/transfer.entity';
 import { Setting } from 'src/settings/entities/setting.entity';
 import { Account } from 'src/account/entities/account.entity';
 import Log from 'src/log/entities/log.entity';
@@ -24,7 +25,16 @@ import { Airtime } from 'src/airtime/entities/airtime.entity';
         username: configService.get('POSTGRES_USER'),
         password: configService.get('POSTGRES_PASSWORD'),
         database: configService.get('POSTGRES_DB'),
-        entities: [User, Account, Wallet, Transaction, Setting, Log, Airtime],
+        entities: [
+          User,
+          Account,
+          Wallet,
+          Transaction,
+          Setting,
+          Log,
+          Airtime,
+          Transfer,
+        ],
         migrations: ['dist/migrations/**/*{.ts,.js}'],
         cli: {
           migrationsDir: 'src/migrations',

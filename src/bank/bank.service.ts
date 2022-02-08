@@ -6,7 +6,6 @@ import {
   Injectable,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import * as FlutterWave from 'flutterwave-node-v3';
 import { Cache } from 'cache-manager';
 import { ServicesSettings } from 'src/common/types/settings.type';
 import { Services } from 'src/common/types/service.type';

@@ -37,6 +37,7 @@
     "@nestjs/platform-express": "^8.0.0",
     "@nestjs/terminus": "^8.0.4",
     "@nestjs/typeorm": "^8.0.2",
+    "axios": "^0.25.0",
     "bcrypt": "^5.0.1",
     "cache-manager": "^3.6.0",
     "cache-manager-redis-store": "^2.0.0",
