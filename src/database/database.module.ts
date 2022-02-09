@@ -39,7 +39,8 @@ import { Airtime } from 'src/airtime/entities/airtime.entity';
         cli: {
           migrationsDir: 'src/migrations',
         },
-        synchronize: false,
+        synchronize: true,
+        migrationsRun: true,
         autoLoadEntities: true,
       }),
     }),
