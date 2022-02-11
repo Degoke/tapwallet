@@ -22,6 +22,12 @@ export class AirtimeController {
   constructor(private readonly airtimeService: AirtimeService) {}
 
   @UseGuards(JwtAuthGaurd)
+  @Post('buy_airtime')
+  buyAirtimeVtpass(@Body() buyAirtimeDto: BuyAirtimeDto, @Req() req) {
+    return this.airtimeService.buyAirtimeVTPass(buyAirtimeDto, req.user);
+  }
+
+  @UseGuards(JwtAuthGaurd)
   @Post('buy/:service')
   buyAirtime(
     @Body() buyAirtimeDto: BuyAirtimeDto,

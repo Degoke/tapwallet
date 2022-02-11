@@ -1,8 +1,9 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString, IsOptional } from 'class-validator';
 
 export class BuyAirtimeDto {
   @IsNotEmpty()
   @IsString()
+  @IsOptional()
   request_id: string;
 
   @IsNotEmpty()

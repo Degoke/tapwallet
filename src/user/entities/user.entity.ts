@@ -19,6 +19,7 @@ import Permission from 'src/common/types/permission.type';
 import { Role } from '../interfaces/user-role.type';
 import { RolePage } from 'twilio/lib/rest/chat/v1/service/role';
 import { Airtime } from 'src/airtime/entities/airtime.entity';
+import { Mobiledatum } from 'src/mobiledata/entities/mobiledatum.entity';
 
 @Entity()
 class User {
@@ -110,6 +111,9 @@ class User {
 
   @OneToMany(() => Airtime, (airtime: Airtime) => airtime.owner)
   airtimeActivities: Airtime[];
+
+  @OneToMany(() => Mobiledatum, (mobileDatum: Mobiledatum) => mobileDatum.owner)
+  mobileDataPurchases: Mobiledatum[];
 }
 
 export default User;

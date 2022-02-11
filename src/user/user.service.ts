@@ -97,6 +97,7 @@ export class UserService {
             'transactions',
             'accounts',
             'airtimeActivities',
+            'mobileDataPurchases',
           ],
         },
       );

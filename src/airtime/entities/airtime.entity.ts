@@ -31,8 +31,8 @@ export class Airtime {
   @Column()
   transactionReference: string;
 
-  @Column()
-  merchantReference: string;
+  // @Column()
+  // merchantReference: string;
 
   @Column()
   service: ServicesType;
@@ -40,14 +40,20 @@ export class Airtime {
   @Column()
   amount: number;
 
-  @Column({ default: 'NGN' })
-  currency: CurrencyType;
+  @Column()
+  balance: number;
 
-  @Column({ type: 'jsonb' })
-  details: any;
+  // @Column({ default: 'NGN' })
+  // currency: CurrencyType;
+
+  // @Column({ type: 'jsonb' })
+  // details: any;
 
   @Column()
-  status: TransactionStatusType;
+  public remarks: string;
+
+  // @Column()
+  // status: TransactionStatusType;
 
   @CreateDateColumn()
   createdAt: Date;
