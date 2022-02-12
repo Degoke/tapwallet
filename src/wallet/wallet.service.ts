@@ -57,7 +57,8 @@ export class WalletService {
   }
 
   async removeMoney(
-    transactionDto: TransactionDto,queryRunner: QueryRunner
+    transactionDto: TransactionDto,
+    queryRunner: QueryRunner,
   ): Promise<ReturnTypeContainer<any>> {
     const { email, amount } = transactionDto;
     try {
@@ -71,10 +72,12 @@ export class WalletService {
       await queryRunner.manager.decrement(
         Wallet,
         { id: walletId },
-        "balance",
-        amount
-       );
-      const wallet = await queryRunner.manager.findOne(Wallet,{ id: walletId });
+        'balance',
+        amount,
+      );
+      const wallet = await queryRunner.manager.findOne(Wallet, {
+        id: walletId,
+      });
       return {
         message: 'success',
         data: { balance: wallet.balance },

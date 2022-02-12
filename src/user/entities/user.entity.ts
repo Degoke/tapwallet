@@ -20,6 +20,8 @@ import { Role } from '../interfaces/user-role.type';
 import { RolePage } from 'twilio/lib/rest/chat/v1/service/role';
 import { Airtime } from 'src/airtime/entities/airtime.entity';
 import { Mobiledatum } from 'src/mobiledata/entities/mobiledatum.entity';
+import { Electricitybill } from 'src/electricitybill/entities/electricitybill.entity';
+import { Tvsubscription } from 'src/tvsubscription/entities/tvsubscription.entity';
 
 @Entity()
 class User {
@@ -114,6 +116,15 @@ class User {
 
   @OneToMany(() => Mobiledatum, (mobileDatum: Mobiledatum) => mobileDatum.owner)
   mobileDataPurchases: Mobiledatum[];
+
+  @OneToMany(() => Electricitybill, (electricitybill: Electricitybill) => electricitybill.owner)
+  electricityPurchases: Electricitybill[];
+
+  @OneToMany(() => Tvsubscription, (tvsubscription: Tvsubscription) => tvsubscription.owner)
+  tvSubscriptions: Tvsubscription[];
+
 }
+
+
 
 export default User;

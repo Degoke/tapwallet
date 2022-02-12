@@ -65,8 +65,7 @@ export class VtpassService {
 
   async getVariationCodes(
     serviceID: string,
-  ) : Promise<Observable<AxiosResponse<any>>>
-  {
+  ): Promise<Observable<AxiosResponse<any>>> {
     const response = this.httpService
       .get(
         `https://sandbox.vtpass.com/api/service-variations?serviceID=${serviceID}`,
@@ -182,7 +181,9 @@ export class VtpassService {
 
   async bouquetChange(
     bouquetChangeDto: BouquetChangeDto,
-  ): Promise<Observable<AxiosResponse<any>>> {
+  ) : Promise<Observable<AxiosResponse<any>>>
+  {
+//    return bouquetChangeDto;
     const response = this.httpService
       .post(
         'https://sandbox.vtpass.com/api/pay',

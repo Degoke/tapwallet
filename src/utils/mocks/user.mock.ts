@@ -68,6 +68,8 @@ userData = {
   permissions: [],
   airtimeActivities: [],
   mobileDataPurchases: [],
+  electricityPurchases: [],
+  tvSubscriptions: [],
 };
 
 const userMocks = { userData, walletData, transactionData };

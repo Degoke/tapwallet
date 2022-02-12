@@ -1,27 +1,37 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Services } from 'src/common/types/service.type';
+import { FlutterwaveService } from 'src/flutterwave/flutterwave.service';
+import { getRequestId } from 'src/utils/generate-transaction-reference';
+import { BuyElectricityDto } from 'src/vtpass/dto/buy-electricity.dto';
+import { VtpassService } from 'src/vtpass/vtpass.service';
+import { WalletService } from 'src/wallet/wallet.service';
+import { Connection, Repository } from 'typeorm';
 import { CreateElectricitybillDto } from './dto/create-electricitybill.dto';
 import { UpdateElectricitybillDto } from './dto/update-electricitybill.dto';
+import { Electricitybill } from './entities/electricitybill.entity';
 
 @Injectable()
 export class ElectricitybillService {
+  constructor(
+    private connection: Connection,
+    @InjectRepository(Electricitybill)
+    private airtimeRepository: Repository<Electricitybill>,
+    private readonly vtpassService: VtpassService,
+    private readonly flutterwaveService: FlutterwaveService,
+    private readonly walletService: WalletService,
+  ) {}
 
-  async buyMobileData(buyDataDto: BuyDataDto, user) {
+  async buyElectricity(buyElectrictyDto: BuyElectricityDto, user) {
     const queryRunner = this.connection.createQueryRunner();
-
     await queryRunner.connect();
     await queryRunner.startTransaction();
     try {
       const email = user.email;
       const variations = await this.vtpassService.getVariationCodes(
-        buyDataDto.serviceID,
+        buyElectrictyDto.serviceID,
       );
-      const amount = parseInt(
-        variations['content']['varations'].find(
-          (variation) =>
-            variation['variation_code'] == buyDataDto.variation_code,
-        ).variation_amount,
-      );
-      //      return amount;
+      const amount = buyElectrictyDto.amount;
       const walletResponse = await this.walletService.removeMoney(
         {
           email,
@@ -31,25 +41,29 @@ export class ElectricitybillService {
       );
       const request_id = await getRequestId();
       const payload = {
-        customer: buyDataDto.phone,
+        customer: buyElectrictyDto.phone,
         owner: user,
         ownerId: user.id,
         transactionReference: request_id,
         service: Services.VTPASS,
         amount: amount,
-        serviceID:buyDataDto.serviceID,
-        variation_code:buyDataDto.variation_code,
-        remarks: 'AIRTIME RECHARGE',
+        serviceID: buyElectrictyDto.serviceID,
+        variation_code: buyElectrictyDto.variation_code,
+        remarks: 'ElECTRICITY PURCHASE',
         balance: walletResponse.data.balance,
       };
 
-      const airtime = await queryRunner.manager.create(Mobiledatum, payload);
+      const airtime = await queryRunner.manager.create(
+        Electricitybill,
+        payload,
+      );
       await queryRunner.manager.save(airtime);
 
-      buyDataDto['request_id'] = request_id;
-      const purchaseResponse = await this.vtpassService.buyData(buyDataDto);
-
-      if (purchaseResponse['content']['errors']) {
+      buyElectrictyDto['request_id'] = request_id;
+      const purchaseResponse = await this.vtpassService.buyElectricity(
+        buyElectrictyDto,
+      );
+      if (!purchaseResponse['content']['transactions']) {
         throw new HttpException(
           {
             status: HttpStatus.BAD_REQUEST,
@@ -74,7 +88,7 @@ export class ElectricitybillService {
       await queryRunner.commitTransaction();
       //      return buyAirtimeDto;
       return {
-        message: 'Data Purchase completed successfully',
+        message: 'Electricity Bill completed successfully',
       };
       return { email, amount };
     } catch (err) {
@@ -86,7 +100,6 @@ export class ElectricitybillService {
       await queryRunner.release();
     }
   }
-
 
   buyElectricityUnits;
   verifyBillStatus;

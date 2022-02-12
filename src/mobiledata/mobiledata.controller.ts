@@ -24,5 +24,4 @@ export class MobiledataController {
   buyAirtimeVtpass(@Body() buyDataDto: BuyDataDto, @Req() req) {
     return this.mobiledataService.buyMobileData(buyDataDto, req.user);
   }
-
 }

@@ -11,11 +11,6 @@ export class BuyStartimesDto {
   serviceID: string;
 
   @IsNotEmpty()
-  @IsNumber()
-  @IsOptional()
-  amount: number;
-
-  @IsNotEmpty()
   @IsString()
   phone: string;
 

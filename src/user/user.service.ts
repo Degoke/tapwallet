@@ -98,6 +98,8 @@ export class UserService {
             'accounts',
             'airtimeActivities',
             'mobileDataPurchases',
+            'electricityPurchases',
+            'tvSubscriptions',
           ],
         },
       );

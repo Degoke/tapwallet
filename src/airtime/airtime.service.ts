@@ -48,6 +48,7 @@ export class AirtimeService {
         transactionReference: request_id,
         service: Services.VTPASS,
         amount: buyAirtimeDto.amount,
+        serviceID: buyAirtimeDto.serviceID,
         remarks: 'AIRTIME RECHARGE',
         balance: walletResponse.data.balance,
       };

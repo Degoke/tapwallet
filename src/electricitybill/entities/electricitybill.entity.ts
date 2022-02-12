@@ -16,7 +16,7 @@ export class Electricitybill {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ default: 'data' })
+  @Column({ default: 'electricity' })
   type: string;
 
   @Column()

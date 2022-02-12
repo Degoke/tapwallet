@@ -11,11 +11,6 @@ export class BouquetChangeDto {
   serviceID: string;
 
   @IsNotEmpty()
-  @IsNumber()
-  @IsOptional()
-  amount: number;
-
-  @IsNotEmpty()
   @IsString()
   phone: string;
 

@@ -54,9 +54,9 @@ export class MobiledataService {
         transactionReference: request_id,
         service: Services.VTPASS,
         amount: amount,
-        serviceID:buyDataDto.serviceID,
-        variation_code:buyDataDto.variation_code,
-        remarks: 'AIRTIME RECHARGE',
+        serviceID: buyDataDto.serviceID,
+        variation_code: buyDataDto.variation_code,
+        remarks: 'DATA PURCHASE',
         balance: walletResponse.data.balance,
       };
 

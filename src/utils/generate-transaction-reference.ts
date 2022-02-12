@@ -12,9 +12,9 @@ export const getRequestId = async () => {
 };
 
 function yyyymmdd() {
-  var now = new Date();
-  var y = now.getFullYear();
-  var m = now.getMonth() + 1;
-  var d = now.getDate();
+  const now = new Date();
+  const y = now.getFullYear();
+  const m = now.getMonth() + 1;
+  const d = now.getDate();
   return '' + y + (m < 10 ? '0' : '') + m + (d < 10 ? '0' : '') + d;
 }
