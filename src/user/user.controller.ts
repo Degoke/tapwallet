@@ -34,4 +34,9 @@ export class UserController {
   getUserByEmail(@Param('email') email) {
     return this.userService.findByEmail(email);
   }
+
+  @Delete(':id')
+  delete(@Param('id') id) {
+    return this.userService.delete(id);
+  }
 }

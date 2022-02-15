@@ -11,6 +11,7 @@ import { Account } from 'src/account/entities/account.entity';
 import Log from 'src/log/entities/log.entity';
 import DatabaseLogger from './database-logger';
 import { Airtime } from 'src/airtime/entities/airtime.entity';
+import { Email } from 'src/email/entities/email.entity';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { Airtime } from 'src/airtime/entities/airtime.entity';
           Log,
           Airtime,
           Transfer,
+          Email,
         ],
         migrations: ['dist/migrations/**/*{.ts,.js}'],
         cli: {

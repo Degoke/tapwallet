@@ -14,7 +14,7 @@ import { UssdDepositDto } from './dto/ussd-deposit.dto';
 import { InitiateWithdrawalDto } from './dto/initiate-withdrawal.dto';
 import { InitiateWithdrawalData } from './interfaces/withdrawal.interface';
 import { BillCategoryType } from 'src/common/types/bill-categories.type';
-import { getTransactionReference } from 'src/utils/generate-transaction-reference';
+import { getTransactionReference } from 'src/utils/random-generators';
 import { CreateReservedAccountDto } from './dto/create-reserved-account.dto';
 import { compare } from 'bcrypt';
 

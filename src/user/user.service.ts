@@ -8,7 +8,7 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import Wallet from 'src/wallet/entities/wallet.entity';
 import { WalletService } from 'src/wallet/wallet.service';
-import { Repository } from 'typeorm';
+import { Connection, Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import User from './entities/user.entity';
 import { UserInterface } from './interfaces/User.interface';
@@ -17,6 +17,7 @@ import * as crypto from 'crypto';
 import * as bcrypt from 'bcrypt';
 import { SmsService } from 'src/sms/sms.service';
 import { ConfigService } from '@nestjs/config';
+import { EmailService } from 'src/email/email.service';
 
 @Injectable()
 export class UserService {
@@ -26,9 +27,13 @@ export class UserService {
     @Inject(forwardRef(() => SmsService))
     private readonly smsService: SmsService,
     private readonly configService: ConfigService,
+    @Inject(forwardRef(() => EmailService))
+    private readonly emailService: EmailService,
+    private connection: Connection,
   ) {}
 
   async create(createUserDto: CreateUserDto) {
+    const queryRunner = this.connection.createQueryRunner();
     try {
       const { email, phoneNumber } = createUserDto;
 
@@ -52,35 +57,37 @@ export class UserService {
       // make this into a transaction
       const hashedPassword = await bcrypt.hash(createUserDto.password, 10);
 
-      //create user
-      const newUser = await this.userRepository.create({
-        ...createUserDto,
-        password: hashedPassword,
-      });
+      const code = await this.createReferralCode(createUserDto.firstName);
 
-      //      create wallet
-      const newWallet = await this.walletService.create({
-        balance: 100000.0,
-        owner: newUser,
-        type: 'NAIRA',
-      });
+      await queryRunner.connect();
+      await queryRunner.startTransaction();
 
-      //create referral code
-      const code = await this.createReferralCode(newUser.firstName);
+      try {
+        const newUser = await queryRunner.manager.create(User, {
+          ...createUserDto,
+          password: hashedPassword,
+          referralCode: code,
+        });
 
-      await this.userRepository.save({
-        ...newUser,
-        wallet: newWallet,
-        referralCode: code,
-      });
+        const newWallet = await queryRunner.manager.create(Wallet, {
+          balance: 0.0,
+          owner: newUser,
+          type: 'NAIRA',
+        });
 
-      // send email or phone number
+        await queryRunner.manager.save(User, { ...newUser, wallet: newWallet });
 
-      /*await this.smsService.initiatePhoneNumberVerification(
-        newUser.phoneNumber,
-      );*/
+        await this.emailService.sendVerificationCode(
+          newUser.email,
+          queryRunner,
+        );
 
-      return newUser;
+        await queryRunner.commitTransaction();
+        return newUser;
+      } catch (error) {
+        await queryRunner.rollbackTransaction();
+        throw error;
+      }
     } catch (error) {
       throw error;
     }
@@ -150,5 +157,20 @@ export class UserService {
     } catch (error) {}
   }
 
-  markBvnAsConfirmed;
+  async markEmailAsConfirmed(email) {
+    try {
+      return this.userRepository.update(
+        { email },
+        {
+          isEmailVerified: true,
+        },
+      );
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async delete(id) {
+    return this.userRepository.delete(id);
+  }
 }

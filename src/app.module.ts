@@ -25,6 +25,8 @@ import { MonnifyModule } from './monnify/monnify.module';
 import * as Joi from 'joi';
 import * as redisStore from 'cache-manager-redis-store';
 import { APP_INTERCEPTOR } from '@nestjs/core';
+import { EmailModule } from './email/email.module';
+import { NodemailerModule } from './nodemailer/nodemailer.module';
 
 @Module({
   imports: [
@@ -34,8 +36,6 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
         PORT: Joi.number(),
         POSTGRES_USER: Joi.string().required(),
         POSTGRES_PASSWORD: Joi.string().required(),
-        POSTGRES_DB_PREFIX: Joi.string().required(),
-        POSTGRES_DB_NAME: Joi.string().required(),
         POSTGRES_DB_PORT: Joi.number().required(),
         POSTGRES_DB_HOST: Joi.string().required(),
         PGADMIN_DEFAULT_EMAIL: Joi.string().required(),
@@ -86,6 +86,8 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
     LogModule,
     HealthModule,
     MonnifyModule,
+    EmailModule,
+    NodemailerModule,
   ],
 })
 export class AppModule {}

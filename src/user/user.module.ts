@@ -10,6 +10,7 @@ import { WalletModule } from 'src/wallet/wallet.module';
 import { TransactionsModule } from 'src/transactions/transactions.module';
 import { SmsModule } from 'src/sms/sms.module';
 import { Account } from 'src/account/entities/account.entity';
+import { EmailModule } from 'src/email/email.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { Account } from 'src/account/entities/account.entity';
     WalletModule,
     TransactionsModule,
     forwardRef(() => SmsModule),
+    forwardRef(() => EmailModule),
   ],
   controllers: [UserController],
   providers: [UserService],

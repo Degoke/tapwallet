@@ -23,7 +23,7 @@ export class TransactionsService {
     private readonly walletService: WalletService, // private readonly userService: UserService,
   ) {}
 
-  async completeDeposit(reference: string, user: User) {
+  /*async completeDeposit(reference: string, user: User) {
     const queryRunner = this.connection.createQueryRunner();
 
     await queryRunner.connect();
@@ -59,25 +59,5 @@ export class TransactionsService {
       // you need to release a queryRunner which was manually instantiated
       await queryRunner.release();
     }
-  }
-
-  create(createTransactionDto: CreateTransactionDto) {
-    return 'This action adds a new transaction';
-  }
-
-  findAll() {
-    return `This action returns all transactions`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} transaction`;
-  }
-
-  update(id: number, updateTransactionDto: UpdateTransactionDto) {
-    return `This action updates a #${id} transaction`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} transaction`;
-  }
+  }*/
 }
