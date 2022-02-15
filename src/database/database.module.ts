@@ -26,6 +26,10 @@ import { Email } from 'src/email/entities/email.entity';
         username: configService.get('POSTGRES_USER'),
         password: configService.get('POSTGRES_PASSWORD'),
         database: configService.get('POSTGRES_DB'),
+        ssl: {
+          require: true,
+          rejectUnauthorized: false,
+        },
         entities: [
           User,
           Account,
