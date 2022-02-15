@@ -173,4 +173,6 @@ export class UserService {
   async delete(id) {
     return this.userRepository.delete(id);
   }
+
+  deleteLater;
 }
