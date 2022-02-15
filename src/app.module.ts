@@ -64,6 +64,9 @@ import { NodemailerModule } from './nodemailer/nodemailer.module';
       password: process.env.REDIS_PASSWORD,
       ttl: 1200,
       isGlobal: true,
+      tls: {
+        rejectUnauthorized: false,
+      },
     }),
     AuthModule,
     UserModule,
