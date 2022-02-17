@@ -1,4 +1,4 @@
-import { UserPermission } from 'src/user/interfaces/user-permissions.interface';
+import { UserPermission } from 'src/common/types/user-permissions.interface';
 
 const Permission = {
   ...UserPermission,

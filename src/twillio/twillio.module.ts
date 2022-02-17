@@ -5,5 +5,6 @@ import { TwillioController } from './twillio.controller';
 @Module({
   controllers: [TwillioController],
   providers: [TwillioService],
+  exports: [TwillioService],
 })
 export class TwillioModule {}

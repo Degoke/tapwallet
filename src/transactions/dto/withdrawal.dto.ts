@@ -1,6 +1,6 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsNumber, IsNotEmpty, IsString } from 'class-validator';
 
-export class InitiateTransferDto {
+export class WithdrawalDto {
   @IsNumber()
   @IsNotEmpty()
   amount;
@@ -28,4 +28,8 @@ export class InitiateTransferDto {
   @IsString()
   @IsNotEmpty()
   sourceAccountNumber;
+
+  @IsString()
+  @IsNotEmpty()
+  beneficiary_name;
 }

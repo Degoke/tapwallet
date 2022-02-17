@@ -18,16 +18,17 @@ import * as bcrypt from 'bcrypt';
 import { SmsService } from 'src/sms/sms.service';
 import { ConfigService } from '@nestjs/config';
 import { EmailService } from 'src/email/email.service';
+import { object } from 'joi';
+import { UserPermission } from '../common/types/user-permissions.interface';
+import { AuthService } from 'src/auth/auth.service';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User) private userRepository: Repository<User>,
     private readonly walletService: WalletService,
-    @Inject(forwardRef(() => SmsService))
     private readonly smsService: SmsService,
     private readonly configService: ConfigService,
-    @Inject(forwardRef(() => EmailService))
     private readonly emailService: EmailService,
     private connection: Connection,
   ) {}
@@ -67,6 +68,7 @@ export class UserService {
           ...createUserDto,
           password: hashedPassword,
           referralCode: code,
+          permissions: Object.values(UserPermission),
         });
 
         const newWallet = await queryRunner.manager.create(Wallet, {
@@ -120,7 +122,15 @@ export class UserService {
   }
   async findById(id: number) {
     try {
-      return await this.userRepository.findOne(id, { relations: ['wallet'] });
+      return await this.userRepository.findOne(id, {
+        relations: [
+          'wallet',
+          'transfers',
+          'transactions',
+          'accounts',
+          'airtimeActivities',
+        ],
+      });
     } catch (error) {
       throw error;
     }
@@ -170,8 +180,50 @@ export class UserService {
     }
   }
 
+  async verifyEmail(code, email) {
+    try {
+      await this.emailService.verifyMail(code, email);
+
+      await this.markEmailAsConfirmed(email);
+
+      return {
+        message: 'Email Verified Successfully',
+      };
+    } catch (error) {}
+  }
+
+  async initiatePhoneNumberVerification(phoneNumber: string) {
+    try {
+      return this.smsService.sendPhoneNumberOtp(phoneNumber);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async verifyPhoneNumberOtp(
+    phoneNumber: string,
+    verificationCode: string,
+    id: number,
+  ) {
+    try {
+      const data = await this.smsService.verifyPhoneNumberOtp(
+        phoneNumber,
+        verificationCode,
+      );
+
+      await this.markPhonenumberAsConfirmed(id);
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async delete(id) {
     return this.userRepository.delete(id);
+  }
+
+  async setPin(email: string, pin: number) {
+    return await this.userRepository.update({ email }, { pin });
   }
 
   deleteLater;

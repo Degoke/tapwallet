@@ -8,11 +8,7 @@ import { EmailService } from './email.service';
 import { Email } from './entities/email.entity';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([Email]),
-    NodemailerModule,
-    forwardRef(() => UserModule),
-  ],
+  imports: [TypeOrmModule.forFeature([Email]), NodemailerModule],
   controllers: [EmailController],
   providers: [EmailService],
   exports: [EmailService],

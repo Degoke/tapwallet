@@ -3,7 +3,7 @@ import User from 'src/user/entities/user.entity';
 import Wallet from 'src/wallet/entities/wallet.entity';
 import { Transaction } from 'src/transactions/entities/transaction.entity';
 import { Transfer } from '../../transfers/entities/transfer.entity';
-import { Role } from 'src/user/interfaces/user-role.type';
+import { Role } from 'src/common/types/user-role.type';
 import { number } from 'joi';
 
 let userData: User;

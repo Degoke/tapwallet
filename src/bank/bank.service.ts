@@ -33,6 +33,13 @@ export class BankService {
       );
     }
 
+    if (!data) {
+      throw new HttpException(
+        'Service currently unavailable',
+        HttpStatus.SERVICE_UNAVAILABLE,
+      );
+    }
+
     const status = data.isActive;
 
     if (!status) {

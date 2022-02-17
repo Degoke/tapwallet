@@ -18,8 +18,6 @@ export class EmailService {
   constructor(
     @InjectRepository(Email) private emailRepository: Repository<Email>,
     private readonly nodeMailerService: NodemailerService,
-    @Inject(forwardRef(() => UserService))
-    private readonly userService: UserService,
   ) {}
   async sendMail(options: CreateEmailDto) {
     return await this.nodeMailerService.sendMail(options);
@@ -68,13 +66,7 @@ export class EmailService {
         throw new HttpException('Invalid code', HttpStatus.BAD_REQUEST);
       }
 
-      await this.userService.markEmailAsConfirmed(email);
-
       await this.deleteCode(email);
-
-      return {
-        message: 'Verification Successful',
-      };
     } catch (error) {
       throw error;
     }
