@@ -67,6 +67,9 @@ userData = {
   role: Role.User,
   permissions: [],
   airtimeActivities: [],
+  tvSubscriptionActivities: [],
+  mobileDataActivities: [],
+  electricityActivities: [],
 };
 
 const userMocks = { userData, walletData, transactionData };

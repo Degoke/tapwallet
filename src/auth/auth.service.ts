@@ -15,7 +15,6 @@ import { async } from 'rxjs';
 @Injectable()
 export class AuthService {
   constructor(
-    UserService,
     private readonly userService: UserService,
     private jwtService: JwtService,
   ) {}

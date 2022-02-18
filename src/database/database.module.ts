@@ -12,6 +12,9 @@ import Log from 'src/log/entities/log.entity';
 import DatabaseLogger from './database-logger';
 import { Airtime } from 'src/airtime/entities/airtime.entity';
 import { Email } from 'src/email/entities/email.entity';
+import { Tvsubscription } from 'src/tvsubscription/entities/tvsubscription.entity';
+import { Mobiledatum } from 'src/mobiledata/entities/mobiledatum.entity';
+import { Electricitybill } from 'src/electricitybill/entities/electricitybill.entity';
 
 @Module({
   imports: [
@@ -26,10 +29,7 @@ import { Email } from 'src/email/entities/email.entity';
         username: configService.get('POSTGRES_USER'),
         password: configService.get('POSTGRES_PASSWORD'),
         database: configService.get('POSTGRES_DB'),
-        ssl: {
-          require: true,
-          rejectUnauthorized: false,
-        },
+        ssl: configService.get('NODE_ENV') === 'dev' ? false : true,
         entities: [
           User,
           Account,
@@ -40,6 +40,9 @@ import { Email } from 'src/email/entities/email.entity';
           Airtime,
           Transfer,
           Email,
+          Tvsubscription,
+          Mobiledatum,
+          Electricitybill,
         ],
         migrations: ['dist/migrations/**/*{.ts,.js}'],
         cli: {

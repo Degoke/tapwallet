@@ -5,7 +5,7 @@ import { UserModule } from 'src/user/user.module';
 import { TwillioModule } from 'src/twillio/twillio.module';
 
 @Module({
-  imports: [UserModule, TwillioModule],
+  imports: [TwillioModule],
   controllers: [SmsController],
   providers: [SmsService],
   exports: [SmsService],

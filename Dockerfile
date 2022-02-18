@@ -1,4 +1,4 @@
-FROM node:16-alpine as dev
+FROM node:14-alpine as dev
 
 RUN apk --update add postgresql-client
 
@@ -12,7 +12,7 @@ COPY . .
 
 RUN npm run build
 
-FROM node:16-alpine as prod
+FROM node:14-alpine as prod
 
 RUN apk --update add postgresql-client
 
