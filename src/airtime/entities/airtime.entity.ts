@@ -27,7 +27,7 @@ export class Airtime {
 
   @Column()
   ownerId: number;
-  
+
   @Column()
   serviceID: string;
 

@@ -181,9 +181,8 @@ export class VtpassService {
 
   async bouquetChange(
     bouquetChangeDto: BouquetChangeDto,
-  ) : Promise<Observable<AxiosResponse<any>>>
-  {
-//    return bouquetChangeDto;
+  ): Promise<Observable<AxiosResponse<any>>> {
+    //    return bouquetChangeDto;
     const response = this.httpService
       .post(
         'https://sandbox.vtpass.com/api/pay',

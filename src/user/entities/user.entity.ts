@@ -117,14 +117,17 @@ class User {
   @OneToMany(() => Mobiledatum, (mobileDatum: Mobiledatum) => mobileDatum.owner)
   mobileDataPurchases: Mobiledatum[];
 
-  @OneToMany(() => Electricitybill, (electricitybill: Electricitybill) => electricitybill.owner)
+  @OneToMany(
+    () => Electricitybill,
+    (electricitybill: Electricitybill) => electricitybill.owner,
+  )
   electricityPurchases: Electricitybill[];
 
-  @OneToMany(() => Tvsubscription, (tvsubscription: Tvsubscription) => tvsubscription.owner)
+  @OneToMany(
+    () => Tvsubscription,
+    (tvsubscription: Tvsubscription) => tvsubscription.owner,
+  )
   tvSubscriptions: Tvsubscription[];
-
 }
-
-
 
 export default User;
