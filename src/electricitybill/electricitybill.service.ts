@@ -2,7 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Services } from 'src/common/types/service.type';
 import { FlutterwaveService } from 'src/flutterwave/flutterwave.service';
-import { getRequestId } from 'src/utils/generate-transaction-reference';
+import { getRequestId } from 'src/utils/random-generators';
 import { BuyElectricityDto } from 'src/vtpass/dto/buy-electricity.dto';
 import { VtpassService } from 'src/vtpass/vtpass.service';
 import { WalletService } from 'src/wallet/wallet.service';

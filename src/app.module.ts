@@ -25,6 +25,8 @@ import { MonnifyModule } from './monnify/monnify.module';
 import * as Joi from 'joi';
 import * as redisStore from 'cache-manager-redis-store';
 import { APP_INTERCEPTOR } from '@nestjs/core';
+import { EmailModule } from './email/email.module';
+import { NodemailerModule } from './nodemailer/nodemailer.module';
 
 @Module({
   imports: [
@@ -34,25 +36,12 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
         PORT: Joi.number(),
         POSTGRES_USER: Joi.string().required(),
         POSTGRES_PASSWORD: Joi.string().required(),
-        POSTGRES_DB_PREFIX: Joi.string().required(),
-        POSTGRES_DB_NAME: Joi.string().required(),
         POSTGRES_DB_PORT: Joi.number().required(),
         POSTGRES_DB_HOST: Joi.string().required(),
         PGADMIN_DEFAULT_EMAIL: Joi.string().required(),
         PGADMIN_DEFAULT_PASSWORD: Joi.string().required(),
         JWT_SECRET: Joi.string().required(),
         JWT_EXPIRATION: Joi.string().required(),
-        TWILLIO_ACCOUNT_SID: Joi.string().required(),
-        TWILLIO_MESSAGING_SERVICE_SID: Joi.string().required(),
-        TWILLIO_AUTH_TOKEN: Joi.string().required(),
-        TWILLIO_PHONE_NUMBER: Joi.string().required(),
-        FLUTTERWAVE_PUBLIC_KEY: Joi.string().required(),
-        FLUTTERWAVE_SECRET_KEY: Joi.string().required(),
-        FLUTTERWAVE_ENCRYPT_KEY: Joi.string().required(),
-        MONNIFY_BASE_URL: Joi.string().required(),
-        MONNIFY_SECRET_KEY: Joi.string().required(),
-        MONNIFY_APIKEY: Joi.string().required(),
-        MONNIFY_CONTRACT_CODE: Joi.string().required(),
         REDIS_HOST: Joi.string().required(),
         REDIS_PORT: Joi.string().required(),
       }),
@@ -61,8 +50,12 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
       store: redisStore,
       host: process.env.REDIS_HOST,
       port: process.env.REDIS_PORT,
+      password: process.env.REDIS_PASSWORD,
       ttl: 1200,
       isGlobal: true,
+      tls: {
+        rejectUnauthorized: false,
+      },
     }),
     AuthModule,
     UserModule,
@@ -86,6 +79,8 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
     LogModule,
     HealthModule,
     MonnifyModule,
+    EmailModule,
+    NodemailerModule,
   ],
 })
 export class AppModule {}

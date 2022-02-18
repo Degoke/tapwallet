@@ -7,6 +7,9 @@ import { HttpModule } from '@nestjs/axios';
 import { PaystackModule } from '../paystack/paystack.module';
 import Wallet from 'src/wallet/entities/wallet.entity';
 import { WalletModule } from 'src/wallet/wallet.module';
+import { MonnifyModule } from 'src/monnify/monnify.module';
+import { FlutterwaveModule } from 'src/flutterwave/flutterwave.module';
+import { SettingsModule } from 'src/settings/settings.module';
 
 @Module({
   imports: [
@@ -14,6 +17,9 @@ import { WalletModule } from 'src/wallet/wallet.module';
     HttpModule,
     PaystackModule,
     WalletModule,
+    FlutterwaveModule,
+    MonnifyModule,
+    SettingsModule,
   ],
   controllers: [TransactionsController],
   providers: [TransactionsService],

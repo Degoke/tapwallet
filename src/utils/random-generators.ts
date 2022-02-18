@@ -5,6 +5,10 @@ export const getTransactionReference = async () => {
   return `TM-${hash}`;
 };
 
+export const generateVerificationCode = async () => {
+  const hash = await crypto.randomBytes(4).toString('hex').substring(0, 6);
+  return hash;
+};
 export const getRequestId = async () => {
   const date = yyyymmdd();
   const hash = await crypto.randomBytes(4).toString('hex').substring(0, 9);

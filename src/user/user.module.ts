@@ -10,6 +10,8 @@ import { WalletModule } from 'src/wallet/wallet.module';
 import { TransactionsModule } from 'src/transactions/transactions.module';
 import { SmsModule } from 'src/sms/sms.module';
 import { Account } from 'src/account/entities/account.entity';
+import { EmailModule } from 'src/email/email.module';
+import { AuthModule } from 'src/auth/auth.module';
 
 @Module({
   imports: [
@@ -18,7 +20,8 @@ import { Account } from 'src/account/entities/account.entity';
     TypeOrmModule.forFeature([Account]),
     WalletModule,
     TransactionsModule,
-    forwardRef(() => SmsModule),
+    SmsModule,
+    EmailModule,
   ],
   controllers: [UserController],
   providers: [UserService],

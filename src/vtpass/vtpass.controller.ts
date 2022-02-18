@@ -22,7 +22,6 @@ import { BuyShowmaxDto } from './dto/buy-showmax.dto';
 import { BuyStartimesDto } from './dto/buy-startimes.dto';
 import { BuyWAECDto } from './dto/buy-waec.dto';
 import { BuyElectricityDto } from './dto/buy-electricity.dto';
-import { getRequestId } from 'src/utils/generate-transaction-reference';
 
 @Controller('vtpass')
 export class VtpassController {

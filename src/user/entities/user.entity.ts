@@ -16,12 +16,12 @@ import {
 import { Account } from 'src/account/entities/account.entity';
 import { UserRoles } from '../interfaces/User.interface';
 import Permission from 'src/common/types/permission.type';
-import { Role } from '../interfaces/user-role.type';
+import { Role } from '../../common/types/user-role.type';
 import { RolePage } from 'twilio/lib/rest/chat/v1/service/role';
 import { Airtime } from 'src/airtime/entities/airtime.entity';
-import { Mobiledatum } from 'src/mobiledata/entities/mobiledatum.entity';
-import { Electricitybill } from 'src/electricitybill/entities/electricitybill.entity';
 import { Tvsubscription } from 'src/tvsubscription/entities/tvsubscription.entity';
+import { Electricitybill } from 'src/electricitybill/entities/electricitybill.entity';
+import { Mobiledatum } from 'src/mobiledata/entities/mobiledatum.entity';
 
 @Entity()
 class User {
@@ -63,7 +63,7 @@ class User {
   @Column({ default: false })
   isSuspended: boolean;
 
-  @Column({ nullable: true })
+  @Column()
   referralCode: string;
 
   @Column({ nullable: true })
@@ -128,6 +128,20 @@ class User {
     (tvsubscription: Tvsubscription) => tvsubscription.owner,
   )
   tvSubscriptions: Tvsubscription[];
+  @OneToMany(
+    () => Tvsubscription,
+    (tvSubscription: Tvsubscription) => tvSubscription.owner,
+  )
+  tvSubscriptionActivities: Tvsubscription[];
+
+  @OneToMany(
+    () => Electricitybill,
+    (electricityBill: Electricitybill) => electricityBill.owner,
+  )
+  electricityActivities: Electricitybill[];
+
+  @OneToMany(() => Mobiledatum, (mobiledatum: Mobiledatum) => mobiledatum.owner)
+  mobileDataActivities: Mobiledatum[];
 }
 
 export default User;

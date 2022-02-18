@@ -8,7 +8,7 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import Wallet from 'src/wallet/entities/wallet.entity';
 import { WalletService } from 'src/wallet/wallet.service';
-import { Repository } from 'typeorm';
+import { Connection, Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import User from './entities/user.entity';
 import { UserInterface } from './interfaces/User.interface';
@@ -17,18 +17,24 @@ import * as crypto from 'crypto';
 import * as bcrypt from 'bcrypt';
 import { SmsService } from 'src/sms/sms.service';
 import { ConfigService } from '@nestjs/config';
+import { EmailService } from 'src/email/email.service';
+import { object } from 'joi';
+import { UserPermission } from '../common/types/user-permissions.interface';
+import { AuthService } from 'src/auth/auth.service';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User) private userRepository: Repository<User>,
     private readonly walletService: WalletService,
-    @Inject(forwardRef(() => SmsService))
     private readonly smsService: SmsService,
     private readonly configService: ConfigService,
+    private readonly emailService: EmailService,
+    private connection: Connection,
   ) {}
 
   async create(createUserDto: CreateUserDto) {
+    const queryRunner = this.connection.createQueryRunner();
     try {
       const { email, phoneNumber } = createUserDto;
 
@@ -52,35 +58,38 @@ export class UserService {
       // make this into a transaction
       const hashedPassword = await bcrypt.hash(createUserDto.password, 10);
 
-      //create user
-      const newUser = await this.userRepository.create({
-        ...createUserDto,
-        password: hashedPassword,
-      });
+      const code = await this.createReferralCode(createUserDto.firstName);
 
-      //      create wallet
-      const newWallet = await this.walletService.create({
-        balance: 100000.0,
-        owner: newUser,
-        type: 'NAIRA',
-      });
+      await queryRunner.connect();
+      await queryRunner.startTransaction();
 
-      //create referral code
-      const code = await this.createReferralCode(newUser.firstName);
+      try {
+        const newUser = await queryRunner.manager.create(User, {
+          ...createUserDto,
+          password: hashedPassword,
+          referralCode: code,
+          permissions: Object.values(UserPermission),
+        });
 
-      await this.userRepository.save({
-        ...newUser,
-        wallet: newWallet,
-        referralCode: code,
-      });
+        const newWallet = await queryRunner.manager.create(Wallet, {
+          balance: 0.0,
+          owner: newUser,
+          type: 'NAIRA',
+        });
 
-      // send email or phone number
+        await queryRunner.manager.save(User, { ...newUser, wallet: newWallet });
 
-      /*await this.smsService.initiatePhoneNumberVerification(
-        newUser.phoneNumber,
-      );*/
+        await this.emailService.sendVerificationCode(
+          newUser.email,
+          queryRunner,
+        );
 
-      return newUser;
+        await queryRunner.commitTransaction();
+        return newUser;
+      } catch (error) {
+        await queryRunner.rollbackTransaction();
+        throw error;
+      }
     } catch (error) {
       throw error;
     }
@@ -97,9 +106,9 @@ export class UserService {
             'transactions',
             'accounts',
             'airtimeActivities',
-            'mobileDataPurchases',
-            'electricityPurchases',
-            'tvSubscriptions',
+            'mobileDataActivities',
+            'electricityActivities',
+            'tvSubscriptionActivities',
           ],
         },
       );
@@ -116,7 +125,15 @@ export class UserService {
   }
   async findById(id: number) {
     try {
-      return await this.userRepository.findOne(id, { relations: ['wallet'] });
+      return await this.userRepository.findOne(id, {
+        relations: [
+          'wallet',
+          'transfers',
+          'transactions',
+          'accounts',
+          'airtimeActivities',
+        ],
+      });
     } catch (error) {
       throw error;
     }
@@ -153,5 +170,64 @@ export class UserService {
     } catch (error) {}
   }
 
-  markBvnAsConfirmed;
+  async markEmailAsConfirmed(email) {
+    try {
+      return this.userRepository.update(
+        { email },
+        {
+          isEmailVerified: true,
+        },
+      );
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async verifyEmail(code, email) {
+    try {
+      await this.emailService.verifyMail(code, email);
+
+      await this.markEmailAsConfirmed(email);
+
+      return {
+        message: 'Email Verified Successfully',
+      };
+    } catch (error) {}
+  }
+
+  async initiatePhoneNumberVerification(phoneNumber: string) {
+    try {
+      return this.smsService.sendPhoneNumberOtp(phoneNumber);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async verifyPhoneNumberOtp(
+    phoneNumber: string,
+    verificationCode: string,
+    id: number,
+  ) {
+    try {
+      const data = await this.smsService.verifyPhoneNumberOtp(
+        phoneNumber,
+        verificationCode,
+      );
+
+      await this.markPhonenumberAsConfirmed(id);
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async delete(id) {
+    return this.userRepository.delete(id);
+  }
+
+  async setPin(email: string, pin: number) {
+    return await this.userRepository.update({ email }, { pin });
+  }
+
+  deleteLater;
 }

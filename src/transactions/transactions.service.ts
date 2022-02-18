@@ -1,4 +1,10 @@
-import { HttpException, Injectable } from '@nestjs/common';
+import {
+  CACHE_MANAGER,
+  HttpException,
+  HttpStatus,
+  Inject,
+  Injectable,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
 import { UpdateTransactionDto } from './dto/update-transaction.dto';
@@ -12,18 +18,113 @@ import { WalletService } from 'src/wallet/wallet.service';
 import { Connection, Repository } from 'typeorm';
 import { Transaction } from './entities/transaction.entity';
 import { UserService } from 'src/user/user.service';
+import { MonnifyService } from 'src/monnify/monnify.service';
+import { FlutterwaveService } from 'src/flutterwave/flutterwave.service';
+import { SettingsModule } from 'src/settings/settings.module';
+import { Services } from 'src/common/types/service.type';
+import { ServicesSettings } from 'src/common/types/settings.type';
+import { Cache } from 'cache-manager';
+import { SettingsService } from 'src/settings/settings.service';
+import { CreateVirtualAccountDto } from './dto/create-virtual-account.dto';
+import { CreateReservedAccountDto } from 'src/flutterwave/dto/create-reserved-account.dto';
+import { WithdrawalDto } from './dto/withdrawal.dto';
+import { InitiateWithdrawalDto } from 'src/flutterwave/dto/initiate-withdrawal.dto';
 
 @Injectable()
 export class TransactionsService {
+  private currentService: FlutterwaveService | MonnifyService;
   constructor(
+    @Inject(CACHE_MANAGER) private cacheManager: Cache,
     private connection: Connection,
     @InjectRepository(Transaction)
     private transactionRepository: Repository<Transaction>,
     private readonly paystackService: PaystackService,
-    private readonly walletService: WalletService, // private readonly userService: UserService,
+    private readonly walletService: WalletService,
+    private readonly flutterwaveService: FlutterwaveService,
+    private readonly monnifyService: MonnifyService,
+    private readonly settingsService: SettingsService,
   ) {}
 
-  async completeDeposit(reference: string, user: User) {
+  async getCurrentService() {
+    let data;
+    data = await this.cacheManager.get<any>(
+      ServicesSettings.TRANSACTIONS_SERVICE,
+    );
+
+    if (!data) {
+      data = await this.settingsService.getSetting(
+        ServicesSettings.TRANSACTIONS_SERVICE,
+      );
+    }
+
+    if (!data) {
+      throw new HttpException(
+        'Service currently unavailable',
+        HttpStatus.SERVICE_UNAVAILABLE,
+      );
+    }
+
+    const status = data.isActive;
+
+    if (!status) {
+      throw new HttpException(
+        'Service currently unavailable',
+        HttpStatus.SERVICE_UNAVAILABLE,
+      );
+    }
+    const service = data.value;
+
+    switch (service) {
+      case Services.FLUTTERWAVE:
+        this.currentService = this.flutterwaveService;
+        break;
+      case Services.MONNIFY:
+        this.currentService = this.monnifyService;
+    }
+  }
+
+  async createVirtualAccount(createVirtualAccountDto: CreateVirtualAccountDto) {
+    const flutterwaveData: CreateReservedAccountDto = {
+      email: createVirtualAccountDto.customerEmail,
+      tx_ref: createVirtualAccountDto.accountRecference,
+      bvn: createVirtualAccountDto.bvn,
+      is_permanent: true,
+    };
+
+    const monnifyData = removeKeyAndPropertyFromObject(
+      createVirtualAccountDto,
+      ['tx_ref'],
+    );
+    try {
+      await this.getCurrentService();
+
+      let result;
+
+      switch (this.currentService) {
+        case this.flutterwaveService:
+          result = await this.currentService.createReservedAccount(
+            flutterwaveData,
+          );
+          break;
+        case this.monnifyService:
+          result = await this.currentService.createReservedAccount(monnifyData);
+      }
+
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async withdraw(withdrawalDto: WithdrawalDto) {
+    try {
+      await this.monnifyService.initiateTransfers(withdrawalDto);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  /*async completeDeposit(reference: string, user: User) {
     const queryRunner = this.connection.createQueryRunner();
 
     await queryRunner.connect();
@@ -59,25 +160,5 @@ export class TransactionsService {
       // you need to release a queryRunner which was manually instantiated
       await queryRunner.release();
     }
-  }
-
-  create(createTransactionDto: CreateTransactionDto) {
-    return 'This action adds a new transaction';
-  }
-
-  findAll() {
-    return `This action returns all transactions`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} transaction`;
-  }
-
-  update(id: number, updateTransactionDto: UpdateTransactionDto) {
-    return `This action updates a #${id} transaction`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} transaction`;
-  }
+  }*/
 }
