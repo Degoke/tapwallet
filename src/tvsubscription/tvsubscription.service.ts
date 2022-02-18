@@ -2,7 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Services } from 'src/common/types/service.type';
 import { FlutterwaveService } from 'src/flutterwave/flutterwave.service';
-import { getRequestId } from 'src/utils/generate-transaction-reference';
+import { getRequestId } from 'src/utils/random-generators';
 import { VtpassService } from 'src/vtpass/vtpass.service';
 import { WalletService } from 'src/wallet/wallet.service';
 import { Connection, Repository } from 'typeorm';
@@ -62,12 +62,17 @@ export class TvsubscriptionService {
         billersCode: buyDSTVGOTV.billersCode,
       };
 
-      const tvsubscription = await queryRunner.manager.create(Tvsubscription, payload);
+      const tvsubscription = await queryRunner.manager.create(
+        Tvsubscription,
+        payload,
+      );
       await queryRunner.manager.save(tvsubscription);
 
       buyDSTVGOTV['request_id'] = request_id;
-      buyDSTVGOTV['quantity']=1;
-      const purchaseResponse = await this.vtpassService.bouquetChange(buyDSTVGOTV);
+      buyDSTVGOTV['quantity'] = 1;
+      const purchaseResponse = await this.vtpassService.bouquetChange(
+        buyDSTVGOTV,
+      );
 
       if (purchaseResponse['content']['errors']) {
         throw new HttpException(
@@ -106,7 +111,6 @@ export class TvsubscriptionService {
       await queryRunner.release();
     }
   }
-
 
   async bouquetRenewDSTV_GOTV(buyDSTVGOTV: BuyDSTVGOTV, user) {
     const queryRunner = this.connection.createQueryRunner();
@@ -147,12 +151,17 @@ export class TvsubscriptionService {
         billersCode: buyDSTVGOTV.billersCode,
       };
 
-      const tvsubscription = await queryRunner.manager.create(Tvsubscription, payload);
+      const tvsubscription = await queryRunner.manager.create(
+        Tvsubscription,
+        payload,
+      );
       await queryRunner.manager.save(tvsubscription);
 
       buyDSTVGOTV['request_id'] = request_id;
-      buyDSTVGOTV['quantity']=1;
-      const purchaseResponse = await this.vtpassService.bouquetChange(buyDSTVGOTV);
+      buyDSTVGOTV['quantity'] = 1;
+      const purchaseResponse = await this.vtpassService.bouquetChange(
+        buyDSTVGOTV,
+      );
 
       if (purchaseResponse['content']['errors']) {
         throw new HttpException(
@@ -205,7 +214,8 @@ export class TvsubscriptionService {
       const amount = parseInt(
         variations['content']['varations'].find(
           (variation) =>
-            variation['variation_code'] == buyShowmaxStartimesDto.variation_code,
+            variation['variation_code'] ==
+            buyShowmaxStartimesDto.variation_code,
         ).variation_amount,
       );
       const walletResponse = await this.walletService.removeMoney(
@@ -231,12 +241,17 @@ export class TvsubscriptionService {
         billersCode: buyShowmaxStartimesDto.billersCode,
       };
 
-      const tvsubscription = await queryRunner.manager.create(Tvsubscription, payload);
+      const tvsubscription = await queryRunner.manager.create(
+        Tvsubscription,
+        payload,
+      );
       await queryRunner.manager.save(tvsubscription);
 
       buyShowmaxStartimesDto['request_id'] = request_id;
-      buyShowmaxStartimesDto['quantity']=1;
-      const purchaseResponse = await this.vtpassService.buyStartimes(buyShowmaxStartimesDto);
+      buyShowmaxStartimesDto['quantity'] = 1;
+      const purchaseResponse = await this.vtpassService.buyStartimes(
+        buyShowmaxStartimesDto,
+      );
 
       if (purchaseResponse['content']['errors']) {
         throw new HttpException(
@@ -288,7 +303,8 @@ export class TvsubscriptionService {
       const amount = parseInt(
         variations['content']['varations'].find(
           (variation) =>
-            variation['variation_code'] == buyShowmaxStartimesDto.variation_code,
+            variation['variation_code'] ==
+            buyShowmaxStartimesDto.variation_code,
         ).variation_amount,
       );
       const walletResponse = await this.walletService.removeMoney(
@@ -314,12 +330,17 @@ export class TvsubscriptionService {
         billersCode: buyShowmaxStartimesDto.billersCode,
       };
 
-      const tvsubscription = await queryRunner.manager.create(Tvsubscription, payload);
+      const tvsubscription = await queryRunner.manager.create(
+        Tvsubscription,
+        payload,
+      );
       await queryRunner.manager.save(tvsubscription);
 
       buyShowmaxStartimesDto['request_id'] = request_id;
-      buyShowmaxStartimesDto['quantity']=1;
-      const purchaseResponse = await this.vtpassService.buyStartimes(buyShowmaxStartimesDto);
+      buyShowmaxStartimesDto['quantity'] = 1;
+      const purchaseResponse = await this.vtpassService.buyStartimes(
+        buyShowmaxStartimesDto,
+      );
 
       if (purchaseResponse['content']['errors']) {
         throw new HttpException(

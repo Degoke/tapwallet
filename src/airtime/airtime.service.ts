@@ -6,11 +6,10 @@ import { Services, ServicesType } from 'src/common/types/service.type';
 import { FlutterwaveService } from 'src/flutterwave/flutterwave.service';
 import { BillCategories } from 'src/common/types/bill-categories.type';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { getTransactionReference } from 'src/utils/random-generators';
 import {
-  getRequestId,
   getTransactionReference,
-} from 'src/utils/generate-transaction-reference';
+  getRequestId,
+} from 'src/utils/random-generators';
 import { TransactionStatus } from 'src/common/types/status.type';
 import { WalletService } from 'src/wallet/wallet.service';
 import { VtpassService } from 'src/vtpass/vtpass.service';

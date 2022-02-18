@@ -42,5 +42,4 @@ export class BuyShowmaxStartimesDto {
   @IsString()
   @IsNotEmpty()
   variation_code: string;
-
 }

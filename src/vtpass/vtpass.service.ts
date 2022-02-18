@@ -17,7 +17,7 @@ import { BuyStartimesDto } from './dto/buy-startimes.dto';
 import { BuyShowmaxDto } from './dto/buy-showmax.dto';
 import { BuyWAECDto } from './dto/buy-waec.dto';
 import { BuyElectricityDto } from './dto/buy-electricity.dto';
-import { getRequestId } from 'src/utils/generate-transaction-reference';
+import { getRequestId } from 'src/utils/random-generators';
 
 @Injectable()
 export class VtpassService {
@@ -181,9 +181,8 @@ export class VtpassService {
 
   async bouquetChange(
     bouquetChangeDto: BouquetChangeDto,
-  ) : Promise<Observable<AxiosResponse<any>>>
-  {
-//    return bouquetChangeDto;
+  ): Promise<Observable<AxiosResponse<any>>> {
+    //    return bouquetChangeDto;
     const response = this.httpService
       .post(
         'https://sandbox.vtpass.com/api/pay',

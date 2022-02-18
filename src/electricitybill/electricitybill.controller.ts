@@ -22,11 +22,12 @@ export class ElectricitybillController {
     private readonly electricitybillService: ElectricitybillService,
   ) {}
 
-
-
   @UseGuards(JwtAuthGaurd)
   @Post('buy_electricity')
   buyAirtimeVtpass(@Body() buyElectrictyDto: BuyElectricityDto, @Req() req) {
-    return this.electricitybillService.buyElectricity(buyElectrictyDto, req.user);
+    return this.electricitybillService.buyElectricity(
+      buyElectrictyDto,
+      req.user,
+    );
   }
 }
