@@ -17,6 +17,7 @@ import { BuyStartimesDto } from './dto/buy-startimes.dto';
 import { BuyShowmaxDto } from './dto/buy-showmax.dto';
 import { BuyWAECDto } from './dto/buy-waec.dto';
 import { BuyElectricityDto } from './dto/buy-electricity.dto';
+import { getRequestId } from 'src/utils/generate-transaction-reference';
 
 @Injectable()
 export class VtpassService {
@@ -30,7 +31,9 @@ export class VtpassService {
     this.secretKey = this.configService.get('VTPASS_SECRET_KEY');
     this.publicKey = this.configService.get('VTPASS_PUBLIC_KEY');
     const base64encodedData = Buffer.from(
-      'adedibuprecious@gmail.com' + ':' + 'Snowflakes',
+      this.configService.get('VTPASS_EMAIL') +
+        ':' +
+        this.configService.get('VTPASS_PASSWORD'),
     ).toString('base64');
     this.requestHeaders = {
       headers: {
@@ -61,10 +64,8 @@ export class VtpassService {
   }
 
   async getVariationCodes(
-    params: object,
+    serviceID: string,
   ): Promise<Observable<AxiosResponse<any>>> {
-    const serviceID = params['serviceID'];
-
     const response = this.httpService
       .get(
         `https://sandbox.vtpass.com/api/service-variations?serviceID=${serviceID}`,
@@ -180,7 +181,9 @@ export class VtpassService {
 
   async bouquetChange(
     bouquetChangeDto: BouquetChangeDto,
-  ): Promise<Observable<AxiosResponse<any>>> {
+  ) : Promise<Observable<AxiosResponse<any>>>
+  {
+//    return bouquetChangeDto;
     const response = this.httpService
       .post(
         'https://sandbox.vtpass.com/api/pay',

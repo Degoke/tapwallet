@@ -4,7 +4,7 @@ import { number } from 'joi';
 import { ReturnTypeContainer } from 'src/common/containers/Container.entity';
 import { Transaction } from 'src/transactions/entities/transaction.entity';
 import { UserService } from 'src/user/user.service';
-import { Repository } from 'typeorm';
+import { QueryRunner, Repository } from 'typeorm';
 import { CreateWalletDto } from './dto/create-wallet.dto';
 import { TransactionDto } from './dto/transaction.dto';
 import { UpdateWalletDto } from './dto/update-wallet.dto';
@@ -56,6 +56,37 @@ export class WalletService {
     }
   }
 
+  async removeMoney(
+    transactionDto: TransactionDto,
+    queryRunner: QueryRunner,
+  ): Promise<ReturnTypeContainer<any>> {
+    const { email, amount } = transactionDto;
+    try {
+      const user = await this.userService.findByEmail(email);
+      const walletId = user.data.wallet.id;
+      // await this.walletRepository.decrement(
+      //   { id: walletId },
+      //   'balance',
+      //   amount,
+      // );
+      await queryRunner.manager.decrement(
+        Wallet,
+        { id: walletId },
+        'balance',
+        amount,
+      );
+      const wallet = await queryRunner.manager.findOne(Wallet, {
+        id: walletId,
+      });
+      return {
+        message: 'success',
+        data: { balance: wallet.balance },
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async find() {
     return await this.walletRepository.find({ relations: ['owner'] });
   }
@@ -64,11 +95,6 @@ export class WalletService {
     return await this.walletRepository.findOne(id);
   }
 
-  // async addMoney(balance: number, walletId: number) {
-  //   const wallet = await this.walletRepository.find({ id: walletId });
-  // }
-
-  // async removeMoney(balance: number) {}
   async getWalletByOwnerId(id: number) {
     try {
       return await this.walletRepository.findOne({

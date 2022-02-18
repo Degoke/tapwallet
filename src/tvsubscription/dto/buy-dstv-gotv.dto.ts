@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
-export class BuyAirtimeDto {
+export class BuyDSTVGOTV {
   @IsString()
   @IsNotEmpty()
   @IsOptional()
@@ -26,12 +26,24 @@ export class BuyAirtimeDto {
   @IsOptional()
   serviceID: string;
 
-  @IsNumber()
-  @IsNotEmpty()
-  amount: number;
-
   @IsString()
   @IsNotEmpty()
   @IsOptional()
   type: string;
+
+  @IsOptional()
+  @IsString()
+  billersCode: string;
+
+  @IsOptional()
+  @IsNumber()
+  quantity: number;
+
+  @IsString()
+  @IsNotEmpty()
+  variation_code: string;
+
+  @IsString()
+  @IsNotEmpty()
+  subscription_type: string;
 }

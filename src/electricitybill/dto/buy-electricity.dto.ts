@@ -1,25 +1,37 @@
 import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class BuyElectricityDto {
+  @IsString()
+  @IsNotEmpty()
+  @IsOptional()
+  country: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @IsOptional()
+  customer: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @IsOptional()
+  phone: string;
+
   @IsNotEmpty()
   @IsString()
   @IsOptional()
   request_id: string;
 
-  @IsNotEmpty()
   @IsString()
+  @IsNotEmpty()
+  @IsOptional()
   serviceID: string;
 
-  @IsNotEmpty()
-  @IsNumber()
-  @IsOptional()
-  amount: number;
-
-  @IsNotEmpty()
   @IsString()
-  phone: string;
-
   @IsNotEmpty()
+  @IsOptional()
+  type: string;
+
+  @IsOptional()
   @IsString()
   billersCode: string;
 

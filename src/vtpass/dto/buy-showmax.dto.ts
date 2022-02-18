@@ -3,6 +3,7 @@ import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 export class BuyShowmaxDto {
   @IsNotEmpty()
   @IsString()
+  @IsOptional()
   request_id: string;
 
   @IsNotEmpty()

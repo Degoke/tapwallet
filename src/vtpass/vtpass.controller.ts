@@ -22,6 +22,7 @@ import { BuyShowmaxDto } from './dto/buy-showmax.dto';
 import { BuyStartimesDto } from './dto/buy-startimes.dto';
 import { BuyWAECDto } from './dto/buy-waec.dto';
 import { BuyElectricityDto } from './dto/buy-electricity.dto';
+import { getRequestId } from 'src/utils/generate-transaction-reference';
 
 @Controller('vtpass')
 export class VtpassController {
@@ -29,6 +30,7 @@ export class VtpassController {
 
   @Post('buy_airtime')
   buyAirtime(@Body() buyAirtimeDto: BuyAirtimeDto) {
+    //    return getRequestId();
     return this.vtpassService.buyAirtime(buyAirtimeDto);
   }
 
@@ -37,8 +39,8 @@ export class VtpassController {
     return this.vtpassService.buyData(buyDataDto);
   }
   @Get('get_variation_codes/:serviceID')
-  getVariationCode(@Param() serviceID: object) {
-    return this.vtpassService.getVariationCodes(serviceID);
+  getVariationCode(@Param() params) {
+    return this.vtpassService.getVariationCodes(params.serviceID);
   }
   @Post('transaction_status')
   queryTransactionStatus(
