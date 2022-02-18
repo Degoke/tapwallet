@@ -106,9 +106,9 @@ export class UserService {
             'transactions',
             'accounts',
             'airtimeActivities',
-            'mobileDataPurchases',
-            'electricityPurchases',
-            'tvSubscriptions',
+            'mobileDataActivities',
+            'electricityActivities',
+            'tvSubscriptionActivities',
           ],
         },
       );
