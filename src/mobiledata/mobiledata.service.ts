@@ -38,6 +38,14 @@ export class MobiledataService {
             variation['variation_code'] == buyDataDto.variation_code,
         ).variation_amount,
       );
+
+      const wallet = await this.walletService.getWalletByOwnerId(user.id);
+      if (wallet.balance < amount) {
+        throw new HttpException(
+          'Not enough funds in your wallet',
+          HttpStatus.BAD_REQUEST,
+        );
+      }
       //      return amount;
       const walletResponse = await this.walletService.removeMoney(
         {

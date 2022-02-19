@@ -340,7 +340,7 @@ export class TvsubscriptionService {
       buyShowmaxStartimesDto['quantity'] = 1;
       const purchaseResponse = await this.vtpassService.buyStartimes(
         buyShowmaxStartimesDto,
-      );
+       );
 
       if (purchaseResponse['content']['errors']) {
         throw new HttpException(
