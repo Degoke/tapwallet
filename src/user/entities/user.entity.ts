@@ -114,20 +114,6 @@ class User {
   @OneToMany(() => Airtime, (airtime: Airtime) => airtime.owner)
   airtimeActivities: Airtime[];
 
-  @OneToMany(() => Mobiledatum, (mobileDatum: Mobiledatum) => mobileDatum.owner)
-  mobileDataPurchases: Mobiledatum[];
-
-  @OneToMany(
-    () => Electricitybill,
-    (electricitybill: Electricitybill) => electricitybill.owner,
-  )
-  electricityPurchases: Electricitybill[];
-
-  @OneToMany(
-    () => Tvsubscription,
-    (tvsubscription: Tvsubscription) => tvsubscription.owner,
-  )
-  tvSubscriptions: Tvsubscription[];
   @OneToMany(
     () => Tvsubscription,
     (tvSubscription: Tvsubscription) => tvSubscription.owner,

@@ -83,6 +83,46 @@ export class VtpassService {
       );
     return await lastValueFrom(response);
   }
+  async getServiceIds(
+    identifier: string,
+  ): Promise<Observable<AxiosResponse<any>>> {
+    const response = this.httpService
+      .get(
+        `https://vtpass.com/api/services?identifier=${identifier}`,
+        this.requestHeaders,
+      )
+      .pipe(
+        map((res) => res.data),
+        catchError((error) => {
+          //          throw error;
+          throw new HttpException(
+            error.response.data.message.error,
+            error.response.status,
+          );
+        }),
+      );
+    return await lastValueFrom(response);
+  }
+
+  async getVtpassServicesIdentifiers(): Promise<
+    Observable<AxiosResponse<any>>
+  > {
+    const response = this.httpService
+      .get(
+        'https://sandbox.vtpass.com/api/service-categories',
+        this.requestHeaders,
+      )
+      .pipe(
+        map((res) => res.data),
+        catchError((error) => {
+          throw new HttpException(
+            error.response.data.message.error,
+            error.response.status,
+          );
+        }),
+      );
+    return await lastValueFrom(response);
+  }
 
   async buyData(
     buyDataDto: BuyDataDto,
