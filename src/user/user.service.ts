@@ -21,6 +21,7 @@ import { EmailService } from 'src/email/email.service';
 import { object } from 'joi';
 import { UserPermission } from '../common/types/user-permissions.interface';
 import { AuthService } from 'src/auth/auth.service';
+import { ReferralService } from 'src/referral/referral.service';
 
 @Injectable()
 export class UserService {
@@ -31,12 +32,13 @@ export class UserService {
     private readonly configService: ConfigService,
     private readonly emailService: EmailService,
     private connection: Connection,
+    private readonly referralService: ReferralService,
   ) {}
 
   async create(createUserDto: CreateUserDto) {
     const queryRunner = this.connection.createQueryRunner();
     try {
-      const { email, phoneNumber } = createUserDto;
+      const { email, phoneNumber, referralCode } = createUserDto;
 
       const emailAlreadyExists = await this.userRepository.findOne({ email });
 
@@ -54,6 +56,8 @@ export class UserService {
           HttpStatus.CONFLICT,
         );
       }
+
+      const referrerId = await this.verifyReferralCode(referralCode);
 
       // make this into a transaction
       const hashedPassword = await bcrypt.hash(createUserDto.password, 10);
@@ -79,10 +83,18 @@ export class UserService {
 
         await queryRunner.manager.save(User, { ...newUser, wallet: newWallet });
 
+        await this.referralService.createReferral(
+          { referrerId, userId: newUser.id },
+          queryRunner,
+        );
+
         await this.emailService.sendVerificationCode(
           newUser.email,
           queryRunner,
         );
+
+        if (referralCode) {
+        }
 
         await queryRunner.commitTransaction();
         return newUser;
@@ -229,5 +241,16 @@ export class UserService {
     return await this.userRepository.update({ email }, { pin });
   }
 
-  deleteLater;
+  async verifyReferralCode(referralCode: string) {
+    try {
+      const user = await this.userRepository.findOne({ referralCode });
+      if (!user) {
+        throw new HttpException('Invalid referralCode', HttpStatus.BAD_REQUEST);
+      }
+
+      return user.id;
+    } catch (error) {
+      throw error;
+    }
+  }
 }

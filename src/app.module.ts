@@ -27,6 +27,7 @@ import * as redisStore from 'cache-manager-redis-store';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { EmailModule } from './email/email.module';
 import { NodemailerModule } from './nodemailer/nodemailer.module';
+import { ReferralModule } from './referral/referral.module';
 
 @Module({
   imports: [
@@ -81,6 +82,7 @@ import { NodemailerModule } from './nodemailer/nodemailer.module';
     MonnifyModule,
     EmailModule,
     NodemailerModule,
+    ReferralModule,
   ],
 })
 export class AppModule {}

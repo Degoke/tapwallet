@@ -19,12 +19,13 @@ import { JwtAuthGaurd } from 'src/common/gaurds/jwt-auth.gaurd';
 import { VerifyEmailDTO } from './dto/verify-email.dto';
 import PermissionGuard from 'src/common/gaurds/permission.gaurd';
 import Permission from 'src/common/types/permission.type';
+import { AddBankAccountDTO } from '../account/dto/add-bank-accoiunt.dto';
 
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Post()
+  @Post('signup')
   create(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);
   }
@@ -70,10 +71,5 @@ export class UserController {
   @Get(':email')
   getUserByEmail(@Param('email') email) {
     return this.userService.findByEmail(email);
-  }
-
-  @Delete(':id')
-  delete(@Param('id') id) {
-    return this.userService.delete(id);
   }
 }

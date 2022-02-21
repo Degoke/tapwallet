@@ -12,6 +12,7 @@ import { SmsModule } from 'src/sms/sms.module';
 import { Account } from 'src/account/entities/account.entity';
 import { EmailModule } from 'src/email/email.module';
 import { AuthModule } from 'src/auth/auth.module';
+import { ReferralModule } from 'src/referral/referral.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { AuthModule } from 'src/auth/auth.module';
     TransactionsModule,
     SmsModule,
     EmailModule,
+    ReferralModule,
   ],
   controllers: [UserController],
   providers: [UserService],
