@@ -41,6 +41,17 @@ export class VtpassController {
   getVariationCode(@Param() params) {
     return this.vtpassService.getVariationCodes(params.serviceID);
   }
+
+  @Get('vtpass_services_identifiers')
+  getVtpassServicesIdentifiers() {
+    return this.vtpassService.getVtpassServicesIdentifiers();
+  }
+
+  @Get('vtpass_service_ids/:identifier')
+  getServiceIds(@Param() params) {
+    return this.vtpassService.getServiceIds(params.identifier);
+  }
+
   @Post('transaction_status')
   queryTransactionStatus(
     @Body() queryTransactionStatusDto: QueryTransactionStatusDto,
