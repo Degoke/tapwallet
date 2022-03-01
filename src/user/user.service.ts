@@ -57,7 +57,11 @@ export class UserService {
         );
       }
 
-      const referrerId = await this.verifyReferralCode(referralCode);
+      let referrerId;
+
+      if (referralCode) {
+        referrerId = await this.verifyReferralCode(referralCode);
+      }
 
       // make this into a transaction
       const hashedPassword = await bcrypt.hash(createUserDto.password, 10);
@@ -83,10 +87,12 @@ export class UserService {
 
         await queryRunner.manager.save(User, { ...newUser, wallet: newWallet });
 
-        await this.referralService.createReferral(
-          { referrerId, userId: newUser.id },
-          queryRunner,
-        );
+        if (referralCode) {
+          await this.referralService.createReferral(
+            { referrerId, userId: newUser.id },
+            queryRunner,
+          );
+        }
 
         await this.emailService.sendVerificationCode(
           newUser.email,
