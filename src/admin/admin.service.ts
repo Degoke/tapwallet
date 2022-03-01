@@ -35,7 +35,6 @@ export class AdminService {
     return await this.userService.findByLastName(lastName);
   }
 
-
   async getSetting(id) {
     return await this.settingsService.getSetting(id);
   }

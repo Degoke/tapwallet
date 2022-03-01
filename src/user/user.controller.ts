@@ -75,8 +75,8 @@ export class UserController {
   }
 
   @Get(':email')
-//  @UseGuards(AbilitiesGuard)
-//  @UseGuards(JwtAuthGaurd)
+  //  @UseGuards(AbilitiesGuard)
+  //  @UseGuards(JwtAuthGaurd)
   @CheckAbilities(new Level3UserAbility())
   getUserByEmail(@Param('email') email) {
     return this.userService.findByEmail(email);
