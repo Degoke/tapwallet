@@ -7,6 +7,7 @@ import {
   Body,
 } from '@nestjs/common';
 import { get } from 'http';
+import { Public } from 'src/common/decorators/jwt-auth-guard.decorator';
 import { JwtAuthGaurd } from 'src/common/gaurds/jwt-auth.gaurd';
 import { LocalAuthGaurd } from 'src/common/gaurds/local-auth.gaurd';
 import PermissionGuard from 'src/common/gaurds/permission.gaurd';
@@ -19,6 +20,7 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @UseGuards(LocalAuthGaurd)
+  @Public()
   @Post('login')
   async login(@Request() req) {
     return this.authService.loginUser(req.user);

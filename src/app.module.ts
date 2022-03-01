@@ -24,9 +24,12 @@ import { HealthModule } from './health/health.module';
 import { MonnifyModule } from './monnify/monnify.module';
 import * as Joi from 'joi';
 import * as redisStore from 'cache-manager-redis-store';
-import { APP_INTERCEPTOR } from '@nestjs/core';
+import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { EmailModule } from './email/email.module';
 import { NodemailerModule } from './nodemailer/nodemailer.module';
+import { AbilityModule } from './ability/ability.module';
+import { AbilitiesGuard } from './ability/abilities.guard';
+import { JwtAuthGaurd } from './common/gaurds/jwt-auth.gaurd';
 
 @Module({
   imports: [
@@ -81,6 +84,17 @@ import { NodemailerModule } from './nodemailer/nodemailer.module';
     MonnifyModule,
     EmailModule,
     NodemailerModule,
+    AbilityModule,
+  ],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGaurd,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: AbilitiesGuard,
+    },
   ],
 })
 export class AppModule {}

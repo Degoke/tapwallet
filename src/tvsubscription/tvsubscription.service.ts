@@ -56,7 +56,7 @@ export class TvsubscriptionService {
         amount: amount,
         serviceID: buyDSTVGOTV.serviceID,
         variation_code: buyDSTVGOTV.variation_code,
-        remarks: 'DATA PURCHASE',
+        remarks: 'TV SUBSCRIPTION',
         balance: walletResponse.data.balance,
         quantity: 1,
         billersCode: buyDSTVGOTV.billersCode,
@@ -99,7 +99,7 @@ export class TvsubscriptionService {
       await queryRunner.commitTransaction();
       //      return buyAirtimeDto;
       return {
-        message: 'Data Purchase completed successfully',
+        message: 'DSTV BOUQUET CHANGED',
       };
       return { email, amount };
     } catch (err) {
@@ -145,7 +145,7 @@ export class TvsubscriptionService {
         amount: amount,
         serviceID: buyDSTVGOTV.serviceID,
         variation_code: buyDSTVGOTV.variation_code,
-        remarks: 'DATA PURCHASE',
+        remarks: 'DSTV BOUQUET RENEWAL',
         balance: walletResponse.data.balance,
         quantity: 1,
         billersCode: buyDSTVGOTV.billersCode,
@@ -188,7 +188,7 @@ export class TvsubscriptionService {
       await queryRunner.commitTransaction();
       //      return buyAirtimeDto;
       return {
-        message: 'Data Purchase completed successfully',
+        message: 'DSTV BOUQUET RENEWED',
       };
       return { email, amount };
     } catch (err) {
@@ -340,7 +340,7 @@ export class TvsubscriptionService {
       buyShowmaxStartimesDto['quantity'] = 1;
       const purchaseResponse = await this.vtpassService.buyStartimes(
         buyShowmaxStartimesDto,
-       );
+      );
 
       if (purchaseResponse['content']['errors']) {
         throw new HttpException(

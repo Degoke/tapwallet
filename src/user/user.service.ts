@@ -11,6 +11,7 @@ import { WalletService } from 'src/wallet/wallet.service';
 import { Connection, Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import User from './entities/user.entity';
+import { Tvsubscription } from '../tvsubscription/entities/tvsubscription.entity';
 import { UserInterface } from './interfaces/User.interface';
 import { ReturnTypeContainer } from '../common/containers/Container.entity';
 import * as crypto from 'crypto';
@@ -21,6 +22,8 @@ import { EmailService } from 'src/email/email.service';
 import { object } from 'joi';
 import { UserPermission } from '../common/types/user-permissions.interface';
 import { AuthService } from 'src/auth/auth.service';
+import { Electricitybill } from 'src/electricitybill/entities/electricitybill.entity';
+import { Role } from 'src/common/types/user-role.type';
 
 @Injectable()
 export class UserService {
@@ -68,7 +71,8 @@ export class UserService {
           ...createUserDto,
           password: hashedPassword,
           referralCode: code,
-          permissions: Object.values(UserPermission),
+          role: Role.Level2,
+          // permissions: Object.values(UserPermission),
         });
 
         const newWallet = await queryRunner.manager.create(Wallet, {
@@ -79,10 +83,10 @@ export class UserService {
 
         await queryRunner.manager.save(User, { ...newUser, wallet: newWallet });
 
-        await this.emailService.sendVerificationCode(
-          newUser.email,
-          queryRunner,
-        );
+        // await this.emailService.sendVerificationCode(
+        //   newUser.email,
+        //   queryRunner,
+        // );
 
         await queryRunner.commitTransaction();
         return newUser;
@@ -149,10 +153,68 @@ export class UserService {
     }
   }
 
+  async findByPhone(phoneNumber: string): Promise<ReturnTypeContainer<any>> {
+    try {
+      const user = await this.userRepository.findOne(
+        { phoneNumber },
+        {
+          relations: ['wallet'],
+        },
+      );
+      if (!user) {
+        throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+      }
+      return {
+        message: 'SUCCESS',
+        data: user,
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async findByFirstName(firstName: string): Promise<ReturnTypeContainer<any>> {
+    try {
+      const user = await this.userRepository.findOne(
+        { firstName },
+        {
+          relations: ['wallet'],
+        },
+      );
+      if (!user) {
+        throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+      }
+      return {
+        message: 'SUCCESS',
+        data: user,
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
+  async findByLastName(lastName: string): Promise<ReturnTypeContainer<any>> {
+    try {
+      const user = await this.userRepository.findOne(
+        { lastName },
+        {
+          relations: ['wallet'],
+        },
+      );
+      if (!user) {
+        throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+      }
+      return {
+        message: 'SUCCESS',
+        data: user,
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async getByEmail(email) {
     return await this.userRepository.findOne({ email });
   }
-
   async createReferralCode(firstName) {
     try {
       const hash = await crypto.randomBytes(4).toString('hex').substring(0, 3);
@@ -229,5 +291,34 @@ export class UserService {
     return await this.userRepository.update({ email }, { pin });
   }
 
+  async queryBuilder() {
+    // return await this.connection
+    //   .getRepository(User)
+    //   .createQueryBuilder('user')
+    //   .where('user.id = :id', { id: 1 })
+    //   .getOne();
+    // return await this.connection
+    //   .getRepository(User)
+    //   .createQueryBuilder('user')
+    //   .leftJoinAndSelect(
+    //     'user.tvSubscriptionActivities',
+    //     'tvSubscriptionActivities',
+    //   )
+    //   // .where('user.firstName = :name', { name: 'Precious' })
+    //   .getMany();
+
+    // return await this.connection.getRepository(Tvsubscription).createQueryBuilder("tv")
+    // .leftJoinAndSelect("photos", "photo", "photo.userId = user.id")
+    // .getMany();
+    return await this.connection
+      .getRepository(Tvsubscription)
+      .createQueryBuilder('tv')
+      .innerJoin(
+        Electricitybill,
+        'electricity',
+        'electricity.ownerId = tv.ownerId',
+      )
+      .getMany();
+  }
   deleteLater;
 }
