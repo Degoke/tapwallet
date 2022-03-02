@@ -71,7 +71,7 @@ export class UserService {
           ...createUserDto,
           password: hashedPassword,
           referralCode: code,
-          role: Role.Level2,
+          role: Role.Level_2,
           // permissions: Object.values(UserPermission),
         });
 

@@ -30,24 +30,19 @@ export class AbilityFactory {
     );
     if (user.role === Role.Admin) {
       can(UserPermission.Manage, 'all');
-    } else if (user.role === Role.Level1) {
+    } else if (user.role === Role.Level_0) {
       can(UserPermission.RECEIVE, 'all');
-      can(UserPermission.EDIT, 'all');
-    } else if (user.role === Role.Level2) {
+    } else if (user.role === Role.Level_1) {
       can(UserPermission.RECEIVE, 'all');
-      can(UserPermission.DEPOSIT, 'all');
-      can(UserPermission.WITHDRAW, 'all');
-      can(UserPermission.EDIT, 'all');
-    } else if (user.role === Role.Level3) {
+      can(UserPermission.SEND, 'all');
+    } else if (user.role === Role.Level_2) {
       can(UserPermission.RECEIVE, 'all');
       can(UserPermission.DEPOSIT, 'all');
       can(UserPermission.WITHDRAW, 'all');
-      can(UserPermission.EDIT, 'all');
       can(UserPermission.SEND, 'all');
     } else {
       can(UserPermission.RECEIVE, 'all');
-      can(UserPermission.EDIT, 'all');
-      cannot(UserPermission.SEND, 'all').because('Only Level3 users can');
+      cannot(UserPermission.WITHDRAW, 'all').because('Only Level3 users can');
     }
 
     return build({

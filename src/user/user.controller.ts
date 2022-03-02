@@ -22,7 +22,7 @@ import Permission from 'src/common/types/permission.type';
 import { AbilitiesGuard } from 'src/ability/abilities.guard';
 import {
   CheckAbilities,
-  Level3UserAbility,
+  SEND_USER_PERMSSION,
 } from 'src/ability/abilities.decorator';
 import { UserPermission } from 'src/common/types/user-permissions.interface';
 import User from './entities/user.entity';
@@ -77,7 +77,7 @@ export class UserController {
   @Get(':email')
   //  @UseGuards(AbilitiesGuard)
   //  @UseGuards(JwtAuthGaurd)
-  @CheckAbilities(new Level3UserAbility())
+  @CheckAbilities(new SEND_USER_PERMSSION())
   getUserByEmail(@Param('email') email) {
     return this.userService.findByEmail(email);
   }

@@ -13,7 +13,7 @@ export const CHECK_ABILITY = 'check_ability';
 export const CheckAbilities = (...requirements: RequiredRule[]) =>
   SetMetadata(CHECK_ABILITY, requirements);
 
-export class Level3UserAbility implements RequiredRule {
+export class SEND_USER_PERMSSION implements RequiredRule {
   action = UserPermission.SEND;
   subject = User;
 }
