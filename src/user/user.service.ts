@@ -11,6 +11,7 @@ import { WalletService } from 'src/wallet/wallet.service';
 import { Connection, Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import User from './entities/user.entity';
+import { Tvsubscription } from '../tvsubscription/entities/tvsubscription.entity';
 import { UserInterface } from './interfaces/User.interface';
 import { ReturnTypeContainer } from '../common/containers/Container.entity';
 import * as crypto from 'crypto';
@@ -22,6 +23,8 @@ import { object } from 'joi';
 import { UserPermission } from '../common/types/user-permissions.interface';
 import { AuthService } from 'src/auth/auth.service';
 import { ReferralService } from 'src/referral/referral.service';
+import { Electricitybill } from 'src/electricitybill/entities/electricitybill.entity';
+import { Role } from 'src/common/types/user-role.type';
 
 @Injectable()
 export class UserService {
@@ -76,7 +79,8 @@ export class UserService {
           ...createUserDto,
           password: hashedPassword,
           referralCode: code,
-          permissions: Object.values(UserPermission),
+          role: Role.Level_2,
+          // permissions: Object.values(UserPermission),
         });
 
         const newWallet = await queryRunner.manager.create(Wallet, {
@@ -167,10 +171,68 @@ export class UserService {
     }
   }
 
+  async findByPhone(phoneNumber: string): Promise<ReturnTypeContainer<any>> {
+    try {
+      const user = await this.userRepository.findOne(
+        { phoneNumber },
+        {
+          relations: ['wallet'],
+        },
+      );
+      if (!user) {
+        throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+      }
+      return {
+        message: 'SUCCESS',
+        data: user,
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async findByFirstName(firstName: string): Promise<ReturnTypeContainer<any>> {
+    try {
+      const user = await this.userRepository.findOne(
+        { firstName },
+        {
+          relations: ['wallet'],
+        },
+      );
+      if (!user) {
+        throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+      }
+      return {
+        message: 'SUCCESS',
+        data: user,
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
+  async findByLastName(lastName: string): Promise<ReturnTypeContainer<any>> {
+    try {
+      const user = await this.userRepository.findOne(
+        { lastName },
+        {
+          relations: ['wallet'],
+        },
+      );
+      if (!user) {
+        throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+      }
+      return {
+        message: 'SUCCESS',
+        data: user,
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async getByEmail(email) {
     return await this.userRepository.findOne({ email });
   }
-
   async createReferralCode(firstName) {
     try {
       const hash = await crypto.randomBytes(4).toString('hex').substring(0, 3);

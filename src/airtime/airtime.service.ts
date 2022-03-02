@@ -33,6 +33,14 @@ export class AirtimeService {
       const amount = buyAirtimeDto['amount'];
       const email = user.email;
 
+      const wallet = await this.walletService.getWalletByOwnerId(user.id);
+      if (wallet.balance < amount) {
+        throw new HttpException(
+          'Not enough funds in your wallet',
+          HttpStatus.BAD_REQUEST,
+        );
+      }
+
       const walletResponse = await this.walletService.removeMoney(
         {
           email,

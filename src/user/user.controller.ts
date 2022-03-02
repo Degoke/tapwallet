@@ -20,6 +20,13 @@ import { VerifyEmailDTO } from './dto/verify-email.dto';
 import PermissionGuard from 'src/common/gaurds/permission.gaurd';
 import Permission from 'src/common/types/permission.type';
 import { AddBankAccountDTO } from '../account/dto/add-bank-accoiunt.dto';
+import { AbilitiesGuard } from 'src/ability/abilities.guard';
+import {
+  CheckAbilities,
+  SEND_USER_PERMSSION,
+} from 'src/ability/abilities.decorator';
+import { UserPermission } from 'src/common/types/user-permissions.interface';
+import User from './entities/user.entity';
 
 @Controller('user')
 export class UserController {
@@ -69,6 +76,9 @@ export class UserController {
   }
 
   @Get(':email')
+  //  @UseGuards(AbilitiesGuard)
+  //  @UseGuards(JwtAuthGaurd)
+  @CheckAbilities(new SEND_USER_PERMSSION())
   getUserByEmail(@Param('email') email) {
     return this.userService.findByEmail(email);
   }

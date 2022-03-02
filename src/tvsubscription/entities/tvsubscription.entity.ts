@@ -16,7 +16,7 @@ export class Tvsubscription {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ default: 'electricity' })
+  @Column({ default: 'tvsubscription' })
   type: string;
 
   @Column()

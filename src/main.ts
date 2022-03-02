@@ -1,5 +1,7 @@
 import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
 import { NestFactory, Reflector } from '@nestjs/core';
+import { AbilitiesGuard } from './ability/abilities.guard';
+import { AbilityFactory } from './ability/ability.factory';
 import { AppModule } from './app.module';
 import CustomLogger from './log/custom-logger';
 
@@ -10,6 +12,10 @@ async function bootstrap() {
   });
 
   app.useLogger(app.get(CustomLogger));
+
+  // app.useGlobalGuards(
+  //   new AbilitiesGuard(new Reflector(), new AbilityFactory()),
+  // );
 
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
 
