@@ -321,4 +321,12 @@ export class UserService {
       throw error;
     }
   }
+
+  async markAsAdmin(email: string) {
+    try {
+      await this.userRepository.update({ email }, { role: Role.Admin });
+    } catch (error) {
+      throw error;
+    }
+  }
 }

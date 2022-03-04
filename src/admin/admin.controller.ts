@@ -7,6 +7,8 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
+import { Public } from 'src/common/decorators/jwt-auth-guard.decorator';
+import { CreateUserDto } from 'src/user/dto/create-user.dto';
 import { UserService } from 'src/user/user.service';
 import { AdminService } from './admin.service';
 import { CreateAdminDto } from './dto/create-admin.dto';
@@ -14,10 +16,13 @@ import { UpdateAdminDto } from './dto/update-admin.dto';
 
 @Controller('admin')
 export class AdminController {
-  constructor(
-    private readonly adminService: AdminService,
-    private readonly userService: UserService,
-  ) {}
+  constructor(private readonly adminService: AdminService) {}
+
+  @Public()
+  @Post('create')
+  createAdmin(@Body() createUserDto: CreateUserDto) {
+    return this.adminService.createNewAdmin(createUserDto);
+  }
 
   @Get('users')
   getAllUsers() {
@@ -43,8 +48,8 @@ export class AdminController {
     return this.adminService.getUserByLastName(lastName);
   }
 
-  @Get('query')
+  /*@Get('query')
   queryBuilder() {
     return this.userService.queryBuilder();
-  }
+  }*/
 }

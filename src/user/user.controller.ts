@@ -27,11 +27,13 @@ import {
 } from 'src/ability/abilities.decorator';
 import { UserPermission } from 'src/common/types/user-permissions.interface';
 import User from './entities/user.entity';
+import { Public } from 'src/common/decorators/jwt-auth-guard.decorator';
 
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
+  @Public()
   @Post('signup')
   create(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);

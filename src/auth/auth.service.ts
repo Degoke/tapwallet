@@ -9,8 +9,7 @@ import {
 import { UserService } from '../user/user.service';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
-import { any } from 'joi';
-import { async } from 'rxjs';
+import { Role } from 'src/common/types/user-role.type';
 
 @Injectable()
 export class AuthService {
@@ -38,6 +37,35 @@ export class AuthService {
       const payload = { email: user.email, sub: user.id };
 
       const currentUser = await this.userService.findById(user.id);
+
+      if (currentUser.role === Role.Admin) {
+        throw new HttpException(
+          'This is an Admin Account',
+          HttpStatus.UNAUTHORIZED,
+        );
+      }
+
+      return {
+        user: currentUser,
+        token: this.jwtService.sign(payload),
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async loginAdmin(user: any) {
+    try {
+      const payload = { email: user.email, sub: user.id };
+
+      const currentUser = await this.userService.findById(user.id);
+
+      if (currentUser.role !== Role.Admin) {
+        throw new HttpException(
+          'This is not an Admin Account',
+          HttpStatus.UNAUTHORIZED,
+        );
+      }
 
       return {
         user: currentUser,

@@ -21,9 +21,16 @@ export class AuthController {
 
   @UseGuards(LocalAuthGaurd)
   @Public()
-  @Post('login')
-  async login(@Request() req) {
+  @Post('login/user')
+  async loginUser(@Request() req) {
     return this.authService.loginUser(req.user);
+  }
+
+  @UseGuards(LocalAuthGaurd)
+  @Public()
+  @Post('login/admin')
+  async loginAdmin(@Request() req) {
+    return this.authService.loginAdmin(req.user);
   }
 
   @UseGuards(PermissionGuard(Permission.EDIT))
