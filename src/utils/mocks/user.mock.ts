@@ -1,5 +1,5 @@
 /* eslint-disable prefer-const */
-import User from 'src/user/entities/user.entity';
+/*import User from 'src/user/entities/user.entity';
 import Wallet from 'src/wallet/entities/wallet.entity';
 import { Transaction } from 'src/transactions/entities/transaction.entity';
 import { Transfer } from '../../transfers/entities/transfer.entity';
@@ -74,4 +74,4 @@ userData = {
 
 const userMocks = { userData, walletData, transactionData };
 
-export default userMocks;
+export default userMocks;*/

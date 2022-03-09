@@ -10,10 +10,11 @@ import { WalletModule } from 'src/wallet/wallet.module';
 import { MonnifyModule } from 'src/monnify/monnify.module';
 import { FlutterwaveModule } from 'src/flutterwave/flutterwave.module';
 import { SettingsModule } from 'src/settings/settings.module';
+import { TransactionRepository } from './repositories/transaction.repository';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Transaction]),
+    TypeOrmModule.forFeature([TransactionRepository]),
     HttpModule,
     PaystackModule,
     WalletModule,
@@ -23,5 +24,6 @@ import { SettingsModule } from 'src/settings/settings.module';
   ],
   controllers: [TransactionsController],
   providers: [TransactionsService],
+  exports: [TransactionsService],
 })
 export class TransactionsModule {}

@@ -10,6 +10,13 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import {
+  TransactionModes,
+  TransactionStatus,
+  TransactionType,
+  TRANSACTION_MODES,
+} from 'src/common/types/status.type';
+import { Currency } from 'src/common/types/currency.type';
 
 @Entity()
 export class Transaction {
@@ -17,16 +24,31 @@ export class Transaction {
   public id: number;
 
   @Column()
-  public type: string;
-
-  @Column()
-  public balance: number;
+  public type: TransactionType;
 
   @Column()
   public amount: number;
 
   @Column()
-  public remarks: string;
+  accountNumber: string;
+
+  @Column()
+  accountBank: string;
+
+  @Column()
+  currency: Currency;
+
+  @Column()
+  public status: TransactionStatus;
+
+  @Column()
+  public reference: string;
+
+  @Column()
+  public merchantId: number;
+
+  @Column({ default: TRANSACTION_MODES.BANK_ACCOUNT })
+  public mode: TransactionModes;
 
   @CreateDateColumn()
   public createdDate: Date;
@@ -36,4 +58,7 @@ export class Transaction {
 
   @ManyToOne(() => User, (user) => user.transactions, { onDelete: 'SET NULL' })
   public user: User;
+
+  @Column()
+  public userId: number;
 }

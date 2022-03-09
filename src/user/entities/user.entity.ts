@@ -108,9 +108,6 @@ class User {
   @Column({ type: 'enum', enum: Role, default: Role.User })
   role: Role;
 
-  @Column({ type: 'enum', enum: Permission, array: true, default: [] })
-  permissions: Permission[];
-
   @OneToMany(() => Airtime, (airtime: Airtime) => airtime.owner)
   airtimeActivities: Airtime[];
 

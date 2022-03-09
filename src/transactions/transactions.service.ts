@@ -27,8 +27,17 @@ import { Cache } from 'cache-manager';
 import { SettingsService } from 'src/settings/settings.service';
 import { CreateVirtualAccountDto } from './dto/create-virtual-account.dto';
 import { CreateReservedAccountDto } from 'src/flutterwave/dto/create-reserved-account.dto';
-import { WithdrawalDto } from './dto/withdrawal.dto';
-import { InitiateWithdrawalDto } from 'src/flutterwave/dto/initiate-withdrawal.dto';
+import { FWWithdrawalDto } from './dto/withdrawal.dto';
+import { getTransactionReference } from 'src/utils/random-generators';
+import {
+  TRANSACTION,
+  TransactionStatus,
+  TRANSACTIONSTATUS,
+  TransactionType,
+} from 'src/common/types/status.type';
+import { TransactionRepository } from './repositories/transaction.repository';
+import { userInfo } from 'os';
+import { CURRENCY } from 'src/common/types/currency.type';
 
 @Injectable()
 export class TransactionsService {
@@ -36,8 +45,8 @@ export class TransactionsService {
   constructor(
     @Inject(CACHE_MANAGER) private cacheManager: Cache,
     private connection: Connection,
-    @InjectRepository(Transaction)
-    private transactionRepository: Repository<Transaction>,
+    @InjectRepository(TransactionRepository)
+    private transactionRepository: TransactionRepository,
     private readonly paystackService: PaystackService,
     private readonly walletService: WalletService,
     private readonly flutterwaveService: FlutterwaveService,
@@ -45,7 +54,209 @@ export class TransactionsService {
     private readonly settingsService: SettingsService,
   ) {}
 
-  async getCurrentService() {
+  async initiateWithdrawal(dto: FWWithdrawalDto, user: User) {
+    const queryRunner = this.connection.createQueryRunner();
+    await queryRunner.connect();
+    await queryRunner.startTransaction();
+    try {
+      const reference = await getTransactionReference();
+      const narration = 'Tapmoney Withdrawal';
+      const payload = {
+        ...dto,
+        reference,
+        narration,
+      };
+
+      const newTransaction = await queryRunner.manager.create(Transaction, {
+        accountNumber: dto.account_number,
+        accountBank: dto.account_bank,
+        amount: dto.amount,
+        currency: dto.currency,
+        reference,
+        userId: user.id,
+        status: TRANSACTIONSTATUS.QUEUED,
+        merchantId: 0,
+      });
+
+      await queryRunner.manager.save(Transaction, newTransaction);
+
+      const result = await this.flutterwaveService.transfer(payload);
+
+      if (result.status === 'success') {
+        await this.walletService.removeMoney(
+          { email: user.email, amount: dto.amount },
+          queryRunner,
+        );
+        await queryRunner.manager.update(
+          Transaction,
+          { reference },
+          { status: TRANSACTIONSTATUS.PENDING, merchantId: result.data.id },
+        );
+
+        await queryRunner.commitTransaction();
+        return {
+          message: result.message,
+        };
+      } else {
+        await queryRunner.manager.update(
+          Transaction,
+          { reference },
+          { status: TRANSACTIONSTATUS.FAILED, id: result.data.id },
+        );
+        await queryRunner.commitTransaction();
+        return {
+          status: 404,
+          message: result.message,
+        };
+      }
+    } catch (error) {
+      await queryRunner.rollbackTransaction();
+      throw error;
+    }
+  }
+
+  async getTransactionStatus(id: number) {
+    try {
+      const result = await this.flutterwaveService.getTransferStatus(id);
+
+      if (result.status !== 'success') {
+        throw new HttpException(result.message, HttpStatus.BAD_REQUEST);
+      }
+      if (result.data.status === 'SUCCESSFUL') {
+        await this.transactionRepository.update(
+          { id },
+          { status: TRANSACTIONSTATUS.COMPLETED },
+        );
+        return {
+          message: result.data.complete_message,
+          status: result.data.status,
+        };
+      }
+
+      if (result.status === 'PENDING') {
+        return {
+          message: result.data.complete_message,
+          status: result.data.status,
+        };
+      }
+
+      if (result.status === 'FAILED') {
+        await this.transactionRepository.update(
+          { id },
+          { status: TRANSACTIONSTATUS.FAILED },
+        );
+        return {
+          message: result.data.complete_message,
+          status: result.data.status,
+        };
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async updateTransactionStatus(merchantId: number, status: TransactionStatus) {
+    try {
+      await this.transactionRepository.update({ merchantId }, { status });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getTotalNairaTransactionsBalance() {
+    try {
+      const { sum } = await this.transactionRepository
+        .createQueryBuilder('transaction')
+        .select('SUM(transaction.amount)', 'sum')
+        .where('transaction.currency = :currency', {
+          currency: CURRENCY.NAIRA,
+        })
+        .getRawOne();
+
+      return {
+        totalNairaTransactions: sum,
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getTotalNairaWithdrawalsBalance() {
+    try {
+      const { sum } = await this.transactionRepository
+        .createQueryBuilder('transaction')
+        .select('SUM(transaction.amount)', 'sum')
+        .where('transaction.currency = :currency', {
+          currency: CURRENCY.NAIRA,
+        })
+        .andWhere('transaction.type = :type', { type: TRANSACTION.WITHDRAWAL })
+        .getRawOne();
+
+      return {
+        totalNairaWithdrawals: sum,
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getTotalNairaDepositsBalance() {
+    try {
+      const { sum } = await this.transactionRepository
+        .createQueryBuilder('transaction')
+        .select('SUM(transaction.amount)', 'sum')
+        .where('transaction.currency = :currency', {
+          currency: CURRENCY.NAIRA,
+        })
+        .andWhere('transaction.type = :type', { type: TRANSACTION.DEPOSIT })
+        .getRawOne();
+
+      return {
+        totalNairaDeposits: sum,
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getAllTransactions(type?: TransactionType) {
+    try {
+      if (type) {
+        return await this.transactionRepository.find({ type });
+      }
+      return await this.transactionRepository.find();
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getUserTransactions(id: number, type?: TransactionType) {
+    try {
+      if (type) {
+        return await this.transactionRepository.find({ userId: id });
+      }
+      return await this.transactionRepository.find({ userId: id, type });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async findOneTransaction(id: number) {
+    try {
+      return await this.transactionRepository.findOne(id);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  // create callback url/webhooks
+  // add server sent events
+  //  admin refetch transaction
+  // admin retry a transaction
+  // admin update transaction details
+  // transaction with same amount and bank(similar transactions) with created at 10 minutes ago will not be valid
+
+  /*async getCurrentService() {
     let data;
     data = await this.cacheManager.get<any>(
       ServicesSettings.TRANSACTIONS_SERVICE,

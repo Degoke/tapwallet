@@ -17,11 +17,15 @@ import { BillCategoryType } from 'src/common/types/bill-categories.type';
 import { getTransactionReference } from 'src/utils/random-generators';
 import { CreateReservedAccountDto } from './dto/create-reserved-account.dto';
 import { compare } from 'bcrypt';
+import * as Flutterwave from 'flutterwave-node-v3';
+import { CURRENCY } from 'src/common/types/currency.type';
 
 @Injectable()
 export class FlutterwaveService {
+  private flw: Flutterwave;
   private secretKey: string;
   private publicKey: string;
+  private baseURI: string;
   private encryptKey: string;
   private requestHeaders;
   constructor(
@@ -31,6 +35,7 @@ export class FlutterwaveService {
     this.secretKey = this.configService.get('FLUTTERWAVE_SECRET_KEY');
     this.publicKey = this.configService.get('FLUTTERWAVE_PUBLIC_KEY');
     this.encryptKey = this.configService.get('FLUTTERWAVE_ENCRYPT_KEY');
+    this.flw = new Flutterwave(this.publicKey, this.secretKey);
     this.requestHeaders = {
       headers: {
         Authorization: `Bearer ${this.secretKey}`,
@@ -38,7 +43,37 @@ export class FlutterwaveService {
     };
   }
 
-  async getAllBillCategories(category: BillCategoryType) {
+  async transfer(initiateWithdrawalDto: InitiateWithdrawalDto) {
+    try {
+      const result = this.flw.Transfer.initiate(initiateWithdrawalDto);
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getTransferStatus(id: number) {
+    try {
+      return await this.flw.Transfer.get_a_transfer({ id });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getNairaWalletBalance() {
+    try {
+      const result = await this.flw.Misc.bal_currency({
+        currency: CURRENCY.NAIRA,
+      });
+      return {
+        nairaWalletBalance: result.data.available_balance,
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  /*async getAllBillCategories(category: BillCategoryType) {
     const response = this.httpService
       .get(
         `https://api.flutterwave.com/v3/bill-categories?${category}=1`,
@@ -375,5 +410,5 @@ export class FlutterwaveService {
     cipher.finish();
     const encrypted = cipher.output;
     return forge.util.encode64(encrypted.getBytes());
-  }
+  }*/
 }

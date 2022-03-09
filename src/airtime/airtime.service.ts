@@ -108,7 +108,7 @@ export class AirtimeService {
     }
   }
 
-  async buyAirtime(buyAirtimeDto: BuyAirtimeDto, service: ServicesType, user) {
+  /*async buyAirtime(buyAirtimeDto: BuyAirtimeDto, service: ServicesType, user) {
     const wallet = await this.walletService.getWalletByOwnerId(user.id);
     //    return wallet.balance < parseInt(buyAirtimeDto.amount);
     if (wallet.balance < buyAirtimeDto.amount) {
@@ -157,7 +157,7 @@ export class AirtimeService {
         );
     }
     return result;
-  }
+  }*/
 
   verifyAirtimeTransactionStatus;
 

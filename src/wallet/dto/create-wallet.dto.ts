@@ -1,6 +1,10 @@
 import User from 'src/user/entities/user.entity';
 
-export type WalletType = 'NAIRA';
+export enum WALLETTYPE {
+  NAIRA = 'Naira',
+}
+
+export type WalletType = WALLETTYPE;
 
 export class CreateWalletDto {
   balance: number;

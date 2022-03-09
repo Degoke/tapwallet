@@ -23,7 +23,7 @@ export class BankService {
     private readonly monnifyService: MonnifyService,
   ) {}
 
-  async getCurrentService() {
+  /*async getCurrentService() {
     let data;
     data = await this.cacheManager.get<any>(ServicesSettings.BANK_SERVICE);
 
@@ -59,9 +59,9 @@ export class BankService {
     }
   }
 
-  async getAllBanks() {
+  /async getAllBanks() {
     await this.getCurrentService();
 
     return this.currentService.getAllBankCodes();
-  }
+  }*/
 }

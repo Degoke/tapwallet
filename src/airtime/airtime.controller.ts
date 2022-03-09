@@ -27,7 +27,7 @@ export class AirtimeController {
     return this.airtimeService.buyAirtimeVTPass(buyAirtimeDto, req.user);
   }
 
-  @UseGuards(JwtAuthGaurd)
+  /*@UseGuards(JwtAuthGaurd)
   @Post('buy/:service')
   buyAirtime(
     @Body() buyAirtimeDto: BuyAirtimeDto,
@@ -41,8 +41,8 @@ export class AirtimeController {
     );
   }
 
-  @Get('providers/all/:service')
+  /*@Get('providers/all/:service')
   getAllProviders(@Param() params) {
     return this.airtimeService.getAirtimeProviders(params.service);
-  }
+  }*/
 }

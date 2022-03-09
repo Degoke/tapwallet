@@ -10,17 +10,17 @@ import {
   UpdateDateColumn,
   RelationId,
 } from 'typeorm';
-import { WalletType } from '../dto/create-wallet.dto';
+import { WALLETTYPE, WalletType } from '../dto/create-wallet.dto';
 
 @Entity()
 class Wallet {
   @PrimaryGeneratedColumn()
   public id: number;
 
-  @Column({ type: 'real' })
+  @Column({ type: 'real', default: 0.0 })
   public balance: number;
 
-  @Column()
+  @Column({ default: WALLETTYPE.NAIRA })
   public type: WalletType;
 
   @CreateDateColumn()

@@ -8,7 +8,7 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import Wallet from 'src/wallet/entities/wallet.entity';
 import { WalletService } from 'src/wallet/wallet.service';
-import { Connection, Repository } from 'typeorm';
+import { Connection, Not, Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import User from './entities/user.entity';
 import { Tvsubscription } from '../tvsubscription/entities/tvsubscription.entity';
@@ -75,21 +75,16 @@ export class UserService {
       await queryRunner.startTransaction();
 
       try {
+        const wallet = new Wallet();
         const newUser = await queryRunner.manager.create(User, {
           ...createUserDto,
           password: hashedPassword,
           referralCode: code,
           role: Role.Level_2,
-          // permissions: Object.values(UserPermission),
+          wallet,
         });
 
-        const newWallet = await queryRunner.manager.create(Wallet, {
-          balance: 0.0,
-          owner: newUser,
-          type: 'NAIRA',
-        });
-
-        await queryRunner.manager.save(User, { ...newUser, wallet: newWallet });
+        await queryRunner.manager.save(User, newUser);
 
         if (referralCode) {
           await this.referralService.createReferral(
@@ -315,7 +310,6 @@ export class UserService {
       if (!user) {
         throw new HttpException('Invalid referralCode', HttpStatus.BAD_REQUEST);
       }
-
       return user.id;
     } catch (error) {
       throw error;
@@ -325,6 +319,18 @@ export class UserService {
   async markAsAdmin(email: string) {
     try {
       await this.userRepository.update({ email }, { role: Role.Admin });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getTotalNumberOfUsers() {
+    try {
+      const totalUsers = await this.userRepository.count({
+        role: Not(Role.Admin),
+      });
+
+      return { totalUsers };
     } catch (error) {
       throw error;
     }

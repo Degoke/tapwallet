@@ -5,7 +5,7 @@ import { ReturnTypeContainer } from 'src/common/containers/Container.entity';
 import { Transaction } from 'src/transactions/entities/transaction.entity';
 import { UserService } from 'src/user/user.service';
 import { QueryRunner, Repository } from 'typeorm';
-import { CreateWalletDto } from './dto/create-wallet.dto';
+import { CreateWalletDto, WALLETTYPE } from './dto/create-wallet.dto';
 import { TransactionDto } from './dto/transaction.dto';
 import { UpdateWalletDto } from './dto/update-wallet.dto';
 import Wallet from './entities/wallet.entity';
@@ -105,6 +105,22 @@ export class WalletService {
           },
         },
       });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getTotalUsersNaira() {
+    try {
+      const { sum } = await this.walletRepository
+        .createQueryBuilder('wallet')
+        .select('SUM(wallet.balance)', 'sum')
+        .where('wallet.type = :type', { type: WALLETTYPE.NAIRA })
+        .getRawOne();
+
+      return {
+        totalUsersNaira: sum,
+      };
     } catch (error) {
       throw error;
     }

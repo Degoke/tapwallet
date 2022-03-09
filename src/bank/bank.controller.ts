@@ -18,10 +18,10 @@ import { VerifyBvnDto } from './dto/verify-bvn.dto';
 export class BankController {
   constructor(private readonly bankService: BankService) {}
 
-  @UseInterceptors(CacheInterceptor)
+  /*@UseInterceptors(CacheInterceptor)
   @CacheKey('allBanks')
   @Get('all')
   getAll() {
     return this.bankService.getAllBanks();
-  }
+  }*/
 }

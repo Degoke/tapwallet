@@ -19,9 +19,9 @@ export class InitiateWithdrawalDto {
 
   @IsString()
   @IsNotEmpty()
-  currency;
+  reference;
 
   @IsString()
   @IsNotEmpty()
-  beneficiary_name;
+  currency;
 }

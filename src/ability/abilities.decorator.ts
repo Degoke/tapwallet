@@ -17,3 +17,8 @@ export class SEND_USER_PERMSSION implements RequiredRule {
   action = UserPermission.SEND;
   subject = User;
 }
+
+export class ADMIN_PERMISSION implements RequiredRule {
+  action = UserPermission.Manage;
+  subject = User;
+}

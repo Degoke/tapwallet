@@ -4,7 +4,7 @@ services:
     container_name: tapmoney_api_${NODE_ENV}
     image: tapmoney_api_${NODE_ENV}
     environment:
-    - NODE_ENV:${NODE_ENV}
+    - NODE_ENV=${NODE_ENV}
     build:
       context: .
       target: ${NODE_ENV}
