@@ -22,16 +22,20 @@ import Permission from 'src/common/types/permission.type';
 import { AbilitiesGuard } from 'src/ability/abilities.guard';
 import {
   CheckAbilities,
+  EDIT_PERMISSION,
+  RECEIVE_PERMISSION,
   SEND_USER_PERMSSION,
 } from 'src/ability/abilities.decorator';
 import { UserPermission } from 'src/common/types/user-permissions.interface';
 import User from './entities/user.entity';
+import { Public } from 'src/common/decorators/jwt-auth-guard.decorator';
 
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Post()
+  @Public()
+  @Post('signup')
   create(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);
   }
@@ -48,14 +52,14 @@ export class UserController {
     return this.userService.verifyEmail(code, email);
   }
 
-  @UseGuards(PermissionGuard(Permission.EDIT))
+  @CheckAbilities(new EDIT_PERMISSION())
   @Post()
   initiatePhoneVerification(@Body() body) {
     const { phoneNumber } = body;
     return this.userService.initiatePhoneNumberVerification(phoneNumber);
   }
 
-  @UseGuards(PermissionGuard(Permission.EDIT))
+  @CheckAbilities(new EDIT_PERMISSION())
   @Post()
   verifyPhoneOtp(@Request() req, @Body() body) {
     const { id } = req;
@@ -68,22 +72,15 @@ export class UserController {
     );
   }
 
-  // @UseGuards(JwtAuthGaurd)
+  @Public()
   @Get()
   getUser() {
     return this.userService.find();
   }
 
   @Get(':email')
-  //  @UseGuards(AbilitiesGuard)
-  //  @UseGuards(JwtAuthGaurd)
-  @CheckAbilities(new SEND_USER_PERMSSION())
+  @CheckAbilities(new RECEIVE_PERMISSION())
   getUserByEmail(@Param('email') email) {
     return this.userService.findByEmail(email);
-  }
-
-  @Delete(':id')
-  delete(@Param('id') id) {
-    return this.userService.delete(id);
   }
 }

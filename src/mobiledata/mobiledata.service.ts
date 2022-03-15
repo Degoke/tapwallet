@@ -58,7 +58,7 @@ export class MobiledataService {
       const payload = {
         customer: buyDataDto.phone,
         owner: user,
-        ownerId: user.id,
+        ownerid: user.id,
         transactionReference: request_id,
         service: Services.VTPASS,
         amount: amount,

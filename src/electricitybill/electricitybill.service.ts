@@ -52,7 +52,7 @@ export class ElectricitybillService {
       const payload = {
         customer: buyElectrictyDto.phone,
         owner: user,
-        ownerId: user.id,
+        ownerid: user.id,
         transactionReference: request_id,
         service: Services.VTPASS,
         amount: amount,

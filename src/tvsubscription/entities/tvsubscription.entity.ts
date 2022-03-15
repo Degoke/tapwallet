@@ -35,7 +35,7 @@ export class Tvsubscription {
   owner: User;
 
   @Column()
-  ownerId: number;
+  ownerid: number;
 
   @Column()
   transactionReference: string;
@@ -68,8 +68,8 @@ export class Tvsubscription {
   // status: TransactionStatusType;
 
   @CreateDateColumn()
-  createdAt: Date;
+  createdat: Date;
 
   @UpdateDateColumn()
-  updatedAt: Date;
+  updatedat: Date;
 }

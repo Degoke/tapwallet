@@ -1,4 +1,10 @@
-import { IsEmail, IsNotEmpty, IsString, Matches } from 'class-validator';
+import {
+  IsEmail,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  Matches,
+} from 'class-validator';
 
 export class CreateUserDto {
   @IsString()
@@ -22,4 +28,8 @@ export class CreateUserDto {
   @IsNotEmpty()
   @Matches(/^\+[1-9]\d{1,14}$/)
   phoneNumber: string;
+
+  @IsOptional()
+  @IsString()
+  referralCode: string;
 }

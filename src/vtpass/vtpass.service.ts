@@ -74,11 +74,11 @@ export class VtpassService {
       .pipe(
         map((res) => res.data),
         catchError((error) => {
-          //          throw error;
-          throw new HttpException(
-            error.response.data.message.error,
-            error.response.status,
-          );
+          throw new HttpException(error.response.data, error.response.status);
+          // throw new HttpException(
+          //   error.response.data.message.error,
+          //   error.response.status,
+          // );
         }),
       );
     return await lastValueFrom(response);
@@ -95,10 +95,7 @@ export class VtpassService {
         map((res) => res.data),
         catchError((error) => {
           //          throw error;
-          throw new HttpException(
-            error.response.data.message.error,
-            error.response.status,
-          );
+          throw new HttpException(error.response.data, error.response.status);
         }),
       );
     return await lastValueFrom(response);
@@ -115,10 +112,7 @@ export class VtpassService {
       .pipe(
         map((res) => res.data),
         catchError((error) => {
-          throw new HttpException(
-            error.response.data.message.error,
-            error.response.status,
-          );
+          throw new HttpException(error.response.data, error.response.status);
         }),
       );
     return await lastValueFrom(response);

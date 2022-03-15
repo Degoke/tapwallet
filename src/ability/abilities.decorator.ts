@@ -17,3 +17,28 @@ export class SEND_USER_PERMSSION implements RequiredRule {
   action = UserPermission.SEND;
   subject = User;
 }
+
+export class ADMIN_PERMISSION implements RequiredRule {
+  action = UserPermission.Manage;
+  subject = User;
+}
+
+export class RECEIVE_PERMISSION implements RequiredRule {
+  action = UserPermission.RECEIVE;
+  subject = User;
+}
+
+export class WITHDRAW_PERMISSION implements RequiredRule {
+  action = UserPermission.WITHDRAW;
+  subject = User;
+}
+
+export class DEPOSIT_PERMISSION implements RequiredRule {
+  action = UserPermission.DEPOSIT;
+  subject = User;
+}
+
+export class EDIT_PERMISSION implements RequiredRule {
+  action = UserPermission.EDIT;
+  subject = User;
+}

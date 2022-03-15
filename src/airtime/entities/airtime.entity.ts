@@ -26,7 +26,7 @@ export class Airtime {
   owner: User;
 
   @Column()
-  ownerId: number;
+  ownerid: number;
 
   @Column()
   serviceID: string;
@@ -59,8 +59,8 @@ export class Airtime {
   // status: TransactionStatusType;
 
   @CreateDateColumn()
-  createdAt: Date;
+  createdat: Date;
 
   @UpdateDateColumn()
-  updatedAt: Date;
+  updatedat: Date;
 }

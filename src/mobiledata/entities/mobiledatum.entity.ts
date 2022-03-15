@@ -32,7 +32,7 @@ export class Mobiledatum {
   owner: User;
 
   @Column()
-  ownerId: number;
+  ownerid: number;
 
   @Column()
   transactionReference: string;
@@ -62,8 +62,8 @@ export class Mobiledatum {
   // status: TransactionStatusType;
 
   @CreateDateColumn()
-  createdAt: Date;
+  createdat: Date;
 
   @UpdateDateColumn()
-  updatedAt: Date;
+  updatedat: Date;
 }

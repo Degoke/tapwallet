@@ -50,7 +50,7 @@ export class TvsubscriptionService {
       const payload = {
         customer: buyDSTVGOTV.phone,
         owner: user,
-        ownerId: user.id,
+        ownerid: user.id,
         transactionReference: request_id,
         service: Services.VTPASS,
         amount: amount,
@@ -139,7 +139,7 @@ export class TvsubscriptionService {
       const payload = {
         customer: buyDSTVGOTV.phone,
         owner: user,
-        ownerId: user.id,
+        ownerid: user.id,
         transactionReference: request_id,
         service: Services.VTPASS,
         amount: amount,

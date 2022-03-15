@@ -22,8 +22,11 @@ import { EmailService } from 'src/email/email.service';
 import { object } from 'joi';
 import { UserPermission } from '../common/types/user-permissions.interface';
 import { AuthService } from 'src/auth/auth.service';
+import { ReferralService } from 'src/referral/referral.service';
 import { Electricitybill } from 'src/electricitybill/entities/electricitybill.entity';
-import { Role } from 'src/common/types/user-role.type';
+import { Role_name } from 'src/common/types/user-role.type';
+import { RoleService } from 'src/role/role.service';
+import Role from 'src/role/entities/role.entity';
 
 @Injectable()
 export class UserService {
@@ -34,12 +37,14 @@ export class UserService {
     private readonly configService: ConfigService,
     private readonly emailService: EmailService,
     private connection: Connection,
+    private readonly referralService: ReferralService,
+    private readonly roleService: RoleService,
   ) {}
 
   async create(createUserDto: CreateUserDto) {
     const queryRunner = this.connection.createQueryRunner();
     try {
-      const { email, phoneNumber } = createUserDto;
+      const { email, phoneNumber, referralCode } = createUserDto;
 
       const emailAlreadyExists = await this.userRepository.findOne({ email });
 
@@ -58,6 +63,12 @@ export class UserService {
         );
       }
 
+      let referrerId;
+
+      if (referralCode) {
+        referrerId = await this.verifyReferralCode(referralCode);
+      }
+
       // make this into a transaction
       const hashedPassword = await bcrypt.hash(createUserDto.password, 10);
 
@@ -67,26 +78,42 @@ export class UserService {
       await queryRunner.startTransaction();
 
       try {
+        const wallet = new Wallet();
         const newUser = await queryRunner.manager.create(User, {
           ...createUserDto,
           password: hashedPassword,
           referralCode: code,
-          role: Role.Level_2,
-          // permissions: Object.values(UserPermission),
         });
-
         const newWallet = await queryRunner.manager.create(Wallet, {
-          balance: 0.0,
+          balance: 10000000.0,
           owner: newUser,
           type: 'NAIRA',
         });
 
-        await queryRunner.manager.save(User, { ...newUser, wallet: newWallet });
+        const newRole = await queryRunner.manager.create(Role, {
+          owner: newUser,
+          role_name: Role_name.Admin,
+        });
+        await queryRunner.manager.save(User, {
+          ...newUser,
+          wallet: newWallet,
+          role: newRole,
+        });
 
-        // await this.emailService.sendVerificationCode(
-        //   newUser.email,
-        //   queryRunner,
-        // );
+        if (referralCode) {
+          await this.referralService.createReferral(
+            { referrerId, userId: newUser.id },
+            queryRunner,
+          );
+        }
+
+        await this.emailService.sendVerificationCode(
+          newUser.email,
+          queryRunner,
+        );
+
+        if (referralCode) {
+        }
 
         await queryRunner.commitTransaction();
         return newUser;
@@ -113,6 +140,7 @@ export class UserService {
             'mobileDataActivities',
             'electricityActivities',
             'tvSubscriptionActivities',
+            'role',
           ],
         },
       );
@@ -136,6 +164,7 @@ export class UserService {
           'transactions',
           'accounts',
           'airtimeActivities',
+          'role',
         ],
       });
     } catch (error) {
@@ -291,34 +320,29 @@ export class UserService {
     return await this.userRepository.update({ email }, { pin });
   }
 
-  async queryBuilder() {
-    // return await this.connection
-    //   .getRepository(User)
-    //   .createQueryBuilder('user')
-    //   .where('user.id = :id', { id: 1 })
-    //   .getOne();
-    // return await this.connection
-    //   .getRepository(User)
-    //   .createQueryBuilder('user')
-    //   .leftJoinAndSelect(
-    //     'user.tvSubscriptionActivities',
-    //     'tvSubscriptionActivities',
-    //   )
-    //   // .where('user.firstName = :name', { name: 'Precious' })
-    //   .getMany();
-
-    // return await this.connection.getRepository(Tvsubscription).createQueryBuilder("tv")
-    // .leftJoinAndSelect("photos", "photo", "photo.userId = user.id")
-    // .getMany();
-    return await this.connection
-      .getRepository(Tvsubscription)
-      .createQueryBuilder('tv')
-      .innerJoin(
-        Electricitybill,
-        'electricity',
-        'electricity.ownerId = tv.ownerId',
-      )
-      .getMany();
+  async verifyReferralCode(referralCode: string) {
+    try {
+      const user = await this.userRepository.findOne({ referralCode });
+      if (!user) {
+        throw new HttpException('Invalid referralCode', HttpStatus.BAD_REQUEST);
+      }
+      return user.id;
+    } catch (error) {
+      throw error;
+    }
   }
-  deleteLater;
+
+  async markAsAdmin(email: string) {
+    try {
+      const user = await this.userRepository.findOne(
+        { email },
+        {
+          relations: ['role'],
+        },
+      );
+      await this.roleService.update(user.role.id, Role_name.Admin);
+    } catch (error) {
+      throw error;
+    }
+  }
 }

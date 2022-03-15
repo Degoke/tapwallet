@@ -15,6 +15,9 @@ import { Email } from 'src/email/entities/email.entity';
 import { Tvsubscription } from 'src/tvsubscription/entities/tvsubscription.entity';
 import { Mobiledatum } from 'src/mobiledata/entities/mobiledatum.entity';
 import { Electricitybill } from 'src/electricitybill/entities/electricitybill.entity';
+import Role from 'src/role/entities/role.entity';
+import { Activity } from 'src/admin/entities/activity.entity';
+
 
 @Module({
   imports: [
@@ -43,6 +46,8 @@ import { Electricitybill } from 'src/electricitybill/entities/electricitybill.en
           Tvsubscription,
           Mobiledatum,
           Electricitybill,
+          Role,
+          Activity,
         ],
         migrations: ['dist/migrations/**/*{.ts,.js}'],
         cli: {
@@ -50,6 +55,7 @@ import { Electricitybill } from 'src/electricitybill/entities/electricitybill.en
         },
         synchronize: true,
         migrationsRun: true,
+
         autoLoadEntities: true,
       }),
     }),

@@ -52,7 +52,7 @@ export class AirtimeService {
       const payload = {
         customer: buyAirtimeDto.phone,
         owner: user,
-        ownerId: user.id,
+        ownerid: user.id,
         transactionReference: request_id,
         service: Services.VTPASS,
         amount: buyAirtimeDto.amount,
@@ -130,7 +130,7 @@ export class AirtimeService {
           const payload = {
             customer: response.data.phoneNumber,
             amount: response.data.amount,
-            ownerId: user.id,
+            ownerid: user.id,
             merchantReference: response.data.tx_ref,
             tapmoneyReference: reference,
             service: Services.FLUTTERWAVE,

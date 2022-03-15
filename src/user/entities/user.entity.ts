@@ -16,12 +16,13 @@ import {
 import { Account } from 'src/account/entities/account.entity';
 import { UserRoles } from '../interfaces/User.interface';
 import Permission from 'src/common/types/permission.type';
-import { Role } from '../../common/types/user-role.type';
+import { Role_name } from '../../common/types/user-role.type';
 import { RolePage } from 'twilio/lib/rest/chat/v1/service/role';
 import { Airtime } from 'src/airtime/entities/airtime.entity';
 import { Tvsubscription } from 'src/tvsubscription/entities/tvsubscription.entity';
 import { Electricitybill } from 'src/electricitybill/entities/electricitybill.entity';
 import { Mobiledatum } from 'src/mobiledata/entities/mobiledatum.entity';
+import Role from 'src/role/entities/role.entity';
 
 @Entity()
 class User {
@@ -105,8 +106,11 @@ class User {
   @JoinColumn()
   public wallet: Wallet;
 
-  @Column({ type: 'enum', enum: Role, default: Role.User })
-  role: Role;
+  @OneToOne(() => Role, (role: Role) => role.owner, {
+    cascade: true,
+  })
+  @JoinColumn()
+  public role: Role;
 
   @Column({ type: 'enum', enum: Permission, array: true, default: [] })
   permissions: Permission[];
