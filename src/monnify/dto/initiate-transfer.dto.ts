@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
-export class InitiateTransferDto {
+export class InitiateMNTransferDto {
   @IsNumber()
   @IsNotEmpty()
   amount;
@@ -24,8 +24,4 @@ export class InitiateTransferDto {
   @IsString()
   @IsNotEmpty()
   currency;
-
-  @IsString()
-  @IsNotEmpty()
-  sourceAccountNumber;
 }

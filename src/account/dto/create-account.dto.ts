@@ -16,4 +16,16 @@ export class CreateAccountDto {
   @IsNumber()
   @IsNotEmpty()
   ownerId;
+
+  @IsString()
+  @IsNotEmpty()
+  accountType;
+
+  @IsString()
+  @IsNotEmpty()
+  bankService;
+
+  @IsString()
+  @IsNotEmpty()
+  currency;
 }

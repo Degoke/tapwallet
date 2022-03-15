@@ -8,7 +8,6 @@ import { mockedConfigService } from 'src/utils/mocks/config.service';
 import { mockedJwtService } from 'src/utils/mocks/jwt.service';
 import { AuthService } from './auth.service';
 import * as bcrypt from 'bcrypt';
-import userMocks from 'src/utils/mocks/user.mock';
 import Wallet from 'src/wallet/entities/wallet.entity';
 import { WalletService } from 'src/wallet/wallet.service';
 

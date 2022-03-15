@@ -8,20 +8,28 @@ import {
 import { ConfigService } from '@nestjs/config';
 import { Cache } from 'cache-manager';
 import { ServicesSettings } from 'src/common/types/settings.type';
-import { Services } from 'src/common/types/service.type';
+import {
+  BankServices,
+  BANK_SERVICES,
+  Services,
+} from 'src/common/types/service.type';
 import { FlutterwaveService } from 'src/flutterwave/flutterwave.service';
 import { SettingsService } from 'src/settings/settings.service';
 import { MonnifyService } from 'src/monnify/monnify.service';
 
+const { MONNIFY, FLUTTERWAVE } = BANK_SERVICES;
+
 @Injectable()
 export class BankService {
-  private currentService: FlutterwaveService | MonnifyService;
+  private currentService: BankServices;
   constructor(
     @Inject(CACHE_MANAGER) private cacheManager: Cache,
     private readonly settingsService: SettingsService,
     private readonly flutterwaveService: FlutterwaveService,
     private readonly monnifyService: MonnifyService,
-  ) {}
+  ) {
+    this.currentService = MONNIFY;
+  }
 
   /*async getCurrentService() {
     let data;
@@ -64,4 +72,26 @@ export class BankService {
 
     return this.currentService.getAllBankCodes();
   }*/
+
+  async getAllBanks() {
+    try {
+      switch (this.currentService) {
+        case MONNIFY:
+          return await this.monnifyService.getAllBankCodes();
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getNairaWalletBAlance() {
+    try {
+      switch (this.currentService) {
+        case MONNIFY:
+          return await this.monnifyService.getWalletBalance('2953846525');
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
 }

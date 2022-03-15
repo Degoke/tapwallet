@@ -45,7 +45,8 @@ export class FlutterwaveService {
 
   async transfer(initiateWithdrawalDto: InitiateWithdrawalDto) {
     try {
-      const result = this.flw.Transfer.initiate(initiateWithdrawalDto);
+      const result = await this.flw.Transfer.initiate(initiateWithdrawalDto);
+      console.log(result);
       return result;
     } catch (error) {
       throw error;

@@ -1,4 +1,6 @@
 import { Injectable } from '@nestjs/common';
+import { BankService } from 'src/bank/bank.service';
+import { AdminRoles } from 'src/common/types/roles.type';
 import { FlutterwaveService } from 'src/flutterwave/flutterwave.service';
 import { CreateSettingDto } from 'src/settings/dto/create-setting.dto';
 import { UpdateSettingDto } from 'src/settings/dto/update-setting.dto';
@@ -18,13 +20,14 @@ export class AdminService {
     private readonly walletService: WalletService,
     private readonly flutterwaveService: FlutterwaveService,
     private readonly transactionsService: TransactionsService,
+    private readonly bankService: BankService,
   ) {}
 
-  async createNewAdmin(createUserDto: CreateUserDto) {
+  async createNewAdmin(createUserDto: CreateUserDto, role: AdminRoles) {
     try {
       const { email } = createUserDto;
       await this.userService.create(createUserDto);
-      await this.userService.markAsAdmin(email);
+      await this.userService.markAsAdmin(email, role);
 
       return {
         message: 'Admin created Successfully',
@@ -38,8 +41,7 @@ export class AdminService {
     try {
       const totalUsers = await this.userService.getTotalNumberOfUsers();
       const totalUsersNaira = await this.walletService.getTotalUsersNaira();
-      const nairaWalletBalance =
-        await this.flutterwaveService.getNairaWalletBalance();
+      const nairaWalletBalance = await this.bankService.getNairaWalletBAlance();
       const totalNairaTransactions =
         await this.transactionsService.getTotalNairaTransactionsBalance();
       const totalNairaDeposits =

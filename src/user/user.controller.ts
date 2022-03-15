@@ -14,18 +14,15 @@ import {
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { UserInterface } from './interfaces/User.interface';
 import { JwtAuthGaurd } from 'src/common/gaurds/jwt-auth.gaurd';
 import { VerifyEmailDTO } from './dto/verify-email.dto';
-import PermissionGuard from 'src/common/gaurds/permission.gaurd';
-import Permission from 'src/common/types/permission.type';
 import { AddBankAccountDTO } from '../account/dto/add-bank-accoiunt.dto';
 import { AbilitiesGuard } from 'src/ability/abilities.guard';
 import {
   CheckAbilities,
-  SEND_USER_PERMSSION,
+  EditUserPermission,
+  ReadUserPermission,
 } from 'src/ability/abilities.decorator';
-import { UserPermission } from 'src/common/types/user-permissions.interface';
 import User from './entities/user.entity';
 import { Public } from 'src/common/decorators/jwt-auth-guard.decorator';
 
@@ -39,26 +36,27 @@ export class UserController {
     return this.userService.create(createUserDto);
   }
 
-  @UseGuards(JwtAuthGaurd)
+  @CheckAbilities(new ReadUserPermission())
   @Get('current')
   getCurrentUser(@Request() req) {
     return this.userService.findById(req.user.id);
   }
 
+  /*@CheckAbilities(new EditUserPermission())
   @Post('verifyemail')
   verifyEmail(@Body() verifyEmailDto: VerifyEmailDTO) {
     const { email, code } = verifyEmailDto;
     return this.userService.verifyEmail(code, email);
   }
 
-  @UseGuards(PermissionGuard(Permission.EDIT))
+  @CheckAbilities(new EditUserPermission())
   @Post()
   initiatePhoneVerification(@Body() body) {
     const { phoneNumber } = body;
     return this.userService.initiatePhoneNumberVerification(phoneNumber);
   }
 
-  @UseGuards(PermissionGuard(Permission.EDIT))
+  @CheckAbilities(new EditUserPermission())
   @Post()
   verifyPhoneOtp(@Request() req, @Body() body) {
     const { id } = req;
@@ -69,7 +67,7 @@ export class UserController {
       verificationCode,
       id,
     );
-  }
+  }*/
 
   // @UseGuards(JwtAuthGaurd)
   @Get()
@@ -80,7 +78,7 @@ export class UserController {
   @Get(':email')
   //  @UseGuards(AbilitiesGuard)
   //  @UseGuards(JwtAuthGaurd)
-  @CheckAbilities(new SEND_USER_PERMSSION())
+  //@CheckAbilities(new SEND_USER_PERMSSION())
   getUserByEmail(@Param('email') email) {
     return this.userService.findByEmail(email);
   }

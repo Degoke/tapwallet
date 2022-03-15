@@ -1,22 +1,18 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  OneToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { EntityContainer } from 'src/common/types/entity';
+import { Customer } from 'src/user/entities/customer.entity';
+import { Column, Entity, ManyToOne, OneToOne } from 'typeorm';
 
 @Entity()
-export class Referral {
-  @PrimaryGeneratedColumn()
-  id: number;
+export class Referral extends EntityContainer {
+  @ManyToOne(() => Customer, (customer: Customer) => customer.referrals)
+  public referredBy: Customer;
 
   @Column()
-  referrerId: number;
+  public referredById: number;
 
-  @Column()
-  userId: number;
+  @OneToOne(() => Customer, (customer: Customer) => customer.referredBy)
+  public referred: Customer;
 
-  @CreateDateColumn()
-  createdAt: Date;
+  @OneToOne(() => Customer, (customer: Customer) => customer.referredBy)
+  public referredId: number;
 }

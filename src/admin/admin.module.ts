@@ -6,6 +6,7 @@ import { FlutterwaveModule } from 'src/flutterwave/flutterwave.module';
 import { UserModule } from 'src/user/user.module';
 import { WalletModule } from 'src/wallet/wallet.module';
 import { TransactionsModule } from 'src/transactions/transactions.module';
+import { BankModule } from 'src/bank/bank.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { TransactionsModule } from 'src/transactions/transactions.module';
     UserModule,
     WalletModule,
     TransactionsModule,
+    BankModule,
   ],
   controllers: [AdminController],
   providers: [AdminService],

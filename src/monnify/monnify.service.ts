@@ -2,6 +2,7 @@ import { HttpService } from '@nestjs/axios';
 import {
   CACHE_MANAGER,
   HttpException,
+  HttpStatus,
   Inject,
   Injectable,
 } from '@nestjs/common';
@@ -9,7 +10,8 @@ import { ConfigService } from '@nestjs/config';
 import { catchError, lastValueFrom, map } from 'rxjs';
 import { Cache } from 'cache-manager';
 import { CreateReservedAccountDto } from './dto/create-reserved-account.dto';
-import { InitiateTransferDto } from './dto/initiate-transfer.dto';
+import { InitiateMNTransferDto } from './dto/initiate-transfer.dto';
+import { TRANSACTIONSTATUS } from 'src/common/types/status.type';
 
 @Injectable()
 export class MonnifyService {
@@ -41,50 +43,120 @@ export class MonnifyService {
   }
 
   async authenticate() {
-    if (this.authToken) {
-      return {
-        message: 'Token Available',
+    try {
+      if (this.authToken) {
+        return {
+          message: 'Token Available',
+        };
+      }
+
+      const apiKey = this.configService.get('MONNIFY_APIKEY');
+      const apiSecret = this.configService.get('MONNIFY_SECRET_KEY');
+
+      const clientIdSecretInBase64 = Buffer.from(
+        apiKey + ':' + apiSecret,
+      ).toString('base64');
+
+      const headers = {
+        headers: {
+          Authorization: `Basic ${clientIdSecretInBase64}`,
+        },
       };
+
+      const response = this.httpService
+        .post(`${this.baseUrl}api/v1/auth/login`, null, headers)
+        .pipe(
+          map((res) => res.data),
+          catchError((error) => {
+            throw new HttpException(
+              {
+                status: error.response.status,
+                message: error.response.data.responseMessage,
+                code: error.response.data.responseCode,
+              },
+              error.response.status,
+            );
+          }),
+        );
+
+      const result = await lastValueFrom(response);
+
+      console.log('starting api call...');
+      /*await this.cacheManager.set('monnify_token', 'hi', {
+        ttl: result.responseBody.expiresIn,
+      });*/
+      this.authToken = result.responseBody.accessToken;
+
+      console.log('starting api call...');
+
+      return result;
+    } catch (error) {
+      throw error;
     }
+  }
 
-    const apiKey = this.configService.get('MONNIFY_APIKEY');
-    const apiSecret = this.configService.get('MONNIFY_SECRET_KEY');
+  async handleResponse(result) {
+    try {
+      if (result.responseCode === '0') {
+        if (result.responseBody.status) {
+          if (
+            result.responseBody.status === 'SUCCESS' ||
+            result.responseBody.status === 'COMPLETED'
+          ) {
+            return {
+              status: TRANSACTIONSTATUS.COMPLETED,
+              data: result.responseBody,
+            };
+          }
 
-    const clientIdSecretInBase64 = Buffer.from(
-      apiKey + ':' + apiSecret,
-    ).toString('base64');
+          if (
+            result.responseBody.status === 'PENDING' ||
+            result.responseBody.status === 'AWAITING_PROCESSING' ||
+            result.responseBody.status === 'IN_PROGRESS'
+          ) {
+            return {
+              status: TRANSACTIONSTATUS.IN_PROGRESS,
+              data: result.responseBody,
+            };
+          }
 
-    const headers = {
-      headers: {
-        Authorization: `Basic ${clientIdSecretInBase64}`,
-      },
-    };
+          if (result.responseBody.status === 'PENDING_AUTHORIZATION') {
+            return {
+              status: TRANSACTIONSTATUS.PENDING_AUTH,
+              data: result.responseBody,
+            };
+          }
 
-    const response = this.httpService
-      .post(`${this.baseUrl}api/v1/auth/login`, null, headers)
-      .pipe(
-        map((res) => res.data),
-        catchError((error) => {
-          throw new HttpException(
-            {
-              status: error.response.status,
-              message: error.response.data.responseMessage,
-              code: error.response.data.responseCode,
-            },
-            error.response.status,
-          );
-        }),
-      );
+          if (result.responseBody.status === 'REVERSED') {
+            return {
+              status: TRANSACTIONSTATUS.REVERSED,
+              data: result.responseBody,
+            };
+          }
+        }
 
-    const result = await lastValueFrom(response);
-    await this.cacheManager.set(
-      'monnify_token',
-      result.requestBody.accessToken,
-      { ttl: result.requestBody.expiresIn },
-    );
-    this.authToken = result.requestBody.accessToken;
+        return {
+          data: result.responseBody,
+        };
+      }
 
-    return result;
+      if (
+        result.responseCode === 'D01' ||
+        result.responseCode === 'D02' ||
+        result.responseCode === 'D03' ||
+        result.responseCode === 'D04'
+      ) {
+        throw new HttpException(result.responseMessage, HttpStatus.BAD_REQUEST);
+      }
+
+      if (result.responseCode === '99') {
+        return {
+          status: TRANSACTIONSTATUS.PENDING_REQUERY,
+        };
+      }
+    } catch (error) {
+      throw error;
+    }
   }
 
   async getAllBankCodes() {
@@ -139,7 +211,7 @@ export class MonnifyService {
 
     const result = await lastValueFrom(response);
 
-    return result;
+    return await this.handleResponse(result);
   }
 
   async createReservedAccount(
@@ -171,7 +243,7 @@ export class MonnifyService {
 
     const result = await lastValueFrom(response);
 
-    return result;
+    return await this.handleResponse(result);
   }
 
   async deleteReservedAccount(reference: string) {
@@ -233,15 +305,17 @@ export class MonnifyService {
     return result;
   }
 
-  async initiateTransfers(initiateTransferDto: InitiateTransferDto) {
+  async initiateTransfers(initiateTransferDto: InitiateMNTransferDto) {
     await this.authenticate();
 
     const headers = this.setRequestHeaders(this.authToken);
 
+    const sourceNumber = '2953846525';
+
     const response = this.httpService
       .post(
         `${this.baseUrl}api/v2/disbursements/single`,
-        initiateTransferDto,
+        { ...initiateTransferDto, sourceAccountNumber: sourceNumber },
         headers,
       )
       .pipe(
@@ -260,7 +334,7 @@ export class MonnifyService {
 
     const result = await lastValueFrom(response);
 
-    return result;
+    return await this.handleResponse(result);
   }
 
   async getWalletBalance(accountNumber: string) {
@@ -316,5 +390,66 @@ export class MonnifyService {
     const result = await lastValueFrom(response);
 
     return result;
+  }
+
+  async getTransactionStatus(reference) {
+    await this.authenticate();
+
+    const headers = this.setRequestHeaders(this.authToken);
+
+    const response = this.httpService
+      .get(
+        `${this.baseUrl}/api/v2/disbursements/single/summary?reference=${reference}`,
+        headers,
+      )
+      .pipe(
+        map((res) => res.data),
+        catchError((error) => {
+          throw new HttpException(
+            {
+              status: error.response.status,
+              message: error.response.data.responseMessage,
+              code: error.response.data.responseCode,
+            },
+            error.response.statusCode,
+          );
+        }),
+      );
+
+    const result = await lastValueFrom(response);
+
+    return this.handleResponse(result);
+  }
+
+  async validateAccountBvnMatch({ accountNumber, bankCode, bvn }) {
+    await this.authenticate();
+
+    const headers = this.setRequestHeaders(this.authToken);
+
+    const payload = {
+      bankCode,
+      accountNumber,
+      bvn,
+    };
+
+    const response = this.httpService
+      .post(`${this.baseUrl}/api/v1/vas/bvn-account-match`, payload, headers)
+      .pipe(
+        map((res) => res.data),
+        catchError((error) => {
+          throw new HttpException(
+            {
+              status: error.response.status,
+              message: error.response.data.responseMessage,
+              code: error.response.data.responseCode,
+            },
+            error.response.statusCode,
+          );
+        }),
+      );
+
+    const result = await lastValueFrom(response);
+
+    return await this.handleResponse(result);
   }
 }

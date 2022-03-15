@@ -12,7 +12,6 @@ import { Connection, Not, Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import User from './entities/user.entity';
 import { Tvsubscription } from '../tvsubscription/entities/tvsubscription.entity';
-import { UserInterface } from './interfaces/User.interface';
 import { ReturnTypeContainer } from '../common/containers/Container.entity';
 import * as crypto from 'crypto';
 import * as bcrypt from 'bcrypt';
@@ -20,11 +19,16 @@ import { SmsService } from 'src/sms/sms.service';
 import { ConfigService } from '@nestjs/config';
 import { EmailService } from 'src/email/email.service';
 import { object } from 'joi';
-import { UserPermission } from '../common/types/user-permissions.interface';
 import { AuthService } from 'src/auth/auth.service';
 import { ReferralService } from 'src/referral/referral.service';
 import { Electricitybill } from 'src/electricitybill/entities/electricitybill.entity';
-import { Role } from 'src/common/types/user-role.type';
+import {
+  AdminRoles,
+  ADMIN_ROLES,
+  UserRoles,
+  USER_ROLES,
+} from 'src/common/types/roles.type';
+import { Kyc } from 'src/kyc/entities/kyc.entity';
 
 @Injectable()
 export class UserService {
@@ -75,16 +79,25 @@ export class UserService {
       await queryRunner.startTransaction();
 
       try {
-        const wallet = new Wallet();
         const newUser = await queryRunner.manager.create(User, {
           ...createUserDto,
           password: hashedPassword,
           referralCode: code,
-          role: Role.Level_2,
-          wallet,
         });
 
-        await queryRunner.manager.save(User, newUser);
+        const savedUser = await queryRunner.manager.save(User, newUser);
+
+        const wallet = await queryRunner.manager.create(Wallet, {
+          userId: savedUser.id,
+        });
+
+        await queryRunner.manager.save(Wallet, wallet);
+
+        const newKyc = await queryRunner.manager.create(Kyc, {
+          userId: savedUser.id,
+        });
+
+        await queryRunner.manager.save(Kyc, newKyc);
 
         if (referralCode) {
           await this.referralService.createReferral(
@@ -149,11 +162,22 @@ export class UserService {
           'transactions',
           'accounts',
           'airtimeActivities',
+          'kyc',
         ],
       });
     } catch (error) {
       throw error;
     }
+  }
+
+  async getForJwt(id: number) {
+    return await this.userRepository
+      .createQueryBuilder('user')
+      .leftJoin('user.kyc', 'kyc')
+      .leftJoin('user.wallet', 'wallet')
+      .addSelect(['user', 'kyc.level', 'wallet.balance'])
+      .where('user.id = :id', { id })
+      .getOne();
   }
 
   async find() {
@@ -228,6 +252,7 @@ export class UserService {
   async getByEmail(email) {
     return await this.userRepository.findOne({ email });
   }
+
   async createReferralCode(firstName) {
     try {
       const hash = await crypto.randomBytes(4).toString('hex').substring(0, 3);
@@ -237,7 +262,9 @@ export class UserService {
     }
   }
 
-  async markPhonenumberAsConfirmed(id) {
+  // add to kyc
+
+  /*async markPhonenumberAsConfirmed(id) {
     try {
       return this.userRepository.update(id, {
         isPhoneNumberVerified: true,
@@ -295,13 +322,15 @@ export class UserService {
       throw error;
     }
   }
+  */
 
   async delete(id) {
     return this.userRepository.delete(id);
   }
 
   async setPin(email: string, pin: number) {
-    return await this.userRepository.update({ email }, { pin });
+    const hashedPin = await bcrypt.hash(String(pin), 10);
+    return await this.userRepository.update({ email }, { pin: hashedPin });
   }
 
   async verifyReferralCode(referralCode: string) {
@@ -316,9 +345,9 @@ export class UserService {
     }
   }
 
-  async markAsAdmin(email: string) {
+  async markAsAdmin(email: string, role: AdminRoles) {
     try {
-      await this.userRepository.update({ email }, { role: Role.Admin });
+      await this.userRepository.update({ email }, { role });
     } catch (error) {
       throw error;
     }
@@ -327,7 +356,7 @@ export class UserService {
   async getTotalNumberOfUsers() {
     try {
       const totalUsers = await this.userRepository.count({
-        role: Not(Role.Admin),
+        role: Not(ADMIN_ROLES.SUB_ADMIN),
       });
 
       return { totalUsers };

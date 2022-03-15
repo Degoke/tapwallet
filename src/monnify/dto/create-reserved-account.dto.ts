@@ -3,7 +3,7 @@ import { IsBoolean, IsNotEmpty, IsString } from 'class-validator';
 export class CreateReservedAccountDto {
   @IsString()
   @IsNotEmpty()
-  accountRecference;
+  accountReference;
 
   @IsString()
   @IsNotEmpty()
@@ -27,5 +27,5 @@ export class CreateReservedAccountDto {
 
   @IsBoolean()
   @IsNotEmpty()
-  getAllAvailaibleBanks;
+  getAllAvailableBanks;
 }

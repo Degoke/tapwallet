@@ -31,6 +31,9 @@ import { ReferralModule } from './referral/referral.module';
 import { AbilityModule } from './ability/ability.module';
 import { AbilitiesGuard } from './ability/abilities.guard';
 import { JwtAuthGaurd } from './common/gaurds/jwt-auth.gaurd';
+import { KycModule } from './kyc/kyc.module';
+import { AnnouncementModule } from './announcement/announcement.module';
+import { ActivitiesModule } from './activities/activities.module';
 
 @Module({
   imports: [
@@ -87,6 +90,9 @@ import { JwtAuthGaurd } from './common/gaurds/jwt-auth.gaurd';
     NodemailerModule,
     ReferralModule,
     AbilityModule,
+    KycModule,
+    AnnouncementModule,
+    ActivitiesModule,
   ],
   providers: [
     {

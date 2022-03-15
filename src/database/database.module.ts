@@ -15,6 +15,7 @@ import { Email } from 'src/email/entities/email.entity';
 import { Tvsubscription } from 'src/tvsubscription/entities/tvsubscription.entity';
 import { Mobiledatum } from 'src/mobiledata/entities/mobiledatum.entity';
 import { Electricitybill } from 'src/electricitybill/entities/electricitybill.entity';
+import { Kyc } from 'src/kyc/entities/kyc.entity';
 
 @Module({
   imports: [
@@ -43,6 +44,7 @@ import { Electricitybill } from 'src/electricitybill/entities/electricitybill.en
           Tvsubscription,
           Mobiledatum,
           Electricitybill,
+          Kyc,
         ],
         migrations: ['dist/migrations/**/*{.ts,.js}'],
         cli: {

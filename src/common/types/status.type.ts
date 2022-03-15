@@ -1,24 +1,21 @@
-export enum TRANSACTIONSTATUS {
+export enum TRANSACTION_STATUS {
   PENDING = 'PENDING',
   COMPLETED = 'COMPLETED',
   CANCELLED = 'CANCELLED',
   FAILED = 'FAILED',
   QUEUED = 'QUEUED',
+  IN_PROGRESS = 'IN_PROGRESS',
+  PENDING_AUTH = 'PENDING_AUTH',
+  REVERSED = 'REVERSED',
+  PENDING_REQUERY = 'PENDING_REQUERY',
 }
 
-export type TransactionStatus = TRANSACTIONSTATUS;
+export type TransactionStatus = TRANSACTION_STATUS;
 
-export enum TRANSACTION {
-  DEPOSIT = 'Deposit',
-  WITHDRAWAL = 'Withdrawal',
-  DEBIT = 'Debit',
-  CREDIT = 'Credit',
+export enum KYC_STATUS {
+  PENDING = 'pending',
+  ACCEPTED = 'accepted',
+  DECLINED = 'declined',
 }
 
-export type TransactionType = TRANSACTION;
-
-export enum TRANSACTION_MODES {
-  BANK_ACCOUNT = 'Bank Account',
-}
-
-export type TransactionModes = TRANSACTION_MODES;
+export type KycStatus = KYC_STATUS;

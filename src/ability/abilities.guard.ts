@@ -21,8 +21,6 @@ export class AbilitiesGuard implements CanActivate {
       this.reflector.get<RequiredRule[]>(CHECK_ABILITY, context.getHandler()) ||
       [];
 
-    console.log(rules);
-
     if (!rules.length) {
       return true;
     }

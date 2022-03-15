@@ -9,11 +9,15 @@ export class FWWithdrawalDto {
   @IsNotEmpty()
   account_number;
 
-  @IsString()
+  @IsNumber()
   @IsNotEmpty()
   amount;
 
   @IsString()
   @IsNotEmpty()
   currency;
+
+  @IsNumber()
+  @IsNotEmpty()
+  wallet_id;
 }

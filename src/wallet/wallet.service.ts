@@ -63,7 +63,7 @@ export class WalletService {
     const { email, amount } = transactionDto;
     try {
       const user = await this.userService.findByEmail(email);
-      const walletId = user.data.wallet.id;
+      const walletId = user.data.wallet[0].id;
       // await this.walletRepository.decrement(
       //   { id: walletId },
       //   'balance',
@@ -88,7 +88,7 @@ export class WalletService {
   }
 
   async find() {
-    return await this.walletRepository.find({ relations: ['owner'] });
+    return await this.walletRepository.find();
   }
 
   async findById(id: number) {
