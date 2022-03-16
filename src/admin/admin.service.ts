@@ -23,7 +23,7 @@ export class AdminService {
     private readonly bankService: BankService,
   ) {}
 
-  async createNewAdmin(createUserDto: CreateUserDto, role: AdminRoles) {
+  /*async createNewAdmin(createUserDto: CreateUserDto, role: AdminRoles) {
     try {
       const { email } = createUserDto;
       await this.userService.create(createUserDto);
@@ -99,5 +99,5 @@ export class AdminService {
 
   async editSetting(updateSettingDto: UpdateSettingDto, id) {
     return await this.settingsService.updateSetting(id, updateSettingDto);
-  }
+  }*/
 }

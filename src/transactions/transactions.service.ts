@@ -12,7 +12,6 @@ import { HttpService } from '@nestjs/axios';
 import { AxiosResponse } from 'axios';
 import { Observable, map, lastValueFrom, catchError } from 'rxjs';
 import { ConfigService } from '@nestjs/config';
-import User from 'src/user/entities/user.entity';
 import { PaystackService } from 'src/paystack/paystack.service';
 import { WalletService } from 'src/wallet/wallet.service';
 import { Connection, Repository } from 'typeorm';
@@ -33,16 +32,18 @@ import { CreateVirtualAccountDto } from './dto/create-virtual-account.dto';
 import { CreateReservedAccountDto } from 'src/flutterwave/dto/create-reserved-account.dto';
 import { FWWithdrawalDto } from './dto/withdrawal.dto';
 import { getTransactionReference } from 'src/utils/random-generators';
-import {
-  TRANSACTION,
-  TransactionStatus,
-  TRANSACTIONSTATUS,
-  TransactionType,
-} from 'src/common/types/status.type';
-import { TransactionRepository } from './repositories/transaction.repository';
+
 import { userInfo } from 'os';
 import { CURRENCY } from 'src/common/types/currency.type';
 import { InitiateMNTransferDto } from 'src/monnify/dto/initiate-transfer.dto';
+import { Withdrawal } from './entities/withdrawal.entity';
+import {
+  TRANSACTION_STATUS,
+  TransactionStatus,
+} from 'src/common/types/status.type';
+import { TRANSACTION } from 'src/common/types/transaction.type';
+import { User } from 'src/user/entities/user.entity';
+import { WithdrawalRepository } from './repositories/withdrawal.repository';
 
 const { FLUTTERWAVE, MONNIFY } = BANK_SERVICES;
 
@@ -52,8 +53,8 @@ export class TransactionsService {
   constructor(
     @Inject(CACHE_MANAGER) private cacheManager: Cache,
     private connection: Connection,
-    @InjectRepository(TransactionRepository)
-    private transactionRepository: TransactionRepository,
+    @InjectRepository(WithdrawalRepository)
+    private withdrawalRepository: WithdrawalRepository,
     private readonly paystackService: PaystackService,
     private readonly walletService: WalletService,
     private readonly flutterwaveService: FlutterwaveService,
@@ -101,21 +102,22 @@ export class TransactionsService {
         };
 
         try {
-          newTransaction = await queryRunner.manager.create(Transaction, {
-            accountNumber: dto.account_number,
+          newTransaction = await queryRunner.manager.create(Withdrawal, {
             accountBank: dto.account_bank,
+            accountNumber: dto.account_number,
             amount: dto.amount,
             currency: dto.currency,
             reference,
             userId: user.id,
-            status: TRANSACTIONSTATUS.QUEUED,
-            merchantId: 0,
+            status: TRANSACTION_STATUS.QUEUED,
             type: TRANSACTION.WITHDRAWAL,
             serviceUsed: service,
+            walletId: dto.wallet_id,
           });
 
-          await queryRunner.manager.save(Transaction, newTransaction);
+          await queryRunner.manager.save(Withdrawal, newTransaction);
 
+          //might change
           await this.walletService.removeMoney(
             { email: user.email, amount: dto.amount },
             queryRunner,
@@ -128,13 +130,13 @@ export class TransactionsService {
           await queryRunner.rollbackTransaction();
           throw error;
         }
-        await this.transactionRepository.update(
+        await this.withdrawalRepository.update(
           { reference },
           { status: result.status },
         );
       }
 
-      if (service === FLUTTERWAVE) {
+      /*if (service === FLUTTERWAVE) {
         result = await this.flutterwaveService.transfer(payload);
 
         if (result.status === 'success') {
@@ -166,7 +168,7 @@ export class TransactionsService {
             message: result.message,
           };
         }
-      }
+      }*/
     } catch (error) {
       throw error;
     }
@@ -183,7 +185,7 @@ export class TransactionsService {
           <string>reference,
         );
 
-        return await this.transactionRepository.update(
+        return await this.withdrawalRepository.update(
           { reference: <string>reference },
           {
             status: result.status,
@@ -194,7 +196,7 @@ export class TransactionsService {
         );
       }
 
-      if (service === FLUTTERWAVE) {
+      /*if (service === FLUTTERWAVE) {
         result = await this.flutterwaveService.getTransferStatus(
           <number>reference,
         );
@@ -230,7 +232,7 @@ export class TransactionsService {
             status: result.data.status,
           };
         }
-      }
+      }*/
     } catch (error) {
       throw error;
     }
@@ -243,14 +245,14 @@ export class TransactionsService {
   ) {
     try {
       if (service === MONNIFY) {
-        return await this.transactionRepository.update(
+        return await this.withdrawalRepository.update(
           { merchantId: <number>reference },
           { status },
         );
       }
 
       if (service === FLUTTERWAVE) {
-        await this.transactionRepository.update(
+        await this.withdrawalRepository.update(
           { reference: <string>reference },
           { status },
         );
@@ -262,7 +264,7 @@ export class TransactionsService {
 
   async getTotalNairaTransactionsBalance() {
     try {
-      const { sum } = await this.transactionRepository
+      const { sum } = await this.withdrawalRepository
         .createQueryBuilder('transaction')
         .select('SUM(transaction.amount)', 'sum')
         .where('transaction.currency = :currency', {
@@ -280,7 +282,7 @@ export class TransactionsService {
 
   async getTotalNairaWithdrawalsBalance() {
     try {
-      const { sum } = await this.transactionRepository
+      const { sum } = await this.withdrawalRepository
         .createQueryBuilder('transaction')
         .select('SUM(transaction.amount)', 'sum')
         .where('transaction.currency = :currency', {
@@ -297,7 +299,7 @@ export class TransactionsService {
     }
   }
 
-  async getTotalNairaDepositsBalance() {
+  /*async getTotalNairaDepositsBalance() {
     try {
       const { sum } = await this.transactionRepository
         .createQueryBuilder('transaction')

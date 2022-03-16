@@ -11,7 +11,7 @@ import { catchError, lastValueFrom, map } from 'rxjs';
 import { Cache } from 'cache-manager';
 import { CreateReservedAccountDto } from './dto/create-reserved-account.dto';
 import { InitiateMNTransferDto } from './dto/initiate-transfer.dto';
-import { TRANSACTIONSTATUS } from 'src/common/types/status.type';
+import { TRANSACTION_STATUS } from 'src/common/types/status.type';
 
 @Injectable()
 export class MonnifyService {
@@ -104,7 +104,7 @@ export class MonnifyService {
             result.responseBody.status === 'COMPLETED'
           ) {
             return {
-              status: TRANSACTIONSTATUS.COMPLETED,
+              status: TRANSACTION_STATUS.COMPLETED,
               data: result.responseBody,
             };
           }
@@ -115,21 +115,21 @@ export class MonnifyService {
             result.responseBody.status === 'IN_PROGRESS'
           ) {
             return {
-              status: TRANSACTIONSTATUS.IN_PROGRESS,
+              status: TRANSACTION_STATUS.IN_PROGRESS,
               data: result.responseBody,
             };
           }
 
           if (result.responseBody.status === 'PENDING_AUTHORIZATION') {
             return {
-              status: TRANSACTIONSTATUS.PENDING_AUTH,
+              status: TRANSACTION_STATUS.PENDING_AUTH,
               data: result.responseBody,
             };
           }
 
           if (result.responseBody.status === 'REVERSED') {
             return {
-              status: TRANSACTIONSTATUS.REVERSED,
+              status: TRANSACTION_STATUS.REVERSED,
               data: result.responseBody,
             };
           }
@@ -151,7 +151,7 @@ export class MonnifyService {
 
       if (result.responseCode === '99') {
         return {
-          status: TRANSACTIONSTATUS.PENDING_REQUERY,
+          status: TRANSACTION_STATUS.PENDING_REQUERY,
         };
       }
     } catch (error) {

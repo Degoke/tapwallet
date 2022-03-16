@@ -16,18 +16,9 @@ import { PaystackService } from 'src/paystack/paystack.service';
 import { VerifyTransactionDto } from './dto/verify-transaction.dto';
 import { JwtAuthGaurd } from '../common/gaurds/jwt-auth.gaurd';
 import { Public } from 'src/common/decorators/jwt-auth-guard.decorator';
-import {
-  TRANSACTION,
-  TransactionStatus,
-  TRANSACTIONSTATUS,
-} from 'src/common/types/status.type';
-import {
-  CheckAbilities,
-  CreateTransactionPermission,
-  ReadTransactionPermission,
-} from 'src/ability/abilities.decorator';
 import { FWWithdrawalDto } from './dto/withdrawal.dto';
 import { BANK_SERVICES } from 'src/common/types/service.type';
+import { TransactionStatus } from 'src/common/types/status.type';
 
 @Controller('transactions')
 export class TransactionsController {
@@ -39,7 +30,7 @@ export class TransactionsController {
     return body;
   }
 
-  @CheckAbilities(new CreateTransactionPermission())
+  //@CheckAbilities(new CreateTransactionPermission())
   @Post('withdraw')
   initiateWithdrawal(@Body() body: FWWithdrawalDto, @Request() req) {
     return this.transactionsService.initiateWithdrawal(
@@ -61,7 +52,7 @@ export class TransactionsController {
     );
   }
 
-  @Get('all')
+  /*@Get('all')
   getAllTransactions() {
     return this.transactionsService.getAllTransactions();
   }
@@ -133,5 +124,5 @@ export class TransactionsController {
   @Post('confirm-monnify-disbursement')
   confirmMonnifyDisbursement(@Body() body, @Request() req) {
     return;
-  }
+  }*/
 }

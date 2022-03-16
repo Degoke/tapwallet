@@ -1,5 +1,4 @@
-import { ServicesType } from 'src/common/types/service.type';
-import User from 'src/user/entities/user.entity';
+/*import { ServicesType } from 'src/common/types/service.type';
 import {
   Column,
   CreateDateColumn,
@@ -65,3 +64,4 @@ export class Electricitybill {
   @UpdateDateColumn()
   updatedAt: Date;
 }
+*/

@@ -1,4 +1,5 @@
 import { Exclude } from 'class-transformer';
+import { type } from 'os';
 import { EntityContainer } from 'src/common/types/entity';
 import { KYC_STATUS, KycStatus } from 'src/common/types/status.type';
 import { Column, Entity, OneToOne } from 'typeorm';

@@ -5,13 +5,11 @@ import { ACCOUNT_TYPES } from 'src/common/types/account.type';
 import { CURRENCY } from 'src/common/types/currency.type';
 import { BankServices, BANK_SERVICES } from 'src/common/types/service.type';
 import { FlutterwaveService } from 'src/flutterwave/flutterwave.service';
-import { KycService } from 'src/kyc/kyc.service';
 import { MonnifyService } from 'src/monnify/monnify.service';
+import { UserService } from 'src/user/user.service';
 import { getTransactionReference } from 'src/utils/random-generators';
-import { Repository } from 'typeorm';
 import { CreateAccountDto } from './dto/create-account.dto';
-import { ValidateAccountDto } from './dto/validate-account.dto';
-import { Account } from './entities/account.entity';
+import { MonnifyAccountRepository } from './repositories/monnify-account.repository';
 
 const { MONNIFY, FLUTTERWAVE } = BANK_SERVICES;
 
@@ -19,18 +17,21 @@ const { MONNIFY, FLUTTERWAVE } = BANK_SERVICES;
 export class AccountService {
   private currentBankService: BankServices;
   constructor(
-    @InjectRepository(Account) private accountRepository: Repository<Account>,
+    @InjectRepository(MonnifyAccountRepository)
+    private monnifyAccountRepository: MonnifyAccountRepository,
     private readonly flutterwaveService: FlutterwaveService,
     private readonly monnifyService: MonnifyService,
-    private readonly kycService: KycService,
     private readonly configService: ConfigService,
+    private readonly userService: UserService,
   ) {
     this.currentBankService = MONNIFY;
   }
 
   async findAllAccounts() {
     try {
-      const data = await this.accountRepository.find({ relations: ['owner'] });
+      const data = await this.monnifyAccountRepository.find({
+        relations: ['user'],
+      });
       if (!data) {
         throw new HttpException(
           'There are no avilable accounts',
@@ -45,7 +46,7 @@ export class AccountService {
 
   async findAccoutnById(id) {
     try {
-      const data = await this.accountRepository.findOne(id);
+      const data = await this.monnifyAccountRepository.findOne(id);
       if (!data) {
         throw new HttpException(
           'There are no avilable accounts',
@@ -60,7 +61,7 @@ export class AccountService {
 
   async findAccoutnByOwnerId(id: number) {
     try {
-      const data = await this.accountRepository.findOne({ ownerId: id });
+      const data = await this.monnifyAccountRepository.findOne({ userId: id });
       if (!data) {
         throw new HttpException(
           'There are no avilable accounts',
@@ -75,8 +76,8 @@ export class AccountService {
 
   async createAccount(createAccountDto: CreateAccountDto) {
     try {
-      const account = this.accountRepository.create(createAccountDto);
-      await this.accountRepository.save(account);
+      const account = this.monnifyAccountRepository.create(createAccountDto);
+      await this.monnifyAccountRepository.save(account);
       return {
         message: 'Account created successfully',
       };
@@ -87,7 +88,7 @@ export class AccountService {
 
   async deleteAccount(id) {
     try {
-      await this.accountRepository.delete(id);
+      await this.monnifyAccountRepository.delete(id);
       return {
         message: 'Account Deleted successfully',
       };
@@ -102,7 +103,10 @@ export class AccountService {
     userId: number,
   ) {
     try {
-      const bvn = await this.kycService.findBVNByUserId;
+      const bvn = await this.userService.findBvnByUserId(userId);
+      if (!bvn) {
+        throw new HttpException('No bvn registered', HttpStatus.BAD_REQUEST);
+      }
       switch (this.currentBankService) {
         case MONNIFY:
           const result = await this.monnifyService.validateAccountBvnMatch({
@@ -126,7 +130,7 @@ export class AccountService {
             accountName,
             accountNumber: returnedAccountNumber,
             bankCode,
-            ownerId: userId,
+            userId,
             accountType: ACCOUNT_TYPES.BANK_ACCOUNT,
             bankService: BANK_SERVICES.MONNIFY,
             currency: CURRENCY.NAIRA,
@@ -163,8 +167,8 @@ export class AccountService {
   }
 
   async createVirtualAccount(userId) {
-    const kyc = await this.kycService.findByUserId(userId);
-    const bvn = await this.kycService.findBVNByUserId(userId);
+    const kyc = await this.userService.findKycByUserId(userId);
+    const bvn = await this.userService.findBvnByUserId(userId);
     const reference = await getTransactionReference();
     const contractCode = await this.configService.get('MONNIFY_CONTRACT_CODE');
 
@@ -174,7 +178,7 @@ export class AccountService {
       currencyCode: CURRENCY.NAIRA,
       contractCode,
       customerEmail: kyc.user.email,
-      bvn: bvn.bvn,
+      bvn: bvn,
       customerName: kyc.bvnName,
       getAllAvailableBanks: true,
     };
@@ -192,7 +196,7 @@ export class AccountService {
               accountName,
               accountNumber,
               bankCode,
-              ownerId: userId,
+              userId,
               accountType: ACCOUNT_TYPES.VIRTUAL_ACCOUNT,
               bankService: BANK_SERVICES.MONNIFY,
               currency: CURRENCY.NAIRA,

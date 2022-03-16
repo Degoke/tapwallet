@@ -31,7 +31,6 @@ export class AuthController {
     return this.authService.loginAdmin(req.user);
   }
 
-  //@UseGuards(PermissionGuard(Permission.EDIT))
   @Post('pin')
   setPin(@Request() req, @Body() setPinDto: SetPinDTO) {
     const { password, pin } = setPinDto;

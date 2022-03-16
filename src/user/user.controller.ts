@@ -23,7 +23,6 @@ import {
   EditUserPermission,
   ReadUserPermission,
 } from 'src/ability/abilities.decorator';
-import User from './entities/user.entity';
 import { Public } from 'src/common/decorators/jwt-auth-guard.decorator';
 
 @Controller('user')
@@ -33,13 +32,13 @@ export class UserController {
   @Public()
   @Post('signup')
   create(@Body() createUserDto: CreateUserDto) {
-    return this.userService.create(createUserDto);
+    return this.userService.createCustomer(createUserDto);
   }
 
   @CheckAbilities(new ReadUserPermission())
   @Get('current')
   getCurrentUser(@Request() req) {
-    return this.userService.findById(req.user.id);
+    return req.user;
   }
 
   /*@CheckAbilities(new EditUserPermission())
@@ -70,7 +69,7 @@ export class UserController {
   }*/
 
   // @UseGuards(JwtAuthGaurd)
-  @Get()
+  /*@Get()
   getUser() {
     return this.userService.find();
   }
@@ -81,5 +80,5 @@ export class UserController {
   //@CheckAbilities(new SEND_USER_PERMSSION())
   getUserByEmail(@Param('email') email) {
     return this.userService.findByEmail(email);
-  }
+  }*/
 }

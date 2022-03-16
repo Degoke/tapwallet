@@ -14,16 +14,24 @@ import {
   USER_ROLES,
 } from 'src/common/types/roles.type';
 import { Transaction } from 'src/transactions/entities/transaction.entity';
+import { Withdrawal } from 'src/transactions/entities/withdrawal.entity';
+import { ReceiveTransfer } from 'src/transfers/entities/receive-transfer.entity';
+import { SendTransfer } from 'src/transfers/entities/send-transfer.entity';
+import { TransferRequest } from 'src/transfers/entities/transfer-requests.entity';
 import { Transfer } from 'src/transfers/entities/transfer.entity';
-import User from 'src/user/entities/user.entity';
-import Wallet from 'src/wallet/entities/wallet.entity';
+import { Administrator } from 'src/user/entities/administrator.entity';
+import { Customer } from 'src/user/entities/customer.entity';
+import { User } from 'src/user/entities/user.entity';
+import { Wallet } from 'src/wallet/entities/wallet.entity';
 
 const { CREATE, MANAGE, EDIT, DELETE, READ } = USER_ACTIONS;
 
 type InferredTypes =
-  | typeof User
-  | typeof Transfer
-  | typeof Transaction
+  | typeof Customer
+  | typeof SendTransfer
+  | typeof ReceiveTransfer
+  | typeof TransferRequest
+  | typeof Withdrawal
   | typeof Wallet;
 
 export type Subjects = InferSubjects<InferredTypes> | 'all';
@@ -32,77 +40,52 @@ export type AppAbility = Ability<[UserActions, Subjects]>;
 
 @Injectable()
 export class AbilityFactory {
-  defineAbility(user: User) {
+  defineAbility(data: any) {
     const { can, cannot, build } = new AbilityBuilder(
       Ability as AbilityClass<AppAbility>,
     );
 
-    /*
-      subjects
-      user
-      transactions
-      activities
-      kyc
-      transfers
-      wallet
-      settings
+    const { user, role } = data;
 
-      acyions
-      manage
-      delete
-      create send receive
-      edit
-      read
-
-      superadmin manage all
-
-      subadmin manage all cannot edit settings
-
-      level0 
-        read all
-        edit delete user,
-
-      level 1
-        ...level 0
-        create transactions // limited
-        create activities
-        create kyc
-        send transfers 
-        receive transfers
-      
-      level 2
-        ... level 1
-        unlimited
-    */
-
-    if (user.role === ADMIN_ROLES.SUPER_ADMIN) {
-      can(MANAGE, 'all');
-    }
-
-    if (user.role === ADMIN_ROLES.SUB_ADMIN) {
-      can(MANAGE, 'all');
-      cannot(CREATE, Transfer);
-      cannot(CREATE, Transaction);
-    }
-
-    if (user.role === USER_ROLES.USER) {
-      if (user.kyc.level === USER_LEVELS.ZERO) {
+    if (role === USER_ROLES.ADMIN) {
+      if (user.role === ADMIN_ROLES.ADMIN) {
+        can(MANAGE, 'all');
       }
 
-      if (
-        user.kyc.level === USER_LEVELS.ONE ||
-        user.kyc.level === USER_LEVELS.TWO
-      ) {
-        can([READ, EDIT, DELETE], User);
-        can(READ, [Transfer, Transaction, Wallet]);
-        can(CREATE, [Transfer, Transaction]);
+      if (user.role === ADMIN_ROLES.SUPPORT) {
+        can(MANAGE, 'all');
       }
     }
 
-    if (user.role === USER_ROLES.SUSPENDED) {
-      can(READ, [User, Transfer, Transaction, Wallet]);
-      cannot(CREATE, 'all');
-      cannot(EDIT, 'all');
+    if (role === USER_ROLES.CUSTOMER) {
+      if (user.level === USER_LEVELS.ZERO) {
+        can([READ, EDIT, DELETE], Customer);
+        can(READ, [
+          Wallet,
+          SendTransfer,
+          ReceiveTransfer,
+          TransferRequest,
+          Withdrawal,
+        ]);
+        can(CREATE, [
+          Wallet,
+          SendTransfer,
+          ReceiveTransfer,
+          TransferRequest,
+          Withdrawal,
+        ]);
+      }
+
+      if (user.level === USER_LEVELS.SUSPENDED) {
+        can(READ, [
+          Customer,
+          Wallet,
+          SendTransfer,
+          ReceiveTransfer,
+          TransferRequest,
+          Withdrawal,
+        ]);
+      }
     }
 
     return build({

@@ -3,9 +3,9 @@ import { IsNotEmpty, IsNumber } from 'class-validator';
 export class CreateReferralDto {
   @IsNotEmpty()
   @IsNumber()
-  referrerId: number;
+  referredById: number;
 
   @IsNotEmpty()
   @IsNumber()
-  userId: number;
+  referredId: number;
 }

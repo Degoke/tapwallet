@@ -15,7 +15,7 @@ export class CreateAccountDto {
 
   @IsNumber()
   @IsNotEmpty()
-  ownerId;
+  userId;
 
   @IsString()
   @IsNotEmpty()

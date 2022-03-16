@@ -41,4 +41,16 @@ export abstract class Transaction extends EntityContainer {
 
   @Column()
   public remarks: string;
+
+  @Column({ nullable: true })
+  public bankName: string;
+
+  @Column({ nullable: true })
+  public accountName: string;
+
+  @Column({ nullable: true })
+  public merchantReference: string;
+
+  @Column({ nullable: true })
+  public merchantId: number;
 }

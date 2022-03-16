@@ -1,5 +1,5 @@
 import { Exclude } from 'class-transformer';
-import { MonnifyAccounts } from 'src/account/entities/monnnify-account.entity';
+import { MonnifyAccount } from 'src/account/entities/monnnify-account.entity';
 import { AirtimeActivity } from 'src/activities/entities/airtime-activity.entity';
 import { ElectricityBillActivity } from 'src/activities/entities/electricity-bill-activity.entity';
 import { MobileDataActivity } from 'src/activities/entities/mobiledata-activity.entity';
@@ -31,10 +31,10 @@ export class Customer extends User {
   public kyc: CustomerKyc;
 
   @OneToMany(
-    () => MonnifyAccounts,
-    (monnifyAccounts: MonnifyAccounts) => monnifyAccounts.user,
+    () => MonnifyAccount,
+    (monnifyAccounts: MonnifyAccount) => monnifyAccounts.user,
   )
-  public monnifyAccounts: MonnifyAccounts[];
+  public monnifyAccounts: MonnifyAccount[];
 
   @OneToMany(() => Referral, (referrals: Referral) => referrals.referredBy)
   referrals: Referral[];

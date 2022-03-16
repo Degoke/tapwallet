@@ -5,11 +5,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { DatabaseModule } from './database/database.module';
 import { WalletModule } from './wallet/wallet.module';
 import { AccountModule } from './account/account.module';
-import { MobiledataModule } from './mobiledata/mobiledata.module';
-import { AirtimeModule } from './airtime/airtime.module';
-import { TvsubscriptionModule } from './tvsubscription/tvsubscription.module';
 import { TransactionsModule } from './transactions/transactions.module';
-import { ElectricitybillModule } from './electricitybill/electricitybill.module';
 import { TransfersModule } from './transfers/transfers.module';
 import { SmsModule } from './sms/sms.module';
 import { PaystackModule } from './paystack/paystack.module';
@@ -31,7 +27,6 @@ import { ReferralModule } from './referral/referral.module';
 import { AbilityModule } from './ability/ability.module';
 import { AbilitiesGuard } from './ability/abilities.guard';
 import { JwtAuthGaurd } from './common/gaurds/jwt-auth.gaurd';
-import { KycModule } from './kyc/kyc.module';
 import { AnnouncementModule } from './announcement/announcement.module';
 import { ActivitiesModule } from './activities/activities.module';
 
@@ -69,11 +64,7 @@ import { ActivitiesModule } from './activities/activities.module';
     DatabaseModule,
     WalletModule,
     AccountModule,
-    MobiledataModule,
-    AirtimeModule,
-    TvsubscriptionModule,
     TransactionsModule,
-    ElectricitybillModule,
     TransfersModule,
     SmsModule,
     PaystackModule,
@@ -90,7 +81,6 @@ import { ActivitiesModule } from './activities/activities.module';
     NodemailerModule,
     ReferralModule,
     AbilityModule,
-    KycModule,
     AnnouncementModule,
     ActivitiesModule,
   ],

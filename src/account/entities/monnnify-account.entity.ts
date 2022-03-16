@@ -4,10 +4,10 @@ import { Entity, ManyToOne, Column } from 'typeorm';
 import { Account } from './account.entity';
 
 @Entity()
-export class MonnifyAccounts extends Account {
+export class MonnifyAccount extends Account {
   @ManyToOne(() => Customer, (customer: Customer) => customer.monnifyAccounts)
   public user: Customer;
 
   @Column()
-  tpye: AccountTypes;
+  public type: AccountTypes;
 }

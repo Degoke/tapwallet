@@ -5,23 +5,28 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Connection } from 'typeorm';
 import { Transfer } from './entities/transfer.entity';
-import User from '../user/entities/user.entity';
 import { UserService } from '../user/user.service';
 import { WalletService } from 'src/wallet/wallet.service';
-import Wallet from '../wallet/entities/wallet.entity';
 import { ReturnTypeContainer } from 'src/common/containers/Container.entity';
+import { ReceiveTransferRepository } from './repositories/receive-transfer.repository';
+import { SendTransferRepository } from './repositories/send-transfer.repository';
+import { TransferRequestRepository } from './repositories/transfer-request.repository';
 
 @Injectable()
 export class TransfersService {
   constructor(
     private connection: Connection,
-    @InjectRepository(Transfer)
-    private transfersRepository: Repository<Transfer>,
+    @InjectRepository(ReceiveTransferRepository)
+    private receiveTransferRepository: ReceiveTransferRepository,
+    @InjectRepository(SendTransferRepository)
+    private sendTransferRepository: SendTransferRepository,
+    @InjectRepository(TransferRequestRepository)
+    private transferrequestRepository: TransferRequestRepository,
     private readonly userService: UserService,
     private readonly walletService: WalletService,
   ) {}
 
-  async transferFunds(
+  /*async transferFunds(
     createTransferDto: CreateTransferDto,
   ): Promise<ReturnTypeContainer<string>> {
     const queryRunner = this.connection.createQueryRunner();
@@ -114,5 +119,5 @@ export class TransfersService {
 
   remove(id: number) {
     return `This action removes a #${id} transfer`;
-  }
+  }*/
 }

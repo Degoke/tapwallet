@@ -20,7 +20,7 @@ import { UpdateAdminDto } from './dto/update-admin.dto';
 export class AdminController {
   constructor(private readonly adminService: AdminService) {}
 
-  @Public()
+  /*@Public()
   @Post('create')
   createAdmin(@Body() createUserDto: CreateUserDto) {
     return this.adminService.createNewAdmin(

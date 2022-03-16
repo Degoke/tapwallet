@@ -2,20 +2,21 @@ import { Injectable, forwardRef, Inject } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { number } from 'joi';
 import { ReturnTypeContainer } from 'src/common/containers/Container.entity';
+import { WALLET_TYPES } from 'src/common/types/wallet.type';
 import { Transaction } from 'src/transactions/entities/transaction.entity';
 import { UserService } from 'src/user/user.service';
 import { QueryRunner, Repository } from 'typeorm';
-import { CreateWalletDto, WALLETTYPE } from './dto/create-wallet.dto';
+import { CreateWalletDto } from './dto/create-wallet.dto';
 import { TransactionDto } from './dto/transaction.dto';
 import { UpdateWalletDto } from './dto/update-wallet.dto';
-import Wallet from './entities/wallet.entity';
+import { Wallet } from './entities/wallet.entity';
+import { WalletRepository } from './repositories/wallet.repository';
 
 @Injectable()
 export class WalletService {
   constructor(
-    @InjectRepository(Wallet) private walletRepository: Repository<Wallet>,
-    @Inject(forwardRef(() => UserService))
-    private readonly userService: UserService,
+    @InjectRepository(WalletRepository)
+    private walletRepository: WalletRepository,
   ) {}
   async create(createWalletDto: CreateWalletDto) {
     try {
@@ -39,8 +40,9 @@ export class WalletService {
     // };
 
     try {
-      const user = await this.userService.findByEmail(email);
-      const walletId = user.data.wallet.id;
+      const { id: walletId } = await this.walletRepository.findByUserEmail(
+        email,
+      );
       await this.walletRepository.increment(
         { id: walletId },
         'balance',
@@ -62,8 +64,9 @@ export class WalletService {
   ): Promise<ReturnTypeContainer<any>> {
     const { email, amount } = transactionDto;
     try {
-      const user = await this.userService.findByEmail(email);
-      const walletId = user.data.wallet[0].id;
+      const { id: walletId } = await this.walletRepository.findByUserEmail(
+        email,
+      );
       // await this.walletRepository.decrement(
       //   { id: walletId },
       //   'balance',
@@ -115,7 +118,7 @@ export class WalletService {
       const { sum } = await this.walletRepository
         .createQueryBuilder('wallet')
         .select('SUM(wallet.balance)', 'sum')
-        .where('wallet.type = :type', { type: WALLETTYPE.NAIRA })
+        .where('wallet.type = :type', { type: WALLET_TYPES.NAIRA })
         .getRawOne();
 
       return {

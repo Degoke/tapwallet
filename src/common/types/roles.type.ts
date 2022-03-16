@@ -13,3 +13,10 @@ export enum ADMIN_ROLES {
 }
 
 export type AdminRoles = ADMIN_ROLES;
+
+export enum USER_ROLES {
+  CUSTOMER = 'customer',
+  ADMIN = 'admin',
+}
+
+export type UserRoles = USER_ROLES;

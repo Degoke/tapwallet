@@ -18,7 +18,7 @@ import { JwtAuthGaurd } from '../common/gaurds/jwt-auth.gaurd';
 export class TransfersController {
   constructor(private readonly transfersService: TransfersService) {}
 
-  @UseGuards(JwtAuthGaurd)
+  /*@UseGuards(JwtAuthGaurd)
   @Post()
   transfer(@Body() createTransferDto, @Request() req) {
     //return req.user.email;
@@ -55,5 +55,5 @@ export class TransfersController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.transfersService.remove(+id);
-  }
+  }*/
 }

@@ -1,8 +1,11 @@
 import { SetMetadata } from '@nestjs/common';
 import { UserActions, USER_ACTIONS } from 'src/common/types/permissions.type';
 import { Transaction } from 'src/transactions/entities/transaction.entity';
+import { Withdrawal } from 'src/transactions/entities/withdrawal.entity';
+import { SendTransfer } from 'src/transfers/entities/send-transfer.entity';
+import { TransferRequest } from 'src/transfers/entities/transfer-requests.entity';
 import { Transfer } from 'src/transfers/entities/transfer.entity';
-import User from 'src/user/entities/user.entity';
+import { Customer } from 'src/user/entities/customer.entity';
 import { Subjects } from './ability.factory';
 
 const { READ, CREATE, EDIT, DELETE, MANAGE } = USER_ACTIONS;
@@ -24,70 +27,120 @@ export const CheckAbilities = (...requirements: RequiredRule[]) =>
 
 export class ReadUserPermission implements RequiredRule {
   action = READ;
-  subject = User;
+  subject = Customer;
 }
 
 export class CreateUserPermission implements RequiredRule {
   action = CREATE;
-  subject = User;
+  subject = Customer;
 }
 
 export class EditUserPermission implements RequiredRule {
   action = EDIT;
-  subject = User;
+  subject = Customer;
 }
 
 export class DeleteUserPermission implements RequiredRule {
   action = DELETE;
-  subject = User;
+  subject = Customer;
 }
 
 /**
  *
- * Transfer
+ * Send Transfer
  */
 
-export class ReadTransferPermission implements RequiredRule {
+export class ReadSendTransferPermission implements RequiredRule {
   action = READ;
-  subject = Transfer;
+  subject = SendTransfer;
 }
 
-export class CreateTransferPermission implements RequiredRule {
+export class CreateSendTransferPermission implements RequiredRule {
   action = CREATE;
-  subject = Transfer;
+  subject = SendTransfer;
 }
 
-export class EditTransferPermission implements RequiredRule {
+export class EditSendTransferPermission implements RequiredRule {
   action = EDIT;
-  subject = Transfer;
+  subject = SendTransfer;
 }
 
-export class DeleteTransferPermission implements RequiredRule {
+export class DeleteSendTransferPermission implements RequiredRule {
   action = DELETE;
-  subject = Transfer;
+  subject = SendTransfer;
 }
 
 /**
  *
- * Transaction
+ * receive Transfer
  */
 
-export class ReadTransactionPermission implements RequiredRule {
+export class ReadReceiveTransferPermission implements RequiredRule {
   action = READ;
-  subject = Transaction;
+  subject = TransferRequest;
 }
 
-export class CreateTransactionPermission implements RequiredRule {
+export class CreateReceiveTransferPermission implements RequiredRule {
   action = CREATE;
-  subject = Transaction;
+  subject = TransferRequest;
 }
 
-export class EditTransactionPermission implements RequiredRule {
+export class EditReceiveTransferPermission implements RequiredRule {
   action = EDIT;
-  subject = Transaction;
+  subject = TransferRequest;
 }
 
-export class DeleteTransactionPermission implements RequiredRule {
+export class DeleteReceiveTransferPermission implements RequiredRule {
   action = DELETE;
-  subject = Transaction;
+  subject = TransferRequest;
+}
+
+/**
+ *
+ * request Transfer
+ */
+
+export class ReadTransferRequestPermission implements RequiredRule {
+  action = READ;
+  subject = TransferRequest;
+}
+
+export class CreateTransferRequestPermission implements RequiredRule {
+  action = CREATE;
+  subject = TransferRequest;
+}
+
+export class EditTransferRequestPermission implements RequiredRule {
+  action = EDIT;
+  subject = TransferRequest;
+}
+
+export class DeleteTransferRequestPermission implements RequiredRule {
+  action = DELETE;
+  subject = TransferRequest;
+}
+
+/**
+ *
+ * Withdrawal
+ */
+
+export class ReadWithdrawalPermission implements RequiredRule {
+  action = READ;
+  subject = Withdrawal;
+}
+
+export class CreateWithdrawalPermission implements RequiredRule {
+  action = CREATE;
+  subject = Withdrawal;
+}
+
+export class EditWithdrawalPermission implements RequiredRule {
+  action = EDIT;
+  subject = Withdrawal;
+}
+
+export class DeleteWithdrawalPermission implements RequiredRule {
+  action = DELETE;
+  subject = Withdrawal;
 }
