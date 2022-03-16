@@ -1,19 +1,18 @@
 import { Module } from '@nestjs/common';
 import { TransactionsService } from './transactions.service';
 import { TransactionsController } from './transactions.controller';
-import { Transaction } from './entities/transaction.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { HttpModule } from '@nestjs/axios';
 import { PaystackModule } from '../paystack/paystack.module';
-import Wallet from 'src/wallet/entities/wallet.entity';
 import { WalletModule } from 'src/wallet/wallet.module';
 import { MonnifyModule } from 'src/monnify/monnify.module';
 import { FlutterwaveModule } from 'src/flutterwave/flutterwave.module';
 import { SettingsModule } from 'src/settings/settings.module';
+import { WithdrawalRepository } from './repositories/withdrawal.repository';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Transaction]),
+    TypeOrmModule.forFeature([WithdrawalRepository]),
     HttpModule,
     PaystackModule,
     WalletModule,
@@ -23,5 +22,6 @@ import { SettingsModule } from 'src/settings/settings.module';
   ],
   controllers: [TransactionsController],
   providers: [TransactionsService],
+  exports: [TransactionsService],
 })
 export class TransactionsModule {}

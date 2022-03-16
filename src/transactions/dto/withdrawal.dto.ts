@@ -1,35 +1,23 @@
 import { IsNumber, IsNotEmpty, IsString } from 'class-validator';
 
-export class WithdrawalDto {
+export class FWWithdrawalDto {
+  @IsString()
+  @IsNotEmpty()
+  account_bank;
+
+  @IsString()
+  @IsNotEmpty()
+  account_number;
+
   @IsNumber()
   @IsNotEmpty()
   amount;
 
   @IsString()
   @IsNotEmpty()
-  reference;
-
-  @IsString()
-  @IsNotEmpty()
-  narration;
-
-  @IsString()
-  @IsNotEmpty()
-  destinationBankCode;
-
-  @IsString()
-  @IsNotEmpty()
-  destinationAccountNumber;
-
-  @IsString()
-  @IsNotEmpty()
   currency;
 
-  @IsString()
+  @IsNumber()
   @IsNotEmpty()
-  sourceAccountNumber;
-
-  @IsString()
-  @IsNotEmpty()
-  beneficiary_name;
+  wallet_id;
 }

@@ -14,20 +14,15 @@ import {
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { UserInterface } from './interfaces/User.interface';
 import { JwtAuthGaurd } from 'src/common/gaurds/jwt-auth.gaurd';
 import { VerifyEmailDTO } from './dto/verify-email.dto';
-import PermissionGuard from 'src/common/gaurds/permission.gaurd';
-import Permission from 'src/common/types/permission.type';
+import { AddBankAccountDTO } from '../account/dto/add-bank-accoiunt.dto';
 import { AbilitiesGuard } from 'src/ability/abilities.guard';
 import {
   CheckAbilities,
-  EDIT_PERMISSION,
-  RECEIVE_PERMISSION,
-  SEND_USER_PERMSSION,
+  EditUserPermission,
+  ReadUserPermission,
 } from 'src/ability/abilities.decorator';
-import { UserPermission } from 'src/common/types/user-permissions.interface';
-import User from './entities/user.entity';
 import { Public } from 'src/common/decorators/jwt-auth-guard.decorator';
 
 @Controller('user')
@@ -37,29 +32,30 @@ export class UserController {
   @Public()
   @Post('signup')
   create(@Body() createUserDto: CreateUserDto) {
-    return this.userService.create(createUserDto);
+    return this.userService.createCustomer(createUserDto);
   }
 
-  @UseGuards(JwtAuthGaurd)
+  @CheckAbilities(new ReadUserPermission())
   @Get('current')
   getCurrentUser(@Request() req) {
-    return this.userService.findById(req.user.id);
+    return req.user;
   }
 
+  /*@CheckAbilities(new EditUserPermission())
   @Post('verifyemail')
   verifyEmail(@Body() verifyEmailDto: VerifyEmailDTO) {
     const { email, code } = verifyEmailDto;
     return this.userService.verifyEmail(code, email);
   }
 
-  @CheckAbilities(new EDIT_PERMISSION())
+  @CheckAbilities(new EditUserPermission())
   @Post()
   initiatePhoneVerification(@Body() body) {
     const { phoneNumber } = body;
     return this.userService.initiatePhoneNumberVerification(phoneNumber);
   }
 
-  @CheckAbilities(new EDIT_PERMISSION())
+  @CheckAbilities(new EditUserPermission())
   @Post()
   verifyPhoneOtp(@Request() req, @Body() body) {
     const { id } = req;
@@ -70,17 +66,19 @@ export class UserController {
       verificationCode,
       id,
     );
-  }
+  }*/
 
-  @Public()
-  @Get()
+  // @UseGuards(JwtAuthGaurd)
+  /*@Get()
   getUser() {
     return this.userService.find();
   }
 
   @Get(':email')
-  @CheckAbilities(new RECEIVE_PERMISSION())
+  //  @UseGuards(AbilitiesGuard)
+  //  @UseGuards(JwtAuthGaurd)
+  //@CheckAbilities(new SEND_USER_PERMSSION())
   getUserByEmail(@Param('email') email) {
     return this.userService.findByEmail(email);
-  }
+  }*/
 }

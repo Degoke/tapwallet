@@ -1,28 +1,23 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { QueryRunner, Repository } from 'typeorm';
 import { CreateReferralDto } from './dto/create-referral.dto';
 import { UpdateReferralDto } from './dto/update-referral.dto';
-import { Referral } from './entities/referral.entity';
+import { ReferralRepository } from './repositories/referral.repository';
 
 @Injectable()
 export class ReferralService {
   constructor(
-    @InjectRepository(Referral)
-    private referralRepository: Repository<Referral>,
+    @InjectRepository(ReferralRepository)
+    private referralRepository: ReferralRepository,
   ) {}
 
-  async createReferral(
-    createReferralDto: CreateReferralDto,
-    queryRunner: QueryRunner,
-  ) {
+  async createReferral(createReferralDto: CreateReferralDto) {
     try {
-      const newReferral = await queryRunner.manager.create(
-        Referral,
+      const newReferral = await this.referralRepository.create(
         createReferralDto,
       );
 
-      await queryRunner.manager.save(Referral, newReferral);
+      await this.referralRepository.save(newReferral);
     } catch (error) {
       throw error;
     }

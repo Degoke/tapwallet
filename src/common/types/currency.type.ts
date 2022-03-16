@@ -1,5 +1,5 @@
-export enum Currency {
-  NGN = 'NGN',
+export enum CURRENCY {
+  NAIRA = 'NGN',
 }
 
-export type CurrencyType = keyof Record<Currency, string>;
+export type Currency = CURRENCY;

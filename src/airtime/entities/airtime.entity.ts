@@ -1,66 +1,63 @@
-import { CurrencyType } from 'src/common/types/currency.type';
-import { ServicesType } from 'src/common/types/service.type';
-import { TransactionStatusType } from 'src/common/types/status.type';
-import User from 'src/user/entities/user.entity';
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+// import { ServicesType } from 'src/common/types/service.type';
+// import {
+//   Column,
+//   CreateDateColumn,
+//   Entity,
+//   ManyToOne,
+//   PrimaryGeneratedColumn,
+//   UpdateDateColumn,
+// } from 'typeorm';
 
-@Entity()
-export class Airtime {
-  @PrimaryGeneratedColumn()
-  id: number;
+// @Entity()
+// export class Airtime {
+//   @PrimaryGeneratedColumn()
+//   id: number;
 
-  @Column({ default: 'airtime' })
-  type: string;
+//   @Column({ default: 'airtime' })
+//   type: string;
 
-  @Column()
-  customer: string;
+//   @Column()
+//   customer: string;
 
-  @ManyToOne(() => User, (user: User) => user.id)
-  owner: User;
-
-  @Column()
-  ownerid: number;
-
-  @Column()
-  serviceID: string;
-
-  @Column()
-  transactionReference: string;
+//   @ManyToOne(() => User, (user: User) => user.id)
+//   owner: User;
 
   // @Column()
-  // merchantReference: string;
+  // ownerid: number;
 
-  @Column()
-  service: ServicesType;
+//   @Column()
+//   serviceID: string;
 
-  @Column()
-  amount: number;
+//   @Column()
+//   transactionReference: string;
 
-  @Column()
-  balance: number;
+//   // @Column()
+//   // merchantReference: string;
 
-  // @Column({ default: 'NGN' })
-  // currency: CurrencyType;
+//   @Column()
+//   service: ServicesType;
 
-  // @Column({ type: 'jsonb' })
-  // details: any;
+//   @Column()
+//   amount: number;
 
-  @Column()
-  public remarks: string;
+//   @Column()
+//   balance: number;
 
-  // @Column()
-  // status: TransactionStatusType;
+//   // @Column({ default: 'NGN' })
+//   // currency: CurrencyType;
 
-  @CreateDateColumn()
-  createdat: Date;
+//   // @Column({ type: 'jsonb' })
+//   // details: any;
 
-  @UpdateDateColumn()
-  updatedat: Date;
-}
+//   @Column()
+//   public remarks: string;
+
+//   // @Column()
+//   // status: TransactionStatusType;
+
+//   @CreateDateColumn()
+//   createdat: Date;
+
+//   @UpdateDateColumn()
+//   updatedat: Date;
+// }

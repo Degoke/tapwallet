@@ -1,15 +1,8 @@
-import {
-  forwardRef,
-  HttpException,
-  HttpStatus,
-  Inject,
-  Injectable,
-  OnModuleInit,
-} from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { UserService } from '../user/user.service';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
-import { Role_name } from 'src/common/types/user-role.type';
+import { USER_ROLES } from 'src/common/types/roles.type';
 
 @Injectable()
 export class AuthService {
@@ -20,10 +13,13 @@ export class AuthService {
 
   async validateUser(email: string, password: string) {
     try {
-      const user = await this.userService.getByEmail(email);
+      const { user, role } = await this.userService.findByEmail(email);
 
       if (user && (await bcrypt.compare(password, user.password))) {
-        return user;
+        return {
+          user,
+          role,
+        };
       }
 
       return null;
@@ -32,44 +28,68 @@ export class AuthService {
     }
   }
 
-  async loginUser(user: any) {
+  async validatePin(id: number, pin: string) {
     try {
-      const payload = { email: user.email, sub: user.id };
+      const user = await this.userService.findCustomerForJwt(id);
 
-      const currentUser = await this.userService.findById(user.id);
+      if (user && (await bcrypt.compare(pin, user.pin))) {
+        return user;
+      }
+      return null;
+    } catch (error) {
+      throw error;
+    }
+  }
 
-      if (currentUser.role.role_name === Role_name.Admin) {
+  async loginUser(data: any) {
+    try {
+      const { user, role } = data;
+      const payload = {
+        email: user.email,
+        sub: user.id,
+        role,
+      };
+
+      if (role !== USER_ROLES.CUSTOMER) {
         throw new HttpException(
-          'This is an Admin Account',
+          'This is not a user account',
           HttpStatus.UNAUTHORIZED,
         );
       }
 
       return {
-        user: currentUser,
-        token: this.jwtService.sign(payload),
+        message: 'Login successful',
+        data: {
+          user,
+          token: this.jwtService.sign(payload),
+        },
       };
     } catch (error) {
       throw error;
     }
   }
 
-  async loginAdmin(user: any) {
+  async loginAdmin(data: any) {
     try {
-      const payload = { email: user.email, sub: user.id };
+      const { user, role } = data;
+      const payload = {
+        email: user.email,
+        sub: user.id,
+        role,
+      };
 
-      const currentUser = await this.userService.findById(user.id);
-
-      if (currentUser.role.role_name !== Role_name.Admin) {
+      if (role !== USER_ROLES.ADMIN) {
         throw new HttpException(
           'This is not an Admin Account',
           HttpStatus.UNAUTHORIZED,
         );
       }
-
       return {
-        user: currentUser,
-        token: this.jwtService.sign(payload),
+        message: 'Login successful',
+        data: {
+          user,
+          token: this.jwtService.sign(payload),
+        },
       };
     } catch (error) {
       throw error;

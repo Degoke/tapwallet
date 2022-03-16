@@ -10,8 +10,6 @@ import { get } from 'http';
 import { Public } from 'src/common/decorators/jwt-auth-guard.decorator';
 import { JwtAuthGaurd } from 'src/common/gaurds/jwt-auth.gaurd';
 import { LocalAuthGaurd } from 'src/common/gaurds/local-auth.gaurd';
-import PermissionGuard from 'src/common/gaurds/permission.gaurd';
-import Permission from 'src/common/types/permission.type';
 import { AuthService } from './auth.service';
 import { SetPinDTO } from './dto/set-pin.dto';
 
@@ -33,7 +31,6 @@ export class AuthController {
     return this.authService.loginAdmin(req.user);
   }
 
-  @UseGuards(PermissionGuard(Permission.EDIT))
   @Post('pin')
   setPin(@Request() req, @Body() setPinDto: SetPinDTO) {
     const { password, pin } = setPinDto;

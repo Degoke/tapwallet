@@ -2,21 +2,22 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { join } from 'path';
-import User from 'src/user/entities/user.entity';
-import Wallet from 'src/wallet/entities/wallet.entity';
-import { Transaction } from '../transactions/entities/transaction.entity';
-import { Transfer } from '../transfers/entities/transfer.entity';
 import { Setting } from 'src/settings/entities/setting.entity';
-import { Account } from 'src/account/entities/account.entity';
 import Log from 'src/log/entities/log.entity';
 import DatabaseLogger from './database-logger';
-import { Airtime } from 'src/airtime/entities/airtime.entity';
-import { Email } from 'src/email/entities/email.entity';
-import { Tvsubscription } from 'src/tvsubscription/entities/tvsubscription.entity';
-import { Mobiledatum } from 'src/mobiledata/entities/mobiledatum.entity';
-import { Electricitybill } from 'src/electricitybill/entities/electricitybill.entity';
-import Role from 'src/role/entities/role.entity';
-import { Activity } from 'src/admin/entities/activity.entity';
+import { Administrator } from 'src/user/entities/administrator.entity';
+import { ReceiveTransfer } from 'src/transfers/entities/receive-transfer.entity';
+import { SendTransfer } from 'src/transfers/entities/send-transfer.entity';
+import { TransferRequest } from 'src/transfers/entities/transfer-requests.entity';
+import { MonnifyAccount } from 'src/account/entities/monnnify-account.entity';
+import { Referral } from 'src/referral/entities/referral.entity';
+import { Withdrawal } from 'src/transactions/entities/withdrawal.entity';
+import { Customer } from 'src/user/entities/customer.entity';
+import { Wallet } from 'src/wallet/entities/wallet.entity';
+import { AirtimeActivity } from 'src/activities/entities/airtime-activity.entity';
+import { ElectricityBillActivity } from 'src/activities/entities/electricity-bill-activity.entity';
+import { TvSubscriptionActivity } from 'src/activities/entities/tv-subscription-activity.entity';
+import { MobileDataActivity } from 'src/activities/entities/mobiledata-activity.entity';
 
 @Module({
   imports: [
@@ -33,20 +34,21 @@ import { Activity } from 'src/admin/entities/activity.entity';
         database: configService.get('POSTGRES_DB'),
         ssl: configService.get('NODE_ENV') === 'dev' ? false : true,
         entities: [
-          User,
-          Account,
-          Wallet,
-          Transaction,
           Setting,
           Log,
-          Airtime,
-          Transfer,
-          Email,
-          Tvsubscription,
-          Mobiledatum,
-          Electricitybill,
-          Role,
-          Activity,
+          Customer,
+          Administrator,
+          Wallet,
+          Withdrawal,
+          ReceiveTransfer,
+          SendTransfer,
+          TransferRequest,
+          MonnifyAccount,
+          Referral,
+          AirtimeActivity,
+          ElectricityBillActivity,
+          TvSubscriptionActivity,
+          MobileDataActivity,
         ],
         migrations: ['dist/migrations/**/*{.ts,.js}'],
         cli: {

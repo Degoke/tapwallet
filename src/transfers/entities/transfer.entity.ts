@@ -1,39 +1,17 @@
-import User from '../../user/entities/user.entity';
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  JoinColumn,
-  OneToMany,
-  OneToOne,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { Column } from 'typeorm';
+import { EntityContainer } from 'src/common/types/entity';
+import { TransactionStatus } from 'src/common/types/status.type';
 
-@Entity()
-export class Transfer {
-  @PrimaryGeneratedColumn()
-  public id: number;
-
-  @Column()
-  public type: string;
-
-  @Column()
-  public balance: number;
-
-  @Column()
+export abstract class Transfer extends EntityContainer {
+  @Column({ type: 'real' })
   public amount: number;
 
   @Column()
   public remarks: string;
 
-  @CreateDateColumn()
-  public createdDate: Date;
+  @Column({ type: 'real' })
+  public balance: string;
 
-  @UpdateDateColumn()
-  public updatedDate: Date;
-
-  @ManyToOne(() => User, (user: User) => user.transactions)
-  public user: User;
+  @Column()
+  public status: TransactionStatus;
 }

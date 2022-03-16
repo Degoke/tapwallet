@@ -1,8 +1,21 @@
-export enum TransactionStatus {
+export enum TRANSACTION_STATUS {
   PENDING = 'PENDING',
-  SUCCESSFUL = 'SUCCESSFUL',
+  COMPLETED = 'COMPLETED',
   CANCELLED = 'CANCELLED',
   FAILED = 'FAILED',
+  QUEUED = 'QUEUED',
+  IN_PROGRESS = 'IN_PROGRESS',
+  PENDING_AUTH = 'PENDING_AUTH',
+  REVERSED = 'REVERSED',
+  PENDING_REQUERY = 'PENDING_REQUERY',
 }
 
-export type TransactionStatusType = keyof Record<TransactionStatus, string>;
+export type TransactionStatus = TRANSACTION_STATUS;
+
+export enum KYC_STATUS {
+  PENDING = 'pending',
+  ACCEPTED = 'accepted',
+  DECLINED = 'declined',
+}
+
+export type KycStatus = KYC_STATUS;

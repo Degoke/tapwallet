@@ -2,47 +2,90 @@ import {
   Ability,
   AbilityBuilder,
   AbilityClass,
+  createAliasResolver,
   ExtractSubjectType,
   InferSubjects,
 } from '@casl/ability';
 import { Injectable } from '@nestjs/common';
-import { UserPermission } from 'src/common/types/user-permissions.interface';
-import { Role_name } from 'src/common/types/user-role.type';
-import User from 'src/user/entities/user.entity';
+import { UserActions, USER_ACTIONS } from 'src/common/types/permissions.type';
+import {
+  ADMIN_ROLES,
+  USER_LEVELS,
+  USER_ROLES,
+} from 'src/common/types/roles.type';
+import { Transaction } from 'src/transactions/entities/transaction.entity';
+import { Withdrawal } from 'src/transactions/entities/withdrawal.entity';
+import { ReceiveTransfer } from 'src/transfers/entities/receive-transfer.entity';
+import { SendTransfer } from 'src/transfers/entities/send-transfer.entity';
+import { TransferRequest } from 'src/transfers/entities/transfer-requests.entity';
+import { Transfer } from 'src/transfers/entities/transfer.entity';
+import { Administrator } from 'src/user/entities/administrator.entity';
+import { Customer } from 'src/user/entities/customer.entity';
+import { User } from 'src/user/entities/user.entity';
+import { Wallet } from 'src/wallet/entities/wallet.entity';
 
-export enum Action {
-  Manage = 'manage',
-  Create = 'create',
-  Read = 'read',
-  Update = 'update',
-  Delete = 'delete',
-}
+const { CREATE, MANAGE, EDIT, DELETE, READ } = USER_ACTIONS;
 
-export type Subjects = InferSubjects<typeof User> | 'all';
+type InferredTypes =
+  | typeof Customer
+  | typeof SendTransfer
+  | typeof ReceiveTransfer
+  | typeof TransferRequest
+  | typeof Withdrawal
+  | typeof Wallet;
 
-export type AppAbility = Ability<[UserPermission, Subjects]>;
+export type Subjects = InferSubjects<InferredTypes> | 'all';
+
+export type AppAbility = Ability<[UserActions, Subjects]>;
 
 @Injectable()
 export class AbilityFactory {
-  defineAbility(user: User) {
+  defineAbility(data: any) {
     const { can, cannot, build } = new AbilityBuilder(
       Ability as AbilityClass<AppAbility>,
     );
-    if (user.role.role_name === Role_name.Admin) {
-      can(UserPermission.Manage, 'all');
-    } else if (user.role.role_name === Role_name.Level_0) {
-      can(UserPermission.RECEIVE, 'all');
-    } else if (user.role.role_name === Role_name.Level_1) {
-      can(UserPermission.RECEIVE, 'all');
-      can(UserPermission.SEND, 'all');
-    } else if (user.role.role_name === Role_name.Level_2) {
-      can(UserPermission.RECEIVE, 'all');
-      can(UserPermission.DEPOSIT, 'all');
-      can(UserPermission.WITHDRAW, 'all');
-      can(UserPermission.SEND, 'all');
-    } else {
-      can(UserPermission.RECEIVE, 'all');
-      cannot(UserPermission.WITHDRAW, 'all').because('Only Level3 users can');
+
+    const { user, role } = data;
+
+    if (role === USER_ROLES.ADMIN) {
+      if (user.role === ADMIN_ROLES.ADMIN) {
+        can(MANAGE, 'all');
+      }
+
+      if (user.role === ADMIN_ROLES.SUPPORT) {
+        can(MANAGE, 'all');
+      }
+    }
+
+    if (role === USER_ROLES.CUSTOMER) {
+      if (user.level === USER_LEVELS.ZERO) {
+        can([READ, EDIT, DELETE], Customer);
+        can(READ, [
+          Wallet,
+          SendTransfer,
+          ReceiveTransfer,
+          TransferRequest,
+          Withdrawal,
+        ]);
+        can(CREATE, [
+          Wallet,
+          SendTransfer,
+          ReceiveTransfer,
+          TransferRequest,
+          Withdrawal,
+        ]);
+      }
+
+      if (user.level === USER_LEVELS.SUSPENDED) {
+        can(READ, [
+          Customer,
+          Wallet,
+          SendTransfer,
+          ReceiveTransfer,
+          TransferRequest,
+          Withdrawal,
+        ]);
+      }
     }
 
     return build({

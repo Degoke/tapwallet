@@ -1,39 +1,56 @@
-import User from '../../user/entities/user.entity';
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  JoinColumn,
-  OneToMany,
-  OneToOne,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { Column } from 'typeorm';
+import { TransactionStatus } from 'src/common/types/status.type';
+import { Currency } from 'src/common/types/currency.type';
+import { BankServices } from 'src/common/types/service.type';
+import { EntityContainer } from 'src/common/types/entity';
+import { TransactionModes } from 'src/common/types/transaction.type';
 
-@Entity()
-export class Transaction {
-  @PrimaryGeneratedColumn()
-  public id: number;
-
-  @Column()
-  public type: string;
-
-  @Column()
-  public balance: number;
-
+export abstract class Transaction extends EntityContainer {
   @Column()
   public amount: number;
 
   @Column()
+  accountNumber: string;
+
+  @Column()
+  accountBank: string;
+
+  @Column()
+  currency: Currency;
+
+  @Column()
+  public mode: TransactionModes;
+
+  @Column()
+  public reference: string;
+
+  @Column()
+  public status: TransactionStatus;
+
+  @Column()
+  public serviceUsed: BankServices;
+
+  @Column()
+  public userId: number;
+
+  @Column()
+  public walletId: number;
+
+  @Column({ type: 'real' })
+  public balance: number;
+
+  @Column()
   public remarks: string;
 
-  @CreateDateColumn()
-  public createdDate: Date;
+  @Column({ nullable: true })
+  public bankName: string;
 
-  @UpdateDateColumn()
-  public updatedDate: Date;
+  @Column({ nullable: true })
+  public accountName: string;
 
-  @ManyToOne(() => User, (user) => user.transactions, { onDelete: 'SET NULL' })
-  public user: User;
+  @Column({ nullable: true })
+  public merchantReference: string;
+
+  @Column({ nullable: true })
+  public merchantId: number;
 }

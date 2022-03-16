@@ -9,5 +9,6 @@ import { MonnifyModule } from 'src/monnify/monnify.module';
   imports: [SettingsModule, FlutterwaveModule, MonnifyModule],
   controllers: [BankController],
   providers: [BankService],
+  exports: [BankService],
 })
 export class BankModule {}

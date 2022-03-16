@@ -1,33 +1,16 @@
-import User from 'src/user/entities/user.entity';
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-  RelationId,
-} from 'typeorm';
+import { EntityContainer } from 'src/common/types/entity';
+import { Column } from 'typeorm';
 
-@Entity()
-export class Account {
-  @PrimaryGeneratedColumn()
-  id: number;
+export abstract class Account extends EntityContainer {
+  @Column()
+  public accountName: string;
 
   @Column()
-  accountName: string;
+  public bankCode: string;
 
   @Column()
-  bankCode: string;
+  public accountNumber: string;
 
   @Column()
-  accountNumber: string;
-
-  @ManyToOne(() => User, (user: User) => user.accounts)
-  owner: User;
-
-  @Column()
-  ownerId: number;
-
-  @CreateDateColumn()
-  createdAt: Date;
+  public userId: number;
 }
