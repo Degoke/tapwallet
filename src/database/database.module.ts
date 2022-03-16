@@ -18,7 +18,6 @@ import { Electricitybill } from 'src/electricitybill/entities/electricitybill.en
 import Role from 'src/role/entities/role.entity';
 import { Activity } from 'src/admin/entities/activity.entity';
 
-
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({

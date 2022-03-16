@@ -16,7 +16,6 @@ import { ReferralModule } from 'src/referral/referral.module';
 import { AbilityModule } from 'src/ability/ability.module';
 import { RoleModule } from 'src/role/role.module';
 
-
 @Module({
   imports: [
     TypeOrmModule.forFeature([User]),
