@@ -17,8 +17,8 @@ import { CreateAdminDto } from 'src/user/dto/create-admin.dto';
 @Injectable()
 export class AdminService {
   constructor(
-//   @InjectRepository(Activity)
-//    private readonly activityRepository: Repository<Activity>,
+    //   @InjectRepository(Activity)
+    //    private readonly activityRepository: Repository<Activity>,
     private readonly settingsService: SettingsService,
     private readonly userService: UserService,
     private readonly walletService: WalletService,
@@ -95,7 +95,6 @@ export class AdminService {
   async getUserByEmail(email: string) {
     return await this.userService.findByEmail(email);
   }
-
 
   async getSetting(id) {
     return await this.settingsService.getSetting(id);

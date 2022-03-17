@@ -197,7 +197,10 @@ export class UserService {
           password: hashedPassword,
         });
 
-        const savedAdmin = await queryRunner.manager.save(Administrator, newUser);
+        const savedAdmin = await queryRunner.manager.save(
+          Administrator,
+          newUser,
+        );
 
         const wallet = await queryRunner.manager.create(Wallet, {
           userId: savedAdmin.id,

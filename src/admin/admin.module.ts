@@ -10,11 +10,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
-//    TypeOrmModule.forFeature([Activity]),
+    //    TypeOrmModule.forFeature([Activity]),
     SettingsModule,
     FlutterwaveModule,
     UserModule,
-//    RoleModule,
+    //    RoleModule,
   ],
   controllers: [AdminController],
   providers: [AdminService],

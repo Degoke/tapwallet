@@ -144,4 +144,3 @@ export class DeleteWithdrawalPermission implements RequiredRule {
   action = DELETE;
   subject = Withdrawal;
 }
-
