@@ -22,8 +22,8 @@
 //   @ManyToOne(() => User, (user: User) => user.id)
 //   owner: User;
 
-  // @Column()
-  // ownerid: number;
+// @Column()
+// ownerid: number;
 
 //   @Column()
 //   serviceID: string;

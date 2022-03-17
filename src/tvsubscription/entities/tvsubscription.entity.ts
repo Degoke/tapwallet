@@ -31,8 +31,8 @@
 //   @ManyToOne(() => User, (user: User) => user.id)
 //   owner: User;
 
-// @Column()
-// ownerid: number;
+//   @Column()
+//   ownerid: number;
 
 //   @Column()
 //   transactionReference: string;
@@ -69,4 +69,4 @@
 
 // @UpdateDateColumn()
 // updatedat: Date;
-//}
+// }

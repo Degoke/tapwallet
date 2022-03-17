@@ -6,4 +6,6 @@ import { User } from './user.entity';
 export class Administrator extends User {
   @Column()
   role: AdminRoles;
+
+  
 }

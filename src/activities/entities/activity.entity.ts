@@ -8,10 +8,10 @@ export abstract class Activity extends EntityContainer {
   customer: string;
 
   @Column()
-  userId: number;
+  userid: number;
 
   @Column()
-  walletId: number;
+  walletid: number;
 
   @Column()
   serviceID: string;

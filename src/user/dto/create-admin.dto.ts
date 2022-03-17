@@ -5,9 +5,8 @@ import {
   IsString,
   Matches,
 } from 'class-validator';
-import { AdminRoles } from 'src/common/types/roles.type';
 
-export class CreateUserDto {
+export class CreateAdminDto {
   @IsString()
   @IsNotEmpty()
   firstName: string;
@@ -27,14 +26,6 @@ export class CreateUserDto {
 
   @IsString()
   @IsNotEmpty()
-  role: AdminRoles;
-
-  @IsString()
-  @IsNotEmpty()
   @Matches(/^\+[1-9]\d{1,14}$/)
   phoneNumber: string;
-
-  @IsOptional()
-  @IsString()
-  referralCode: string;
 }

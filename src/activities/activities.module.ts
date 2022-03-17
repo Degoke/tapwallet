@@ -6,6 +6,8 @@ import { AirtimeActivityRepository } from './repositories/airtime-activity.repos
 import { ElectricityBillActivityRepository } from './repositories/electricity-bill-activity.repository';
 import { MobileDataActivityRepository } from './repositories/mobile-data-activity.repository';
 import { TvSubscriptionActivityRepository } from './repositories/tv-subscription-activity.repository';
+import { VtpassModule } from 'src/vtpass/vtpass.module';
+import { WalletModule } from 'src/wallet/wallet.module';
 
 @Module({
   imports: [
@@ -14,6 +16,8 @@ import { TvSubscriptionActivityRepository } from './repositories/tv-subscription
       ElectricityBillActivityRepository,
       MobileDataActivityRepository,
       TvSubscriptionActivityRepository,
+      VtpassModule,
+      WalletModule,
     ]),
   ],
   controllers: [ActivitiesController],

@@ -41,25 +41,25 @@
 //         );
 //       }
 
-      // const walletResponse = await this.walletService.removeMoney(
-      //   {
-      //     email,
-      //     amount,
-      //   },
-      //   queryRunner,
-      // );
-      // const request_id = await getRequestId();
-      // const payload = {
-      //   customer: buyAirtimeDto.phone,
-      //   owner: user,
-      //   ownerid: user.id,
-      //   transactionReference: request_id,
-      //   service: Services.VTPASS,
-      //   amount: buyAirtimeDto.amount,
-      //   serviceID: buyAirtimeDto.serviceID,
-      //   remarks: 'AIRTIME RECHARGE',
-      //   balance: walletResponse.data.balance,
-      // };
+// const walletResponse = await this.walletService.removeMoney(
+//   {
+//     email,
+//     amount,
+//   },
+//   queryRunner,
+// );
+// const request_id = await getRequestId();
+// const payload = {
+//   customer: buyAirtimeDto.phone,
+//   owner: user,
+//   ownerid: user.id,
+//   transactionReference: request_id,
+//   service: Services.VTPASS,
+//   amount: buyAirtimeDto.amount,
+//   serviceID: buyAirtimeDto.serviceID,
+//   remarks: 'AIRTIME RECHARGE',
+//   balance: walletResponse.data.balance,
+// };
 
 //       const airtime = await queryRunner.manager.create(Airtime, payload);
 //       await queryRunner.manager.save(airtime);
@@ -108,45 +108,45 @@
 //     }
 //   }
 
-  // async buyAirtime(buyAirtimeDto: BuyAirtimeDto, service: ServicesType, user) {
-  //   const wallet = await this.walletService.getWalletByOwnerId(user.id);
-  //   //    return wallet.balance < parseInt(buyAirtimeDto.amount);
-  //   if (wallet.balance < buyAirtimeDto.amount) {
-  //     throw new HttpException(
-  //       'Not enough funds in your wallet',
-  //       HttpStatus.BAD_REQUEST,
-  //     );
-  //   }
-  //   let result;
-  //   const reference = await getTransactionReference();
-  //   switch (service) {
-  //     case Services.FLUTTERWAVE:
-  //       const payload = {
-  //         ...buyAirtimeDto,
-  //         reference,
-  //       };
-  //       const response = await this.flutterwaveService.createBill(payload);
-  //       if (response.status === 'success') {
-  //         const payload = {
-  //           customer: response.data.phoneNumber,
-  //           amount: response.data.amount,
-  //           ownerid: user.id,
-  //           merchantReference: response.data.tx_ref,
-  //           tapmoneyReference: reference,
-  //           service: Services.FLUTTERWAVE,
-  //           status: TransactionStatus.PENDING,
-  //           details: response.data,
-  //         };
-  //         const newData = await this.airtimeRepository.create(payload);
-  //         await this.airtimeRepository.save(newData);
-  //         return newData;
-  //       } else {
-  //         result = response;
-  //       }
-  //       break;
-  //   }
-  //   return result;
-  // }
+// async buyAirtime(buyAirtimeDto: BuyAirtimeDto, service: ServicesType, user) {
+//   const wallet = await this.walletService.getWalletByOwnerId(user.id);
+//   //    return wallet.balance < parseInt(buyAirtimeDto.amount);
+//   if (wallet.balance < buyAirtimeDto.amount) {
+//     throw new HttpException(
+//       'Not enough funds in your wallet',
+//       HttpStatus.BAD_REQUEST,
+//     );
+//   }
+//   let result;
+//   const reference = await getTransactionReference();
+//   switch (service) {
+//     case Services.FLUTTERWAVE:
+//       const payload = {
+//         ...buyAirtimeDto,
+//         reference,
+//       };
+//       const response = await this.flutterwaveService.createBill(payload);
+//       if (response.status === 'success') {
+//         const payload = {
+//           customer: response.data.phoneNumber,
+//           amount: response.data.amount,
+//           ownerid: user.id,
+//           merchantReference: response.data.tx_ref,
+//           tapmoneyReference: reference,
+//           service: Services.FLUTTERWAVE,
+//           status: TransactionStatus.PENDING,
+//           details: response.data,
+//         };
+//         const newData = await this.airtimeRepository.create(payload);
+//         await this.airtimeRepository.save(newData);
+//         return newData;
+//       } else {
+//         result = response;
+//       }
+//       break;
+//   }
+//   return result;
+// }
 
 //   async getAirtimeProviders(service: ServicesType) {
 //     let result;
