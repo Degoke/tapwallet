@@ -9,10 +9,11 @@ import { MonnifyModule } from 'src/monnify/monnify.module';
 import { FlutterwaveModule } from 'src/flutterwave/flutterwave.module';
 import { SettingsModule } from 'src/settings/settings.module';
 import { WithdrawalRepository } from './repositories/withdrawal.repository';
+import { DepositRepository } from './repositories/deposit.repository';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([WithdrawalRepository]),
+    TypeOrmModule.forFeature([WithdrawalRepository, DepositRepository]),
     HttpModule,
     PaystackModule,
     WalletModule,

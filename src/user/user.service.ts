@@ -25,6 +25,7 @@ import { Wallet } from 'src/wallet/entities/wallet.entity';
 import { Customer } from './entities/customer.entity';
 import { CustomerKyc } from './entities/customer-kyc.entity';
 import { Referral } from 'src/referral/entities/referral.entity';
+import { CreateAdminDto } from './dto/create-admin.dto';
 
 @Injectable()
 export class UserService {
@@ -60,6 +61,8 @@ export class UserService {
           role: USER_ROLES.ADMIN,
         };
       }
+
+      return null;
     } catch (error) {
       throw error;
     }
@@ -145,10 +148,10 @@ export class UserService {
           await queryRunner.manager.save(newReferral);
         }
 
-        await this.emailService.sendVerificationCode(
+        /*await this.emailService.sendVerificationCode(
           newUser.email,
           queryRunner,
-        );
+        );*/
         await queryRunner.commitTransaction();
         return {
           message: 'User Created Successfully',
@@ -160,6 +163,23 @@ export class UserService {
         await queryRunner.rollbackTransaction();
         throw error;
       }
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async createAdmin(payload: CreateAdminDto) {
+    try {
+      const { email } = payload;
+
+      const emailAlreadyExists = await this.adminRepository.findByEmail(email);
+
+      if (emailAlreadyExists) {
+        throw new HttpException('Email Already in use', HttpStatus.CONFLICT);
+      }
+
+      const newAdmin = await this.adminRepository.create(payload);
+      return await this.adminRepository.save(newAdmin);
     } catch (error) {
       throw error;
     }

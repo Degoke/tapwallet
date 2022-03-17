@@ -6,10 +6,10 @@ import { CreateSettingDto } from 'src/settings/dto/create-setting.dto';
 import { UpdateSettingDto } from 'src/settings/dto/update-setting.dto';
 import { SettingsService } from 'src/settings/settings.service';
 import { TransactionsService } from 'src/transactions/transactions.service';
+import { CreateAdminDto } from 'src/user/dto/create-admin.dto';
 import { CreateUserDto } from 'src/user/dto/create-user.dto';
 import { UserService } from 'src/user/user.service';
 import { WalletService } from 'src/wallet/wallet.service';
-import { CreateAdminDto } from './dto/create-admin.dto';
 import { UpdateAdminDto } from './dto/update-admin.dto';
 
 @Injectable()
@@ -23,14 +23,15 @@ export class AdminService {
     private readonly bankService: BankService,
   ) {}
 
-  /*async createNewAdmin(createUserDto: CreateUserDto, role: AdminRoles) {
+  async createNewAdmin(payload: CreateAdminDto) {
     try {
-      const { email } = createUserDto;
-      await this.userService.create(createUserDto);
-      await this.userService.markAsAdmin(email, role);
+      const admin = await this.userService.createAdmin(payload);
 
       return {
-        message: 'Admin created Successfully',
+        message: 'Admin created successfully',
+        data: {
+          admin,
+        },
       };
     } catch (error) {
       throw error;
@@ -39,60 +40,36 @@ export class AdminService {
 
   async getSummary() {
     try {
-      const totalUsers = await this.userService.getTotalNumberOfUsers();
-      const totalUsersNaira = await this.walletService.getTotalUsersNaira();
-      const nairaWalletBalance = await this.bankService.getNairaWalletBAlance();
-      const totalNairaTransactions =
-        await this.transactionsService.getTotalNairaTransactionsBalance();
-      const totalNairaDeposits =
-        await this.transactionsService.getTotalNairaDepositsBalance();
-      const totalNairaWithdrawals =
-        await this.transactionsService.getTotalNairaWithdrawalsBalance();
+      const { totalUsers } = await this.userService.getTotalNumberOfUsers();
+
+      const { totalUsersNaira } = await this.walletService.getTotalUsersNaira();
+
+      const walletBalance = await this.bankService.getNairaWalletBAlance();
+
+      const { totalDeposits } =
+        await this.transactionsService.getTotalDepositsBalance();
+
+      const { totalWithdrawals } =
+        await this.transactionsService.getTotalWithdrawalsBalance();
+
+      const totalTransactions = totalDeposits + totalWithdrawals;
 
       return {
-        ...totalUsers,
-        ...totalUsersNaira,
-        ...nairaWalletBalance,
-        ...totalNairaDeposits,
-        ...totalNairaTransactions,
-        ...totalNairaWithdrawals,
+        totalUsers,
+        totalUsersNaira,
+        ...walletBalance,
+        totalDeposits,
+        totalTransactions,
+        totalWithdrawals,
       };
     } catch (error) {
       throw error;
     }
   }
 
-  async getAllTransactions() {
-    try {
-      return await this.transactionsService.getAllTransactions();
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  async addNewSetting(createSettingDto: CreateSettingDto) {
+  /*async addNewSetting(createSettingDto: CreateSettingDto) {
     return await this.settingsService.addSetting(createSettingDto);
   }
-
-  async getAllUsers() {
-    return await this.userService.find();
-  }
-
-  async getUserByEmail(email: string) {
-    return await this.userService.findByEmail(email);
-  }
-
-  async getUserByPhone(phoneNumber: string) {
-    return await this.userService.findByPhone(phoneNumber);
-  }
-
-  async getUserByFirstName(firstName: string) {
-    return await this.userService.findByFirstName(firstName);
-  }
-  async getUserByLastName(lastName: string) {
-    return await this.userService.findByLastName(lastName);
-  }
-
   async getSetting(id) {
     return await this.settingsService.getSetting(id);
   }

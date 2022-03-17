@@ -8,13 +8,13 @@ import { Column, Entity, ManyToOne } from 'typeorm';
 import { Transaction } from './transaction.entity';
 
 @Entity()
-export class Withdrawal extends Transaction {
+export class Deposit extends Transaction {
   @ManyToOne(() => Customer, (customer: Customer) => customer.withdrawals)
   user: Customer;
 
   @ManyToOne(() => Wallet, (wallet: Wallet) => wallet.withdrawals)
   wallet: Wallet;
 
-  @Column({ default: TRANSACTION.WITHDRAWAL })
+  @Column({ default: TRANSACTION.DEPOSIT })
   type: TransactionType;
 }

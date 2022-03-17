@@ -18,6 +18,7 @@ import { AirtimeActivity } from 'src/activities/entities/airtime-activity.entity
 import { ElectricityBillActivity } from 'src/activities/entities/electricity-bill-activity.entity';
 import { TvSubscriptionActivity } from 'src/activities/entities/tv-subscription-activity.entity';
 import { MobileDataActivity } from 'src/activities/entities/mobiledata-activity.entity';
+import { Deposit } from 'src/transactions/entities/deposit.entity';
 
 @Module({
   imports: [
@@ -49,6 +50,7 @@ import { MobileDataActivity } from 'src/activities/entities/mobiledata-activity.
           ElectricityBillActivity,
           TvSubscriptionActivity,
           MobileDataActivity,
+          Deposit,
         ],
         migrations: ['dist/migrations/**/*{.ts,.js}'],
         cli: {
