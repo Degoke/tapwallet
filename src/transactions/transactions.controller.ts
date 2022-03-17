@@ -8,6 +8,9 @@ import {
   Delete,
   UseGuards,
   Request,
+  Query,
+  HttpException,
+  HttpStatus,
 } from '@nestjs/common';
 import { TransactionsService } from './transactions.service';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
@@ -19,6 +22,14 @@ import { Public } from 'src/common/decorators/jwt-auth-guard.decorator';
 import { FWWithdrawalDto } from './dto/withdrawal.dto';
 import { BANK_SERVICES } from 'src/common/types/service.type';
 import { TransactionStatus } from 'src/common/types/status.type';
+import {
+  CheckAbilities,
+  CreateWithdrawalPermission,
+  ReadWithdrawalPermission,
+} from 'src/ability/abilities.decorator';
+import { TransactionQueryDto } from './dto/transaction-query.dto';
+import { TRANSACTION } from 'src/common/types/transaction.type';
+import { HttpErrorByCode } from '@nestjs/common/utils/http-error-by-code.util';
 
 @Controller('transactions')
 export class TransactionsController {
@@ -30,14 +41,10 @@ export class TransactionsController {
     return body;
   }
 
-  //@CheckAbilities(new CreateTransactionPermission())
+  @CheckAbilities(new CreateWithdrawalPermission())
   @Post('withdraw')
   initiateWithdrawal(@Body() body: FWWithdrawalDto, @Request() req) {
-    return this.transactionsService.initiateWithdrawal(
-      body,
-      req.user,
-      BANK_SERVICES.MONNIFY,
-    );
+    return this.transactionsService.initiateWithdrawal(body, req.user);
   }
 
   @Post('update-status/:id')
@@ -45,84 +52,94 @@ export class TransactionsController {
     @Body() body: { status: TransactionStatus },
     @Param('id') id: number,
   ) {
-    return this.transactionsService.updateTransactionStatus(
-      id,
-      body.status,
-      BANK_SERVICES.MONNIFY,
-    );
-  }
-
-  /*@Get('all')
-  getAllTransactions() {
-    return this.transactionsService.getAllTransactions();
-  }
-
-  @CheckAbilities(new ReadTransactionPermission())
-  @Get('all/current-user')
-  getCurrentUsersTransactions(@Request() req) {
-    return this.transactionsService.getUserTransactions(req.user.id);
-  }
-
-  @Get('all/user/:id')
-  getuserTransactionsById(@Param('id') id: number) {
-    return this.transactionsService.getUserTransactions(id);
-  }
-
-  @CheckAbilities(new ReadTransactionPermission())
-  @Get('/transaction/:id')
-  getTransactionById(@Param('id') id: number) {
-    return this.transactionsService.findOneTransaction(id);
-  }
-
-  @Get('withdrawals')
-  getAllWithdrawals() {
-    return this.transactionsService.getAllTransactions(TRANSACTION.WITHDRAWAL);
-  }
-
-  @CheckAbilities(new ReadTransactionPermission())
-  @Get('/withdrawals/current-user')
-  getCurrentUserWithdrawals(@Request() req) {
-    const { id } = req.user;
-    return this.transactionsService.getUserTransactions(
-      id,
-      TRANSACTION.WITHDRAWAL,
-    );
-  }
-
-  @Get('/withdrawals/user/:id')
-  getUserWithdrawalsById(@Param('id') id: number) {
-    return this.transactionsService.getUserTransactions(
-      id,
-      TRANSACTION.WITHDRAWAL,
-    );
-  }
-
-  @Get('deposits')
-  getAllDeposits() {
-    return this.transactionsService.getAllTransactions(TRANSACTION.DEPOSIT);
-  }
-
-  @CheckAbilities(new ReadTransactionPermission())
-  @Get('/deposits/current-user')
-  getCurrentUserDeposit(@Request() req) {
-    const { id } = req.user;
-    return this.transactionsService.getUserTransactions(
-      id,
-      TRANSACTION.WITHDRAWAL,
-    );
-  }
-
-  @Get('/deposits/user/:id')
-  getUserDepositsById(@Param('id') id: number) {
-    return this.transactionsService.getUserTransactions(
-      id,
-      TRANSACTION.WITHDRAWAL,
-    );
+    return this.transactionsService.updateTransactionStatus(id, body.status);
   }
 
   @Public()
-  @Post('confirm-monnify-disbursement')
-  confirmMonnifyDisbursement(@Body() body, @Request() req) {
-    return;
-  }*/
+  @Get()
+  getAllTransactions(@Query() query: TransactionQueryDto) {
+    let type;
+
+    if (query) {
+      if (query.type === TRANSACTION.WITHDRAWAL) {
+        type = TRANSACTION.WITHDRAWAL;
+      } else if (query.type === TRANSACTION.DEPOSIT) {
+        type = TRANSACTION.DEPOSIT;
+      } else if (!query.type) {
+        type = 'all';
+      } else {
+        throw new HttpException(
+          'Invalid query parameter',
+          HttpStatus.BAD_REQUEST,
+        );
+      }
+    }
+    if (!query) {
+      type = 'all';
+    }
+
+    return this.transactionsService.getAllTransactions(type);
+  }
+
+  @CheckAbilities(new ReadWithdrawalPermission())
+  @Get('current-user')
+  getCurrentUsersTransactions(
+    @Request() req,
+    @Query() query: TransactionQueryDto,
+  ) {
+    let type;
+
+    if (query) {
+      if (query.type === TRANSACTION.WITHDRAWAL) {
+        type = TRANSACTION.WITHDRAWAL;
+      } else if (query.type === TRANSACTION.DEPOSIT) {
+        type = TRANSACTION.DEPOSIT;
+      } else if (!query.type) {
+        type = 'all';
+      } else {
+        throw new HttpException(
+          'Invalid query parameter',
+          HttpStatus.BAD_REQUEST,
+        );
+      }
+    }
+    if (!query) {
+      type = 'all';
+    }
+    const { user } = req.user;
+    return this.transactionsService.getUserTransactions(user.id, type);
+  }
+
+  @Get('user/:id')
+  getuserTransactionsById(
+    @Param('id') id: number,
+    @Query() query: TransactionQueryDto,
+  ) {
+    let type;
+
+    if (query) {
+      if (query.type === TRANSACTION.WITHDRAWAL) {
+        type = TRANSACTION.WITHDRAWAL;
+      } else if (query.type === TRANSACTION.DEPOSIT) {
+        type = TRANSACTION.DEPOSIT;
+      } else if (!query.type) {
+        type = 'all';
+      } else {
+        throw new HttpException(
+          'Invalid query parameter',
+          HttpStatus.BAD_REQUEST,
+        );
+      }
+    }
+    if (!query) {
+      type = 'all';
+    }
+    return this.transactionsService.getUserTransactions(id, type);
+  }
+
+  @CheckAbilities(new ReadWithdrawalPermission())
+  @Get(':id')
+  getTransactionById(@Param('id') id: number) {
+    return this.transactionsService.findOneTransaction(id);
+  }
 }

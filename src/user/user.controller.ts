@@ -22,6 +22,7 @@ import {
   CheckAbilities,
   EditUserPermission,
   ReadUserPermission,
+  ReadWithdrawalPermission,
 } from 'src/ability/abilities.decorator';
 import { Public } from 'src/common/decorators/jwt-auth-guard.decorator';
 

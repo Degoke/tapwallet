@@ -44,17 +44,22 @@ import {
 import { TRANSACTION } from 'src/common/types/transaction.type';
 import { User } from 'src/user/entities/user.entity';
 import { WithdrawalRepository } from './repositories/withdrawal.repository';
+import { DepositRepository } from './repositories/deposit.repository';
 
 const { FLUTTERWAVE, MONNIFY } = BANK_SERVICES;
 
+const { WITHDRAWAL, DEPOSIT } = TRANSACTION;
+
 @Injectable()
 export class TransactionsService {
-  private currentService: FlutterwaveService | MonnifyService;
+  private currentService: BankServices = MONNIFY;
   constructor(
     @Inject(CACHE_MANAGER) private cacheManager: Cache,
     private connection: Connection,
     @InjectRepository(WithdrawalRepository)
     private withdrawalRepository: WithdrawalRepository,
+    @InjectRepository(DepositRepository)
+    private depositRepository: DepositRepository,
     private readonly paystackService: PaystackService,
     private readonly walletService: WalletService,
     private readonly flutterwaveService: FlutterwaveService,
@@ -62,11 +67,7 @@ export class TransactionsService {
     private readonly settingsService: SettingsService,
   ) {}
 
-  async initiateWithdrawal(
-    dto: FWWithdrawalDto,
-    user: User,
-    service: BankServices,
-  ) {
+  async initiateWithdrawal(dto: FWWithdrawalDto, user: User) {
     /*if (user.wallet[0].balance < dto.amount) {
       throw new HttpException('Insufficient balance', HttpStatus.BAD_REQUEST);
     }*/
@@ -83,7 +84,7 @@ export class TransactionsService {
       let newTransaction;
       let result;
 
-      if (service === BANK_SERVICES.FLUTTERWAVE) {
+      if (this.currentService === FLUTTERWAVE) {
         payload = {
           ...dto,
           reference: mockReferencePass,
@@ -91,7 +92,7 @@ export class TransactionsService {
         };
       }
 
-      if (service === MONNIFY) {
+      if (this.currentService === MONNIFY) {
         payload = {
           amount: dto.amount,
           reference,
@@ -111,7 +112,7 @@ export class TransactionsService {
             userId: user.id,
             status: TRANSACTION_STATUS.QUEUED,
             type: TRANSACTION.WITHDRAWAL,
-            serviceUsed: service,
+            serviceUsed: this.currentService,
             walletId: dto.wallet_id,
           });
 
@@ -174,13 +175,10 @@ export class TransactionsService {
     }
   }
 
-  async getTransactionStatus(
-    reference: string | number,
-    service: BankServices,
-  ) {
+  async getTransactionStatus(reference: string | number) {
     try {
       let result;
-      if (service === MONNIFY) {
+      if (this.currentService === MONNIFY) {
         result = await this.monnifyService.getTransactionStatus(
           <string>reference,
         );
@@ -241,17 +239,16 @@ export class TransactionsService {
   async updateTransactionStatus(
     reference: number | string,
     status: TransactionStatus,
-    service: BankServices,
   ) {
     try {
-      if (service === MONNIFY) {
+      if (this.currentService === MONNIFY) {
         return await this.withdrawalRepository.update(
           { merchantId: <number>reference },
           { status },
         );
       }
 
-      if (service === FLUTTERWAVE) {
+      if (this.currentService === FLUTTERWAVE) {
         await this.withdrawalRepository.update(
           { reference: <string>reference },
           { status },
@@ -262,38 +259,166 @@ export class TransactionsService {
     }
   }
 
-  async getTotalNairaTransactionsBalance() {
+  async getTotalWithdrawalsBalance() {
     try {
-      const { sum } = await this.withdrawalRepository
-        .createQueryBuilder('transaction')
-        .select('SUM(transaction.amount)', 'sum')
-        .where('transaction.currency = :currency', {
-          currency: CURRENCY.NAIRA,
-        })
-        .getRawOne();
+      const sum = await this.withdrawalRepository.count({
+        currency: CURRENCY.NAIRA,
+      });
 
       return {
-        totalNairaTransactions: sum,
+        totalWithdrawals: sum,
       };
     } catch (error) {
       throw error;
     }
   }
 
-  async getTotalNairaWithdrawalsBalance() {
+  async getTotalDepositsBalance() {
     try {
-      const { sum } = await this.withdrawalRepository
-        .createQueryBuilder('transaction')
-        .select('SUM(transaction.amount)', 'sum')
-        .where('transaction.currency = :currency', {
-          currency: CURRENCY.NAIRA,
-        })
-        .andWhere('transaction.type = :type', { type: TRANSACTION.WITHDRAWAL })
-        .getRawOne();
+      const sum = await this.depositRepository.count({
+        currency: CURRENCY.NAIRA,
+      });
 
       return {
-        totalNairaWithdrawals: sum,
+        totalDeposits: sum,
       };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getAllTransactions(type) {
+    try {
+      switch (type) {
+        case 'all':
+          const depositsQuery = await this.depositRepository
+            .createQueryBuilder('deposit')
+            .select('deposit')
+            .leftJoinAndSelect('deposit.user', 'user')
+            .leftJoinAndSelect('deposit.wallet', 'wallet')
+            .getQuery();
+          const withdrawalQuery = await this.withdrawalRepository
+            .createQueryBuilder('withdrawal')
+            .select('withdrawal')
+            .leftJoinAndSelect('withdrawal.user', 'user')
+            .leftJoinAndSelect('withdrawal.wallet', 'wallet')
+            .getQuery();
+
+          const allTransactions = await this.connection.manager.query(
+            `${depositsQuery} UNION ${withdrawalQuery}`,
+          );
+
+          return {
+            message: 'Success',
+            data: {
+              transactions: allTransactions,
+            },
+          };
+
+        case WITHDRAWAL:
+          const withdrawals = await this.withdrawalRepository.find({
+            relations: ['user', 'wallet'],
+          });
+          return {
+            message: 'Success',
+            data: {
+              withdrawals,
+            },
+          };
+
+        case DEPOSIT:
+          const deposits = await this.depositRepository.find({
+            relations: ['user', 'wallet'],
+          });
+          return {
+            message: 'Success',
+            data: {
+              deposits,
+            },
+          };
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getUserTransactions(id: number, type) {
+    try {
+      switch (type) {
+        case 'all':
+          const depositsQuery = await this.depositRepository
+            .createQueryBuilder('deposit')
+            .leftJoinAndSelect('deposit.user', 'user')
+            .leftJoinAndSelect('deposit.wallet', 'wallet')
+            .where(`user.id = ${id}`)
+            .getQuery();
+          const withdrawalQuery = await this.withdrawalRepository
+            .createQueryBuilder('withdrawal')
+            .leftJoinAndSelect('withdrawal.user', 'user')
+            .leftJoinAndSelect('withdrawal.wallet', 'wallet')
+            .where(`user.id = ${id}`)
+            .getQuery();
+
+          const allTransactions = await this.connection.manager.query(
+            `${depositsQuery} UNION ${withdrawalQuery}`,
+          );
+
+          return {
+            message: 'Success',
+            data: {
+              transactions: allTransactions,
+            },
+          };
+
+        case WITHDRAWAL:
+          const withdrawals = await this.withdrawalRepository.findOne(id, {
+            relations: ['user', 'wallet'],
+          });
+          return {
+            message: 'Success',
+            data: {
+              withdrawals,
+            },
+          };
+
+        case DEPOSIT:
+          const deposits = await this.depositRepository.findOne(id, {
+            relations: ['user', 'wallet'],
+          });
+          return {
+            message: 'Success',
+            data: {
+              deposits,
+            },
+          };
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async findOneTransaction(id: number) {
+    try {
+      const withdrawal = await this.withdrawalRepository.findOne(id);
+      if (withdrawal) {
+        return {
+          message: 'Success',
+          data: {
+            withdrawal,
+          },
+        };
+      }
+      const deposit = await this.depositRepository.findOne(id);
+      if (deposit) {
+        return {
+          message: 'Success',
+          data: {
+            deposit,
+          },
+        };
+      }
+
+      throw new HttpException('Transaction not found', HttpStatus.NOT_FOUND);
     } catch (error) {
       throw error;
     }
@@ -318,16 +443,6 @@ export class TransactionsService {
     }
   }
 
-  async getAllTransactions(type?: TransactionType) {
-    try {
-      if (type) {
-        return await this.transactionRepository.find({ type });
-      }
-      return await this.transactionRepository.find();
-    } catch (error) {
-      throw error;
-    }
-  }
 
   async getUserTransactions(id: number, type?: TransactionType) {
     try {

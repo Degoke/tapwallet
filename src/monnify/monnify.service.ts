@@ -363,7 +363,7 @@ export class MonnifyService {
 
     const result = await lastValueFrom(response);
 
-    return result;
+    return result.responseBody.availableBalance;
   }
 
   async listAllTransfers() {

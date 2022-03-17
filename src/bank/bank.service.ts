@@ -88,7 +88,13 @@ export class BankService {
     try {
       switch (this.currentService) {
         case MONNIFY:
-          return await this.monnifyService.getWalletBalance('2953846525');
+          const result = await this.monnifyService.getWalletBalance(
+            '2953846525',
+          );
+
+          return {
+            monnifyWalletBalance: result,
+          };
       }
     } catch (error) {
       throw error;

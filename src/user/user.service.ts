@@ -62,6 +62,8 @@ export class UserService {
           role: USER_ROLES.ADMIN,
         };
       }
+
+      return null;
     } catch (error) {
       throw error;
     }
@@ -147,10 +149,10 @@ export class UserService {
           await queryRunner.manager.save(newReferral);
         }
 
-        await this.emailService.sendVerificationCode(
+        /*await this.emailService.sendVerificationCode(
           newUser.email,
           queryRunner,
-        );
+        );*/
         await queryRunner.commitTransaction();
         return {
           message: 'User Created Successfully',
@@ -202,24 +204,6 @@ export class UserService {
           newUser,
         );
 
-        const wallet = await queryRunner.manager.create(Wallet, {
-          userId: savedAdmin.id,
-          type: WALLET_TYPES.NAIRA,
-          currency: CURRENCY.NAIRA,
-        });
-
-        await queryRunner.manager.save(Wallet, wallet);
-
-        const newKyc = await queryRunner.manager.create(CustomerKyc, {
-          userId: savedAdmin.id,
-        });
-
-        await queryRunner.manager.save(CustomerKyc, newKyc);
-
-        await this.emailService.sendVerificationCode(
-          newUser.email,
-          queryRunner,
-        );
         await queryRunner.commitTransaction();
         return {
           message: 'Admin Created Successfully',

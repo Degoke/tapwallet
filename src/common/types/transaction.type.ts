@@ -1,8 +1,8 @@
 export enum TRANSACTION {
-  DEPOSIT = 'Deposit',
-  WITHDRAWAL = 'Withdrawal',
-  DEBIT = 'Debit',
-  CREDIT = 'Credit',
+  DEPOSIT = 'deposit',
+  WITHDRAWAL = 'withdrawal',
+  DEBIT = 'debit',
+  CREDIT = 'credit',
 }
 
 export type TransactionType = TRANSACTION;

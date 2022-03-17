@@ -7,11 +7,10 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
-import {
-  //  ADMIN_PERMISSION,
-  CheckAbilities,
-} from 'src/ability/abilities.decorator';
+import { CheckAbilities } from 'src/ability/abilities.decorator';
+import { CreateAccountDto } from 'src/account/dto/create-account.dto';
 import { Public } from 'src/common/decorators/jwt-auth-guard.decorator';
+import { ADMIN_ROLES } from 'src/common/types/roles.type';
 import { CreateAdminDto } from 'src/user/dto/create-admin.dto';
 import { CreateUserDto } from 'src/user/dto/create-user.dto';
 import { UserService } from 'src/user/user.service';
@@ -41,10 +40,6 @@ export class AdminController {
   //   return this.adminService.assignRole(assignUserLevelDto);
   // }
 
-  @Get('users/email/:email')
-  getUserByEmail(@Param('email') email) {
-    return this.adminService.getUserByEmail(email);
-  }
 
   // @Get('users/activities/:id')
   // @CheckAbilities(new ADMIN_PERMISSION())

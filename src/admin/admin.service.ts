@@ -27,75 +27,53 @@ export class AdminService {
     private readonly bankService: BankService,
   ) {}
 
-  async createNewAdmin(createAdminDto: CreateAdminDto) {
+  async createNewAdmin(payload: CreateAdminDto) {
     try {
-      const { email } = createAdminDto;
-      await this.userService.createAdmin(createAdminDto);
+      const admin = await this.userService.createAdmin(payload);
 
       return {
-        message: 'Admin created Successfully',
+        message: 'Admin created successfully',
+        data: {
+          admin,
+        },
       };
     } catch (error) {
       throw error;
     }
   }
 
-  // async getSummary() {
-  //   try {
-  //     const totalUsers = await this.userService.getTotalNumberOfUsers();
-  //     const totalUsersNaira = await this.walletService.getTotalUsersNaira();
-  //     const nairaWalletBalance = await this.bankService.getNairaWalletBAlance();
-  //     const totalNairaTransactions =
-  //       await this.transactionsService.getTotalNairaTransactionsBalance();
-  //     const totalNairaDeposits =
-  //       await this.transactionsService.getTotalNairaDepositsBalance();
-  //     const totalNairaWithdrawals =
-  //       await this.transactionsService.getTotalNairaWithdrawalsBalance();
+  async getSummary() {
+    try {
+      const { totalUsers } = await this.userService.getTotalNumberOfUsers();
 
-  //     return {
-  //       ...totalUsers,
-  //       ...totalUsersNaira,
-  //       ...nairaWalletBalance,
-  //       ...totalNairaDeposits,
-  //       ...totalNairaTransactions,
-  //       ...totalNairaWithdrawals,
-  //     };
-  //   } catch (error) {
-  //     throw error;
-  //   }
-  // }
+      const { totalUsersNaira } = await this.walletService.getTotalUsersNaira();
 
-  // async getAllTransactions() {
-  //   try {
-  //     return await this.transactionsService.getAllTransactions();
-  //   } catch (error) {
-  //     throw error;
-  //   }
-  // }
+      const walletBalance = await this.bankService.getNairaWalletBAlance();
 
-  async addNewSetting(createSettingDto: CreateSettingDto) {
+      const { totalDeposits } =
+        await this.transactionsService.getTotalDepositsBalance();
+
+      const { totalWithdrawals } =
+        await this.transactionsService.getTotalWithdrawalsBalance();
+
+      const totalTransactions = totalDeposits + totalWithdrawals;
+
+      return {
+        totalUsers,
+        totalUsersNaira,
+        ...walletBalance,
+        totalDeposits,
+        totalTransactions,
+        totalWithdrawals,
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  /*async addNewSetting(createSettingDto: CreateSettingDto) {
     return await this.settingsService.addSetting(createSettingDto);
   }
-
-  // async assignRole(assignUserLevelDto: AssignUserLevelDto) {
-  //   try {
-  //     const { email, role_name } = assignUserLevelDto;
-  //     const user: User = (await this.userService.findByEmail(email)).data;
-  //     this.roleService.update(user.role.id, role_name);
-  //     return {
-  //       message: `${user.firstName} ${user.lastName} has been assigned ${role_name}`,
-  //     };
-  //   } catch (error) {}
-  // }
-
-  // async getAllUsers() {
-  //   return await this.userService.find();
-  // }
-
-  async getUserByEmail(email: string) {
-    return await this.userService.findByEmail(email);
-  }
-
   async getSetting(id) {
     return await this.settingsService.getSetting(id);
   }
@@ -104,19 +82,19 @@ export class AdminService {
     return await this.settingsService.updateSetting(id, updateSettingDto);
   }
 
-  // async getUserActivities(id: string) {
-  //   try {
-  //     return await this.activityRepository.find({ ownerid: id });
-  //   } catch (error) {
-  //     throw error;
-  //   }
-  // }
+  async getUserActivities(id: string) {
+    try {
+      return await this.activityRepository.find({ ownerid: id });
+    } catch (error) {
+      throw error;
+    }
+  }
 
-  // async getAllActivities() {
-  //   try {
-  //     return await this.activityRepository.find();
-  //   } catch (error) {
-  //     throw error;
-  //   }
-  // }
+  async getAllActivities() {
+    try {
+      return await this.activityRepository.find();
+    } catch (error) {
+      throw error;
+    }
+   }*/
 }

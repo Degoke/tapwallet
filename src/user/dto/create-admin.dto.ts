@@ -1,31 +1,10 @@
-import {
-  IsEmail,
-  IsNotEmpty,
-  IsOptional,
-  IsString,
-  Matches,
-} from 'class-validator';
+import { IsIn, IsNotEmpty, IsString } from 'class-validator';
+import { AdminRoles, ADMIN_ROLES } from 'src/common/types/roles.type';
+import { CreateUserDto } from './create-user.dto';
 
-export class CreateAdminDto {
+export class CreateAdminDto extends CreateUserDto {
   @IsString()
   @IsNotEmpty()
-  firstName: string;
-
-  @IsString()
-  @IsNotEmpty()
-  lastName: string;
-
-  @IsString()
-  @IsNotEmpty()
-  @IsEmail()
-  email: string;
-
-  @IsString()
-  @IsNotEmpty()
-  password: string;
-
-  @IsString()
-  @IsNotEmpty()
-  @Matches(/^\+[1-9]\d{1,14}$/)
-  phoneNumber: string;
+  @IsIn(Object.values(ADMIN_ROLES))
+  role: AdminRoles;
 }
