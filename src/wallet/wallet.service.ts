@@ -68,7 +68,7 @@ export class WalletService {
       //   email,
       // );
       // const user = await this.userService.findByEmail(email);
-   //   const walletId = user.data.wallet.id;
+      //   const walletId = user.data.wallet.id;
       // await this.walletRepository.decrement(
       //   { id: walletId },
       //   'balance',

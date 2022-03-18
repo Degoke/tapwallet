@@ -5,9 +5,9 @@ export class TransactionDto {
   @IsNotEmpty()
   amount: number;
 
-//   @IsEmail()
-//  // @IsNotEmpty()
-//   email: string;
+  //   @IsEmail()
+  //  // @IsNotEmpty()
+  //   email: string;
 
   @IsNumber()
   @IsNotEmpty()

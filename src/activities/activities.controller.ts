@@ -43,21 +43,14 @@ export class ActivitiesController {
   @UseGuards(JwtAuthGaurd)
   @Post('bouquet_change_dstv_gotv')
   bouquetChangeDSTV_GOTV(@Body() BuyDSTVGOTV: BuyDSTVGOTV, @Req() req) {
-    return this.activitiesService.bouquetChangeDSTV_GOTV(
-      BuyDSTVGOTV,
-      req.user,
-    );
+    return this.activitiesService.bouquetChangeDSTV_GOTV(BuyDSTVGOTV, req.user);
   }
 
   @UseGuards(JwtAuthGaurd)
   @Post('bouquet_renew_dstv_gotv')
   bouquetRenewDSTV_GOTV(@Body() BuyDSTVGOTV: BuyDSTVGOTV, @Req() req) {
-    return this.activitiesService.bouquetRenewDSTV_GOTV(
-      BuyDSTVGOTV,
-      req.user,
-    );
+    return this.activitiesService.bouquetRenewDSTV_GOTV(BuyDSTVGOTV, req.user);
   }
-
 
   @Post()
   create(@Body() createActivityDto: CreateActivityDto) {
