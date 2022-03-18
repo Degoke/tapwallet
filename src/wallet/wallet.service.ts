@@ -115,11 +115,15 @@ export class WalletService {
 
   async getTotalUsersNaira() {
     try {
-      const { sum } = await this.walletRepository
+      let { sum } = await this.walletRepository
         .createQueryBuilder('wallet')
         .select('SUM(wallet.balance)', 'sum')
         .where('wallet.type = :type', { type: WALLET_TYPES.NAIRA })
         .getRawOne();
+
+      if (!sum) {
+        sum = 0;
+      }
 
       return {
         totalUsersNaira: sum,

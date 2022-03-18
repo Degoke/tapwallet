@@ -178,7 +178,12 @@ export class UserService {
         throw new HttpException('Email Already in use', HttpStatus.CONFLICT);
       }
 
-      const newAdmin = await this.adminRepository.create(payload);
+      const hashedPassword = await bcrypt.hash(payload.password, 10);
+
+      const newAdmin = await this.adminRepository.create({
+        ...payload,
+        password: hashedPassword,
+      });
       return await this.adminRepository.save(newAdmin);
     } catch (error) {
       throw error;

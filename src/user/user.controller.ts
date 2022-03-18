@@ -39,7 +39,13 @@ export class UserController {
   @CheckAbilities(new ReadUserPermission())
   @Get('current')
   getCurrentUser(@Request() req) {
-    return req.user;
+    return {
+      message: 'success',
+      data: {
+        user: req.user.user,
+        role: req.user.role,
+      },
+    };
   }
 
   /*@CheckAbilities(new EditUserPermission())

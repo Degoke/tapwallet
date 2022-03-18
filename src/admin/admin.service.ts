@@ -55,12 +55,15 @@ export class AdminService {
       const totalTransactions = totalDeposits + totalWithdrawals;
 
       return {
-        totalUsers,
-        totalUsersNaira,
-        ...walletBalance,
-        totalDeposits,
-        totalTransactions,
-        totalWithdrawals,
+        message: 'Success',
+        data: {
+          totalUsers,
+          totalUsersNaira,
+          ...walletBalance,
+          totalDeposits,
+          totalTransactions,
+          totalWithdrawals,
+        },
       };
     } catch (error) {
       throw error;

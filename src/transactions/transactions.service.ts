@@ -261,10 +261,14 @@ export class TransactionsService {
 
   async getTotalWithdrawalsBalance() {
     try {
-      const sum = await this.withdrawalRepository.count({
-        currency: CURRENCY.NAIRA,
-      });
-
+      let { sum } = await this.withdrawalRepository
+        .createQueryBuilder('withdrawal')
+        .select('SUM(withdrawal.amount)', 'sum')
+        .where('withdrawal.currency = :type', { type: CURRENCY.NAIRA })
+        .getRawOne();
+      if (!sum) {
+        sum = 0;
+      }
       return {
         totalWithdrawals: sum,
       };
@@ -275,9 +279,14 @@ export class TransactionsService {
 
   async getTotalDepositsBalance() {
     try {
-      const sum = await this.depositRepository.count({
-        currency: CURRENCY.NAIRA,
-      });
+      let { sum } = await this.depositRepository
+        .createQueryBuilder('deposit')
+        .select('SUM(deposit.amount)', 'sum')
+        .where('deposit.currency = :type', { type: CURRENCY.NAIRA })
+        .getRawOne();
+      if (!sum) {
+        sum = 0;
+      }
 
       return {
         totalDeposits: sum,
