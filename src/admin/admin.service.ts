@@ -12,13 +12,14 @@ import { WalletService } from 'src/wallet/wallet.service';
 import { UpdateAdminDto } from './dto/update-admin.dto';
 import { Connection, Repository } from 'typeorm';
 import { CreateAdminDto } from 'src/user/dto/create-admin.dto';
-//import { Activity } from './entities/activity.entity';
+import { Activity } from './entities/activity.entity';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class AdminService {
   constructor(
-    //   @InjectRepository(Activity)
-    //    private readonly activityRepository: Repository<Activity>,
+    @InjectRepository(Activity)
+    private readonly activityRepository: Repository<Activity>,
     private readonly settingsService: SettingsService,
     private readonly userService: UserService,
     private readonly walletService: WalletService,
@@ -81,10 +82,10 @@ export class AdminService {
   async editSetting(updateSettingDto: UpdateSettingDto, id) {
     return await this.settingsService.updateSetting(id, updateSettingDto);
   }
-
+*/
   async getUserActivities(id: string) {
     try {
-      return await this.activityRepository.find({ ownerid: id });
+      return await this.activityRepository.find({ userid: id });
     } catch (error) {
       throw error;
     }
@@ -96,5 +97,5 @@ export class AdminService {
     } catch (error) {
       throw error;
     }
-   }*/
+  }
 }

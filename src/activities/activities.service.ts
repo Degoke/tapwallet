@@ -18,11 +18,24 @@ import { BuyDSTVGOTV } from './dto/buy-dstv-gotv.dto';
 import { MobileDataActivity } from './entities/mobiledata-activity.entity';
 import { TvSubscriptionActivity } from './entities/tv-subscription-activity.entity';
 import { ElectricityBillActivity } from './entities/electricity-bill-activity.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { AirtimeActivityRepository } from './repositories/airtime-activity.repository';
+import { ElectricityBillActivityRepository } from './repositories/electricity-bill-activity.repository';
+import { MobileDataActivityRepository } from './repositories/mobile-data-activity.repository';
+import { TvSubscriptionActivityRepository } from './repositories/tv-subscription-activity.repository';
 
 @Injectable()
 export class ActivitiesService {
   constructor(
     private connection: Connection,
+    @InjectRepository(AirtimeActivityRepository)
+    private airtimeActivityRepository: AirtimeActivityRepository,
+    @InjectRepository(ElectricityBillActivityRepository)
+    private electricityBillActivityRepository: ElectricityBillActivityRepository,
+    @InjectRepository(MobileDataActivityRepository)
+    private mobileDataActivityRepository: MobileDataActivityRepository,
+    @InjectRepository(TvSubscriptionActivityRepository)
+    private tvSubscriptionActivityRepository: TvSubscriptionActivityRepository,
     private readonly vtpassService: VtpassService,
     private readonly walletService: WalletService,
   ) {}
@@ -33,19 +46,23 @@ export class ActivitiesService {
     await queryRunner.startTransaction();
     try {
       const amount = buyAirtimeDto['amount'];
-      const email = user.email;
+      const email = user.user.email;
 
-      const wallet = await this.walletService.getWalletByOwnerId(user.id);
+      const wallet = user.user['wallets'].find(
+        (wallet) => wallet['type'] == 'naira',
+      );
+      //      const wallet = await this.walletService.getWalletByOwnerId(user.id);
+
       if (wallet.balance < amount) {
         throw new HttpException(
           'Not enough funds in your wallet',
           HttpStatus.BAD_REQUEST,
         );
       }
-
+      const walletId = wallet['id'];
       const walletResponse = await this.walletService.removeMoney(
         {
-          email,
+          walletId,
           amount,
         },
         queryRunner,
@@ -54,7 +71,8 @@ export class ActivitiesService {
       const payload = {
         customer: buyAirtimeDto.phone,
         walletid: wallet.id,
-        userid: user.id,
+        userid: user.user.id,
+        email:user.user.email,
         transactionReference: request_id,
         service: Services.VTPASS,
         amount: buyAirtimeDto.amount,
@@ -70,6 +88,7 @@ export class ActivitiesService {
       await queryRunner.manager.save(airtime);
 
       buyAirtimeDto['request_id'] = request_id;
+      //      return buyAirtimeDto;
       const airtimePurchaseResponse = await this.vtpassService.buyAirtime(
         buyAirtimeDto,
       );
@@ -118,23 +137,26 @@ export class ActivitiesService {
     await queryRunner.connect();
     await queryRunner.startTransaction();
     try {
-      const email = user.email;
+      const email = user.user.email;
       const variations = await this.vtpassService.getVariationCodes(
         buyElectrictyDto.serviceID,
       );
       const amount = buyElectrictyDto.amount;
 
-      const wallet = await this.walletService.getWalletByOwnerId(user.id);
+      // const wallet = await this.walletService.getWalletByOwnerId(user.id);
+      const wallet = user.user['wallets'].find(
+        (wallet) => wallet['type'] == 'naira',
+      );
       if (wallet.balance < amount) {
         throw new HttpException(
           'Not enough funds in your wallet',
           HttpStatus.BAD_REQUEST,
         );
       }
-
+      const walletId = wallet['id'];
       const walletResponse = await this.walletService.removeMoney(
         {
-          email,
+          walletId,
           amount,
         },
         queryRunner,
@@ -143,7 +165,8 @@ export class ActivitiesService {
       const payload = {
         customer: buyElectrictyDto.phone,
         walletid: wallet.id,
-        userid: user.id,
+        userid: user.user.id,
+        email:user.user.email,
         transactionReference: request_id,
         service: Services.VTPASS,
         amount: amount,
@@ -207,7 +230,7 @@ export class ActivitiesService {
     await queryRunner.connect();
     await queryRunner.startTransaction();
     try {
-      const email = user.email;
+      const email = user.user.email;
       const variations = await this.vtpassService.getVariationCodes(
         buyDataDto.serviceID,
       );
@@ -218,7 +241,12 @@ export class ActivitiesService {
         ).variation_amount,
       );
 
-      const wallet = await this.walletService.getWalletByOwnerId(user.id);
+      //      const wallet = await this.walletService.getWalletByOwnerId(user.id);
+      const wallet = user.user['wallets'].find(
+        (wallet) => wallet['type'] == 'naira',
+      );
+
+      const walletId = wallet['id'];
       if (wallet.balance < amount) {
         throw new HttpException(
           'Not enough funds in your wallet',
@@ -228,7 +256,7 @@ export class ActivitiesService {
       //      return amount;
       const walletResponse = await this.walletService.removeMoney(
         {
-          email,
+          walletId,
           amount,
         },
         queryRunner,
@@ -237,7 +265,8 @@ export class ActivitiesService {
       const payload = {
         customer: buyDataDto.phone,
         walletid: wallet.id,
-        userid: user.id,
+        userid: user.user.id,
+                email:user.user.email,
         transactionReference: request_id,
         service: Services.VTPASS,
         amount: amount,
@@ -310,7 +339,12 @@ export class ActivitiesService {
             variation['variation_code'] == buyDSTVGOTV.variation_code,
         ).variation_amount,
       );
-      const wallet = await this.walletService.getWalletByOwnerId(user.id);
+      //      const wallet = await this.walletService.getWalletByOwnerId(user.id);
+      const wallet = user.user['wallets'].find(
+        (wallet) => wallet['type'] == 'naira',
+      );
+
+      const walletId = wallet['id'];
       if (wallet.balance < amount) {
         throw new HttpException(
           'Not enough funds in your wallet',
@@ -320,7 +354,7 @@ export class ActivitiesService {
 
       const walletResponse = await this.walletService.removeMoney(
         {
-          email,
+          walletId,
           amount,
         },
         queryRunner,
@@ -329,7 +363,8 @@ export class ActivitiesService {
       const payload = {
         customer: buyDSTVGOTV.phone,
         walletid: wallet.id,
-        userid: user.id,
+        userid: user.user.id,
+        email:user.user.email,
         transactionReference: request_id,
         service: Services.VTPASS,
         amount: amount,
@@ -408,7 +443,12 @@ export class ActivitiesService {
         ).variation_amount,
       );
 
-      const wallet = await this.walletService.getWalletByOwnerId(user.id);
+      //      const wallet = await this.walletService.getWalletByOwnerId(user.id);
+      const wallet = user.user['wallets'].find(
+        (wallet) => wallet['type'] == 'naira',
+      );
+
+      const walletId = wallet['id'];
       if (wallet.balance < amount) {
         throw new HttpException(
           'Not enough funds in your wallet',
@@ -417,7 +457,7 @@ export class ActivitiesService {
       }
       const walletResponse = await this.walletService.removeMoney(
         {
-          email,
+          walletId,
           amount,
         },
         queryRunner,
@@ -426,7 +466,8 @@ export class ActivitiesService {
       const payload = {
         customer: buyDSTVGOTV.phone,
         walletid: wallet.id,
-        userid: user.id,
+        userid: user.user.id,
+        email:user.user.email,
         transactionReference: request_id,
         service: Services.VTPASS,
         amount: amount,

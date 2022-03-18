@@ -5,7 +5,6 @@ import {
   IsString,
   Matches,
 } from 'class-validator';
-import { AdminRoles } from 'src/common/types/roles.type';
 
 export class CreateUserDto {
   @IsString()
@@ -24,10 +23,6 @@ export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
   password: string;
-
-  @IsString()
-  @IsNotEmpty()
-  role: AdminRoles;
 
   @IsString()
   @IsNotEmpty()

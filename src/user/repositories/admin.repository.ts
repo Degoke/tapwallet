@@ -7,6 +7,10 @@ export class AdminRepository extends Repository<Administrator> {
     return this.findOne({ email });
   }
 
+  findById(id: number) {
+    return this.findOne({ id });
+  }
+
   findByPhoneNumber(phoneNumber: string) {
     return this.findOne({ phoneNumber });
   }

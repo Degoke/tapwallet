@@ -40,16 +40,17 @@ export class AdminController {
   //   return this.adminService.assignRole(assignUserLevelDto);
   // }
 
+  @Public()
+  @Get('users/activities/:id')
+  //  @CheckAbilities(new ADMIN_PERMISSION())
+  getUserActivities(@Param('id') id) {
+    return this.adminService.getUserActivities(id);
+  }
 
-  // @Get('users/activities/:id')
-  // @CheckAbilities(new ADMIN_PERMISSION())
-  // getUserActivities(@Param('id') id) {
-  //   return this.adminService.getUserActivities(id);
-  // }
-
-  // @Get('get_all_activities')
-  // @CheckAbilities(new ADMIN_PERMISSION())
-  // getAllActivities() {
-  //   return this.adminService.getAllActivities();
-  // }
+  @Public()
+  @Get('get_all_activities')
+  //  @CheckAbilities(new ADMIN_PERMISSION())
+  getAllActivities() {
+    return this.adminService.getAllActivities();
+  }
 }

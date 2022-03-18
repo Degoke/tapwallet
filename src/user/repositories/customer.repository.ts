@@ -4,7 +4,21 @@ import { Customer } from '../entities/customer.entity';
 @EntityRepository(Customer)
 export class CustomerRepository extends Repository<Customer> {
   findByEmail(email: string) {
-    return this.findOne({ email });
+    return this.findOne(
+      { email: email },
+      {
+        relations: ['wallets'],
+      },
+    );
+  }
+
+  findById(id: number) {
+    return this.findOne(
+      { id: id },
+      {
+        relations: ['wallets'],
+      },
+    );
   }
 
   findByPhoneNumber(phoneNumber: string) {

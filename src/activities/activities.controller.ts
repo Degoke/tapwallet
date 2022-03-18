@@ -12,6 +12,9 @@ import {
 import { JwtAuthGaurd } from 'src/common/gaurds/jwt-auth.gaurd';
 import { ActivitiesService } from './activities.service';
 import { BuyAirtimeDto } from './dto/buy-airtime.dto';
+import { BuyDataDto } from './dto/buy-data.dto';
+import { BuyDSTVGOTV } from './dto/buy-dstv-gotv.dto';
+import { BuyElectricityDto } from './dto/buy-electricity.dto';
 import { CreateActivityDto } from './dto/create-activity.dto';
 import { UpdateActivityDto } from './dto/update-activity.dto';
 
@@ -21,9 +24,40 @@ export class ActivitiesController {
 
   @UseGuards(JwtAuthGaurd)
   @Post('buy_airtime')
-  buyAirtimeVtpass(@Body() buyAirtimeDto: BuyAirtimeDto, @Req() req) {
+  buyAirtime(@Body() buyAirtimeDto: BuyAirtimeDto, @Req() req) {
     return this.activitiesService.buyAirtimeVTPass(buyAirtimeDto, req.user);
   }
+
+  @UseGuards(JwtAuthGaurd)
+  @Post('buy_electricity')
+  buyElectricity(@Body() buyElectrictyDto: BuyElectricityDto, @Req() req) {
+    return this.activitiesService.buyElectricity(buyElectrictyDto, req.user);
+  }
+
+  @UseGuards(JwtAuthGaurd)
+  @Post('buy_data')
+  buyMobileData(@Body() buyDataDto: BuyDataDto, @Req() req) {
+    return this.activitiesService.buyMobileData(buyDataDto, req.user);
+  }
+
+  @UseGuards(JwtAuthGaurd)
+  @Post('bouquet_change_dstv_gotv')
+  bouquetChangeDSTV_GOTV(@Body() BuyDSTVGOTV: BuyDSTVGOTV, @Req() req) {
+    return this.activitiesService.bouquetChangeDSTV_GOTV(
+      BuyDSTVGOTV,
+      req.user,
+    );
+  }
+
+  @UseGuards(JwtAuthGaurd)
+  @Post('bouquet_renew_dstv_gotv')
+  bouquetRenewDSTV_GOTV(@Body() BuyDSTVGOTV: BuyDSTVGOTV, @Req() req) {
+    return this.activitiesService.bouquetRenewDSTV_GOTV(
+      BuyDSTVGOTV,
+      req.user,
+    );
+  }
+
 
   @Post()
   create(@Body() createActivityDto: CreateActivityDto) {

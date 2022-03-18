@@ -67,113 +67,113 @@ export class TransactionsService {
     private readonly settingsService: SettingsService,
   ) {}
 
-  async initiateWithdrawal(dto: FWWithdrawalDto, user: User) {
-    /*if (user.wallet[0].balance < dto.amount) {
-      throw new HttpException('Insufficient balance', HttpStatus.BAD_REQUEST);
-    }*/
-    const queryRunner = this.connection.createQueryRunner();
-    await queryRunner.connect();
-    await queryRunner.startTransaction();
-    try {
-      const reference = await getTransactionReference();
-      const mockReferencePass = 'dfs23fhr7ntg0293039_PMCKDU_1';
-      const mockReferenceFail = 'dfs23fhr7ntg0293039_PMCK_ST_FDU_1';
-      const narration = 'Tapmoney Withdrawal';
+  // async initiateWithdrawal(dto: FWWithdrawalDto, user: User) {
+  //   /*if (user.wallet[0].balance < dto.amount) {
+  //     throw new HttpException('Insufficient balance', HttpStatus.BAD_REQUEST);
+  //   }*/
+  //   const queryRunner = this.connection.createQueryRunner();
+  //   await queryRunner.connect();
+  //   await queryRunner.startTransaction();
+  //   try {
+  //     const reference = await getTransactionReference();
+  //     const mockReferencePass = 'dfs23fhr7ntg0293039_PMCKDU_1';
+  //     const mockReferenceFail = 'dfs23fhr7ntg0293039_PMCK_ST_FDU_1';
+  //     const narration = 'Tapmoney Withdrawal';
 
-      let payload;
-      let newTransaction;
-      let result;
+  //     let payload;
+  //     let newTransaction;
+  //     let result;
 
-      if (this.currentService === FLUTTERWAVE) {
-        payload = {
-          ...dto,
-          reference: mockReferencePass,
-          narration,
-        };
-      }
+  //     if (this.currentService === FLUTTERWAVE) {
+  //       payload = {
+  //         ...dto,
+  //         reference: mockReferencePass,
+  //         narration,
+  //       };
+  //     }
 
-      if (this.currentService === MONNIFY) {
-        payload = {
-          amount: dto.amount,
-          reference,
-          narration,
-          destinationBankCode: dto.account_bank,
-          destinationAccountNumber: dto.account_number,
-          currency: dto.currency,
-        };
+  //     if (this.currentService === MONNIFY) {
+  //       payload = {
+  //         amount: dto.amount,
+  //         reference,
+  //         narration,
+  //         destinationBankCode: dto.account_bank,
+  //         destinationAccountNumber: dto.account_number,
+  //         currency: dto.currency,
+  //       };
 
-        try {
-          newTransaction = await queryRunner.manager.create(Withdrawal, {
-            accountBank: dto.account_bank,
-            accountNumber: dto.account_number,
-            amount: dto.amount,
-            currency: dto.currency,
-            reference,
-            userId: user.id,
-            status: TRANSACTION_STATUS.QUEUED,
-            type: TRANSACTION.WITHDRAWAL,
-            serviceUsed: this.currentService,
-            walletId: dto.wallet_id,
-          });
+  //       try {
+  //         newTransaction = await queryRunner.manager.create(Withdrawal, {
+  //           accountBank: dto.account_bank,
+  //           accountNumber: dto.account_number,
+  //           amount: dto.amount,
+  //           currency: dto.currency,
+  //           reference,
+  //           userId: user.id,
+  //           status: TRANSACTION_STATUS.QUEUED,
+  //           type: TRANSACTION.WITHDRAWAL,
+  //           serviceUsed: this.currentService,
+  //           walletId: dto.wallet_id,
+  //         });
 
-          await queryRunner.manager.save(Withdrawal, newTransaction);
+  //         await queryRunner.manager.save(Withdrawal, newTransaction);
 
-          //might change
-          await this.walletService.removeMoney(
-            { email: user.email, amount: dto.amount },
-            queryRunner,
-          );
+  //         //might change
+  //         await this.walletService.removeMoney(
+  //           { email: user.email, amount: dto.amount },
+  //           queryRunner,
+  //         );
 
-          result = await this.monnifyService.initiateTransfers(payload);
+  //         result = await this.monnifyService.initiateTransfers(payload);
 
-          await queryRunner.commitTransaction();
-        } catch (error) {
-          await queryRunner.rollbackTransaction();
-          throw error;
-        }
-        await this.withdrawalRepository.update(
-          { reference },
-          { status: result.status },
-        );
-      }
+  //         await queryRunner.commitTransaction();
+  //       } catch (error) {
+  //         await queryRunner.rollbackTransaction();
+  //         throw error;
+  //       }
+  //       await this.withdrawalRepository.update(
+  //         { reference },
+  //         { status: result.status },
+  //       );
+  //     }
 
-      /*if (service === FLUTTERWAVE) {
-        result = await this.flutterwaveService.transfer(payload);
+  //     /*if (service === FLUTTERWAVE) {
+  //       result = await this.flutterwaveService.transfer(payload);
 
-        if (result.status === 'success') {
-          await this.walletService.removeMoney(
-            { email: user.email, amount: dto.amount },
-            queryRunner,
-          );
-          await queryRunner.manager.update(
-            Transaction,
-            { reference },
-            { status: TRANSACTIONSTATUS.PENDING, merchantId: result.data.id },
-          );
+  //       if (result.status === 'success') {
+  //         await this.walletService.removeMoney(
+  //           { email: user.email, amount: dto.amount },
+  //           queryRunner,
+  //         );
+  //         await queryRunner.manager.update(
+  //           Transaction,
+  //           { reference },
+  //           { status: TRANSACTIONSTATUS.PENDING, merchantId: result.data.id },
+  //         );
 
-          await queryRunner.commitTransaction();
-          return {
-            message: result.message,
-          };
-        } else if (result.status === 'error') {
-          throw new HttpException(result.message, HttpStatus.BAD_REQUEST);
-        } else {
-          await queryRunner.manager.update(
-            Transaction,
-            { reference },
-            { status: TRANSACTIONSTATUS.FAILED, id: result.data.id },
-          );
-          await queryRunner.commitTransaction();
-          return {
-            status: 404,
-            message: result.message,
-          };
-        }
-      }*/
-    } catch (error) {
-      throw error;
-    }
-  }
+  //         await queryRunner.commitTransaction();
+  //         return {
+  //           message: result.message,
+  //         };
+  //       } else if (result.status === 'error') {
+  //         throw new HttpException(result.message, HttpStatus.BAD_REQUEST);
+  //       } else {
+  //         await queryRunner.manager.update(
+  //           Transaction,
+  //           { reference },
+  //           { status: TRANSACTIONSTATUS.FAILED, id: result.data.id },
+  //         );
+  //         await queryRunner.commitTransaction();
+  //         return {
+  //           status: 404,
+  //           message: result.message,
+  //         };
+  //       }
+  //     }*/
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // }
 
   async getTransactionStatus(reference: string | number) {
     try {

@@ -42,6 +42,25 @@ export class UserController {
     return req.user;
   }
 
+  //  @UseGuards(JwtAuthGaurd)
+  @Public()
+  @Get()
+  getUser() {
+    return this.userService.find();
+  }
+
+  @Get(':email')
+  @UseGuards(JwtAuthGaurd)
+  getUserByEmail(@Param('email') email) {
+    return this.userService.findByEmail(email);
+  }
+
+  @Get('byId/:id')
+  @Public()
+  getUserById(@Param('id') id) {
+    return this.userService.findById(id);
+  }
+
   /*@CheckAbilities(new EditUserPermission())
   @Post('verifyemail')
   verifyEmail(@Body() verifyEmailDto: VerifyEmailDTO) {

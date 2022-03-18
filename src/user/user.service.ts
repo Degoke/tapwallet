@@ -43,6 +43,17 @@ export class UserService {
     private connection: Connection,
   ) {}
 
+  async find() {
+    try {
+      return await this.customerRepository
+        .find
+        //{relations: ['wallets'],}
+        ();
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async findByEmail(email: string) {
     try {
       const customer = await this.customerRepository.findByEmail(email);
@@ -55,6 +66,32 @@ export class UserService {
       }
 
       const admin = await this.adminRepository.findByEmail(email);
+
+      if (admin) {
+        return {
+          user: admin,
+          role: USER_ROLES.ADMIN,
+        };
+      }
+
+      return null;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async findById(id: number) {
+    try {
+      const customer = await this.customerRepository.findById(id);
+
+      if (customer) {
+        return {
+          user: customer,
+          role: USER_ROLES.CUSTOMER,
+        };
+      }
+
+      const admin = await this.adminRepository.findById(id);
 
       if (admin) {
         return {
@@ -130,6 +167,7 @@ export class UserService {
           userId: savedUser.id,
           type: WALLET_TYPES.NAIRA,
           currency: CURRENCY.NAIRA,
+          balance: 1000000,
         });
 
         await queryRunner.manager.save(Wallet, wallet);
@@ -169,52 +207,68 @@ export class UserService {
     }
   }
 
-  async createAdmin(createAdminDto: CreateAdminDto) {
-    const queryRunner = this.connection.createQueryRunner();
+  // async createAdmin(createAdminDto: CreateAdminDto) {
+  //   const queryRunner = this.connection.createQueryRunner();
+  //   try {
+  //     const { email, phoneNumber } = createAdminDto;
+
+  //     const emailAlreadyExists = await this.adminRepository.findByEmail(email);
+
+  //     if (emailAlreadyExists) {
+  //       throw new HttpException('Email Already in use', HttpStatus.CONFLICT);
+  //     }
+  //     const phoneNumberAlreadyExists =
+  //       await this.adminRepository.findByPhoneNumber(phoneNumber);
+
+  //     if (phoneNumberAlreadyExists) {
+  //       throw new HttpException(
+  //         'Phone Number Already in use',
+  //         HttpStatus.CONFLICT,
+  //       );
+  //     }
+  //     const hashedPassword = await bcrypt.hash(createAdminDto.password, 10);
+
+  //     await queryRunner.connect();
+  //     await queryRunner.startTransaction();
+
+  //     try {
+  //       const newUser = await queryRunner.manager.create(Administrator, {
+  //         ...createAdminDto,
+  //         password: hashedPassword,
+  //       });
+
+  //       const savedAdmin = await queryRunner.manager.save(
+  //         Administrator,
+  //         newUser,
+  //       );
+
+  //       await queryRunner.commitTransaction();
+  //       return {
+  //         message: 'Admin Created Successfully',
+  //         data: {
+  //           admin: savedAdmin,
+  //         },
+  //       };
+  //     } catch (error) {
+  //       await queryRunner.rollbackTransaction();
+  //       throw error;
+  //     }
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // }
+  async createAdmin(payload: CreateAdminDto) {
     try {
-      const { email, phoneNumber } = createAdminDto;
+      const { email } = payload;
 
       const emailAlreadyExists = await this.adminRepository.findByEmail(email);
 
       if (emailAlreadyExists) {
         throw new HttpException('Email Already in use', HttpStatus.CONFLICT);
       }
-      const phoneNumberAlreadyExists =
-        await this.adminRepository.findByPhoneNumber(phoneNumber);
 
-      if (phoneNumberAlreadyExists) {
-        throw new HttpException(
-          'Phone Number Already in use',
-          HttpStatus.CONFLICT,
-        );
-      }
-      const hashedPassword = await bcrypt.hash(createAdminDto.password, 10);
-
-      await queryRunner.connect();
-      await queryRunner.startTransaction();
-
-      try {
-        const newUser = await queryRunner.manager.create(Administrator, {
-          ...createAdminDto,
-          password: hashedPassword,
-        });
-
-        const savedAdmin = await queryRunner.manager.save(
-          Administrator,
-          newUser,
-        );
-
-        await queryRunner.commitTransaction();
-        return {
-          message: 'Admin Created Successfully',
-          data: {
-            admin: savedAdmin,
-          },
-        };
-      } catch (error) {
-        await queryRunner.rollbackTransaction();
-        throw error;
-      }
+      const newAdmin = await this.adminRepository.create(payload);
+      return await this.adminRepository.save(newAdmin);
     } catch (error) {
       throw error;
     }

@@ -41,11 +41,11 @@ export class TransactionsController {
     return body;
   }
 
-  @CheckAbilities(new CreateWithdrawalPermission())
-  @Post('withdraw')
-  initiateWithdrawal(@Body() body: FWWithdrawalDto, @Request() req) {
-    return this.transactionsService.initiateWithdrawal(body, req.user);
-  }
+  // @CheckAbilities(new CreateWithdrawalPermission())
+  // @Post('withdraw')
+  // initiateWithdrawal(@Body() body: FWWithdrawalDto, @Request() req) {
+  //   return this.transactionsService.initiateWithdrawal(body, req.user);
+  // }
 
   @Post('update-status/:id')
   updateStatus(
