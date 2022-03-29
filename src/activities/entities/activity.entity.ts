@@ -8,15 +8,18 @@ export abstract class Activity extends EntityContainer {
   customer: string;
 
   @Column()
-  userId: number;
+  userid: number;
 
   @Column()
-  walletId: number;
+  email: string;
+
+  @Column()
+  walletid: number;
 
   @Column()
   serviceID: string;
 
-  @Column()
+  @Column({ nullable: true })
   variation_code: string;
 
   @Column()
@@ -34,6 +37,6 @@ export abstract class Activity extends EntityContainer {
   @Column()
   public remarks: string;
 
-  @Column()
+  @Column({ nullable: true })
   status: TransactionStatus;
 }

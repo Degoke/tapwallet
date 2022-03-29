@@ -3,13 +3,15 @@
 import Wallet from 'src/wallet/entities/wallet.entity';
 import { Transaction } from 'src/transactions/entities/transaction.entity';
 import { Transfer } from '../../transfers/entities/transfer.entity';
-import { Role } from 'src/common/types/user-role.type';
+import { Role_name } from 'src/common/types/user-role.type';
 import { number } from 'joi';
+import Role from 'src/role/entities/role.entity';
 
 let userData: User;
 let walletData: Wallet;
 let transactionData: Transaction;
 let transferData: Transfer;
+let roleData: Role;
 
 walletData = {
   id: 1,
@@ -19,7 +21,13 @@ walletData = {
   createdDate: new Date(),
   updatedDate: new Date(),
 };
-
+roleData = {
+  id: 1,
+  role_name: Role_name.Level_0,
+  owner: userData,
+  createdDate: new Date(),
+  updatedDate: new Date(),
+};
 transactionData = {
   id: 1,
   type: 'deposit',
@@ -64,7 +72,7 @@ userData = {
   referrals: [],
   referralCode: 'hhdf55679',
   profileImage: 'my image',
-  role: Role.User,
+  role: roleData,
   permissions: [],
   airtimeActivities: [],
   tvSubscriptionActivities: [],

@@ -16,10 +16,10 @@ import { TransactionDto } from './dto/transaction.dto';
 export class WalletController {
   constructor(private readonly walletService: WalletService) {}
 
-  @Post('deposit')
-  deposit(@Body() transactionDto: TransactionDto) {
-    return this.walletService.deposit(transactionDto);
-  }
+  // @Post('deposit')
+  // deposit(@Body() transactionDto: TransactionDto) {
+  //   return this.walletService.deposit(transactionDto);
+  // }
 
   @Get()
   getall() {

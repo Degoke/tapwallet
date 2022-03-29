@@ -32,7 +32,7 @@
 //   owner: User;
 
 //   @Column()
-//   ownerId: number;
+//   ownerid: number;
 
 //   @Column()
 //   transactionReference: string;
@@ -64,9 +64,9 @@
 //   // @Column()
 //   // status: TransactionStatusType;
 
-//   @CreateDateColumn()
-//   createdAt: Date;
+// @CreateDateColumn()
+// createdat: Date;
 
-//   @UpdateDateColumn()
-//   updatedAt: Date;
+// @UpdateDateColumn()
+// updatedat: Date;
 // }

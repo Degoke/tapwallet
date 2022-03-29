@@ -5,7 +5,11 @@ export class TransactionDto {
   @IsNotEmpty()
   amount: number;
 
-  @IsEmail()
+  //   @IsEmail()
+  //  // @IsNotEmpty()
+  //   email: string;
+
+  @IsNumber()
   @IsNotEmpty()
-  email: string;
+  walletId: number;
 }

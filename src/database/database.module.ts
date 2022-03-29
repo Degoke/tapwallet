@@ -58,6 +58,7 @@ import { Deposit } from 'src/transactions/entities/deposit.entity';
         },
         synchronize: true,
         migrationsRun: true,
+
         autoLoadEntities: true,
       }),
     }),

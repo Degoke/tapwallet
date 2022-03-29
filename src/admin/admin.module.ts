@@ -7,9 +7,12 @@ import { UserModule } from 'src/user/user.module';
 import { WalletModule } from 'src/wallet/wallet.module';
 import { TransactionsModule } from 'src/transactions/transactions.module';
 import { BankModule } from 'src/bank/bank.module';
+import { Activity } from './entities/activity.entity';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
+    TypeOrmModule.forFeature([Activity]),
     SettingsModule,
     FlutterwaveModule,
     UserModule,

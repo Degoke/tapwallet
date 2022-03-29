@@ -9,8 +9,8 @@ export abstract class EntityContainer {
   public id: number;
 
   @CreateDateColumn()
-  createdDate: Date;
+  createddate: Date;
 
   @UpdateDateColumn()
-  updatedDate: Date;
+  updateddate: Date;
 }

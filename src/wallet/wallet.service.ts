@@ -30,43 +30,45 @@ export class WalletService {
     }
   }
 
-  async deposit(
-    transactionDto: TransactionDto,
-  ): Promise<ReturnTypeContainer<any>> {
-    const { email, amount } = transactionDto;
-    // return {
-    //   message: 'hello',
-    //   data: transactionDto,
-    // };
+  // async deposit(
+  //   transactionDto: TransactionDto,
+  // ): Promise<ReturnTypeContainer<any>> {
+  //   const { email, amount } = transactionDto;
+  //   // return {
+  //   //   message: 'hello',
+  //   //   data: transactionDto,
+  //   // };
 
-    try {
-      const { id: walletId } = await this.walletRepository.findByUserEmail(
-        email,
-      );
-      await this.walletRepository.increment(
-        { id: walletId },
-        'balance',
-        amount,
-      );
-      const wallet = await this.walletRepository.findOne({ id: walletId });
-      return {
-        message: 'success',
-        data: { balance: wallet.balance },
-      };
-    } catch (error) {
-      throw error;
-    }
-  }
+  //   try {
+  //     const { id: walletId } = await this.walletRepository.findByUserEmail(
+  //       email,
+  //     );
+  //     await this.walletRepository.increment(
+  //       { id: walletId },
+  //       'balance',
+  //       amount,
+  //     );
+  //     const wallet = await this.walletRepository.findOne({ id: walletId });
+  //     return {
+  //       message: 'success',
+  //       data: { balance: wallet.balance },
+  //     };
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // }
 
   async removeMoney(
     transactionDto: TransactionDto,
     queryRunner: QueryRunner,
   ): Promise<ReturnTypeContainer<any>> {
-    const { email, amount } = transactionDto;
+    const { walletId, amount } = transactionDto;
     try {
-      const { id: walletId } = await this.walletRepository.findByUserEmail(
-        email,
-      );
+      // const { id: walletId } = await this.walletRepository.findByUserEmail(
+      //   email,
+      // );
+      // const user = await this.userService.findByEmail(email);
+      //   const walletId = user.data.wallet.id;
       // await this.walletRepository.decrement(
       //   { id: walletId },
       //   'balance',

@@ -30,18 +30,18 @@ export class AuthService {
     }
   }
 
-  async validatePin(id: number, pin: string) {
-    try {
-      const user = await this.userService.findCustomerForJwt(id);
+  // async validatePin(id: number, pin: string) {
+  //   try {
+  //     const user = await this.userService.findCustomerForJwt(id);
 
-      if (user && (await bcrypt.compare(pin, user.pin))) {
-        return user;
-      }
-      return null;
-    } catch (error) {
-      throw error;
-    }
-  }
+  //     if (user && (await bcrypt.compare(pin, user.pin))) {
+  //       return user;
+  //     }
+  //     return null;
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // }
 
   async loginUser(data: any) {
     try {

@@ -41,26 +41,26 @@
 //         );
 //       }
 
-//       const walletResponse = await this.walletService.removeMoney(
-//         {
-//           email,
-//           amount,
-//         },
-//         queryRunner,
-//       );
-//       const request_id = await getRequestId();
-//       const payload = {
-//         customer: buyElectrictyDto.phone,
-//         owner: user,
-//         ownerId: user.id,
-//         transactionReference: request_id,
-//         service: Services.VTPASS,
-//         amount: amount,
-//         serviceID: buyElectrictyDto.serviceID,
-//         variation_code: buyElectrictyDto.variation_code,
-//         remarks: 'ElECTRICITY PURCHASE',
-//         balance: walletResponse.data.balance,
-//       };
+// const walletResponse = await this.walletService.removeMoney(
+//   {
+//     email,
+//     amount,
+//   },
+//   queryRunner,
+// );
+// const request_id = await getRequestId();
+// const payload = {
+//   customer: buyElectrictyDto.phone,
+//   owner: user,
+//   ownerid: user.id,
+//   transactionReference: request_id,
+//   service: Services.VTPASS,
+//   amount: amount,
+//   serviceID: buyElectrictyDto.serviceID,
+//   variation_code: buyElectrictyDto.variation_code,
+//   remarks: 'ElECTRICITY PURCHASE',
+//   balance: walletResponse.data.balance,
+// };
 
 //       const airtime = await queryRunner.manager.create(
 //         Electricitybill,

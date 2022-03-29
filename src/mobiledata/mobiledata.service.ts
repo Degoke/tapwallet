@@ -39,34 +39,34 @@
 //         ).variation_amount,
 //       );
 
-//       const wallet = await this.walletService.getWalletByOwnerId(user.id);
-//       if (wallet.balance < amount) {
-//         throw new HttpException(
-//           'Not enough funds in your wallet',
-//           HttpStatus.BAD_REQUEST,
-//         );
-//       }
-//       //      return amount;
-//       const walletResponse = await this.walletService.removeMoney(
-//         {
-//           email,
-//           amount,
-//         },
-//         queryRunner,
-//       );
-//       const request_id = await getRequestId();
-//       const payload = {
-//         customer: buyDataDto.phone,
-//         owner: user,
-//         ownerId: user.id,
-//         transactionReference: request_id,
-//         service: Services.VTPASS,
-//         amount: amount,
-//         serviceID: buyDataDto.serviceID,
-//         variation_code: buyDataDto.variation_code,
-//         remarks: 'DATA PURCHASE',
-//         balance: walletResponse.data.balance,
-//       };
+// const wallet = await this.walletService.getWalletByOwnerId(user.id);
+// if (wallet.balance < amount) {
+//   throw new HttpException(
+//     'Not enough funds in your wallet',
+//     HttpStatus.BAD_REQUEST,
+//   );
+// }
+// //      return amount;
+// const walletResponse = await this.walletService.removeMoney(
+//   {
+//     email,
+//     amount,
+//   },
+//   queryRunner,
+// );
+// const request_id = await getRequestId();
+// const payload = {
+//   customer: buyDataDto.phone,
+//   owner: user,
+//   ownerid: user.id,
+//   transactionReference: request_id,
+//   service: Services.VTPASS,
+//   amount: amount,
+//   serviceID: buyDataDto.serviceID,
+//   variation_code: buyDataDto.variation_code,
+//   remarks: 'DATA PURCHASE',
+//   balance: walletResponse.data.balance,
+// };
 
 //       const airtime = await queryRunner.manager.create(Mobiledatum, payload);
 //       await queryRunner.manager.save(airtime);

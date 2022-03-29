@@ -7,10 +7,18 @@ import CustomLogger from './log/custom-logger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
-    cors: true,
+    //    cors: true,
     bufferLogs: true,
   });
-
+  app.enableCors({
+    credentials: true,
+    origin: [
+      'http://127.0.0.1:3000',
+      'http://localhost:3000',
+      'http://127.0.0.1:3001',
+      'http://localhost:3001',
+    ],
+  });
   app.useLogger(app.get(CustomLogger));
 
   // app.useGlobalGuards(

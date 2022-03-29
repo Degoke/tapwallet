@@ -22,8 +22,8 @@
 //   @ManyToOne(() => User, (user: User) => user.id)
 //   owner: User;
 
-//   @Column()
-//   ownerId: number;
+// @Column()
+// ownerid: number;
 
 //   @Column()
 //   serviceID: string;
@@ -56,8 +56,8 @@
 //   // status: TransactionStatusType;
 
 //   @CreateDateColumn()
-//   createdAt: Date;
+//   createdat: Date;
 
 //   @UpdateDateColumn()
-//   updatedAt: Date;
+//   updatedat: Date;
 // }

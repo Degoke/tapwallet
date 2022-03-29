@@ -29,7 +29,7 @@ export class Electricitybill {
   owner: User;
 
   @Column()
-  ownerId: number;
+  ownerid: number;
 
   @Column()
   transactionReference: string;
@@ -59,9 +59,9 @@ export class Electricitybill {
   // status: TransactionStatusType;
 
   @CreateDateColumn()
-  createdAt: Date;
+  createdat: Date;
 
   @UpdateDateColumn()
-  updatedAt: Date;
+  updatedat: Date;
 }
 */
