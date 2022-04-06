@@ -349,6 +349,31 @@ export class UserService {
     }
   }
 
+  async findUnapprovedKyc() {
+    try {
+      const verifications = await this.customerKycRepository.find({
+        kycApproved: false,
+      });
+
+      return {
+        message: 'success',
+        data: {
+          verifications,
+        },
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async approveKyc(id: number) {
+    try {
+      await this.customerKycRepository.update(id, { kycApproved: true });
+    } catch (error) {
+      throw error;
+    }
+  }
+
   /*
   async findByEmail(email: string): Promise<ReturnTypeContainer<any>> {
     try {

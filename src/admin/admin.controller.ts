@@ -29,6 +29,12 @@ export class AdminController {
     return this.adminService.createNewAdmin(createAdminDto);
   }
 
+  @Public()
+  @Get('summary')
+  getSummary() {
+    return this.adminService.getSummary();
+  }
+
   // @Get('users')
   // getAllUsers() {
   //   return this.adminService.getAllUsers();

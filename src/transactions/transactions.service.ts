@@ -331,7 +331,7 @@ export class TransactionsService {
           return {
             message: 'Success',
             data: {
-              withdrawals,
+              transactions: withdrawals,
             },
           };
 
@@ -342,7 +342,7 @@ export class TransactionsService {
           return {
             message: 'Success',
             data: {
-              deposits,
+              transactions: deposits,
             },
           };
       }
@@ -386,7 +386,7 @@ export class TransactionsService {
           return {
             message: 'Success',
             data: {
-              withdrawals,
+              transactions: withdrawals,
             },
           };
 
@@ -397,7 +397,7 @@ export class TransactionsService {
           return {
             message: 'Success',
             data: {
-              deposits,
+              transactions: deposits,
             },
           };
       }
@@ -413,7 +413,7 @@ export class TransactionsService {
         return {
           message: 'Success',
           data: {
-            withdrawal,
+            transaction: withdrawal,
           },
         };
       }
@@ -422,7 +422,7 @@ export class TransactionsService {
         return {
           message: 'Success',
           data: {
-            deposit,
+            transaction: deposit,
           },
         };
       }

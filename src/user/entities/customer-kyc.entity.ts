@@ -34,4 +34,7 @@ export class CustomerKyc extends EntityContainer {
 
   @Column()
   public userId: number;
+
+  @Column({ default: false })
+  public kycApproved: boolean;
 }

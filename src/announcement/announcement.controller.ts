@@ -30,6 +30,7 @@ const { DRAFT, PUBLISHED } = ANNOUNCEMENT_STATUS;
 export class AnnouncementController {
   constructor(private readonly announcementService: AnnouncementService) {}
 
+  @Public()
   @Get()
   getAll(@Query() query: AnnouncementQueryDto) {
     let type;

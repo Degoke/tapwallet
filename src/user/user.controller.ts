@@ -67,6 +67,18 @@ export class UserController {
     return this.userService.findById(id);
   }
 
+  @Public()
+  @Get('kyc/pending')
+  getPendingKyc() {
+    return this.userService.findUnapprovedKyc();
+  }
+
+  @Public()
+  @Patch('kyc/approve')
+  approvekyc(@Param('id') id) {
+    return this.userService.approveKyc(id);
+  }
+
   /*@CheckAbilities(new EditUserPermission())
   @Post('verifyemail')
   verifyEmail(@Body() verifyEmailDto: VerifyEmailDTO) {
