@@ -1,9 +1,23 @@
 import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
 import { NestFactory, Reflector } from '@nestjs/core';
+import { exec } from 'child_process';
+import { stdout } from 'process';
 import { AbilitiesGuard } from './ability/abilities.guard';
 import { AbilityFactory } from './ability/ability.factory';
 import { AppModule } from './app.module';
 import CustomLogger from './log/custom-logger';
+
+const runMigrations = () => {
+  return new Promise<void>((resolve, reject) => {
+    exec('npm run typeorm:migrate && npm run typeorm:run', (err, stdout) => {
+      if (err) {
+        reject(err);
+      }
+      console.log(stdout);
+      resolve();
+    });
+  });
+};
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -28,6 +42,8 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
 
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
+
+  runMigrations();
 
   await app.listen(process.env.PORT || 3000);
 }

@@ -19,3 +19,11 @@ export enum KYC_STATUS {
 }
 
 export type KycStatus = KYC_STATUS;
+
+export enum SERVICE_STATUS {
+  ACTIVE = 'active',
+  DORMANT = 'dormant',
+  DEPRECATED = 'deprecated',
+}
+
+export type ServiceStatus = SERVICE_STATUS;

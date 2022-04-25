@@ -5,8 +5,8 @@ import {
 } from 'typeorm';
 
 export abstract class EntityContainer {
-  @PrimaryGeneratedColumn()
-  public id: number;
+  @PrimaryGeneratedColumn('uuid')
+  public id: string;
 
   @CreateDateColumn()
   createddate: Date;
