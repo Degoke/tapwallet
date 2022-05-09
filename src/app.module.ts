@@ -29,6 +29,8 @@ import { AbilitiesGuard } from './ability/abilities.guard';
 import { JwtAuthGaurd } from './common/gaurds/jwt-auth.gaurd';
 import { AnnouncementModule } from './announcement/announcement.module';
 import { ActivitiesModule } from './activities/activities.module';
+import { SeedingModule } from './seeding/seeding.module';
+import { MerchantApiModule } from './merchant-api/merchant-api.module';
 
 @Module({
   imports: [
@@ -83,6 +85,8 @@ import { ActivitiesModule } from './activities/activities.module';
     AbilityModule,
     AnnouncementModule,
     ActivitiesModule,
+    SeedingModule,
+    MerchantApiModule,
   ],
   providers: [
     {

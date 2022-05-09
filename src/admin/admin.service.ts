@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { BankService } from 'src/bank/bank.service';
-import { AdminRoles } from 'src/common/types/roles.type';
 import { FlutterwaveService } from 'src/flutterwave/flutterwave.service';
 import { CreateSettingDto } from 'src/settings/dto/create-setting.dto';
 import { UpdateSettingDto } from 'src/settings/dto/update-setting.dto';
@@ -9,9 +8,7 @@ import { TransactionsService } from 'src/transactions/transactions.service';
 import { CreateUserDto } from 'src/user/dto/create-user.dto';
 import { UserService } from 'src/user/user.service';
 import { WalletService } from 'src/wallet/wallet.service';
-import { UpdateAdminDto } from './dto/update-admin.dto';
 import { Connection, Repository } from 'typeorm';
-import { CreateAdminDto } from 'src/user/dto/create-admin.dto';
 import { Activity } from './entities/activity.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 
@@ -28,7 +25,7 @@ export class AdminService {
     private readonly bankService: BankService,
   ) {}
 
-  async createNewAdmin(payload: CreateAdminDto) {
+  async createNewAdmin(payload) {
     try {
       const admin = await this.userService.createAdmin(payload);
 

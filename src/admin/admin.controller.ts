@@ -10,14 +10,9 @@ import {
 import { CheckAbilities } from 'src/ability/abilities.decorator';
 import { CreateAccountDto } from 'src/account/dto/create-account.dto';
 import { Public } from 'src/common/decorators/jwt-auth-guard.decorator';
-import { ADMIN_ROLES } from 'src/common/types/roles.type';
-import { CreateAdminDto } from 'src/user/dto/create-admin.dto';
 import { CreateUserDto } from 'src/user/dto/create-user.dto';
 import { UserService } from 'src/user/user.service';
 import { AdminService } from './admin.service';
-//import { AssignUserLevelDto } from './dto/assign-user-level.dto';
-import { UpdateAdminDto } from './dto/update-admin.dto';
-import { AdminRoles } from 'src/common/types/roles.type';
 
 @Controller('admin')
 export class AdminController {
@@ -25,7 +20,7 @@ export class AdminController {
 
   @Public()
   @Post('create')
-  createAdmin(@Body() createAdminDto: CreateAdminDto) {
+  createAdmin(@Body() createAdminDto) {
     return this.adminService.createNewAdmin(createAdminDto);
   }
 

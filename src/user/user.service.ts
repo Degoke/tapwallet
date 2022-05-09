@@ -10,14 +10,9 @@ import { EmailService } from 'src/email/email.service';
 import { object } from 'joi';
 import { AuthService } from 'src/auth/auth.service';
 import { ReferralService } from 'src/referral/referral.service';
-import {
-  AdminRoles,
-  ADMIN_ROLES,
-  UserRoles,
-  USER_ROLES,
-} from 'src/common/types/roles.type';
+import { USER_ROLES } from 'src/common/types/roles.type';
 import { CustomerRepository } from './repositories/customer.repository';
-import { AdminRepository } from './repositories/admin.repository';
+import { AdminRepository } from '../admin/repositories/admin.repository';
 import { CustomerKycRepository } from './repositories/customer-kyc.repository';
 import { WALLET_TYPES } from 'src/common/types/wallet.type';
 import { CURRENCY } from 'src/common/types/currency.type';
@@ -25,8 +20,6 @@ import { Wallet } from 'src/wallet/entities/wallet.entity';
 import { Customer } from './entities/customer.entity';
 import { CustomerKyc } from './entities/customer-kyc.entity';
 import { Referral } from 'src/referral/entities/referral.entity';
-import { Administrator } from './entities/administrator.entity';
-import { CreateAdminDto } from './dto/create-admin.dto';
 
 @Injectable()
 export class UserService {
@@ -257,7 +250,7 @@ export class UserService {
   //     throw error;
   //   }
   // }
-  async createAdmin(payload: CreateAdminDto) {
+  async createAdmin(payload) {
     try {
       const { email } = payload;
 

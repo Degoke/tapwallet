@@ -1,8 +1,8 @@
 import { EntityRepository, Repository } from 'typeorm';
-import { Administrator } from '../entities/administrator.entity';
+import { Admin } from '../entities/admin.entity';
 
-@EntityRepository(Administrator)
-export class AdminRepository extends Repository<Administrator> {
+@EntityRepository(Admin)
+export class AdminRepository extends Repository<Admin> {
   findByEmail(email: string) {
     return this.findOne({ email });
   }

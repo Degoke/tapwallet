@@ -9,7 +9,7 @@ import { MonnifyService } from 'src/monnify/monnify.service';
 import { UserService } from 'src/user/user.service';
 import { getTransactionReference } from 'src/utils/random-generators';
 import { CreateAccountDto } from './dto/create-account.dto';
-import { MonnifyAccountRepository } from './repositories/monnify-account.repository';
+import { AccountRepository } from './repositories/account.repository';
 
 const { MONNIFY, FLUTTERWAVE } = BANK_SERVICES;
 
@@ -17,8 +17,8 @@ const { MONNIFY, FLUTTERWAVE } = BANK_SERVICES;
 export class AccountService {
   private currentBankService: BankServices;
   constructor(
-    @InjectRepository(MonnifyAccountRepository)
-    private monnifyAccountRepository: MonnifyAccountRepository,
+    @InjectRepository(AccountRepository)
+    private monnifyAccountRepository: AccountRepository,
     private readonly flutterwaveService: FlutterwaveService,
     private readonly monnifyService: MonnifyService,
     private readonly configService: ConfigService,

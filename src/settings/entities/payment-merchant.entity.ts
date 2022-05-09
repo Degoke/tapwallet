@@ -4,7 +4,7 @@ import { ServiceStatus, SERVICE_STATUS } from 'src/common/types/status.type';
 import { Column, Entity, OneToMany } from 'typeorm';
 
 @Entity()
-export class Merchant extends EntityContainer {
+export class PaymentMerchant extends EntityContainer {
   @Column()
   public name: string;
 

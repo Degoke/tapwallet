@@ -5,11 +5,9 @@ import { join } from 'path';
 import { Setting } from 'src/settings/entities/setting.entity';
 import Log from 'src/log/entities/log.entity';
 import DatabaseLogger from './database-logger';
-import { Administrator } from 'src/user/entities/administrator.entity';
 import { ReceiveTransfer } from 'src/transfers/entities/receive-transfer.entity';
 import { SendTransfer } from 'src/transfers/entities/send-transfer.entity';
 import { TransferRequest } from 'src/transfers/entities/transfer-requests.entity';
-import { MonnifyAccount } from 'src/account/entities/monnnify-account.entity';
 import { Referral } from 'src/referral/entities/referral.entity';
 import { Withdrawal } from 'src/transactions/entities/withdrawal.entity';
 import { Customer } from 'src/user/entities/customer.entity';
@@ -19,6 +17,11 @@ import { ElectricityBillActivity } from 'src/activities/entities/electricity-bil
 import { TvSubscriptionActivity } from 'src/activities/entities/tv-subscription-activity.entity';
 import { MobileDataActivity } from 'src/activities/entities/mobiledata-activity.entity';
 import { Deposit } from 'src/transactions/entities/deposit.entity';
+import { Account } from 'src/account/entities/account.entity';
+import { Merchant } from 'src/merchant-api/entities/merchant.entity';
+import { PaymentMerchant } from 'src/settings/entities/payment-merchant.entity';
+import { Admin } from 'src/admin/entities/admin.entity';
+import { SeedingLogEntry } from 'src/seeding/entities/seeding.entity';
 
 @Module({
   imports: [
@@ -38,19 +41,22 @@ import { Deposit } from 'src/transactions/entities/deposit.entity';
           Setting,
           Log,
           Customer,
-          Administrator,
+          Admin,
           Wallet,
           Withdrawal,
           ReceiveTransfer,
           SendTransfer,
           TransferRequest,
-          MonnifyAccount,
+          Account,
           Referral,
           AirtimeActivity,
           ElectricityBillActivity,
           TvSubscriptionActivity,
           MobileDataActivity,
           Deposit,
+          Merchant,
+          PaymentMerchant,
+          SeedingLogEntry,
         ],
         migrations: ['dist/migrations/**/*{.ts,.js}'],
         cli: {

@@ -1,10 +1,11 @@
 import { AccountTypes } from 'src/common/types/account.type';
 import { EntityContainer } from 'src/common/types/entity';
-import { Merchant } from 'src/settings/entities/merchant.entity';
+import { PaymentMerchant } from 'src/settings/entities/payment-merchant.entity';
 import { Customer } from 'src/user/entities/customer.entity';
-import { Column, ManyToMany, ManyToOne } from 'typeorm';
+import { Column, Entity, ManyToMany, ManyToOne } from 'typeorm';
 
-export abstract class Account extends EntityContainer {
+@Entity()
+export class Account extends EntityContainer {
   @Column()
   public accountName: string;
 
@@ -17,12 +18,15 @@ export abstract class Account extends EntityContainer {
   @Column()
   public userId: number;
 
-  @ManyToOne(() => Customer, (customer: Customer) => customer.monnifyAccounts)
+  @ManyToOne(() => Customer, (customer: Customer) => customer.accounts)
   public user: Customer;
 
   @Column()
   public type: AccountTypes;
 
-  @ManyToOne(() => Merchant, (merchant: Merchant) => merchant.accounts)
-  public merchant: Merchant;
+  @ManyToOne(
+    () => PaymentMerchant,
+    (merchant: PaymentMerchant) => merchant.accounts,
+  )
+  public merchant: PaymentMerchant;
 }

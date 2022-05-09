@@ -8,18 +8,13 @@ import {
 } from '@casl/ability';
 import { Injectable } from '@nestjs/common';
 import { UserActions, USER_ACTIONS } from 'src/common/types/permissions.type';
-import {
-  ADMIN_ROLES,
-  USER_LEVELS,
-  USER_ROLES,
-} from 'src/common/types/roles.type';
+import { USER_LEVELS, USER_ROLES } from 'src/common/types/roles.type';
 import { Transaction } from 'src/transactions/entities/transaction.entity';
 import { Withdrawal } from 'src/transactions/entities/withdrawal.entity';
 import { ReceiveTransfer } from 'src/transfers/entities/receive-transfer.entity';
 import { SendTransfer } from 'src/transfers/entities/send-transfer.entity';
 import { TransferRequest } from 'src/transfers/entities/transfer-requests.entity';
 import { Transfer } from 'src/transfers/entities/transfer.entity';
-import { Administrator } from 'src/user/entities/administrator.entity';
 import { Customer } from 'src/user/entities/customer.entity';
 import { User } from 'src/user/entities/user.entity';
 import { Wallet } from 'src/wallet/entities/wallet.entity';
@@ -47,15 +42,15 @@ export class AbilityFactory {
 
     const { user, role } = data;
 
-    if (role === USER_ROLES.ADMIN) {
-      if (user.role === ADMIN_ROLES.ADMIN) {
-        can(MANAGE, 'all');
-      }
+    // if (role === USER_ROLES.ADMIN) {
+    //   if (user.role === ADMIN_ROLES.ADMIN) {
+    //     can(MANAGE, 'all');
+    //   }
 
-      if (user.role === ADMIN_ROLES.SUPPORT) {
-        can(MANAGE, 'all');
-      }
-    }
+    //   if (user.role === ADMIN_ROLES.SUPPORT) {
+    //     can(MANAGE, 'all');
+    //   }
+    // }
 
     if (role === USER_ROLES.CUSTOMER) {
       if (user.level === USER_LEVELS.ZERO) {
