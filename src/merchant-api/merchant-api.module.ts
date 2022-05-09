@@ -4,6 +4,6 @@ import { MerchantApiController } from './merchant-api.controller';
 
 @Module({
   controllers: [MerchantApiController],
-  providers: [MerchantApiService]
+  providers: [MerchantApiService],
 })
 export class MerchantApiModule {}

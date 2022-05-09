@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { MerchantApiService } from './merchant-api.service';
 import { CreateMerchantApiDto } from './dto/create-merchant-api.dto';
 import { UpdateMerchantApiDto } from './dto/update-merchant-api.dto';
@@ -23,7 +31,10 @@ export class MerchantApiController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateMerchantApiDto: UpdateMerchantApiDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateMerchantApiDto: UpdateMerchantApiDto,
+  ) {
     return this.merchantApiService.update(+id, updateMerchantApiDto);
   }
 
