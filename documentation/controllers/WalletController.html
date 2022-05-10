@@ -130,8 +130,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="19"
-                            class="link-to-prism">src/wallet/wallet.controller.ts:19</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="25"
+                            class="link-to-prism">src/wallet/wallet.controller.ts:25</a></div>
                 </td>
             </tr>
 
@@ -163,10 +163,16 @@
 import { WalletService } from &#x27;./wallet.service&#x27;;
 import { CreateWalletDto } from &#x27;./dto/create-wallet.dto&#x27;;
 import { UpdateWalletDto } from &#x27;./dto/update-wallet.dto&#x27;;
+import { TransactionDto } from &#x27;./dto/transaction.dto&#x27;;
 
 @Controller(&#x27;wallet&#x27;)
 export class WalletController {
   constructor(private readonly walletService: WalletService) {}
+
+  // @Post(&#x27;deposit&#x27;)
+  // deposit(@Body() transactionDto: TransactionDto) {
+  //   return this.walletService.deposit(transactionDto);
+  // }
 
   @Get()
   getall() {

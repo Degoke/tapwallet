@@ -10,9 +10,8 @@ import { EmailService } from 'src/email/email.service';
 import { object } from 'joi';
 import { AuthService } from 'src/auth/auth.service';
 import { ReferralService } from 'src/referral/referral.service';
-import { USER_ROLES } from 'src/common/types/roles.type';
+import { USER_LEVELS, USER_ROLES } from 'src/common/types/roles.type';
 import { CustomerRepository } from './repositories/customer.repository';
-import { AdminRepository } from '../admin/repositories/admin.repository';
 import { CustomerKycRepository } from './repositories/customer-kyc.repository';
 import { WALLET_TYPES } from 'src/common/types/wallet.type';
 import { CURRENCY } from 'src/common/types/currency.type';
@@ -26,8 +25,6 @@ export class UserService {
   constructor(
     @InjectRepository(CustomerRepository)
     private customerRepository: CustomerRepository,
-    @InjectRepository(AdminRepository)
-    private adminRepository: AdminRepository,
     @InjectRepository(CustomerKycRepository)
     private customerKycRepository: CustomerKycRepository,
     private readonly smsService: SmsService,
@@ -49,25 +46,13 @@ export class UserService {
 
   async findByEmail(email: string) {
     try {
-      const customer = await this.customerRepository.findByEmail(email);
+      const user = await this.customerRepository.findOne({ email });
 
-      if (customer) {
-        return {
-          user: customer,
-          role: USER_ROLES.CUSTOMER,
-        };
+      if (!user) {
+        return null;
       }
 
-      const admin = await this.adminRepository.findByEmail(email);
-
-      if (admin) {
-        return {
-          user: admin,
-          role: USER_ROLES.ADMIN,
-        };
-      }
-
-      return null;
+      return user;
     } catch (error) {
       throw error;
     }
@@ -75,25 +60,13 @@ export class UserService {
 
   async findById(id: number) {
     try {
-      const customer = await this.customerRepository.findById(id);
+      const user = await this.customerRepository.findById(id);
 
-      if (customer) {
-        return {
-          user: customer,
-          role: USER_ROLES.CUSTOMER,
-        };
+      if (!user) {
+        throw new HttpException('User not found', HttpStatus.NOT_FOUND);
       }
 
-      const admin = await this.adminRepository.findById(id);
-
-      if (admin) {
-        return {
-          user: admin,
-          role: USER_ROLES.ADMIN,
-        };
-      }
-
-      return null;
+      return user;
     } catch (error) {
       throw error;
     }
@@ -103,10 +76,6 @@ export class UserService {
     return await this.customerRepository.findOne(id, {
       relations: ['wallets'],
     });
-  }
-
-  async findAdminForJwt(id: number) {
-    return await this.adminRepository.findOne(id);
   }
 
   async createCustomer(createUserDto: CreateUserDto) {
@@ -135,9 +104,9 @@ export class UserService {
       let referrerId;
 
       if (referralCode) {
-        const { data } = await this.verifyReferralCode(referralCode);
+        const user = await this.verifyReferralCode(referralCode);
 
-        referrerId = data.user.id;
+        referrerId = user.id;
       }
 
       const hashedPassword = await bcrypt.hash(createUserDto.password, 10);
@@ -160,7 +129,6 @@ export class UserService {
           userId: savedUser.id,
           type: WALLET_TYPES.NAIRA,
           currency: CURRENCY.NAIRA,
-          balance: 1000000,
         });
 
         await queryRunner.manager.save(Wallet, wallet);
@@ -180,17 +148,12 @@ export class UserService {
           await queryRunner.manager.save(newReferral);
         }
 
-        /*await this.emailService.sendVerificationCode(
+        await this.emailService.sendVerificationCode(
           newUser.email,
           queryRunner,
-        );*/
+        );
         await queryRunner.commitTransaction();
-        return {
-          message: 'User Created Successfully',
-          data: {
-            user: savedUser,
-          },
-        };
+        return savedUser;
       } catch (error) {
         await queryRunner.rollbackTransaction();
         throw error;
@@ -250,27 +213,27 @@ export class UserService {
   //     throw error;
   //   }
   // }
-  async createAdmin(payload) {
-    try {
-      const { email } = payload;
+  // async createAdmin(payload) {
+  //   try {
+  //     const { email } = payload;
 
-      const emailAlreadyExists = await this.adminRepository.findByEmail(email);
+  //     const emailAlreadyExists = await this.adminRepository.findByEmail(email);
 
-      if (emailAlreadyExists) {
-        throw new HttpException('Email Already in use', HttpStatus.CONFLICT);
-      }
+  //     if (emailAlreadyExists) {
+  //       throw new HttpException('Email Already in use', HttpStatus.CONFLICT);
+  //     }
 
-      const hashedPassword = await bcrypt.hash(payload.password, 10);
+  //     const hashedPassword = await bcrypt.hash(payload.password, 10);
 
-      const newAdmin = await this.adminRepository.create({
-        ...payload,
-        password: hashedPassword,
-      });
-      return await this.adminRepository.save(newAdmin);
-    } catch (error) {
-      throw error;
-    }
-  }
+  //     const newAdmin = await this.adminRepository.create({
+  //       ...payload,
+  //       password: hashedPassword,
+  //     });
+  //     return await this.adminRepository.save(newAdmin);
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // }
 
   async verifyReferralCode(referralCode: string) {
     try {
@@ -280,12 +243,7 @@ export class UserService {
       if (!user) {
         throw new HttpException('Invalid referralCode', HttpStatus.BAD_REQUEST);
       }
-      return {
-        message: 'Referral code verified successfully',
-        data: {
-          user,
-        },
-      };
+      return user;
     } catch (error) {
       throw error;
     }
@@ -362,6 +320,19 @@ export class UserService {
   async approveKyc(id: number) {
     try {
       await this.customerKycRepository.update(id, { kycApproved: true });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async verifyEmail(code, email) {
+    try {
+      await this.emailService.verifyMail(code, email);
+      await this.customerRepository.update(
+        { email },
+        { level: USER_LEVELS.ONE },
+      );
+      return;
     } catch (error) {
       throw error;
     }

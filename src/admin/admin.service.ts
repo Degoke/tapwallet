@@ -25,20 +25,20 @@ export class AdminService {
     private readonly bankService: BankService,
   ) {}
 
-  async createNewAdmin(payload) {
-    try {
-      const admin = await this.userService.createAdmin(payload);
+  // async createNewAdmin(payload) {
+  //   try {
+  //     const admin = await this.userService.createAdmin(payload);
 
-      return {
-        message: 'Admin created successfully',
-        data: {
-          admin,
-        },
-      };
-    } catch (error) {
-      throw error;
-    }
-  }
+  //     return {
+  //       message: 'Admin created successfully',
+  //       data: {
+  //         admin,
+  //       },
+  //     };
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // }
 
   async getSummary() {
     try {

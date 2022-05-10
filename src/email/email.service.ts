@@ -12,6 +12,7 @@ import { generateVerificationCode } from 'src/utils/random-generators';
 import { QueryRunner, Repository } from 'typeorm';
 import { CreateEmailDto } from './dto/create-email.dto';
 import { Email } from './entities/email.entity';
+// import sgMail from '@sendgrid/mail';
 
 @Injectable()
 export class EmailService {
@@ -71,6 +72,15 @@ export class EmailService {
       throw error;
     }
   }
+
+  // async sendMail() {
+  //   try {
+  //     sgMail.setApiKey(this.configService.get('SENDGRID_API_KEY'));
+  //     const message = ''
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // }
 
   async deleteCode(email) {
     return await this.emailRepository.delete({ email });

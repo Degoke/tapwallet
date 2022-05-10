@@ -124,14 +124,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Get()<br /></code>
+                    <code>@Public()<br />@Get()<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="20"
-                            class="link-to-prism">src/flutterwave/flutterwave.controller.ts:20</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="21"
+                            class="link-to-prism">src/flutterwave/flutterwave.controller.ts:21</a></div>
                 </td>
             </tr>
 
@@ -164,14 +164,15 @@ import { FlutterwaveService } from &#x27;./flutterwave.service&#x27;;
 import { InitiateDepositDto } from &#x27;./dto/initiate-deposit.dto&#x27;;
 import { AuthorizeDepositDto } from &#x27;./dto/authorize-deposit.dto&#x27;;
 import { request } from &#x27;http&#x27;;
+import { Public } from &#x27;src/common/decorators/jwt-auth-guard.decorator&#x27;;
 
 @Controller(&#x27;flutterwave&#x27;)
 export class FlutterwaveController {
   constructor(private readonly flutterwaveService: FlutterwaveService) {}
-
+  @Public()
   @Get()
   test() {
-    return this.flutterwaveService.getAllBankCodes();
+    return this.flutterwaveService.getNairaWalletBalance();
   }
 }
 </code></pre>

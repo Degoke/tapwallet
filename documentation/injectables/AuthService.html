@@ -80,6 +80,14 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Async</span>
+                                <a href="#createTransactionPin" >createTransactionPin</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#loginAdmin" >loginAdmin</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
                                 <a href="#loginUser" >loginUser</a>
                             </li>
                             <li>
@@ -109,7 +117,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/auth/auth.service.ts:12</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/auth/auth.service.ts:8</a></div>
                             </td>
                         </tr>
 
@@ -168,26 +176,26 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="loginUser"></a>
+                    <a name="createTransactionPin"></a>
                     <span class="name">
                         <span class="modifier">Async</span>
-                        <span ><b>loginUser</b></span>
-                        <a href="#loginUser"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>createTransactionPin</b></span>
+                        <a href="#createTransactionPin"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>loginUser(user: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                    <code>createTransactionPin(password: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, pin: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, email: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="32"
-                            class="link-to-prism">src/auth/auth.service.ts:32</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="98"
+                            class="link-to-prism">src/auth/auth.service.ts:98</a></div>
                 </td>
             </tr>
 
@@ -208,7 +216,173 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>user</td>
+                                    <td>password</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>pin</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>email</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>unknown</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loginAdmin"></a>
+                    <span class="name">
+                        <span class="modifier">Async</span>
+                        <span ><b>loginAdmin</b></span>
+                        <a href="#loginAdmin"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>loginAdmin(data: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="71"
+                            class="link-to-prism">src/auth/auth.service.ts:71</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>data</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>unknown</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loginUser"></a>
+                    <span class="name">
+                        <span class="modifier">Async</span>
+                        <span ><b>loginUser</b></span>
+                        <a href="#loginUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>loginUser(data: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="46"
+                            class="link-to-prism">src/auth/auth.service.ts:46</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>data</td>
                                     <td>
                                                 <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
                                     </td>
@@ -257,8 +431,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="18"
-                            class="link-to-prism">src/auth/auth.service.ts:18</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="14"
+                            class="link-to-prism">src/auth/auth.service.ts:14</a></div>
                 </td>
             </tr>
 
@@ -324,15 +498,11 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
-  HttpException,
-  HttpStatus,
-  Injectable,
-  OnModuleInit,
-} from &#x27;@nestjs/common&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { HttpException, HttpStatus, Injectable } from &#x27;@nestjs/common&#x27;;
 import { UserService } from &#x27;../user/user.service&#x27;;
 import * as bcrypt from &#x27;bcrypt&#x27;;
 import { JwtService } from &#x27;@nestjs/jwt&#x27;;
+import { USER_ROLES } from &#x27;src/common/types/roles.type&#x27;;
 
 @Injectable()
 export class AuthService {
@@ -343,27 +513,100 @@ export class AuthService {
 
   async validateUser(email: string, password: string) {
     try {
-      const user &#x3D; await this.userService.getByEmail(email);
+      const data &#x3D; await this.userService.findByEmail(email);
+      if (!data) {
+        return null;
+      }
+      const { user, role } &#x3D; data;
 
       if (user &amp;&amp; (await bcrypt.compare(password, user.password))) {
-        return user;
+        return {
+          user,
+          role,
+        };
       }
-
-      return null;
     } catch (error) {
       throw error;
     }
   }
 
-  async loginUser(user: any) {
-    try {
-      const payload &#x3D; { email: user.email, sub: user.id };
+  // async validatePin(id: number, pin: string) {
+  //   try {
+  //     const user &#x3D; await this.userService.findCustomerForJwt(id);
 
-      const currentUser &#x3D; await this.userService.findById(user.id);
+  //     if (user &amp;&amp; (await bcrypt.compare(pin, user.pin))) {
+  //       return user;
+  //     }
+  //     return null;
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // }
+
+  async loginUser(data: any) {
+    try {
+      const { user, role } &#x3D; data;
+      const payload &#x3D; {
+        email: user.email,
+        sub: user.id,
+        role,
+      };
+
+      if (role !&#x3D;&#x3D; USER_ROLES.CUSTOMER) {
+        throw new HttpException(
+          &#x27;This is not a user account&#x27;,
+          HttpStatus.UNAUTHORIZED,
+        );
+      }
 
       return {
-        user: currentUser,
+        user,
         token: this.jwtService.sign(payload),
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async loginAdmin(data: any) {
+    try {
+      const { user, role } &#x3D; data;
+      const payload &#x3D; {
+        email: user.email,
+        sub: user.id,
+        role,
+      };
+
+      if (role !&#x3D;&#x3D; USER_ROLES.ADMIN) {
+        throw new HttpException(
+          &#x27;This is not an Admin Account&#x27;,
+          HttpStatus.UNAUTHORIZED,
+        );
+      }
+      return {
+        message: &#x27;Login successful&#x27;,
+        data: {
+          user,
+          token: this.jwtService.sign(payload),
+        },
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async createTransactionPin(password: string, pin: number, email: string) {
+    try {
+      const user &#x3D; await this.validateUser(email, password);
+
+      if (!user) {
+        throw new HttpException(&#x27;invalid password&#x27;, HttpStatus.BAD_REQUEST);
+      }
+
+      await this.userService.setPin(email, pin);
+
+      return {
+        message: &#x27;Pin Set successfully&#x27;,
       };
     } catch (error) {
       throw error;

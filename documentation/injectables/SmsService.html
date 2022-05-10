@@ -69,22 +69,22 @@
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
+
                 <tr>
                     <td class="col-md-4">
-                        <h6><b>Properties</b></h6>
+                        <h6><b>Methods</b></h6>
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#sendMessage" >sendMessage</a>
+                                    <span class="modifier">Async</span>
+                                <a href="#sendPhoneNumberOtp" >sendPhoneNumberOtp</a>
                             </li>
                             <li>
-                                <a href="#sendOtp" >sendOtp</a>
-                            </li>
-                            <li>
-                                <a href="#verifyOtp" >verifyOtp</a>
+                                    <span class="modifier">Async</span>
+                                <a href="#verifyPhoneNumberOtp" >verifyPhoneNumberOtp</a>
                             </li>
                         </ul>
                     </td>
@@ -94,76 +94,216 @@
 
 
 
-
         </tbody>
     </table>
 </section>
 
+            <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(twillioService: <a href="../injectables/TwillioService.html" target="_self">TwillioService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/sms/sms.service.ts:13</a></div>
+                            </td>
+                        </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>twillioService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/TwillioService.html" target="_self" >TwillioService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
 
             <section>
     
-    <h3 id="inputs">
-        Properties
+    <h3 id="methods">
+        Methods
     </h3>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="sendMessage"></a>
+                    <a name="sendPhoneNumberOtp"></a>
                     <span class="name">
-                        <span ><b>sendMessage</b></span>
-                        <a href="#sendMessage"><span class="icon ion-ios-link"></span></a>
+                        <span class="modifier">Async</span>
+                        <span ><b>sendPhoneNumberOtp</b></span>
+                        <a href="#sendPhoneNumberOtp"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/sms/sms.service.ts:14</a></div>
-                        </td>
-                    </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>sendPhoneNumberOtp(phoneNumber: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
 
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="16"
+                            class="link-to-prism">src/sms/sms.service.ts:16</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>phoneNumber</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>unknown</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
         </tbody>
     </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="sendOtp"></a>
+                    <a name="verifyPhoneNumberOtp"></a>
                     <span class="name">
-                        <span ><b>sendOtp</b></span>
-                        <a href="#sendOtp"><span class="icon ion-ios-link"></span></a>
+                        <span class="modifier">Async</span>
+                        <span ><b>verifyPhoneNumberOtp</b></span>
+                        <a href="#verifyPhoneNumberOtp"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/sms/sms.service.ts:13</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="verifyOtp"></a>
-                    <span class="name">
-                        <span ><b>verifyOtp</b></span>
-                        <a href="#verifyOtp"><span class="icon ion-ios-link"></span></a>
-                    </span>
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>verifyPhoneNumberOtp(phoneNumber: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, verificationCode: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/sms/sms.service.ts:15</a></div>
-                        </td>
-                    </tr>
 
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="26"
+                            class="link-to-prism">src/sms/sms.service.ts:26</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>phoneNumber</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>verificationCode</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>unknown</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
         </tbody>
     </table>
 </section>
@@ -179,14 +319,34 @@
   Injectable,
 } from &#x27;@nestjs/common&#x27;;
 import { ConfigService } from &#x27;@nestjs/config&#x27;;
+import { TwillioService } from &#x27;src/twillio/twillio.service&#x27;;
 import { UserService } from &#x27;src/user/user.service&#x27;;
 import { Twilio } from &#x27;twilio&#x27;;
 
 @Injectable()
 export class SmsService {
-  sendOtp;
-  sendMessage;
-  verifyOtp;
+  constructor(private readonly twillioService: TwillioService) {}
+
+  async sendPhoneNumberOtp(phoneNumber: string) {
+    try {
+      return await this.twillioService.initiatePhoneNumberVerification(
+        phoneNumber,
+      );
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async verifyPhoneNumberOtp(phoneNumber: string, verificationCode: string) {
+    try {
+      return await this.twillioService.confirmPhoneNumber(
+        phoneNumber,
+        verificationCode,
+      );
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 </code></pre>
     </div>

@@ -92,7 +92,15 @@
                             </li>
                             <li>
                                     <span class="modifier">Async</span>
+                                <a href="#getTotalUsersNaira" >getTotalUsersNaira</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
                                 <a href="#getWalletByOwnerId" >getWalletByOwnerId</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#removeMoney" >removeMoney</a>
                             </li>
                         </ul>
                     </td>
@@ -112,12 +120,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(walletRepository: <a href="../entitys/Wallet.html" target="_self">Repository&lt;Wallet&gt;</a>)</code>
+<code>constructor(walletRepository: <a href="../classes/WalletRepository.html" target="_self">WalletRepository</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/wallet/wallet.service.ts:9</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/wallet/wallet.service.ts:16</a></div>
                             </td>
                         </tr>
 
@@ -138,7 +146,7 @@
                                                         <td>walletRepository</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../entitys/Wallet.html" target="_self" >Repository&lt;Wallet&gt;</a></code>
+                                                                        <code><a href="../classes/WalletRepository.html" target="_self" >WalletRepository</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -182,8 +190,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="13"
-                            class="link-to-prism">src/wallet/wallet.service.ts:13</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="21"
+                            class="link-to-prism">src/wallet/wallet.service.ts:21</a></div>
                 </td>
             </tr>
 
@@ -253,8 +261,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="25"
-                            class="link-to-prism">src/wallet/wallet.service.ts:25</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="95"
+                            class="link-to-prism">src/wallet/wallet.service.ts:95</a></div>
                 </td>
             </tr>
 
@@ -292,8 +300,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="29"
-                            class="link-to-prism">src/wallet/wallet.service.ts:29</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="99"
+                            class="link-to-prism">src/wallet/wallet.service.ts:99</a></div>
                 </td>
             </tr>
 
@@ -345,6 +353,45 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="getTotalUsersNaira"></a>
+                    <span class="name">
+                        <span class="modifier">Async</span>
+                        <span ><b>getTotalUsersNaira</b></span>
+                        <a href="#getTotalUsersNaira"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getTotalUsersNaira()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="118"
+                            class="link-to-prism">src/wallet/wallet.service.ts:118</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>unknown</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="getWalletByOwnerId"></a>
                     <span class="name">
                         <span class="modifier">Async</span>
@@ -363,8 +410,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="33"
-                            class="link-to-prism">src/wallet/wallet.service.ts:33</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="103"
+                            class="link-to-prism">src/wallet/wallet.service.ts:103</a></div>
                 </td>
             </tr>
 
@@ -412,23 +459,114 @@
             </tr>
         </tbody>
     </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="removeMoney"></a>
+                    <span class="name">
+                        <span class="modifier">Async</span>
+                        <span ><b>removeMoney</b></span>
+                        <a href="#removeMoney"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>removeMoney(transactionDto: <a href="../classes/TransactionDto.html" target="_self">TransactionDto</a>, queryRunner: QueryRunner)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="61"
+                            class="link-to-prism">src/wallet/wallet.service.ts:61</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>transactionDto</td>
+                                    <td>
+                                                <code><a href="../classes/TransactionDto.html" target="_self" >TransactionDto</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>queryRunner</td>
+                                    <td>
+                                            <code>QueryRunner</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/ReturnTypeContainer.html" target="_self" >Promise&lt;ReturnTypeContainer&lt;any&gt;&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
 
     </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@nestjs/common&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, forwardRef, Inject } from &#x27;@nestjs/common&#x27;;
 import { InjectRepository } from &#x27;@nestjs/typeorm&#x27;;
-import { Repository } from &#x27;typeorm&#x27;;
+import { number } from &#x27;joi&#x27;;
+import { ReturnTypeContainer } from &#x27;src/common/containers/Container.entity&#x27;;
+import { WALLET_TYPES } from &#x27;src/common/types/wallet.type&#x27;;
+import { Transaction } from &#x27;src/transactions/entities/transaction.entity&#x27;;
+import { UserService } from &#x27;src/user/user.service&#x27;;
+import { QueryRunner, Repository } from &#x27;typeorm&#x27;;
 import { CreateWalletDto } from &#x27;./dto/create-wallet.dto&#x27;;
+import { TransactionDto } from &#x27;./dto/transaction.dto&#x27;;
 import { UpdateWalletDto } from &#x27;./dto/update-wallet.dto&#x27;;
-import Wallet from &#x27;./entities/wallet.entity&#x27;;
+import { Wallet } from &#x27;./entities/wallet.entity&#x27;;
+import { WalletRepository } from &#x27;./repositories/wallet.repository&#x27;;
 
 @Injectable()
 export class WalletService {
   constructor(
-    @InjectRepository(Wallet) private walletRepository: Repository&lt;Wallet&gt;,
+    @InjectRepository(WalletRepository)
+    private walletRepository: WalletRepository,
   ) {}
   async create(createWalletDto: CreateWalletDto) {
     try {
@@ -442,8 +580,70 @@ export class WalletService {
     }
   }
 
+  // async deposit(
+  //   transactionDto: TransactionDto,
+  // ): Promise&lt;ReturnTypeContainer&lt;any&gt;&gt; {
+  //   const { email, amount } &#x3D; transactionDto;
+  //   // return {
+  //   //   message: &#x27;hello&#x27;,
+  //   //   data: transactionDto,
+  //   // };
+
+  //   try {
+  //     const { id: walletId } &#x3D; await this.walletRepository.findByUserEmail(
+  //       email,
+  //     );
+  //     await this.walletRepository.increment(
+  //       { id: walletId },
+  //       &#x27;balance&#x27;,
+  //       amount,
+  //     );
+  //     const wallet &#x3D; await this.walletRepository.findOne({ id: walletId });
+  //     return {
+  //       message: &#x27;success&#x27;,
+  //       data: { balance: wallet.balance },
+  //     };
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // }
+
+  async removeMoney(
+    transactionDto: TransactionDto,
+    queryRunner: QueryRunner,
+  ): Promise&lt;ReturnTypeContainer&lt;any&gt;&gt; {
+    const { walletId, amount } &#x3D; transactionDto;
+    try {
+      // const { id: walletId } &#x3D; await this.walletRepository.findByUserEmail(
+      //   email,
+      // );
+      // const user &#x3D; await this.userService.findByEmail(email);
+      //   const walletId &#x3D; user.data.wallet.id;
+      // await this.walletRepository.decrement(
+      //   { id: walletId },
+      //   &#x27;balance&#x27;,
+      //   amount,
+      // );
+      await queryRunner.manager.decrement(
+        Wallet,
+        { id: walletId },
+        &#x27;balance&#x27;,
+        amount,
+      );
+      const wallet &#x3D; await queryRunner.manager.findOne(Wallet, {
+        id: walletId,
+      });
+      return {
+        message: &#x27;success&#x27;,
+        data: { balance: wallet.balance },
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async find() {
-    return await this.walletRepository.find({ relations: [&#x27;owner&#x27;] });
+    return await this.walletRepository.find();
   }
 
   async findById(id: number) {
@@ -460,6 +660,26 @@ export class WalletService {
           },
         },
       });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getTotalUsersNaira() {
+    try {
+      let { sum } &#x3D; await this.walletRepository
+        .createQueryBuilder(&#x27;wallet&#x27;)
+        .select(&#x27;SUM(wallet.balance)&#x27;, &#x27;sum&#x27;)
+        .where(&#x27;wallet.type &#x3D; :type&#x27;, { type: WALLET_TYPES.NAIRA })
+        .getRawOne();
+
+      if (!sum) {
+        sum &#x3D; 0;
+      }
+
+      return {
+        totalUsersNaira: sum,
+      };
     } catch (error) {
       throw error;
     }

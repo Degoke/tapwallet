@@ -65,45 +65,6 @@
 
 
 
-            <section>
-    <h3 id="index">Index</h3>
-    <table class="table table-sm table-bordered index-table">
-        <tbody>
-
-                <tr>
-                    <td class="col-md-4">
-                        <h6><b>Methods</b></h6>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <ul class="index-list">
-                            <li>
-                                <a href="#findAll" >findAll</a>
-                            </li>
-                            <li>
-                                <a href="#findOne" >findOne</a>
-                            </li>
-                            <li>
-                                <a href="#remove" >remove</a>
-                            </li>
-                            <li>
-                                <a href="#transferFunds" >transferFunds</a>
-                            </li>
-                            <li>
-                                <a href="#update" >update</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-
-
-
-
-
-        </tbody>
-    </table>
-</section>
 
             <section>
     <h3 id="constructor">Constructor</h3>
@@ -111,12 +72,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(connection: Connection)</code>
+<code>constructor(connection: Connection, receiveTransferRepository: <a href="../classes/ReceiveTransferRepository.html" target="_self">ReceiveTransferRepository</a>, sendTransferRepository: <a href="../classes/SendTransferRepository.html" target="_self">SendTransferRepository</a>, transferrequestRepository: <a href="../classes/TransferRequestRepository.html" target="_self">TransferRequestRepository</a>, userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, walletService: <a href="../injectables/WalletService.html" target="_self">WalletService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">src/transfers/transfers.service.ts:7</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/transfers/transfers.service.ts:16</a></div>
                             </td>
                         </tr>
 
@@ -145,6 +106,66 @@
                                                     </td>
                                                     
                                                 </tr>
+                                                <tr>
+                                                        <td>receiveTransferRepository</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../classes/ReceiveTransferRepository.html" target="_self" >ReceiveTransferRepository</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>sendTransferRepository</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../classes/SendTransferRepository.html" target="_self" >SendTransferRepository</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>transferrequestRepository</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../classes/TransferRequestRepository.html" target="_self" >TransferRequestRepository</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>userService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>walletService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/WalletService.html" target="_self" >WalletService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -154,352 +175,117 @@
         </table>
 </section>
 
-            <section>
-    
-    <h3 id="methods">
-        Methods
-    </h3>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="findAll"></a>
-                    <span class="name">
-                        <span ><b>findAll</b></span>
-                        <a href="#findAll"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>findAll()</code>
-                </td>
-            </tr>
 
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="13"
-                            class="link-to-prism">src/transfers/transfers.service.ts:13</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="findOne"></a>
-                    <span class="name">
-                        <span ><b>findOne</b></span>
-                        <a href="#findOne"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>findOne(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="17"
-                            class="link-to-prism">src/transfers/transfers.service.ts:17</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>id</td>
-                                    <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="remove"></a>
-                    <span class="name">
-                        <span ><b>remove</b></span>
-                        <a href="#remove"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>remove(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="25"
-                            class="link-to-prism">src/transfers/transfers.service.ts:25</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>id</td>
-                                    <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="transferFunds"></a>
-                    <span class="name">
-                        <span ><b>transferFunds</b></span>
-                        <a href="#transferFunds"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>transferFunds(createTransferDto: <a href="../classes/CreateTransferDto.html" target="_self">CreateTransferDto</a>)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="9"
-                            class="link-to-prism">src/transfers/transfers.service.ts:9</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>createTransferDto</td>
-                                    <td>
-                                                <code><a href="../classes/CreateTransferDto.html" target="_self" >CreateTransferDto</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="update"></a>
-                    <span class="name">
-                        <span ><b>update</b></span>
-                        <a href="#update"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>update(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, updateTransferDto: <a href="../classes/UpdateTransferDto.html" target="_self">UpdateTransferDto</a>)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="21"
-                            class="link-to-prism">src/transfers/transfers.service.ts:21</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>id</td>
-                                    <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>updateTransferDto</td>
-                                    <td>
-                                                <code><a href="../classes/UpdateTransferDto.html" target="_self" >UpdateTransferDto</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</section>
 
     </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@nestjs/common&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, HttpStatus, HttpException } from &#x27;@nestjs/common&#x27;;
 import { CreateTransferDto } from &#x27;./dto/create-transfer.dto&#x27;;
 import { UpdateTransferDto } from &#x27;./dto/update-transfer.dto&#x27;;
+import { InjectRepository } from &#x27;@nestjs/typeorm&#x27;;
+import { Repository } from &#x27;typeorm&#x27;;
 import { Connection } from &#x27;typeorm&#x27;;
+import { Transfer } from &#x27;./entities/transfer.entity&#x27;;
+import { UserService } from &#x27;../user/user.service&#x27;;
+import { WalletService } from &#x27;src/wallet/wallet.service&#x27;;
+import { ReturnTypeContainer } from &#x27;src/common/containers/Container.entity&#x27;;
+import { ReceiveTransferRepository } from &#x27;./repositories/receive-transfer.repository&#x27;;
+import { SendTransferRepository } from &#x27;./repositories/send-transfer.repository&#x27;;
+import { TransferRequestRepository } from &#x27;./repositories/transfer-request.repository&#x27;;
 
 @Injectable()
 export class TransfersService {
-  constructor(private connection: Connection) {}
-  transferFunds(createTransferDto: CreateTransferDto) {
-    return &#x27;This action adds a new transfer&#x27;;
+  constructor(
+    private connection: Connection,
+    @InjectRepository(ReceiveTransferRepository)
+    private receiveTransferRepository: ReceiveTransferRepository,
+    @InjectRepository(SendTransferRepository)
+    private sendTransferRepository: SendTransferRepository,
+    @InjectRepository(TransferRequestRepository)
+    private transferrequestRepository: TransferRequestRepository,
+    private readonly userService: UserService,
+    private readonly walletService: WalletService,
+  ) {}
+
+  /*async transferFunds(
+    createTransferDto: CreateTransferDto,
+  ): Promise&lt;ReturnTypeContainer&lt;string&gt;&gt; {
+    const queryRunner &#x3D; this.connection.createQueryRunner();
+
+    const { recipientEmail, senderEmail, amount } &#x3D; createTransferDto;
+    await queryRunner.connect();
+    await queryRunner.startTransaction();
+    try {
+      const recipient &#x3D; await this.userService.findByEmail(recipientEmail);
+      const sender &#x3D; await this.userService.findByEmail(senderEmail);
+
+      const recipientWalletId &#x3D; recipient.data.wallet.id;
+      const senderWalletId &#x3D; sender.data.wallet.id;
+
+      const recipientWallet &#x3D; await this.walletService.findById(
+        recipientWalletId,
+      );
+      const senderWallet &#x3D; await this.walletService.findById(senderWalletId);
+
+      if (senderWallet.balance &lt; amount) {
+        throw new HttpException(
+          {
+            status: HttpStatus.FORBIDDEN,
+            error: &#x27;Insufficient funds&#x27;,
+          },
+          HttpStatus.FORBIDDEN,
+        );
+      }
+
+      const creditTransaction &#x3D; new Transfer();
+      creditTransaction.amount &#x3D; amount;
+      creditTransaction.balance &#x3D;
+        Number(recipientWallet.balance) + Number(amount);
+      creditTransaction.user &#x3D; recipient.data;
+      creditTransaction.type &#x3D; &#x27;credit&#x27;;
+      creditTransaction.remarks &#x3D; &#x60;Credit transfer from ${sender.data.firstName} ${sender.data.lastName}&#x60;;
+
+      const debitTransaction &#x3D; new Transfer();
+      debitTransaction.amount &#x3D; amount;
+      debitTransaction.balance &#x3D; Number(senderWallet.balance) - Number(amount);
+      debitTransaction.user &#x3D; sender.data;
+      debitTransaction.type &#x3D; &#x27;debit&#x27;;
+      debitTransaction.remarks &#x3D; &#x60;Debit transfer to ${recipient.data.firstName} ${recipient.data.lastName}&#x60;;
+
+      //   console.log({ sender: sender, recipient: recipient });
+
+      sender.data.transfers.push(debitTransaction);
+      recipient.data.transfers.push(creditTransaction);
+      await queryRunner.manager.save(sender.data);
+      await queryRunner.manager.save(recipient.data);
+      await queryRunner.manager.increment(
+        Wallet,
+        { id: recipientWalletId },
+        &#x27;balance&#x27;,
+        Number(amount),
+      );
+      await queryRunner.manager.decrement(
+        Wallet,
+        { id: senderWalletId },
+        &#x27;balance&#x27;,
+        Number(amount),
+      );
+      //      console.log({ credit: credit, debit: debit });
+
+      await queryRunner.commitTransaction();
+      return {
+        message: &#x27;Transfer completed successfully&#x27;,
+      };
+    } catch (err) {
+      // since we have errors lets rollback the changes we made
+      await queryRunner.rollbackTransaction();
+      throw err;
+    } finally {
+      // you need to release a queryRunner which was manually instantiated
+      await queryRunner.release();
+    }
   }
 
   findAll() {
@@ -516,7 +302,7 @@ export class TransfersService {
 
   remove(id: number) {
     return &#x60;This action removes a #${id} transfer&#x60;;
-  }
+  }*/
 }
 </code></pre>
     </div>

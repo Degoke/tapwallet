@@ -32,19 +32,19 @@ export class UserController {
 
   @Public()
   @Post('signup')
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.userService.createCustomer(createUserDto);
+  async create(@Body() createUserDto: CreateUserDto) {
+    const user = await this.userService.createCustomer(createUserDto);
+    return {
+      user,
+    };
   }
 
   @CheckAbilities(new ReadUserPermission())
   @Get('current')
   getCurrentUser(@Request() req) {
     return {
-      message: 'success',
-      data: {
-        user: req.user.user,
-        role: req.user.role,
-      },
+      user: req.user.user,
+      role: req.user.role,
     };
   }
 
@@ -79,13 +79,16 @@ export class UserController {
     return this.userService.approveKyc(id);
   }
 
-  /*@CheckAbilities(new EditUserPermission())
+  @Public()
   @Post('verifyemail')
-  verifyEmail(@Body() verifyEmailDto: VerifyEmailDTO) {
+  async verifyEmail(@Body() verifyEmailDto: VerifyEmailDTO) {
     const { email, code } = verifyEmailDto;
-    return this.userService.verifyEmail(code, email);
+    await this.userService.verifyEmail(code, email);
+    return {
+      message: 'Email verification Success',
+    };
   }
-
+  /*
   @CheckAbilities(new EditUserPermission())
   @Post()
   initiatePhoneVerification(@Body() body) {

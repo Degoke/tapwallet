@@ -70,8 +70,542 @@
 
 
 
+            <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
 
-    </div>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#confirmWithdrawalCallback" >confirmWithdrawalCallback</a>
+                            </li>
+                            <li>
+                                <a href="#getAllTransactions" >getAllTransactions</a>
+                            </li>
+                            <li>
+                                <a href="#getCurrentUsersTransactions" >getCurrentUsersTransactions</a>
+                            </li>
+                            <li>
+                                <a href="#getTransactionById" >getTransactionById</a>
+                            </li>
+                            <li>
+                                <a href="#getuserTransactionsById" >getuserTransactionsById</a>
+                            </li>
+                            <li>
+                                <a href="#updateStatus" >updateStatus</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="confirmWithdrawalCallback"></a>
+                    <span class="name">
+                        <span ><b>confirmWithdrawalCallback</b></span>
+                        <a href="#confirmWithdrawalCallback"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>confirmWithdrawalCallback(body)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@Public()<br />@Post(&#x27;/confirm-withdrawal&#x27;)<br /></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="40"
+                            class="link-to-prism">src/transactions/transactions.controller.ts:40</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>body</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAllTransactions"></a>
+                    <span class="name">
+                        <span ><b>getAllTransactions</b></span>
+                        <a href="#getAllTransactions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getAllTransactions(query: <a href="../classes/TransactionQueryDto.html" target="_self">TransactionQueryDto</a>)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@Public()<br />@Get()<br /></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="60"
+                            class="link-to-prism">src/transactions/transactions.controller.ts:60</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>query</td>
+                                    <td>
+                                                <code><a href="../classes/TransactionQueryDto.html" target="_self" >TransactionQueryDto</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getCurrentUsersTransactions"></a>
+                    <span class="name">
+                        <span ><b>getCurrentUsersTransactions</b></span>
+                        <a href="#getCurrentUsersTransactions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getCurrentUsersTransactions(req, query: <a href="../classes/TransactionQueryDto.html" target="_self">TransactionQueryDto</a>)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@CheckAbilities(new ReadWithdrawalPermission())<br />@Get(&#x27;current-user&#x27;)<br /></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="86"
+                            class="link-to-prism">src/transactions/transactions.controller.ts:86</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>req</td>
+                                    <td>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>query</td>
+                                    <td>
+                                                <code><a href="../classes/TransactionQueryDto.html" target="_self" >TransactionQueryDto</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getTransactionById"></a>
+                    <span class="name">
+                        <span ><b>getTransactionById</b></span>
+                        <a href="#getTransactionById"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getTransactionById(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@CheckAbilities(new ReadWithdrawalPermission())<br />@Get(&#x27;:id&#x27;)<br /></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="142"
+                            class="link-to-prism">src/transactions/transactions.controller.ts:142</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getuserTransactionsById"></a>
+                    <span class="name">
+                        <span ><b>getuserTransactionsById</b></span>
+                        <a href="#getuserTransactionsById"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getuserTransactionsById(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, query: <a href="../classes/TransactionQueryDto.html" target="_self">TransactionQueryDto</a>)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@Get(&#x27;user/:id&#x27;)<br /></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="114"
+                            class="link-to-prism">src/transactions/transactions.controller.ts:114</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>query</td>
+                                    <td>
+                                                <code><a href="../classes/TransactionQueryDto.html" target="_self" >TransactionQueryDto</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateStatus"></a>
+                    <span class="name">
+                        <span ><b>updateStatus</b></span>
+                        <a href="#updateStatus"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>updateStatus(body: literal type, id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@Post(&#x27;update-status/:id&#x27;)<br /></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="51"
+                            class="link-to-prism">src/transactions/transactions.controller.ts:51</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>body</td>
+                                    <td>
+                                            <code>literal type</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
@@ -83,14 +617,142 @@
   Patch,
   Param,
   Delete,
+  UseGuards,
+  Request,
+  Query,
+  HttpException,
+  HttpStatus,
 } from &#x27;@nestjs/common&#x27;;
 import { TransactionsService } from &#x27;./transactions.service&#x27;;
 import { CreateTransactionDto } from &#x27;./dto/create-transaction.dto&#x27;;
 import { UpdateTransactionDto } from &#x27;./dto/update-transaction.dto&#x27;;
+import { PaystackService } from &#x27;src/paystack/paystack.service&#x27;;
+import { VerifyTransactionDto } from &#x27;./dto/verify-transaction.dto&#x27;;
+import { JwtAuthGaurd } from &#x27;../common/gaurds/jwt-auth.gaurd&#x27;;
+import { Public } from &#x27;src/common/decorators/jwt-auth-guard.decorator&#x27;;
+import { FWWithdrawalDto } from &#x27;./dto/withdrawal.dto&#x27;;
+import { BANK_SERVICES } from &#x27;src/common/types/service.type&#x27;;
+import { TransactionStatus } from &#x27;src/common/types/status.type&#x27;;
+import {
+  CheckAbilities,
+  CreateWithdrawalPermission,
+  ReadWithdrawalPermission,
+} from &#x27;src/ability/abilities.decorator&#x27;;
+import { TransactionQueryDto } from &#x27;./dto/transaction-query.dto&#x27;;
+import { TRANSACTION } from &#x27;src/common/types/transaction.type&#x27;;
+import { HttpErrorByCode } from &#x27;@nestjs/common/utils/http-error-by-code.util&#x27;;
 
 @Controller(&#x27;transactions&#x27;)
 export class TransactionsController {
   constructor(private readonly transactionsService: TransactionsService) {}
+
+  @Public()
+  @Post(&#x27;/confirm-withdrawal&#x27;)
+  confirmWithdrawalCallback(@Body() body) {
+    return body;
+  }
+
+  // @CheckAbilities(new CreateWithdrawalPermission())
+  // @Post(&#x27;withdraw&#x27;)
+  // initiateWithdrawal(@Body() body: FWWithdrawalDto, @Request() req) {
+  //   return this.transactionsService.initiateWithdrawal(body, req.user);
+  // }
+
+  @Post(&#x27;update-status/:id&#x27;)
+  updateStatus(
+    @Body() body: { status: TransactionStatus },
+    @Param(&#x27;id&#x27;) id: number,
+  ) {
+    return this.transactionsService.updateTransactionStatus(id, body.status);
+  }
+
+  @Public()
+  @Get()
+  getAllTransactions(@Query() query: TransactionQueryDto) {
+    let type;
+
+    if (query) {
+      if (query.type &#x3D;&#x3D;&#x3D; TRANSACTION.WITHDRAWAL) {
+        type &#x3D; TRANSACTION.WITHDRAWAL;
+      } else if (query.type &#x3D;&#x3D;&#x3D; TRANSACTION.DEPOSIT) {
+        type &#x3D; TRANSACTION.DEPOSIT;
+      } else if (!query.type) {
+        type &#x3D; &#x27;all&#x27;;
+      } else {
+        throw new HttpException(
+          &#x27;Invalid query parameter&#x27;,
+          HttpStatus.BAD_REQUEST,
+        );
+      }
+    }
+    if (!query) {
+      type &#x3D; &#x27;all&#x27;;
+    }
+
+    return this.transactionsService.getAllTransactions(type);
+  }
+
+  @CheckAbilities(new ReadWithdrawalPermission())
+  @Get(&#x27;current-user&#x27;)
+  getCurrentUsersTransactions(
+    @Request() req,
+    @Query() query: TransactionQueryDto,
+  ) {
+    let type;
+
+    if (query) {
+      if (query.type &#x3D;&#x3D;&#x3D; TRANSACTION.WITHDRAWAL) {
+        type &#x3D; TRANSACTION.WITHDRAWAL;
+      } else if (query.type &#x3D;&#x3D;&#x3D; TRANSACTION.DEPOSIT) {
+        type &#x3D; TRANSACTION.DEPOSIT;
+      } else if (!query.type) {
+        type &#x3D; &#x27;all&#x27;;
+      } else {
+        throw new HttpException(
+          &#x27;Invalid query parameter&#x27;,
+          HttpStatus.BAD_REQUEST,
+        );
+      }
+    }
+    if (!query) {
+      type &#x3D; &#x27;all&#x27;;
+    }
+    const { user } &#x3D; req.user;
+    return this.transactionsService.getUserTransactions(user.id, type);
+  }
+
+  @Get(&#x27;user/:id&#x27;)
+  getuserTransactionsById(
+    @Param(&#x27;id&#x27;) id: number,
+    @Query() query: TransactionQueryDto,
+  ) {
+    let type;
+
+    if (query) {
+      if (query.type &#x3D;&#x3D;&#x3D; TRANSACTION.WITHDRAWAL) {
+        type &#x3D; TRANSACTION.WITHDRAWAL;
+      } else if (query.type &#x3D;&#x3D;&#x3D; TRANSACTION.DEPOSIT) {
+        type &#x3D; TRANSACTION.DEPOSIT;
+      } else if (!query.type) {
+        type &#x3D; &#x27;all&#x27;;
+      } else {
+        throw new HttpException(
+          &#x27;Invalid query parameter&#x27;,
+          HttpStatus.BAD_REQUEST,
+        );
+      }
+    }
+    if (!query) {
+      type &#x3D; &#x27;all&#x27;;
+    }
+    return this.transactionsService.getUserTransactions(id, type);
+  }
+
+  @CheckAbilities(new ReadWithdrawalPermission())
+  @Get(&#x27;:id&#x27;)
+  getTransactionById(@Param(&#x27;id&#x27;) id: number) {
+    return this.transactionsService.findOneTransaction(id);
+  }
 }
 </code></pre>
     </div>

@@ -82,6 +82,10 @@
                                 <a href="#authToken" >authToken</a>
                             </li>
                             <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#baseUrl" >baseUrl</a>
+                            </li>
+                            <li>
                                 <a href="#createVirtualAccount" >createVirtualAccount</a>
                             </li>
                             <li>
@@ -92,10 +96,6 @@
                             </li>
                             <li>
                                 <a href="#handleWebHook" >handleWebHook</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#requestHeaders" >requestHeaders</a>
                             </li>
                             <li>
                                 <a href="#validateAccountName" >validateAccountName</a>
@@ -117,15 +117,54 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Async</span>
-                                <a href="#addToCache" >addToCache</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Async</span>
                                 <a href="#authenticate" >authenticate</a>
                             </li>
                             <li>
                                     <span class="modifier">Async</span>
-                                <a href="#getFromCache" >getFromCache</a>
+                                <a href="#createReservedAccount" >createReservedAccount</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#deleteReservedAccount" >deleteReservedAccount</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#getAllBankCodes" >getAllBankCodes</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#getReservedAccountTransactions" >getReservedAccountTransactions</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#getTransactionStatus" >getTransactionStatus</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#getWalletBalance" >getWalletBalance</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#handleResponse" >handleResponse</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#initiateTransfers" >initiateTransfers</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#listAllTransfers" >listAllTransfers</a>
+                            </li>
+                            <li>
+                                <a href="#setRequestHeaders" >setRequestHeaders</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#validateAccountBvnMatch" >validateAccountBvnMatch</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#validateAccountNumber" >validateAccountNumber</a>
                             </li>
                         </ul>
                     </td>
@@ -150,7 +189,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/monnify/monnify.service.ts:15</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/monnify/monnify.service.ts:19</a></div>
                             </td>
                         </tr>
 
@@ -221,45 +260,6 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="addToCache"></a>
-                    <span class="name">
-                        <span class="modifier">Async</span>
-                        <span ><b>addToCache</b></span>
-                        <a href="#addToCache"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>addToCache()</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="81"
-                            class="link-to-prism">src/monnify/monnify.service.ts:81</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="authenticate"></a>
                     <span class="name">
                         <span class="modifier">Async</span>
@@ -278,8 +278,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="30"
-                            class="link-to-prism">src/monnify/monnify.service.ts:30</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="45"
+                            class="link-to-prism">src/monnify/monnify.service.ts:45</a></div>
                 </td>
             </tr>
 
@@ -299,26 +299,168 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="getFromCache"></a>
+                    <a name="createReservedAccount"></a>
                     <span class="name">
                         <span class="modifier">Async</span>
-                        <span ><b>getFromCache</b></span>
-                        <a href="#getFromCache"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>createReservedAccount</b></span>
+                        <a href="#createReservedAccount"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>getFromCache()</code>
+                    <code>createReservedAccount(createReservedAccountDto: <a href="../classes/CreateReservedAccountDto.html" target="_self">CreateReservedAccountDto</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="77"
-                            class="link-to-prism">src/monnify/monnify.service.ts:77</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="217"
+                            class="link-to-prism">src/monnify/monnify.service.ts:217</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>createReservedAccountDto</td>
+                                    <td>
+                                                <code><a href="../classes/CreateReservedAccountDto.html" target="_self" >CreateReservedAccountDto</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>unknown</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deleteReservedAccount"></a>
+                    <span class="name">
+                        <span class="modifier">Async</span>
+                        <span ><b>deleteReservedAccount</b></span>
+                        <a href="#deleteReservedAccount"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>deleteReservedAccount(reference: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="249"
+                            class="link-to-prism">src/monnify/monnify.service.ts:249</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>reference</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>unknown</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAllBankCodes"></a>
+                    <span class="name">
+                        <span class="modifier">Async</span>
+                        <span ><b>getAllBankCodes</b></span>
+                        <a href="#getAllBankCodes"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getAllBankCodes()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="162"
+                            class="link-to-prism">src/monnify/monnify.service.ts:162</a></div>
                 </td>
             </tr>
 
@@ -329,6 +471,585 @@
                     <div class="io-description">
                         <b>Returns : </b>    <code>unknown</code>
 
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getReservedAccountTransactions"></a>
+                    <span class="name">
+                        <span class="modifier">Async</span>
+                        <span ><b>getReservedAccountTransactions</b></span>
+                        <a href="#getReservedAccountTransactions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getReservedAccountTransactions(reference)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="278"
+                            class="link-to-prism">src/monnify/monnify.service.ts:278</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>reference</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>unknown</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getTransactionStatus"></a>
+                    <span class="name">
+                        <span class="modifier">Async</span>
+                        <span ><b>getTransactionStatus</b></span>
+                        <a href="#getTransactionStatus"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getTransactionStatus(reference)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="395"
+                            class="link-to-prism">src/monnify/monnify.service.ts:395</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>reference</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>unknown</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getWalletBalance"></a>
+                    <span class="name">
+                        <span class="modifier">Async</span>
+                        <span ><b>getWalletBalance</b></span>
+                        <a href="#getWalletBalance"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getWalletBalance(accountNumber: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="340"
+                            class="link-to-prism">src/monnify/monnify.service.ts:340</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>accountNumber</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>unknown</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="handleResponse"></a>
+                    <span class="name">
+                        <span class="modifier">Async</span>
+                        <span ><b>handleResponse</b></span>
+                        <a href="#handleResponse"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>handleResponse(result)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="98"
+                            class="link-to-prism">src/monnify/monnify.service.ts:98</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>result</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>unknown</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="initiateTransfers"></a>
+                    <span class="name">
+                        <span class="modifier">Async</span>
+                        <span ><b>initiateTransfers</b></span>
+                        <a href="#initiateTransfers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>initiateTransfers(initiateTransferDto: <a href="../classes/InitiateMNTransferDto.html" target="_self">InitiateMNTransferDto</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="308"
+                            class="link-to-prism">src/monnify/monnify.service.ts:308</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>initiateTransferDto</td>
+                                    <td>
+                                                <code><a href="../classes/InitiateMNTransferDto.html" target="_self" >InitiateMNTransferDto</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>unknown</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="listAllTransfers"></a>
+                    <span class="name">
+                        <span class="modifier">Async</span>
+                        <span ><b>listAllTransfers</b></span>
+                        <a href="#listAllTransfers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>listAllTransfers()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="369"
+                            class="link-to-prism">src/monnify/monnify.service.ts:369</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>unknown</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setRequestHeaders"></a>
+                    <span class="name">
+                        <span ><b>setRequestHeaders</b></span>
+                        <a href="#setRequestHeaders"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setRequestHeaders(token)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="37"
+                            class="link-to-prism">src/monnify/monnify.service.ts:37</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>token</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../classes/Auth.html" target="_self" >{ headers: { Authorization: string; }; }</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="validateAccountBvnMatch"></a>
+                    <span class="name">
+                        <span class="modifier">Async</span>
+                        <span ><b>validateAccountBvnMatch</b></span>
+                        <a href="#validateAccountBvnMatch"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>validateAccountBvnMatch(undefined)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="424"
+                            class="link-to-prism">src/monnify/monnify.service.ts:424</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>unknown</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="validateAccountNumber"></a>
+                    <span class="name">
+                        <span class="modifier">Async</span>
+                        <span ><b>validateAccountNumber</b></span>
+                        <a href="#validateAccountNumber"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>validateAccountNumber(undefined)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="188"
+                            class="link-to-prism">src/monnify/monnify.service.ts:188</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>unknown</code>
+
+                    </div>
+                    <div class="io-description">
+                        
                     </div>
                 </td>
             </tr>
@@ -354,7 +1075,28 @@
             </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/monnify/monnify.service.ts:15</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/monnify/monnify.service.ts:18</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="baseUrl"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>baseUrl</b></span>
+                        <a href="#baseUrl"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/monnify/monnify.service.ts:19</a></div>
                         </td>
                     </tr>
 
@@ -374,7 +1116,7 @@
             </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/monnify/monnify.service.ts:27</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/monnify/monnify.service.ts:34</a></div>
                         </td>
                     </tr>
 
@@ -394,7 +1136,7 @@
             </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/monnify/monnify.service.ts:26</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/monnify/monnify.service.ts:33</a></div>
                         </td>
                     </tr>
 
@@ -414,7 +1156,7 @@
             </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/monnify/monnify.service.ts:23</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/monnify/monnify.service.ts:30</a></div>
                         </td>
                     </tr>
 
@@ -434,28 +1176,7 @@
             </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/monnify/monnify.service.ts:28</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="requestHeaders"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>requestHeaders</b></span>
-                        <a href="#requestHeaders"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/monnify/monnify.service.ts:14</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/monnify/monnify.service.ts:35</a></div>
                         </td>
                     </tr>
 
@@ -475,7 +1196,7 @@
             </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/monnify/monnify.service.ts:25</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/monnify/monnify.service.ts:32</a></div>
                         </td>
                     </tr>
 
@@ -495,7 +1216,7 @@
             </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/monnify/monnify.service.ts:24</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/monnify/monnify.service.ts:31</a></div>
                         </td>
                     </tr>
 
@@ -512,23 +1233,30 @@
 import {
   CACHE_MANAGER,
   HttpException,
+  HttpStatus,
   Inject,
   Injectable,
 } from &#x27;@nestjs/common&#x27;;
 import { ConfigService } from &#x27;@nestjs/config&#x27;;
 import { catchError, lastValueFrom, map } from &#x27;rxjs&#x27;;
 import { Cache } from &#x27;cache-manager&#x27;;
+import { CreateReservedAccountDto } from &#x27;./dto/create-reserved-account.dto&#x27;;
+import { InitiateMNTransferDto } from &#x27;./dto/initiate-transfer.dto&#x27;;
+import { TRANSACTION_STATUS } from &#x27;src/common/types/status.type&#x27;;
 
 @Injectable()
 export class MonnifyService {
-  private requestHeaders;
   private authToken;
+  private baseUrl;
   constructor(
     @Inject(CACHE_MANAGER) private cacheManager: Cache,
     private readonly configService: ConfigService,
     private httpService: HttpService,
   ) {
-    this.authToken &#x3D; this.cacheManager.get(&#x27;monnify_token&#x27;);
+    this.cacheManager
+      .get(&#x27;monnify_token&#x27;)
+      .then((res) &#x3D;&gt; (this.authToken &#x3D; res));
+    this.baseUrl &#x3D; this.configService.get(&#x27;MONNIFY_BASE_URL&#x27;);
   }
   getAllBanks;
   validateAccountWithBvn;
@@ -537,29 +1265,138 @@ export class MonnifyService {
   createVirtualAccount;
   handleWebHook;
 
-  async authenticate() {
-    if (this.authToken) {
-      return {
-        message: &#x27;Token Available&#x27;,
-      };
-    }
-
-    const apiKey &#x3D; this.configService.get(&#x27;MONNIFY_APIKEY&#x27;);
-    const apiSecret &#x3D; this.configService.get(&#x27;MONNIFY_SECRET_KEY&#x27;);
-    const baseUrl &#x3D; this.configService.get(&#x27;MONNIFY_BASE_URL&#x27;);
-
-    const clientIdSecretInBase64 &#x3D; Buffer.from(
-      apiKey + &#x27;:&#x27; + apiSecret,
-    ).toString(&#x27;base64&#x27;);
-
-    const headers &#x3D; {
+  setRequestHeaders(token) {
+    return {
       headers: {
-        Authorization: &#x60;Basic ${clientIdSecretInBase64}&#x60;,
+        Authorization: &#x60;Bearer ${token}&#x60;,
       },
     };
+  }
+
+  async authenticate() {
+    try {
+      if (this.authToken) {
+        return {
+          message: &#x27;Token Available&#x27;,
+        };
+      }
+
+      const apiKey &#x3D; this.configService.get(&#x27;MONNIFY_APIKEY&#x27;);
+      const apiSecret &#x3D; this.configService.get(&#x27;MONNIFY_SECRET_KEY&#x27;);
+
+      const clientIdSecretInBase64 &#x3D; Buffer.from(
+        apiKey + &#x27;:&#x27; + apiSecret,
+      ).toString(&#x27;base64&#x27;);
+
+      const headers &#x3D; {
+        headers: {
+          Authorization: &#x60;Basic ${clientIdSecretInBase64}&#x60;,
+        },
+      };
+
+      const response &#x3D; this.httpService
+        .post(&#x60;${this.baseUrl}api/v1/auth/login&#x60;, null, headers)
+        .pipe(
+          map((res) &#x3D;&gt; res.data),
+          catchError((error) &#x3D;&gt; {
+            throw new HttpException(
+              {
+                status: error.response.status,
+                message: error.response.data.responseMessage,
+                code: error.response.data.responseCode,
+              },
+              error.response.status,
+            );
+          }),
+        );
+
+      const result &#x3D; await lastValueFrom(response);
+
+      console.log(&#x27;starting api call...&#x27;);
+      /*await this.cacheManager.set(&#x27;monnify_token&#x27;, &#x27;hi&#x27;, {
+        ttl: result.responseBody.expiresIn,
+      });*/
+      this.authToken &#x3D; result.responseBody.accessToken;
+
+      console.log(&#x27;starting api call...&#x27;);
+
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async handleResponse(result) {
+    try {
+      if (result.responseCode &#x3D;&#x3D;&#x3D; &#x27;0&#x27;) {
+        if (result.responseBody.status) {
+          if (
+            result.responseBody.status &#x3D;&#x3D;&#x3D; &#x27;SUCCESS&#x27; ||
+            result.responseBody.status &#x3D;&#x3D;&#x3D; &#x27;COMPLETED&#x27;
+          ) {
+            return {
+              status: TRANSACTION_STATUS.COMPLETED,
+              data: result.responseBody,
+            };
+          }
+
+          if (
+            result.responseBody.status &#x3D;&#x3D;&#x3D; &#x27;PENDING&#x27; ||
+            result.responseBody.status &#x3D;&#x3D;&#x3D; &#x27;AWAITING_PROCESSING&#x27; ||
+            result.responseBody.status &#x3D;&#x3D;&#x3D; &#x27;IN_PROGRESS&#x27;
+          ) {
+            return {
+              status: TRANSACTION_STATUS.IN_PROGRESS,
+              data: result.responseBody,
+            };
+          }
+
+          if (result.responseBody.status &#x3D;&#x3D;&#x3D; &#x27;PENDING_AUTHORIZATION&#x27;) {
+            return {
+              status: TRANSACTION_STATUS.PENDING_AUTH,
+              data: result.responseBody,
+            };
+          }
+
+          if (result.responseBody.status &#x3D;&#x3D;&#x3D; &#x27;REVERSED&#x27;) {
+            return {
+              status: TRANSACTION_STATUS.REVERSED,
+              data: result.responseBody,
+            };
+          }
+        }
+
+        return {
+          data: result.responseBody,
+        };
+      }
+
+      if (
+        result.responseCode &#x3D;&#x3D;&#x3D; &#x27;D01&#x27; ||
+        result.responseCode &#x3D;&#x3D;&#x3D; &#x27;D02&#x27; ||
+        result.responseCode &#x3D;&#x3D;&#x3D; &#x27;D03&#x27; ||
+        result.responseCode &#x3D;&#x3D;&#x3D; &#x27;D04&#x27;
+      ) {
+        throw new HttpException(result.responseMessage, HttpStatus.BAD_REQUEST);
+      }
+
+      if (result.responseCode &#x3D;&#x3D;&#x3D; &#x27;99&#x27;) {
+        return {
+          status: TRANSACTION_STATUS.PENDING_REQUERY,
+        };
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getAllBankCodes() {
+    await this.authenticate();
+
+    const headers &#x3D; this.setRequestHeaders(this.authToken);
 
     const response &#x3D; this.httpService
-      .post(&#x60;${baseUrl}api/v1/auth/login&#x60;, null, headers)
+      .get(&#x60;${this.baseUrl}api/v1/banks&#x60;, headers)
       .pipe(
         map((res) &#x3D;&gt; res.data),
         catchError((error) &#x3D;&gt; {
@@ -575,30 +1412,276 @@ export class MonnifyService {
       );
 
     const result &#x3D; await lastValueFrom(response);
-    await this.cacheManager.set(
-      &#x27;monnify_token&#x27;,
-      result.requestBody.accessToken,
-      { ttl: result.requestBody.expiresIn },
-    );
 
     return result;
   }
 
-  async getFromCache() {
-    return [&#x27;one&#x27;, &#x27;two&#x27;, &#x27;three&#x27;, &#x27;four&#x27;];
+  async validateAccountNumber({ accountNumber, bankCode }) {
+    await this.authenticate();
+
+    const headers &#x3D; this.setRequestHeaders(this.authToken);
+
+    const response &#x3D; this.httpService
+      .get(
+        &#x60;api/v1/disbursements/account/validate?accountNumber&#x3D;${accountNumber}&amp;bankCode&#x3D;${bankCode}&#x60;,
+        headers,
+      )
+      .pipe(
+        map((res) &#x3D;&gt; res.data),
+        catchError((error) &#x3D;&gt; {
+          throw new HttpException(
+            {
+              status: error.response.status,
+              message: error.response.data.responseMessage,
+              code: error.response.data.responseCode,
+            },
+            error.response.statusCode,
+          );
+        }),
+      );
+
+    const result &#x3D; await lastValueFrom(response);
+
+    return await this.handleResponse(result);
   }
 
-  async addToCache() {
-    await this.cacheManager.set(
-      &#x27;test&#x27;,
-      {
-        name: &#x27;test&#x27;,
-        value: &#x27;value&#x27;,
-      },
-      { ttl: 5000 },
-    );
+  async createReservedAccount(
+    createReservedAccountDto: CreateReservedAccountDto,
+  ) {
+    await this.authenticate();
 
-    return;
+    const headers &#x3D; this.setRequestHeaders(this.authToken);
+
+    const response &#x3D; this.httpService
+      .post(
+        &#x60;${this.baseUrl}api/v2/bank-transfer/reserved-accounts&#x60;,
+        createReservedAccountDto,
+        headers,
+      )
+      .pipe(
+        map((res) &#x3D;&gt; res.data),
+        catchError((error) &#x3D;&gt; {
+          throw new HttpException(
+            {
+              status: error.response.status,
+              message: error.response.data.responseMessage,
+              code: error.response.data.responseCode,
+            },
+            error.response.statusCode,
+          );
+        }),
+      );
+
+    const result &#x3D; await lastValueFrom(response);
+
+    return await this.handleResponse(result);
+  }
+
+  async deleteReservedAccount(reference: string) {
+    await this.authenticate();
+
+    const headers &#x3D; this.setRequestHeaders(this.authToken);
+
+    const response &#x3D; this.httpService
+      .delete(
+        &#x60;${this.baseUrl}api/v1/bank-transfer/reserved-accounts/reference/${reference}&#x60;,
+        headers,
+      )
+      .pipe(
+        map((res) &#x3D;&gt; res.data),
+        catchError((error) &#x3D;&gt; {
+          throw new HttpException(
+            {
+              status: error.response.status,
+              message: error.response.data.responseMessage,
+              code: error.response.data.responseCode,
+            },
+            error.response.statusCode,
+          );
+        }),
+      );
+
+    const result &#x3D; await lastValueFrom(response);
+
+    return result;
+  }
+
+  async getReservedAccountTransactions(reference) {
+    await this.authenticate();
+
+    const headers &#x3D; this.setRequestHeaders(this.authToken);
+
+    const response &#x3D; this.httpService
+      .get(
+        &#x60;${this.baseUrl}api/v1/bank-transfer/reserved-accounts/transactions
+    ?accountReference&#x3D;${reference}&#x60;,
+        headers,
+      )
+      .pipe(
+        map((res) &#x3D;&gt; res.data),
+        catchError((error) &#x3D;&gt; {
+          throw new HttpException(
+            {
+              status: error.response.status,
+              message: error.response.data.responseMessage,
+              code: error.response.data.responseCode,
+            },
+            error.response.statusCode,
+          );
+        }),
+      );
+
+    const result &#x3D; await lastValueFrom(response);
+
+    return result;
+  }
+
+  async initiateTransfers(initiateTransferDto: InitiateMNTransferDto) {
+    await this.authenticate();
+
+    const headers &#x3D; this.setRequestHeaders(this.authToken);
+
+    const sourceNumber &#x3D; &#x27;2953846525&#x27;;
+
+    const response &#x3D; this.httpService
+      .post(
+        &#x60;${this.baseUrl}api/v2/disbursements/single&#x60;,
+        { ...initiateTransferDto, sourceAccountNumber: sourceNumber },
+        headers,
+      )
+      .pipe(
+        map((res) &#x3D;&gt; res.data),
+        catchError((error) &#x3D;&gt; {
+          throw new HttpException(
+            {
+              status: error.response.status,
+              message: error.response.data.responseMessage,
+              code: error.response.data.responseCode,
+            },
+            error.response.statusCode,
+          );
+        }),
+      );
+
+    const result &#x3D; await lastValueFrom(response);
+
+    return await this.handleResponse(result);
+  }
+
+  async getWalletBalance(accountNumber: string) {
+    await this.authenticate();
+
+    const headers &#x3D; this.setRequestHeaders(this.authToken);
+
+    const response &#x3D; this.httpService
+      .get(
+        &#x60;${this.baseUrl}api/v2/disbursements/wallet-balance?accountNumber&#x3D;${accountNumber}&#x60;,
+        headers,
+      )
+      .pipe(
+        map((res) &#x3D;&gt; res.data),
+        catchError((error) &#x3D;&gt; {
+          throw new HttpException(
+            {
+              status: error.response.status,
+              message: error.response.data.responseMessage,
+              code: error.response.data.responseCode,
+            },
+            error.response.statusCode,
+          );
+        }),
+      );
+
+    const result &#x3D; await lastValueFrom(response);
+
+    return result.responseBody.availableBalance;
+  }
+
+  async listAllTransfers() {
+    await this.authenticate();
+
+    const headers &#x3D; this.setRequestHeaders(this.authToken);
+
+    const response &#x3D; this.httpService
+      .get(&#x60;${this.baseUrl}api/v2/disbursements/single/transactions&#x60;, headers)
+      .pipe(
+        map((res) &#x3D;&gt; res.data),
+        catchError((error) &#x3D;&gt; {
+          throw new HttpException(
+            {
+              status: error.response.status,
+              message: error.response.data.responseMessage,
+              code: error.response.data.responseCode,
+            },
+            error.response.statusCode,
+          );
+        }),
+      );
+
+    const result &#x3D; await lastValueFrom(response);
+
+    return result;
+  }
+
+  async getTransactionStatus(reference) {
+    await this.authenticate();
+
+    const headers &#x3D; this.setRequestHeaders(this.authToken);
+
+    const response &#x3D; this.httpService
+      .get(
+        &#x60;${this.baseUrl}/api/v2/disbursements/single/summary?reference&#x3D;${reference}&#x60;,
+        headers,
+      )
+      .pipe(
+        map((res) &#x3D;&gt; res.data),
+        catchError((error) &#x3D;&gt; {
+          throw new HttpException(
+            {
+              status: error.response.status,
+              message: error.response.data.responseMessage,
+              code: error.response.data.responseCode,
+            },
+            error.response.statusCode,
+          );
+        }),
+      );
+
+    const result &#x3D; await lastValueFrom(response);
+
+    return this.handleResponse(result);
+  }
+
+  async validateAccountBvnMatch({ accountNumber, bankCode, bvn }) {
+    await this.authenticate();
+
+    const headers &#x3D; this.setRequestHeaders(this.authToken);
+
+    const payload &#x3D; {
+      bankCode,
+      accountNumber,
+      bvn,
+    };
+
+    const response &#x3D; this.httpService
+      .post(&#x60;${this.baseUrl}/api/v1/vas/bvn-account-match&#x60;, payload, headers)
+      .pipe(
+        map((res) &#x3D;&gt; res.data),
+        catchError((error) &#x3D;&gt; {
+          throw new HttpException(
+            {
+              status: error.response.status,
+              message: error.response.data.responseMessage,
+              code: error.response.data.responseCode,
+            },
+            error.response.statusCode,
+          );
+        }),
+      );
+
+    const result &#x3D; await lastValueFrom(response);
+
+    return await this.handleResponse(result);
   }
 }
 </code></pre>

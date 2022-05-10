@@ -32,15 +32,15 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       };
     }
 
-    if (role === USER_ROLES.ADMIN) {
-      const user = await this.UserService.findAdminForJwt(sub);
-      if (!user) {
-        return null;
-      }
-      return {
-        user,
-        role,
-      };
-    }
+    // if (role === USER_ROLES.ADMIN) {
+    //   const user = await this.UserService.findAdminForJwt(sub);
+    //   if (!user) {
+    //     return null;
+    //   }
+    //   return {
+    //     user,
+    //     role,
+    //   };
+    // }
   }
 }

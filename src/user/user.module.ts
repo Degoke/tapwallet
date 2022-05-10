@@ -9,15 +9,10 @@ import { ReferralModule } from 'src/referral/referral.module';
 import { AbilityModule } from 'src/ability/ability.module';
 import { CustomerRepository } from './repositories/customer.repository';
 import { CustomerKycRepository } from './repositories/customer-kyc.repository';
-import { AdminRepository } from '../admin/repositories/admin.repository';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([
-      CustomerRepository,
-      AdminRepository,
-      CustomerKycRepository,
-    ]),
+    TypeOrmModule.forFeature([CustomerRepository, CustomerKycRepository]),
     TransactionsModule,
     SmsModule,
     EmailModule,

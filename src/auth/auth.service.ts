@@ -13,16 +13,12 @@ export class AuthService {
 
   async validateUser(email: string, password: string) {
     try {
-      const data = await this.userService.findByEmail(email);
-      if (!data) {
-        return null;
-      }
-      const { user, role } = data;
+      const user = await this.userService.findByEmail(email);
 
       if (user && (await bcrypt.compare(password, user.password))) {
         return {
           user,
-          role,
+          role: USER_ROLES.CUSTOMER,
         };
       }
     } catch (error) {
@@ -60,11 +56,8 @@ export class AuthService {
       }
 
       return {
-        message: 'Login successful',
-        data: {
-          user,
-          token: this.jwtService.sign(payload),
-        },
+        user,
+        token: this.jwtService.sign(payload),
       };
     } catch (error) {
       throw error;

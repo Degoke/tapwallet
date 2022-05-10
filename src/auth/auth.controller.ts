@@ -21,15 +21,16 @@ export class AuthController {
   @Public()
   @Post('login/user')
   async loginUser(@Request() req) {
-    return this.authService.loginUser(req.user);
+    const data = await this.authService.loginUser(req.user);
+    return data;
   }
 
-  @UseGuards(LocalAuthGaurd)
-  @Public()
-  @Post('login/admin')
-  async loginAdmin(@Request() req) {
-    return this.authService.loginAdmin(req.user);
-  }
+  // @UseGuards(LocalAuthGaurd)
+  // @Public()
+  // @Post('login/admin')
+  // async loginAdmin(@Request() req) {
+  //   return this.authService.loginAdmin(req.user);
+  // }
 
   @Post('pin')
   setPin(@Request() req, @Body() setPinDto: SetPinDTO) {

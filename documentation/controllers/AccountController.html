@@ -84,7 +84,7 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#create" >create</a>
+                                <a href="#addBankAccount" >addBankAccount</a>
                             </li>
                             <li>
                                 <a href="#deleteAccount" >deleteAccount</a>
@@ -113,16 +113,16 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="create"></a>
+                    <a name="addBankAccount"></a>
                     <span class="name">
-                        <span ><b>create</b></span>
-                        <a href="#create"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>addBankAccount</b></span>
+                        <a href="#addBankAccount"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>create(createAccountDto: <a href="../classes/CreateAccountDto.html" target="_self">CreateAccountDto</a>)</code>
+<code>addBankAccount(addBankAccountDto: <a href="../classes/AddBankAccountDTO.html" target="_self">AddBankAccountDTO</a>, req)</code>
                 </td>
             </tr>
 
@@ -136,8 +136,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="19"
-                            class="link-to-prism">src/account/account.controller.ts:19</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="23"
+                            class="link-to-prism">src/account/account.controller.ts:23</a></div>
                 </td>
             </tr>
 
@@ -158,9 +158,20 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>createAccountDto</td>
+                                    <td>addBankAccountDto</td>
                                     <td>
-                                                <code><a href="../classes/CreateAccountDto.html" target="_self" >CreateAccountDto</a></code>
+                                                <code><a href="../classes/AddBankAccountDTO.html" target="_self" >AddBankAccountDTO</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>req</td>
+                                    <td>
                                     </td>
 
                                     <td>
@@ -212,8 +223,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="29"
-                            class="link-to-prism">src/account/account.controller.ts:29</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="39"
+                            class="link-to-prism">src/account/account.controller.ts:39</a></div>
                 </td>
             </tr>
 
@@ -256,8 +267,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="24"
-                            class="link-to-prism">src/account/account.controller.ts:24</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="34"
+                            class="link-to-prism">src/account/account.controller.ts:34</a></div>
                 </td>
             </tr>
 
@@ -285,8 +296,11 @@
   Patch,
   Param,
   Delete,
+  UseGuards,
+  Request,
 } from &#x27;@nestjs/common&#x27;;
 import { AccountService } from &#x27;./account.service&#x27;;
+import { AddBankAccountDTO } from &#x27;./dto/add-bank-accoiunt.dto&#x27;;
 import { CreateAccountDto } from &#x27;./dto/create-account.dto&#x27;;
 import { UpdateAccountDto } from &#x27;./dto/update-account.dto&#x27;;
 
@@ -294,9 +308,16 @@ import { UpdateAccountDto } from &#x27;./dto/update-account.dto&#x27;;
 export class AccountController {
   constructor(private readonly accountService: AccountService) {}
 
+  //@UseGuards(PermissionGuard(Permission.EDIT))
   @Post()
-  create(@Body() createAccountDto: CreateAccountDto) {
-    return this.accountService.createAccount(createAccountDto);
+  addBankAccount(@Body() addBankAccountDto: AddBankAccountDTO, @Request() req) {
+    const { id } &#x3D; req;
+    const { accountNumber, bankCode } &#x3D; addBankAccountDto;
+    return this.accountService.initiateAccountCreation(
+      accountNumber,
+      bankCode,
+      id,
+    );
   }
 
   @Get()

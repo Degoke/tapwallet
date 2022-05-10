@@ -123,16 +123,22 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
                         <b>Decorators : </b>
                         <br />
                         <code>
-                            @IsString()<br />@IsNotEmpty()<br />
+                            @IsBoolean()<br />@IsNotEmpty()<br />
                         </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/settings/dto/create-setting.dto.ts:10</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/settings/dto/create-setting.dto.ts:13</a></div>
                         </td>
                     </tr>
 
@@ -152,6 +158,12 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../entitys/Setting.html" target="_self" >ServiceSettingsType</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
                         <b>Decorators : </b>
                         <br />
                         <code>
@@ -161,7 +173,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="6" class="link-to-prism">src/settings/dto/create-setting.dto.ts:6</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/settings/dto/create-setting.dto.ts:9</a></div>
                         </td>
                     </tr>
 
@@ -181,6 +193,12 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#ServicesType" target="_self" >ServicesType</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
                         <b>Decorators : </b>
                         <br />
                         <code>
@@ -190,7 +208,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/settings/dto/create-setting.dto.ts:14</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/settings/dto/create-setting.dto.ts:17</a></div>
                         </td>
                     </tr>
 
@@ -209,20 +227,23 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { IsNotEmpty, IsString } from &#x27;class-validator&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Type } from &#x27;class-transformer&#x27;;
+import { IsBoolean, IsNotEmpty, IsString } from &#x27;class-validator&#x27;;
+import { ServicesType } from &#x27;src/common/types/service.type&#x27;;
+import { ServiceSettingsType } from &#x27;src/common/types/settings.type&#x27;;
 
 export class CreateSettingDto {
   @IsString()
   @IsNotEmpty()
-  name;
+  name: ServiceSettingsType;
+
+  @IsBoolean()
+  @IsNotEmpty()
+  isActive: boolean;
 
   @IsString()
   @IsNotEmpty()
-  isActive;
-
-  @IsString()
-  @IsNotEmpty()
-  value;
+  value: ServicesType;
 }
 </code></pre>
     </div>

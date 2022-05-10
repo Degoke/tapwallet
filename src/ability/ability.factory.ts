@@ -55,6 +55,10 @@ export class AbilityFactory {
     if (role === USER_ROLES.CUSTOMER) {
       if (user.level === USER_LEVELS.ZERO) {
         can([READ, EDIT, DELETE], Customer);
+      }
+
+      if (user.level === USER_LEVELS.ONE || user.level === USER_LEVELS.TWO) {
+        can([READ, EDIT, DELETE], Customer);
         can(READ, [
           Wallet,
           SendTransfer,

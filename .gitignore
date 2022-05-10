@@ -40,3 +40,6 @@ docker.env
 env
 
 pgdata
+redis-data
+
+documentation

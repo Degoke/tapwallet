@@ -249,13 +249,13 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(email: string, password: string) {
-    const user &#x3D; await this.authService.validateUser(email, password);
+    const data &#x3D; await this.authService.validateUser(email, password);
 
-    if (!user) {
+    if (!data) {
       throw new UnauthorizedException();
     }
 
-    return user;
+    return data;
   }
 }
 </code></pre>

@@ -60,22 +60,58 @@
                 <td class="col-md-4">
                     <ul class="index-list">
                         <li>
-                            <a href="#BillCategories" title="src/common/types/bill-categories.type.ts" ><b>BillCategories</b>&nbsp;&nbsp;&nbsp;(src/.../bill-categories.type.ts)</a>
+                            <a href="#ACCOUNT_TYPES" title="src/common/types/account.type.ts" ><b>ACCOUNT_TYPES</b>&nbsp;&nbsp;&nbsp;(src/.../account.type.ts)</a>
                         </li>
                         <li>
-                            <a href="#Currency" title="src/common/types/currency.type.ts" ><b>Currency</b>&nbsp;&nbsp;&nbsp;(src/.../currency.type.ts)</a>
+                            <a href="#ACTIVITIES" title="src/common/types/activities.type.ts" ><b>ACTIVITIES</b>&nbsp;&nbsp;&nbsp;(src/.../activities.type.ts)</a>
                         </li>
                         <li>
-                            <a href="#Role" title="src/user/interfaces/user-role.type.ts" ><b>Role</b>&nbsp;&nbsp;&nbsp;(src/.../user-role.type.ts)</a>
+                            <a href="#ADMIN_LEVELS" title="src/common/types/roles.type.ts" ><b>ADMIN_LEVELS</b>&nbsp;&nbsp;&nbsp;(src/.../roles.type.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#ANNOUNCEMENT_STATUS" title="src/common/types/announcement.type.ts" ><b>ANNOUNCEMENT_STATUS</b>&nbsp;&nbsp;&nbsp;(src/.../announcement.type.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#BANK_SERVICES" title="src/common/types/service.type.ts" ><b>BANK_SERVICES</b>&nbsp;&nbsp;&nbsp;(src/.../service.type.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#CURRENCY" title="src/common/types/currency.type.ts" ><b>CURRENCY</b>&nbsp;&nbsp;&nbsp;(src/.../currency.type.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#KYC_STATUS" title="src/common/types/status.type.ts" ><b>KYC_STATUS</b>&nbsp;&nbsp;&nbsp;(src/.../status.type.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#SERVICE_STATUS" title="src/common/types/status.type.ts" ><b>SERVICE_STATUS</b>&nbsp;&nbsp;&nbsp;(src/.../status.type.ts)</a>
                         </li>
                         <li>
                             <a href="#Services" title="src/common/types/service.type.ts" ><b>Services</b>&nbsp;&nbsp;&nbsp;(src/.../service.type.ts)</a>
                         </li>
                         <li>
-                            <a href="#TransactionStatus" title="src/common/types/status.type.ts" ><b>TransactionStatus</b>&nbsp;&nbsp;&nbsp;(src/.../status.type.ts)</a>
+                            <a href="#ServicesSettings" title="src/common/types/settings.type.ts" ><b>ServicesSettings</b>&nbsp;&nbsp;&nbsp;(src/.../settings.type.ts)</a>
                         </li>
                         <li>
-                            <a href="#UserPermission" title="src/user/interfaces/user-permissions.interface.ts" ><b>UserPermission</b>&nbsp;&nbsp;&nbsp;(src/.../user-permissions.interface.ts)</a>
+                            <a href="#TRANSACTION" title="src/common/types/transaction.type.ts" ><b>TRANSACTION</b>&nbsp;&nbsp;&nbsp;(src/.../transaction.type.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#TRANSACTION_MODES" title="src/common/types/transaction.type.ts" ><b>TRANSACTION_MODES</b>&nbsp;&nbsp;&nbsp;(src/.../transaction.type.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#TRANSACTION_STATUS" title="src/common/types/status.type.ts" ><b>TRANSACTION_STATUS</b>&nbsp;&nbsp;&nbsp;(src/.../status.type.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#TRANSFER_TYPES" title="src/common/types/transfer.type.ts" ><b>TRANSFER_TYPES</b>&nbsp;&nbsp;&nbsp;(src/.../transfer.type.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#USER_ACTIONS" title="src/common/types/permissions.type.ts" ><b>USER_ACTIONS</b>&nbsp;&nbsp;&nbsp;(src/.../permissions.type.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#USER_LEVELS" title="src/common/types/roles.type.ts" ><b>USER_LEVELS</b>&nbsp;&nbsp;&nbsp;(src/.../roles.type.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#USER_ROLES" title="src/common/types/roles.type.ts" ><b>USER_ROLES</b>&nbsp;&nbsp;&nbsp;(src/.../roles.type.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#WALLET_TYPES" title="src/common/types/wallet.type.ts" ><b>WALLET_TYPES</b>&nbsp;&nbsp;&nbsp;(src/.../wallet.type.ts)</a>
                         </li>
                     </ul>
                 </td>
@@ -84,14 +120,47 @@
     </table>
 </section>
 
-    <h3>src/common/types/bill-categories.type.ts</h3>
+    <h3>src/common/types/account.type.ts</h3>
     <section>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="BillCategories"></a>
-                        <span class="name "><b>BillCategories</b><a href="#BillCategories"><span class="icon ion-ios-link"></span></a></span>
+                        <a name="ACCOUNT_TYPES"></a>
+                        <span class="name "><b>ACCOUNT_TYPES</b><a href="#ACCOUNT_TYPES"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;BANK_ACCOUNT
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>bank_account</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;VIRTUAL_ACCOUNT
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>virtual_account</code>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+    <h3>src/common/types/activities.type.ts</h3>
+    <section>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ACTIVITIES"></a>
+                        <span class="name "><b>ACTIVITIES</b><a href="#ACTIVITIES"><span class="icon ion-ios-link"></span></a></span>
                     </td>
                 </tr>
                         <tr>
@@ -106,93 +175,160 @@
                         </tr>
                         <tr>
                             <td class="col-md-4">
-                                &nbsp;DATABUNDLE
+                                &nbsp;TV_SUBSCRIPTION
                             </td>
                         </tr>
                         <tr>
                             <td class="col-md-4">
-                                <i>Value : </i><code>data_bundle</code>
+                                <i>Value : </i><code>tv_subscription</code>
                             </td>
                         </tr>
                         <tr>
                             <td class="col-md-4">
-                                &nbsp;INTERNET
+                                &nbsp;ELECTRICITY
                             </td>
                         </tr>
                         <tr>
                             <td class="col-md-4">
-                                <i>Value : </i><code>internet</code>
+                                <i>Value : </i><code>electricity</code>
                             </td>
                         </tr>
                         <tr>
                             <td class="col-md-4">
-                                &nbsp;POWER
+                                &nbsp;MOBILE_DATA
                             </td>
                         </tr>
                         <tr>
                             <td class="col-md-4">
-                                <i>Value : </i><code>power</code>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                &nbsp;CABLES
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <i>Value : </i><code>cables</code>
+                                <i>Value : </i><code>mobile_data</code>
                             </td>
                         </tr>
             </tbody>
         </table>
 </section>
-    <h3>src/common/types/currency.type.ts</h3>
+    <h3>src/common/types/roles.type.ts</h3>
     <section>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="Currency"></a>
-                        <span class="name "><b>Currency</b><a href="#Currency"><span class="icon ion-ios-link"></span></a></span>
+                        <a name="ADMIN_LEVELS"></a>
+                        <span class="name "><b>ADMIN_LEVELS</b><a href="#ADMIN_LEVELS"><span class="icon ion-ios-link"></span></a></span>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                &nbsp;NGN
+                                &nbsp;ZERO
                             </td>
                         </tr>
                         <tr>
                             <td class="col-md-4">
-                                <i>Value : </i><code>NGN</code>
+                                <i>Value : </i><code>level_0</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;ONE
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>level_1</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;TWO
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>level_2</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;SUSPENDED
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>suspended</code>
                             </td>
                         </tr>
             </tbody>
         </table>
-</section>
-    <h3>src/user/interfaces/user-role.type.ts</h3>
-    <section>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="Role"></a>
-                        <span class="name "><b>Role</b><a href="#Role"><span class="icon ion-ios-link"></span></a></span>
+                        <a name="USER_LEVELS"></a>
+                        <span class="name "><b>USER_LEVELS</b><a href="#USER_LEVELS"><span class="icon ion-ios-link"></span></a></span>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                &nbsp;User
+                                &nbsp;ZERO
                             </td>
                         </tr>
                         <tr>
                             <td class="col-md-4">
-                                <i>Value : </i><code>user</code>
+                                <i>Value : </i><code>level_0</code>
                             </td>
                         </tr>
                         <tr>
                             <td class="col-md-4">
-                                &nbsp;Admin
+                                &nbsp;ONE
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>level_1</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;TWO
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>level_2</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;SUSPENDED
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>suspended</code>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="USER_ROLES"></a>
+                        <span class="name "><b>USER_ROLES</b><a href="#USER_ROLES"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;CUSTOMER
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>customer</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;ADMIN
                             </td>
                         </tr>
                         <tr>
@@ -203,8 +339,81 @@
             </tbody>
         </table>
 </section>
+    <h3>src/common/types/announcement.type.ts</h3>
+    <section>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ANNOUNCEMENT_STATUS"></a>
+                        <span class="name "><b>ANNOUNCEMENT_STATUS</b><a href="#ANNOUNCEMENT_STATUS"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;DRAFT
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>draft</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;PUBLISHED
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>published</code>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
     <h3>src/common/types/service.type.ts</h3>
     <section>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="BANK_SERVICES"></a>
+                        <span class="name "><b>BANK_SERVICES</b><a href="#BANK_SERVICES"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;MONNIFY
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>monnify</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;PAYSTACK
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>paystack</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;FLUTTERWAVE
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>flutterwave</code>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
@@ -243,6 +452,49 @@
                                 <i>Value : </i><code>paystack</code>
                             </td>
                         </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;VTPASS
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>vtpass</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;MONNIFY
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>monnify</code>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+    <h3>src/common/types/currency.type.ts</h3>
+    <section>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="CURRENCY"></a>
+                        <span class="name "><b>CURRENCY</b><a href="#CURRENCY"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;NAIRA
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>NGN</code>
+                            </td>
+                        </tr>
             </tbody>
         </table>
 </section>
@@ -252,8 +504,88 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="TransactionStatus"></a>
-                        <span class="name "><b>TransactionStatus</b><a href="#TransactionStatus"><span class="icon ion-ios-link"></span></a></span>
+                        <a name="KYC_STATUS"></a>
+                        <span class="name "><b>KYC_STATUS</b><a href="#KYC_STATUS"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;PENDING
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>pending</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;ACCEPTED
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>accepted</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;DECLINED
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>declined</code>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="SERVICE_STATUS"></a>
+                        <span class="name "><b>SERVICE_STATUS</b><a href="#SERVICE_STATUS"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;ACTIVE
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>active</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;DORMANT
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>dormant</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;DEPRECATED
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>deprecated</code>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="TRANSACTION_STATUS"></a>
+                        <span class="name "><b>TRANSACTION_STATUS</b><a href="#TRANSACTION_STATUS"><span class="icon ion-ios-link"></span></a></span>
                     </td>
                 </tr>
                         <tr>
@@ -268,12 +600,12 @@
                         </tr>
                         <tr>
                             <td class="col-md-4">
-                                &nbsp;SUCCESSFUL
+                                &nbsp;COMPLETED
                             </td>
                         </tr>
                         <tr>
                             <td class="col-md-4">
-                                <i>Value : </i><code>SUCCESSFUL</code>
+                                <i>Value : </i><code>COMPLETED</code>
                             </td>
                         </tr>
                         <tr>
@@ -296,27 +628,349 @@
                                 <i>Value : </i><code>FAILED</code>
                             </td>
                         </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;QUEUED
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>QUEUED</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;IN_PROGRESS
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>IN_PROGRESS</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;PENDING_AUTH
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>PENDING_AUTH</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;REVERSED
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>REVERSED</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;PENDING_REQUERY
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>PENDING_REQUERY</code>
+                            </td>
+                        </tr>
             </tbody>
         </table>
 </section>
-    <h3>src/user/interfaces/user-permissions.interface.ts</h3>
+    <h3>src/common/types/settings.type.ts</h3>
     <section>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="UserPermission"></a>
-                        <span class="name "><b>UserPermission</b><a href="#UserPermission"><span class="icon ion-ios-link"></span></a></span>
+                        <a name="ServicesSettings"></a>
+                        <span class="name "><b>ServicesSettings</b><a href="#ServicesSettings"><span class="icon ion-ios-link"></span></a></span>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                &nbsp;register
+                                &nbsp;BANK_SERVICE
                             </td>
                         </tr>
                         <tr>
                             <td class="col-md-4">
-                                <i>Value : </i><code>register</code>
+                                <i>Value : </i><code>BANK_SERVICE</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;TRANSACTIONS_SERVICE
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>TRANSACTIONS_SERVICE</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;DATA_SERVICE
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>DATA_SERVICE</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;INTERNET_SERVICE
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>INTERNET_SERVICE</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;AIRTIME_SERVICE
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>AIRTIME_SERVICE</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;ELECTRICITY_SERVICE
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>ELECTRICITY_SERVICE</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;CABLETV_SERVICE
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>CABLETV_SERVICE</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;EDUCATION_SERVICE
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>EDUCATION_SERVICE</code>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+    <h3>src/common/types/transaction.type.ts</h3>
+    <section>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="TRANSACTION"></a>
+                        <span class="name "><b>TRANSACTION</b><a href="#TRANSACTION"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;DEPOSIT
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>deposit</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;WITHDRAWAL
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>withdrawal</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;DEBIT
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>debit</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;CREDIT
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>credit</code>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="TRANSACTION_MODES"></a>
+                        <span class="name "><b>TRANSACTION_MODES</b><a href="#TRANSACTION_MODES"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;BANK_ACCOUNT
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>Bank Account</code>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+    <h3>src/common/types/transfer.type.ts</h3>
+    <section>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="TRANSFER_TYPES"></a>
+                        <span class="name "><b>TRANSFER_TYPES</b><a href="#TRANSFER_TYPES"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;SEND
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>send</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;RECEIVE
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>receive</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;REQUEST
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>request</code>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+    <h3>src/common/types/permissions.type.ts</h3>
+    <section>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="USER_ACTIONS"></a>
+                        <span class="name "><b>USER_ACTIONS</b><a href="#USER_ACTIONS"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;MANAGE
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>manage</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;READ
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>read</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;EDIT
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>edit</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;DELETE
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>delete</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;CREATE
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>create</code>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+    <h3>src/common/types/wallet.type.ts</h3>
+    <section>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="WALLET_TYPES"></a>
+                        <span class="name "><b>WALLET_TYPES</b><a href="#WALLET_TYPES"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;NAIRA
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>naira</code>
                             </td>
                         </tr>
             </tbody>

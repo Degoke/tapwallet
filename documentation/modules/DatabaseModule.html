@@ -76,14 +76,26 @@
 import { TypeOrmModule } from &#x27;@nestjs/typeorm&#x27;;
 import { ConfigModule, ConfigService } from &#x27;@nestjs/config&#x27;;
 import { join } from &#x27;path&#x27;;
-import User from &#x27;src/user/entities/user.entity&#x27;;
-import Wallet from &#x27;src/wallet/entities/wallet.entity&#x27;;
-import { Transaction } from &#x27;../transactions/entities/transaction.entity&#x27;;
 import { Setting } from &#x27;src/settings/entities/setting.entity&#x27;;
-import { Account } from &#x27;src/account/entities/account.entity&#x27;;
 import Log from &#x27;src/log/entities/log.entity&#x27;;
 import DatabaseLogger from &#x27;./database-logger&#x27;;
-import { Airtime } from &#x27;src/airtime/entities/airtime.entity&#x27;;
+import { ReceiveTransfer } from &#x27;src/transfers/entities/receive-transfer.entity&#x27;;
+import { SendTransfer } from &#x27;src/transfers/entities/send-transfer.entity&#x27;;
+import { TransferRequest } from &#x27;src/transfers/entities/transfer-requests.entity&#x27;;
+import { Referral } from &#x27;src/referral/entities/referral.entity&#x27;;
+import { Withdrawal } from &#x27;src/transactions/entities/withdrawal.entity&#x27;;
+import { Customer } from &#x27;src/user/entities/customer.entity&#x27;;
+import { Wallet } from &#x27;src/wallet/entities/wallet.entity&#x27;;
+import { AirtimeActivity } from &#x27;src/activities/entities/airtime-activity.entity&#x27;;
+import { ElectricityBillActivity } from &#x27;src/activities/entities/electricity-bill-activity.entity&#x27;;
+import { TvSubscriptionActivity } from &#x27;src/activities/entities/tv-subscription-activity.entity&#x27;;
+import { MobileDataActivity } from &#x27;src/activities/entities/mobiledata-activity.entity&#x27;;
+import { Deposit } from &#x27;src/transactions/entities/deposit.entity&#x27;;
+import { Account } from &#x27;src/account/entities/account.entity&#x27;;
+import { Merchant } from &#x27;src/merchant-api/entities/merchant.entity&#x27;;
+import { PaymentMerchant } from &#x27;src/settings/entities/payment-merchant.entity&#x27;;
+import { Admin } from &#x27;src/admin/entities/admin.entity&#x27;;
+import { SeedingLogEntry } from &#x27;src/seeding/entities/seeding.entity&#x27;;
 
 @Module({
   imports: [
@@ -98,12 +110,35 @@ import { Airtime } from &#x27;src/airtime/entities/airtime.entity&#x27;;
         username: configService.get(&#x27;POSTGRES_USER&#x27;),
         password: configService.get(&#x27;POSTGRES_PASSWORD&#x27;),
         database: configService.get(&#x27;POSTGRES_DB&#x27;),
-        entities: [User, Account, Wallet, Transaction, Setting, Log, Airtime],
-        migrations: [&#x27;src/migration/*.js&#x27;],
+        ssl: configService.get(&#x27;NODE_ENV&#x27;) &#x3D;&#x3D;&#x3D; &#x27;dev&#x27; ? false : true,
+        entities: [
+          Setting,
+          Log,
+          Customer,
+          Admin,
+          Wallet,
+          Withdrawal,
+          ReceiveTransfer,
+          SendTransfer,
+          TransferRequest,
+          Account,
+          Referral,
+          AirtimeActivity,
+          ElectricityBillActivity,
+          TvSubscriptionActivity,
+          MobileDataActivity,
+          Deposit,
+          Merchant,
+          PaymentMerchant,
+          SeedingLogEntry,
+        ],
+        migrations: [&#x27;dist/migrations/**/*{.ts,.js}&#x27;],
         cli: {
-          migrationsDir: &#x27;src/migration&#x27;,
+          migrationsDir: &#x27;src/migrations&#x27;,
         },
         synchronize: true,
+        migrationsRun: true,
+
         autoLoadEntities: true,
       }),
     }),

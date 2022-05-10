@@ -69,6 +69,21 @@
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#currentBankService" >currentBankService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -81,6 +96,10 @@
                             <li>
                                     <span class="modifier">Async</span>
                                 <a href="#createAccount" >createAccount</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#createVirtualAccount" >createVirtualAccount</a>
                             </li>
                             <li>
                                     <span class="modifier">Async</span>
@@ -100,7 +119,15 @@
                             </li>
                             <li>
                                     <span class="modifier">Async</span>
-                                <a href="#validateAccount" >validateAccount</a>
+                                <a href="#initiateAccountCreation" >initiateAccountCreation</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#validateAccountName" >validateAccountName</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#verifyBvn" >verifyBvn</a>
                             </li>
                         </ul>
                     </td>
@@ -120,12 +147,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(accountRepository: <a href="../entitys/Account.html" target="_self">Repository&lt;Account&gt;</a>, flutterwaveService: <a href="../injectables/FlutterwaveService.html" target="_self">FlutterwaveService</a>)</code>
+<code>constructor(monnifyAccountRepository: <a href="../classes/AccountRepository.html" target="_self">AccountRepository</a>, flutterwaveService: <a href="../injectables/FlutterwaveService.html" target="_self">FlutterwaveService</a>, monnifyService: <a href="../injectables/MonnifyService.html" target="_self">MonnifyService</a>, configService: ConfigService, userService: <a href="../injectables/UserService.html" target="_self">UserService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/account/account.service.ts:10</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/account/account.service.ts:18</a></div>
                             </td>
                         </tr>
 
@@ -143,10 +170,10 @@
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>accountRepository</td>
+                                                        <td>monnifyAccountRepository</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../entitys/Account.html" target="_self" >Repository&lt;Account&gt;</a></code>
+                                                                        <code><a href="../classes/AccountRepository.html" target="_self" >AccountRepository</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -159,6 +186,42 @@
                                                   
                                                         <td>
                                                                         <code><a href="../injectables/FlutterwaveService.html" target="_self" >FlutterwaveService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>monnifyService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/MonnifyService.html" target="_self" >MonnifyService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>configService</td>
+                                                  
+                                                        <td>
+                                                                    <code>ConfigService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>userService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -202,8 +265,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="61"
-                            class="link-to-prism">src/account/account.service.ts:61</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="77"
+                            class="link-to-prism">src/account/account.service.ts:77</a></div>
                 </td>
             </tr>
 
@@ -255,6 +318,73 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="createVirtualAccount"></a>
+                    <span class="name">
+                        <span class="modifier">Async</span>
+                        <span ><b>createVirtualAccount</b></span>
+                        <a href="#createVirtualAccount"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>createVirtualAccount(userId)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="169"
+                            class="link-to-prism">src/account/account.service.ts:169</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>userId</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="deleteAccount"></a>
                     <span class="name">
                         <span class="modifier">Async</span>
@@ -273,8 +403,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="73"
-                            class="link-to-prism">src/account/account.service.ts:73</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="89"
+                            class="link-to-prism">src/account/account.service.ts:89</a></div>
                 </td>
             </tr>
 
@@ -340,8 +470,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="31"
-                            class="link-to-prism">src/account/account.service.ts:31</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="47"
+                            class="link-to-prism">src/account/account.service.ts:47</a></div>
                 </td>
             </tr>
 
@@ -407,8 +537,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="46"
-                            class="link-to-prism">src/account/account.service.ts:46</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="62"
+                            class="link-to-prism">src/account/account.service.ts:62</a></div>
                 </td>
             </tr>
 
@@ -478,8 +608,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="16"
-                            class="link-to-prism">src/account/account.service.ts:16</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="30"
+                            class="link-to-prism">src/account/account.service.ts:30</a></div>
                 </td>
             </tr>
 
@@ -499,26 +629,26 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="validateAccount"></a>
+                    <a name="initiateAccountCreation"></a>
                     <span class="name">
                         <span class="modifier">Async</span>
-                        <span ><b>validateAccount</b></span>
-                        <a href="#validateAccount"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>initiateAccountCreation</b></span>
+                        <a href="#initiateAccountCreation"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>validateAccount(validateAccountDto: <a href="../classes/ValidateAccountDto.html" target="_self">ValidateAccountDto</a>)</code>
+                    <code>initiateAccountCreation(accountNumber: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, bankCode: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, userId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="84"
-                            class="link-to-prism">src/account/account.service.ts:84</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="100"
+                            class="link-to-prism">src/account/account.service.ts:100</a></div>
                 </td>
             </tr>
 
@@ -539,9 +669,155 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>validateAccountDto</td>
+                                    <td>accountNumber</td>
                                     <td>
-                                                <code><a href="../classes/ValidateAccountDto.html" target="_self" >ValidateAccountDto</a></code>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>bankCode</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>userId</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>unknown</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="validateAccountName"></a>
+                    <span class="name">
+                        <span class="modifier">Async</span>
+                        <span ><b>validateAccountName</b></span>
+                        <a href="#validateAccountName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>validateAccountName()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="144"
+                            class="link-to-prism">src/account/account.service.ts:144</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="verifyBvn"></a>
+                    <span class="name">
+                        <span class="modifier">Async</span>
+                        <span ><b>verifyBvn</b></span>
+                        <a href="#verifyBvn"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>verifyBvn(accountNumber: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, bankCode: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="154"
+                            class="link-to-prism">src/account/account.service.ts:154</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>accountNumber</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>bankCode</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                     </td>
 
                                     <td>
@@ -567,29 +843,78 @@
         </tbody>
     </table>
 </section>
+            <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="currentBankService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>currentBankService</b></span>
+                        <a href="#currentBankService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/BankService.html" target="_self" >BankServices</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/account/account.service.ts:18</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
 
     </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { HttpException, HttpStatus, Injectable } from &#x27;@nestjs/common&#x27;;
+import { ConfigService } from &#x27;@nestjs/config&#x27;;
 import { InjectRepository } from &#x27;@nestjs/typeorm&#x27;;
+import { ACCOUNT_TYPES } from &#x27;src/common/types/account.type&#x27;;
+import { CURRENCY } from &#x27;src/common/types/currency.type&#x27;;
+import { BankServices, BANK_SERVICES } from &#x27;src/common/types/service.type&#x27;;
 import { FlutterwaveService } from &#x27;src/flutterwave/flutterwave.service&#x27;;
-import { Repository } from &#x27;typeorm&#x27;;
+import { MonnifyService } from &#x27;src/monnify/monnify.service&#x27;;
+import { UserService } from &#x27;src/user/user.service&#x27;;
+import { getTransactionReference } from &#x27;src/utils/random-generators&#x27;;
 import { CreateAccountDto } from &#x27;./dto/create-account.dto&#x27;;
-import { ValidateAccountDto } from &#x27;./dto/validate-account.dto&#x27;;
-import { Account } from &#x27;./entities/account.entity&#x27;;
+import { AccountRepository } from &#x27;./repositories/account.repository&#x27;;
+
+const { MONNIFY, FLUTTERWAVE } &#x3D; BANK_SERVICES;
 
 @Injectable()
 export class AccountService {
+  private currentBankService: BankServices;
   constructor(
-    @InjectRepository(Account) private accountRepository: Repository&lt;Account&gt;,
+    @InjectRepository(AccountRepository)
+    private monnifyAccountRepository: AccountRepository,
     private readonly flutterwaveService: FlutterwaveService,
-  ) {}
+    private readonly monnifyService: MonnifyService,
+    private readonly configService: ConfigService,
+    private readonly userService: UserService,
+  ) {
+    this.currentBankService &#x3D; MONNIFY;
+  }
 
   async findAllAccounts() {
     try {
-      const data &#x3D; await this.accountRepository.find({ relations: [&#x27;owner&#x27;] });
+      const data &#x3D; await this.monnifyAccountRepository.find({
+        relations: [&#x27;user&#x27;],
+      });
       if (!data) {
         throw new HttpException(
           &#x27;There are no avilable accounts&#x27;,
@@ -604,7 +929,7 @@ export class AccountService {
 
   async findAccoutnById(id) {
     try {
-      const data &#x3D; await this.accountRepository.findOne(id);
+      const data &#x3D; await this.monnifyAccountRepository.findOne(id);
       if (!data) {
         throw new HttpException(
           &#x27;There are no avilable accounts&#x27;,
@@ -619,7 +944,7 @@ export class AccountService {
 
   async findAccoutnByOwnerId(id: number) {
     try {
-      const data &#x3D; await this.accountRepository.findOne({ ownerId: id });
+      const data &#x3D; await this.monnifyAccountRepository.findOne({ userId: id });
       if (!data) {
         throw new HttpException(
           &#x27;There are no avilable accounts&#x27;,
@@ -634,8 +959,8 @@ export class AccountService {
 
   async createAccount(createAccountDto: CreateAccountDto) {
     try {
-      const account &#x3D; this.accountRepository.create(createAccountDto);
-      await this.accountRepository.save(account);
+      const account &#x3D; this.monnifyAccountRepository.create(createAccountDto);
+      await this.monnifyAccountRepository.save(account);
       return {
         message: &#x27;Account created successfully&#x27;,
       };
@@ -646,7 +971,7 @@ export class AccountService {
 
   async deleteAccount(id) {
     try {
-      await this.accountRepository.delete(id);
+      await this.monnifyAccountRepository.delete(id);
       return {
         message: &#x27;Account Deleted successfully&#x27;,
       };
@@ -655,15 +980,114 @@ export class AccountService {
     }
   }
 
-  async validateAccount(validateAccountDto: ValidateAccountDto) {
-    const { bankCode, accountNumber } &#x3D; validateAccountDto;
+  async initiateAccountCreation(
+    accountNumber: string,
+    bankCode: string,
+    userId: number,
+  ) {
     try {
-      return await this.flutterwaveService.verifyAccountNumber(
-        bankCode,
-        accountNumber,
-      );
+      const bvn &#x3D; await this.userService.findBvnByUserId(userId);
+      if (!bvn) {
+        throw new HttpException(&#x27;No bvn registered&#x27;, HttpStatus.BAD_REQUEST);
+      }
+      switch (this.currentBankService) {
+        case MONNIFY:
+          const result &#x3D; await this.monnifyService.validateAccountBvnMatch({
+            accountNumber,
+            bankCode,
+            bvn,
+          });
+          const {
+            accountNumber: returnedAccountNumber,
+            accountName,
+            matchStatus,
+          } &#x3D; result.data;
+
+          if (matchStatus !&#x3D;&#x3D; &#x27;FULL_MATCH&#x27;) {
+            throw new HttpException(
+              &#x27;Bvn does not match account&#x27;,
+              HttpStatus.BAD_REQUEST,
+            );
+          }
+          return await this.createAccount({
+            accountName,
+            accountNumber: returnedAccountNumber,
+            bankCode,
+            userId,
+            accountType: ACCOUNT_TYPES.BANK_ACCOUNT,
+            bankService: BANK_SERVICES.MONNIFY,
+            currency: CURRENCY.NAIRA,
+          });
+      }
     } catch (error) {
-      throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
+      throw error;
+    }
+  }
+
+  async validateAccountName() {
+    try {
+      switch (this.currentBankService) {
+        case MONNIFY:
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async verifyBvn(accountNumber: string, bankCode: string) {
+    try {
+      switch (this.currentBankService) {
+        case MONNIFY:
+          const result &#x3D; await this.monnifyService.validateAccountNumber({
+            accountNumber,
+            bankCode,
+          });
+          return result.data.accountName;
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async createVirtualAccount(userId) {
+    const kyc &#x3D; await this.userService.findKycByUserId(userId);
+    const bvn &#x3D; await this.userService.findBvnByUserId(userId);
+    const reference &#x3D; await getTransactionReference();
+    const contractCode &#x3D; await this.configService.get(&#x27;MONNIFY_CONTRACT_CODE&#x27;);
+
+    const payload &#x3D; {
+      accountReference: reference,
+      accountName: &#x60;TapMoni-${kyc.bvnName}&#x60;,
+      currencyCode: CURRENCY.NAIRA,
+      contractCode,
+      customerEmail: kyc.user.email,
+      bvn: bvn,
+      customerName: kyc.bvnName,
+      getAllAvailableBanks: true,
+    };
+    try {
+      switch (this.currentBankService) {
+        case MONNIFY:
+          const result &#x3D; await this.monnifyService.createReservedAccount(
+            payload,
+          );
+          const { accounts, accountName, currencyCode } &#x3D; result.data;
+
+          accounts.forEach(async (account) &#x3D;&gt; {
+            const { bankCode, bankName, accountNumber } &#x3D; account;
+            await this.createAccount({
+              accountName,
+              accountNumber,
+              bankCode,
+              userId,
+              accountType: ACCOUNT_TYPES.VIRTUAL_ACCOUNT,
+              bankService: BANK_SERVICES.MONNIFY,
+              currency: CURRENCY.NAIRA,
+            });
+          });
+      }
+    } catch (error) {
+      throw error;
     }
   }
 }

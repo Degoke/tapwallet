@@ -78,22 +78,48 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#addTransaction" >addTransaction</a>
+                                    <span class="modifier">Private</span>
+                                <a href="#currentService" >currentService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#findOneTransaction" >findOneTransaction</a>
                             </li>
                             <li>
-                                <a href="#deposit" >deposit</a>
-                            </li>
-                            <li>
+                                    <span class="modifier">Async</span>
                                 <a href="#getAllTransactions" >getAllTransactions</a>
                             </li>
                             <li>
-                                <a href="#getTransactionById" >getTransactionById</a>
+                                    <span class="modifier">Async</span>
+                                <a href="#getTotalDepositsBalance" >getTotalDepositsBalance</a>
                             </li>
                             <li>
-                                <a href="#getTransactionByOwnerId" >getTransactionByOwnerId</a>
+                                    <span class="modifier">Async</span>
+                                <a href="#getTotalWithdrawalsBalance" >getTotalWithdrawalsBalance</a>
                             </li>
                             <li>
-                                <a href="#withdraw" >withdraw</a>
+                                    <span class="modifier">Async</span>
+                                <a href="#getTransactionStatus" >getTransactionStatus</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#getUserTransactions" >getUserTransactions</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#updateTransactionStatus" >updateTransactionStatus</a>
                             </li>
                         </ul>
                     </td>
@@ -103,13 +129,613 @@
 
 
 
-
         </tbody>
     </table>
 </section>
 
+            <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(cacheManager: Cache, connection: Connection, withdrawalRepository: <a href="../classes/WithdrawalRepository.html" target="_self">WithdrawalRepository</a>, depositRepository: <a href="../classes/DepositRepository.html" target="_self">DepositRepository</a>, paystackService: <a href="../injectables/PaystackService.html" target="_self">PaystackService</a>, walletService: <a href="../injectables/WalletService.html" target="_self">WalletService</a>, flutterwaveService: <a href="../injectables/FlutterwaveService.html" target="_self">FlutterwaveService</a>, monnifyService: <a href="../injectables/MonnifyService.html" target="_self">MonnifyService</a>, settingsService: <a href="../injectables/SettingsService.html" target="_self">SettingsService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/transactions/transactions.service.ts:55</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>cacheManager</td>
+                                                  
+                                                        <td>
+                                                                    <code>Cache</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>connection</td>
+                                                  
+                                                        <td>
+                                                                    <code>Connection</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>withdrawalRepository</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../classes/WithdrawalRepository.html" target="_self" >WithdrawalRepository</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>depositRepository</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../classes/DepositRepository.html" target="_self" >DepositRepository</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>paystackService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/PaystackService.html" target="_self" >PaystackService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>walletService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/WalletService.html" target="_self" >WalletService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>flutterwaveService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/FlutterwaveService.html" target="_self" >FlutterwaveService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>monnifyService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/MonnifyService.html" target="_self" >MonnifyService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>settingsService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/SettingsService.html" target="_self" >SettingsService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="findOneTransaction"></a>
+                    <span class="name">
+                        <span class="modifier">Async</span>
+                        <span ><b>findOneTransaction</b></span>
+                        <a href="#findOneTransaction"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>findOneTransaction(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
 
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="409"
+                            class="link-to-prism">src/transactions/transactions.service.ts:409</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>unknown</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAllTransactions"></a>
+                    <span class="name">
+                        <span class="modifier">Async</span>
+                        <span ><b>getAllTransactions</b></span>
+                        <a href="#getAllTransactions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getAllTransactions(type)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="299"
+                            class="link-to-prism">src/transactions/transactions.service.ts:299</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>type</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>unknown</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getTotalDepositsBalance"></a>
+                    <span class="name">
+                        <span class="modifier">Async</span>
+                        <span ><b>getTotalDepositsBalance</b></span>
+                        <a href="#getTotalDepositsBalance"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getTotalDepositsBalance()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="280"
+                            class="link-to-prism">src/transactions/transactions.service.ts:280</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>unknown</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getTotalWithdrawalsBalance"></a>
+                    <span class="name">
+                        <span class="modifier">Async</span>
+                        <span ><b>getTotalWithdrawalsBalance</b></span>
+                        <a href="#getTotalWithdrawalsBalance"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getTotalWithdrawalsBalance()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="262"
+                            class="link-to-prism">src/transactions/transactions.service.ts:262</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>unknown</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getTransactionStatus"></a>
+                    <span class="name">
+                        <span class="modifier">Async</span>
+                        <span ><b>getTransactionStatus</b></span>
+                        <a href="#getTransactionStatus"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getTransactionStatus(reference: string | number)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="178"
+                            class="link-to-prism">src/transactions/transactions.service.ts:178</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>reference</td>
+                                    <td>
+                                            <code>string | number</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>unknown</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getUserTransactions"></a>
+                    <span class="name">
+                        <span class="modifier">Async</span>
+                        <span ><b>getUserTransactions</b></span>
+                        <a href="#getUserTransactions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getUserTransactions(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, type)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="354"
+                            class="link-to-prism">src/transactions/transactions.service.ts:354</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>type</td>
+                                    <td>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>unknown</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateTransactionStatus"></a>
+                    <span class="name">
+                        <span class="modifier">Async</span>
+                        <span ><b>updateTransactionStatus</b></span>
+                        <a href="#updateTransactionStatus"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>updateTransactionStatus(reference: number | string, status: <a href="../classes/Transaction.html" target="_self">TransactionStatus</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="239"
+                            class="link-to-prism">src/transactions/transactions.service.ts:239</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>reference</td>
+                                    <td>
+                                            <code>number | string</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>status</td>
+                                    <td>
+                                                <code><a href="../classes/Transaction.html" target="_self" >TransactionStatus</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>unknown</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
             <section>
     
     <h3 id="inputs">
@@ -119,116 +745,28 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="addTransaction"></a>
+                    <a name="currentService"></a>
                     <span class="name">
-                        <span ><b>addTransaction</b></span>
-                        <a href="#addTransaction"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier">Private</span>
+                        <span ><b>currentService</b></span>
+                        <a href="#currentService"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/BankService.html" target="_self" >BankServices</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>MONNIFY</code>
+                    </td>
+                </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/transactions/transactions.service.ts:9</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="deposit"></a>
-                    <span class="name">
-                        <span ><b>deposit</b></span>
-                        <a href="#deposit"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">src/transactions/transactions.service.ts:7</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getAllTransactions"></a>
-                    <span class="name">
-                        <span ><b>getAllTransactions</b></span>
-                        <a href="#getAllTransactions"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/transactions/transactions.service.ts:10</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getTransactionById"></a>
-                    <span class="name">
-                        <span ><b>getTransactionById</b></span>
-                        <a href="#getTransactionById"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/transactions/transactions.service.ts:12</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getTransactionByOwnerId"></a>
-                    <span class="name">
-                        <span ><b>getTransactionByOwnerId</b></span>
-                        <a href="#getTransactionByOwnerId"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/transactions/transactions.service.ts:11</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="withdraw"></a>
-                    <span class="name">
-                        <span ><b>withdraw</b></span>
-                        <a href="#withdraw"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/transactions/transactions.service.ts:8</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/transactions/transactions.service.ts:55</a></div>
                         </td>
                     </tr>
 
@@ -241,18 +779,603 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@nestjs/common&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  CACHE_MANAGER,
+  HttpException,
+  HttpStatus,
+  Inject,
+  Injectable,
+} from &#x27;@nestjs/common&#x27;;
+import { InjectRepository } from &#x27;@nestjs/typeorm&#x27;;
 import { CreateTransactionDto } from &#x27;./dto/create-transaction.dto&#x27;;
 import { UpdateTransactionDto } from &#x27;./dto/update-transaction.dto&#x27;;
+import { HttpService } from &#x27;@nestjs/axios&#x27;;
+import { AxiosResponse } from &#x27;axios&#x27;;
+import { Observable, map, lastValueFrom, catchError } from &#x27;rxjs&#x27;;
+import { ConfigService } from &#x27;@nestjs/config&#x27;;
+import { PaystackService } from &#x27;src/paystack/paystack.service&#x27;;
+import { WalletService } from &#x27;src/wallet/wallet.service&#x27;;
+import { Connection, Repository } from &#x27;typeorm&#x27;;
+import { Transaction } from &#x27;./entities/transaction.entity&#x27;;
+import { UserService } from &#x27;src/user/user.service&#x27;;
+import { MonnifyService } from &#x27;src/monnify/monnify.service&#x27;;
+import { FlutterwaveService } from &#x27;src/flutterwave/flutterwave.service&#x27;;
+import { SettingsModule } from &#x27;src/settings/settings.module&#x27;;
+import {
+  BankServices,
+  BANK_SERVICES,
+  Services,
+} from &#x27;src/common/types/service.type&#x27;;
+import { ServicesSettings } from &#x27;src/common/types/settings.type&#x27;;
+import { Cache } from &#x27;cache-manager&#x27;;
+import { SettingsService } from &#x27;src/settings/settings.service&#x27;;
+import { CreateVirtualAccountDto } from &#x27;./dto/create-virtual-account.dto&#x27;;
+import { CreateReservedAccountDto } from &#x27;src/flutterwave/dto/create-reserved-account.dto&#x27;;
+import { FWWithdrawalDto } from &#x27;./dto/withdrawal.dto&#x27;;
+import { getTransactionReference } from &#x27;src/utils/random-generators&#x27;;
+
+import { userInfo } from &#x27;os&#x27;;
+import { CURRENCY } from &#x27;src/common/types/currency.type&#x27;;
+import { InitiateMNTransferDto } from &#x27;src/monnify/dto/initiate-transfer.dto&#x27;;
+import { Withdrawal } from &#x27;./entities/withdrawal.entity&#x27;;
+import {
+  TRANSACTION_STATUS,
+  TransactionStatus,
+} from &#x27;src/common/types/status.type&#x27;;
+import { TRANSACTION } from &#x27;src/common/types/transaction.type&#x27;;
+import { User } from &#x27;src/user/entities/user.entity&#x27;;
+import { WithdrawalRepository } from &#x27;./repositories/withdrawal.repository&#x27;;
+import { DepositRepository } from &#x27;./repositories/deposit.repository&#x27;;
+
+const { FLUTTERWAVE, MONNIFY } &#x3D; BANK_SERVICES;
+
+const { WITHDRAWAL, DEPOSIT } &#x3D; TRANSACTION;
 
 @Injectable()
 export class TransactionsService {
-  deposit;
-  withdraw;
-  addTransaction;
-  getAllTransactions;
-  getTransactionByOwnerId;
-  getTransactionById;
+  private currentService: BankServices &#x3D; MONNIFY;
+  constructor(
+    @Inject(CACHE_MANAGER) private cacheManager: Cache,
+    private connection: Connection,
+    @InjectRepository(WithdrawalRepository)
+    private withdrawalRepository: WithdrawalRepository,
+    @InjectRepository(DepositRepository)
+    private depositRepository: DepositRepository,
+    private readonly paystackService: PaystackService,
+    private readonly walletService: WalletService,
+    private readonly flutterwaveService: FlutterwaveService,
+    private readonly monnifyService: MonnifyService,
+    private readonly settingsService: SettingsService,
+  ) {}
+
+  // async initiateWithdrawal(dto: FWWithdrawalDto, user: User) {
+  //   /*if (user.wallet[0].balance &lt; dto.amount) {
+  //     throw new HttpException(&#x27;Insufficient balance&#x27;, HttpStatus.BAD_REQUEST);
+  //   }*/
+  //   const queryRunner &#x3D; this.connection.createQueryRunner();
+  //   await queryRunner.connect();
+  //   await queryRunner.startTransaction();
+  //   try {
+  //     const reference &#x3D; await getTransactionReference();
+  //     const mockReferencePass &#x3D; &#x27;dfs23fhr7ntg0293039_PMCKDU_1&#x27;;
+  //     const mockReferenceFail &#x3D; &#x27;dfs23fhr7ntg0293039_PMCK_ST_FDU_1&#x27;;
+  //     const narration &#x3D; &#x27;Tapmoney Withdrawal&#x27;;
+
+  //     let payload;
+  //     let newTransaction;
+  //     let result;
+
+  //     if (this.currentService &#x3D;&#x3D;&#x3D; FLUTTERWAVE) {
+  //       payload &#x3D; {
+  //         ...dto,
+  //         reference: mockReferencePass,
+  //         narration,
+  //       };
+  //     }
+
+  //     if (this.currentService &#x3D;&#x3D;&#x3D; MONNIFY) {
+  //       payload &#x3D; {
+  //         amount: dto.amount,
+  //         reference,
+  //         narration,
+  //         destinationBankCode: dto.account_bank,
+  //         destinationAccountNumber: dto.account_number,
+  //         currency: dto.currency,
+  //       };
+
+  //       try {
+  //         newTransaction &#x3D; await queryRunner.manager.create(Withdrawal, {
+  //           accountBank: dto.account_bank,
+  //           accountNumber: dto.account_number,
+  //           amount: dto.amount,
+  //           currency: dto.currency,
+  //           reference,
+  //           userId: user.id,
+  //           status: TRANSACTION_STATUS.QUEUED,
+  //           type: TRANSACTION.WITHDRAWAL,
+  //           serviceUsed: this.currentService,
+  //           walletId: dto.wallet_id,
+  //         });
+
+  //         await queryRunner.manager.save(Withdrawal, newTransaction);
+
+  //         //might change
+  //         await this.walletService.removeMoney(
+  //           { email: user.email, amount: dto.amount },
+  //           queryRunner,
+  //         );
+
+  //         result &#x3D; await this.monnifyService.initiateTransfers(payload);
+
+  //         await queryRunner.commitTransaction();
+  //       } catch (error) {
+  //         await queryRunner.rollbackTransaction();
+  //         throw error;
+  //       }
+  //       await this.withdrawalRepository.update(
+  //         { reference },
+  //         { status: result.status },
+  //       );
+  //     }
+
+  //     /*if (service &#x3D;&#x3D;&#x3D; FLUTTERWAVE) {
+  //       result &#x3D; await this.flutterwaveService.transfer(payload);
+
+  //       if (result.status &#x3D;&#x3D;&#x3D; &#x27;success&#x27;) {
+  //         await this.walletService.removeMoney(
+  //           { email: user.email, amount: dto.amount },
+  //           queryRunner,
+  //         );
+  //         await queryRunner.manager.update(
+  //           Transaction,
+  //           { reference },
+  //           { status: TRANSACTIONSTATUS.PENDING, merchantId: result.data.id },
+  //         );
+
+  //         await queryRunner.commitTransaction();
+  //         return {
+  //           message: result.message,
+  //         };
+  //       } else if (result.status &#x3D;&#x3D;&#x3D; &#x27;error&#x27;) {
+  //         throw new HttpException(result.message, HttpStatus.BAD_REQUEST);
+  //       } else {
+  //         await queryRunner.manager.update(
+  //           Transaction,
+  //           { reference },
+  //           { status: TRANSACTIONSTATUS.FAILED, id: result.data.id },
+  //         );
+  //         await queryRunner.commitTransaction();
+  //         return {
+  //           status: 404,
+  //           message: result.message,
+  //         };
+  //       }
+  //     }*/
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // }
+
+  async getTransactionStatus(reference: string | number) {
+    try {
+      let result;
+      if (this.currentService &#x3D;&#x3D;&#x3D; MONNIFY) {
+        result &#x3D; await this.monnifyService.getTransactionStatus(
+          &lt;string&gt;reference,
+        );
+
+        return await this.withdrawalRepository.update(
+          { reference: &lt;string&gt;reference },
+          {
+            status: result.status,
+            bankName: result.data.destinationBankName,
+            accountName: result.data.destinationAccountName,
+            merchantReference: result.data.transactionReference,
+          },
+        );
+      }
+
+      /*if (service &#x3D;&#x3D;&#x3D; FLUTTERWAVE) {
+        result &#x3D; await this.flutterwaveService.getTransferStatus(
+          &lt;number&gt;reference,
+        );
+
+        if (result.status !&#x3D;&#x3D; &#x27;success&#x27;) {
+          throw new HttpException(result.message, HttpStatus.BAD_REQUEST);
+        }
+        if (result.data.status &#x3D;&#x3D;&#x3D; &#x27;SUCCESSFUL&#x27;) {
+          await this.transactionRepository.update(
+            { merchantId: &lt;number&gt;reference },
+            { status: TRANSACTIONSTATUS.COMPLETED },
+          );
+          return {
+            message: result.data.complete_message,
+            status: result.data.status,
+          };
+        }
+
+        if (result.status &#x3D;&#x3D;&#x3D; &#x27;PENDING&#x27;) {
+          return {
+            message: result.data.complete_message,
+            status: result.data.status,
+          };
+        }
+
+        if (result.status &#x3D;&#x3D;&#x3D; &#x27;FAILED&#x27;) {
+          await this.transactionRepository.update(
+            { merchantId: &lt;number&gt;reference },
+            { status: TRANSACTIONSTATUS.FAILED },
+          );
+          return {
+            message: result.data.complete_message,
+            status: result.data.status,
+          };
+        }
+      }*/
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async updateTransactionStatus(
+    reference: number | string,
+    status: TransactionStatus,
+  ) {
+    try {
+      if (this.currentService &#x3D;&#x3D;&#x3D; MONNIFY) {
+        return await this.withdrawalRepository.update(
+          { merchantId: &lt;number&gt;reference },
+          { status },
+        );
+      }
+
+      if (this.currentService &#x3D;&#x3D;&#x3D; FLUTTERWAVE) {
+        await this.withdrawalRepository.update(
+          { reference: &lt;string&gt;reference },
+          { status },
+        );
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getTotalWithdrawalsBalance() {
+    try {
+      let { sum } &#x3D; await this.withdrawalRepository
+        .createQueryBuilder(&#x27;withdrawal&#x27;)
+        .select(&#x27;SUM(withdrawal.amount)&#x27;, &#x27;sum&#x27;)
+        .where(&#x27;withdrawal.currency &#x3D; :type&#x27;, { type: CURRENCY.NAIRA })
+        .getRawOne();
+      if (!sum) {
+        sum &#x3D; 0;
+      }
+      return {
+        totalWithdrawals: sum,
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getTotalDepositsBalance() {
+    try {
+      let { sum } &#x3D; await this.depositRepository
+        .createQueryBuilder(&#x27;deposit&#x27;)
+        .select(&#x27;SUM(deposit.amount)&#x27;, &#x27;sum&#x27;)
+        .where(&#x27;deposit.currency &#x3D; :type&#x27;, { type: CURRENCY.NAIRA })
+        .getRawOne();
+      if (!sum) {
+        sum &#x3D; 0;
+      }
+
+      return {
+        totalDeposits: sum,
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getAllTransactions(type) {
+    try {
+      switch (type) {
+        case &#x27;all&#x27;:
+          const depositsQuery &#x3D; await this.depositRepository
+            .createQueryBuilder(&#x27;deposit&#x27;)
+            .select(&#x27;deposit&#x27;)
+            .leftJoinAndSelect(&#x27;deposit.user&#x27;, &#x27;user&#x27;)
+            .leftJoinAndSelect(&#x27;deposit.wallet&#x27;, &#x27;wallet&#x27;)
+            .getQuery();
+          const withdrawalQuery &#x3D; await this.withdrawalRepository
+            .createQueryBuilder(&#x27;withdrawal&#x27;)
+            .select(&#x27;withdrawal&#x27;)
+            .leftJoinAndSelect(&#x27;withdrawal.user&#x27;, &#x27;user&#x27;)
+            .leftJoinAndSelect(&#x27;withdrawal.wallet&#x27;, &#x27;wallet&#x27;)
+            .getQuery();
+
+          const allTransactions &#x3D; await this.connection.manager.query(
+            &#x60;${depositsQuery} UNION ${withdrawalQuery}&#x60;,
+          );
+
+          return {
+            message: &#x27;Success&#x27;,
+            data: {
+              transactions: allTransactions,
+            },
+          };
+
+        case WITHDRAWAL:
+          const withdrawals &#x3D; await this.withdrawalRepository.find({
+            relations: [&#x27;user&#x27;, &#x27;wallet&#x27;],
+          });
+          return {
+            message: &#x27;Success&#x27;,
+            data: {
+              transactions: withdrawals,
+            },
+          };
+
+        case DEPOSIT:
+          const deposits &#x3D; await this.depositRepository.find({
+            relations: [&#x27;user&#x27;, &#x27;wallet&#x27;],
+          });
+          return {
+            message: &#x27;Success&#x27;,
+            data: {
+              transactions: deposits,
+            },
+          };
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getUserTransactions(id: number, type) {
+    try {
+      switch (type) {
+        case &#x27;all&#x27;:
+          const depositsQuery &#x3D; await this.depositRepository
+            .createQueryBuilder(&#x27;deposit&#x27;)
+            .leftJoinAndSelect(&#x27;deposit.user&#x27;, &#x27;user&#x27;)
+            .leftJoinAndSelect(&#x27;deposit.wallet&#x27;, &#x27;wallet&#x27;)
+            .where(&#x60;user.id &#x3D; ${id}&#x60;)
+            .getQuery();
+          const withdrawalQuery &#x3D; await this.withdrawalRepository
+            .createQueryBuilder(&#x27;withdrawal&#x27;)
+            .leftJoinAndSelect(&#x27;withdrawal.user&#x27;, &#x27;user&#x27;)
+            .leftJoinAndSelect(&#x27;withdrawal.wallet&#x27;, &#x27;wallet&#x27;)
+            .where(&#x60;user.id &#x3D; ${id}&#x60;)
+            .getQuery();
+
+          const allTransactions &#x3D; await this.connection.manager.query(
+            &#x60;${depositsQuery} UNION ${withdrawalQuery}&#x60;,
+          );
+
+          return {
+            message: &#x27;Success&#x27;,
+            data: {
+              transactions: allTransactions,
+            },
+          };
+
+        case WITHDRAWAL:
+          const withdrawals &#x3D; await this.withdrawalRepository.findOne(id, {
+            relations: [&#x27;user&#x27;, &#x27;wallet&#x27;],
+          });
+          return {
+            message: &#x27;Success&#x27;,
+            data: {
+              transactions: withdrawals,
+            },
+          };
+
+        case DEPOSIT:
+          const deposits &#x3D; await this.depositRepository.findOne(id, {
+            relations: [&#x27;user&#x27;, &#x27;wallet&#x27;],
+          });
+          return {
+            message: &#x27;Success&#x27;,
+            data: {
+              transactions: deposits,
+            },
+          };
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async findOneTransaction(id: number) {
+    try {
+      const withdrawal &#x3D; await this.withdrawalRepository.findOne(id);
+      if (withdrawal) {
+        return {
+          message: &#x27;Success&#x27;,
+          data: {
+            transaction: withdrawal,
+          },
+        };
+      }
+      const deposit &#x3D; await this.depositRepository.findOne(id);
+      if (deposit) {
+        return {
+          message: &#x27;Success&#x27;,
+          data: {
+            transaction: deposit,
+          },
+        };
+      }
+
+      throw new HttpException(&#x27;Transaction not found&#x27;, HttpStatus.NOT_FOUND);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  /*async getTotalNairaDepositsBalance() {
+    try {
+      const { sum } &#x3D; await this.transactionRepository
+        .createQueryBuilder(&#x27;transaction&#x27;)
+        .select(&#x27;SUM(transaction.amount)&#x27;, &#x27;sum&#x27;)
+        .where(&#x27;transaction.currency &#x3D; :currency&#x27;, {
+          currency: CURRENCY.NAIRA,
+        })
+        .andWhere(&#x27;transaction.type &#x3D; :type&#x27;, { type: TRANSACTION.DEPOSIT })
+        .getRawOne();
+
+      return {
+        totalNairaDeposits: sum,
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+
+  async getUserTransactions(id: number, type?: TransactionType) {
+    try {
+      if (type) {
+        return await this.transactionRepository.find({ userId: id });
+      }
+      return await this.transactionRepository.find({ userId: id, type });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async findOneTransaction(id: number) {
+    try {
+      return await this.transactionRepository.findOne(id);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  // create callback url/webhooks
+  // add server sent events
+  //  admin refetch transaction
+  // admin retry a transaction
+  // admin update transaction details
+  // transaction with same amount and bank(similar transactions) with created at 10 minutes ago will not be valid
+
+  /*async getCurrentService() {
+    let data;
+    data &#x3D; await this.cacheManager.get&lt;any&gt;(
+      ServicesSettings.TRANSACTIONS_SERVICE,
+    );
+
+    if (!data) {
+      data &#x3D; await this.settingsService.getSetting(
+        ServicesSettings.TRANSACTIONS_SERVICE,
+      );
+    }
+
+    if (!data) {
+      throw new HttpException(
+        &#x27;Service currently unavailable&#x27;,
+        HttpStatus.SERVICE_UNAVAILABLE,
+      );
+    }
+
+    const status &#x3D; data.isActive;
+
+    if (!status) {
+      throw new HttpException(
+        &#x27;Service currently unavailable&#x27;,
+        HttpStatus.SERVICE_UNAVAILABLE,
+      );
+    }
+    const service &#x3D; data.value;
+
+    switch (service) {
+      case Services.FLUTTERWAVE:
+        this.currentService &#x3D; this.flutterwaveService;
+        break;
+      case Services.MONNIFY:
+        this.currentService &#x3D; this.monnifyService;
+    }
+  }
+
+  async createVirtualAccount(createVirtualAccountDto: CreateVirtualAccountDto) {
+    const flutterwaveData: CreateReservedAccountDto &#x3D; {
+      email: createVirtualAccountDto.customerEmail,
+      tx_ref: createVirtualAccountDto.accountRecference,
+      bvn: createVirtualAccountDto.bvn,
+      is_permanent: true,
+    };
+
+    const monnifyData &#x3D; removeKeyAndPropertyFromObject(
+      createVirtualAccountDto,
+      [&#x27;tx_ref&#x27;],
+    );
+    try {
+      await this.getCurrentService();
+
+      let result;
+
+      switch (this.currentService) {
+        case this.flutterwaveService:
+          result &#x3D; await this.currentService.createReservedAccount(
+            flutterwaveData,
+          );
+          break;
+        case this.monnifyService:
+          result &#x3D; await this.currentService.createReservedAccount(monnifyData);
+      }
+
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async withdraw(withdrawalDto: WithdrawalDto) {
+    try {
+      await this.monnifyService.initiateTransfers(withdrawalDto);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  /*async completeDeposit(reference: string, user: User) {
+    const queryRunner &#x3D; this.connection.createQueryRunner();
+
+    await queryRunner.connect();
+    await queryRunner.startTransaction();
+    try {
+      const transactionStatus &#x3D; await this.paystackService.verifyTransaction(
+        reference,
+      );
+
+      if (transactionStatus[&#x27;data&#x27;][&#x27;status&#x27;] &#x3D;&#x3D;&#x3D; &#x27;success&#x27;) {
+        const email &#x3D; transactionStatus[&#x27;data&#x27;][&#x27;customer&#x27;][&#x27;email&#x27;];
+        const { amount } &#x3D; transactionStatus[&#x27;data&#x27;];
+        const transactionDto &#x3D; { email, amount };
+        const response &#x3D; await this.walletService.deposit(transactionDto);
+        const deposit &#x3D; new Transaction();
+        deposit.amount &#x3D; amount;
+        deposit.balance &#x3D; response.data.balance;
+        deposit.user &#x3D; user;
+        deposit.type &#x3D; &#x27;deposit&#x27;;
+        deposit.remarks &#x3D; &#x60;Paystack Deposit&#x60;;
+        await queryRunner.manager.save(deposit);
+      }
+      await queryRunner.commitTransaction();
+      return {
+        message: &#x27;Deposit completed successfully&#x27;,
+      };
+    } catch (err) {
+      // since we have errors lets rollback the changes we made
+      await queryRunner.rollbackTransaction();
+
+      throw err;
+    } finally {
+      // you need to release a queryRunner which was manually instantiated
+      await queryRunner.release();
+    }
+  }*/
 }
 </code></pre>
     </div>

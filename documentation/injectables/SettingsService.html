@@ -84,6 +84,14 @@
                             </li>
                             <li>
                                     <span class="modifier">Async</span>
+                                <a href="#deleteSetting" >deleteSetting</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#getAllSettings" >getAllSettings</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
                                 <a href="#getSetting" >getSetting</a>
                             </li>
                             <li>
@@ -108,12 +116,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(settingRepository: <a href="../entitys/Setting.html" target="_self">Repository&lt;Setting&gt;</a>)</code>
+<code>constructor(settingRepository: <a href="../entitys/Setting.html" target="_self">Repository&lt;Setting&gt;</a>, cacheManager: Cache)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/settings/settings.service.ts:9</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/settings/settings.service.ts:20</a></div>
                             </td>
                         </tr>
 
@@ -135,6 +143,18 @@
                                                   
                                                         <td>
                                                                         <code><a href="../entitys/Setting.html" target="_self" >Repository&lt;Setting&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>cacheManager</td>
+                                                  
+                                                        <td>
+                                                                    <code>Cache</code>
                                                         </td>
                                                   
                                                     <td>
@@ -178,8 +198,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="17"
-                            class="link-to-prism">src/settings/settings.service.ts:17</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="37"
+                            class="link-to-prism">src/settings/settings.service.ts:37</a></div>
                 </td>
             </tr>
 
@@ -231,26 +251,26 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="getSetting"></a>
+                    <a name="deleteSetting"></a>
                     <span class="name">
                         <span class="modifier">Async</span>
-                        <span ><b>getSetting</b></span>
-                        <a href="#getSetting"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>deleteSetting</b></span>
+                        <a href="#deleteSetting"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>getSetting(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                    <code>deleteSetting(name: <a href="../entitys/Setting.html" target="_self">ServiceSettingsType</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="13"
-                            class="link-to-prism">src/settings/settings.service.ts:13</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="74"
+                            class="link-to-prism">src/settings/settings.service.ts:74</a></div>
                 </td>
             </tr>
 
@@ -271,9 +291,119 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>id</td>
+                                    <td>name</td>
                                     <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                <code><a href="../entitys/Setting.html" target="_self" >ServiceSettingsType</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAllSettings"></a>
+                    <span class="name">
+                        <span class="modifier">Async</span>
+                        <span ><b>getAllSettings</b></span>
+                        <a href="#getAllSettings"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getAllSettings()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="33"
+                            class="link-to-prism">src/settings/settings.service.ts:33</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>unknown</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getSetting"></a>
+                    <span class="name">
+                        <span class="modifier">Async</span>
+                        <span ><b>getSetting</b></span>
+                        <a href="#getSetting"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getSetting(name: <a href="../entitys/Setting.html" target="_self">ServiceSettingsType</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="25"
+                            class="link-to-prism">src/settings/settings.service.ts:25</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>name</td>
+                                    <td>
+                                                <code><a href="../entitys/Setting.html" target="_self" >ServiceSettingsType</a></code>
                                     </td>
 
                                     <td>
@@ -313,15 +443,15 @@
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>updateSetting(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, updateSettingDto: <a href="../classes/UpdateSettingDto.html" target="_self">UpdateSettingDto</a>)</code>
+                    <code>updateSetting(name: <a href="../entitys/Setting.html" target="_self">ServiceSettingsType</a>, updateSettingDto: <a href="../classes/UpdateSettingDto.html" target="_self">UpdateSettingDto</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="22"
-                            class="link-to-prism">src/settings/settings.service.ts:22</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="52"
+                            class="link-to-prism">src/settings/settings.service.ts:52</a></div>
                 </td>
             </tr>
 
@@ -342,9 +472,9 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>id</td>
+                                    <td>name</td>
                                     <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                <code><a href="../entitys/Setting.html" target="_self" >ServiceSettingsType</a></code>
                                     </td>
 
                                     <td>
@@ -371,7 +501,7 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                        <b>Returns : </b>    <code>unknown</code>
 
                     </div>
                     <div class="io-description">
@@ -387,29 +517,85 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@nestjs/common&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  CACHE_MANAGER,
+  HttpException,
+  HttpStatus,
+  Inject,
+  Injectable,
+} from &#x27;@nestjs/common&#x27;;
 import { InjectRepository } from &#x27;@nestjs/typeorm&#x27;;
+import {
+  ServiceSettingsType,
+  ServicesSettings,
+} from &#x27;src/common/types/settings.type&#x27;;
 import { Repository } from &#x27;typeorm&#x27;;
 import { CreateSettingDto } from &#x27;./dto/create-setting.dto&#x27;;
 import { UpdateSettingDto } from &#x27;./dto/update-setting.dto&#x27;;
 import { Setting } from &#x27;./entities/setting.entity&#x27;;
+import { Cache } from &#x27;cache-manager&#x27;;
 
 @Injectable()
 export class SettingsService {
   constructor(
     @InjectRepository(Setting) private settingRepository: Repository&lt;Setting&gt;,
+    @Inject(CACHE_MANAGER) private cacheManager: Cache,
   ) {}
-  async getSetting(id: number) {
-    return await this.settingRepository.findOne(id);
+  async getSetting(name: ServiceSettingsType) {
+    const result &#x3D; await this.settingRepository.findOne({ name });
+
+    await this.cacheManager.set(name, result);
+
+    return result;
+  }
+
+  async getAllSettings() {
+    return await this.settingRepository.find();
   }
 
   async addSetting(createSettingDto: CreateSettingDto) {
+    const existingSetting &#x3D; await this.settingRepository.findOne({
+      name: createSettingDto.name,
+    });
+
+    if (existingSetting) {
+      throw new HttpException(&#x27;Setting currently exists&#x27;, HttpStatus.CONFLICT);
+    }
+
     const setting &#x3D; await this.settingRepository.create(createSettingDto);
-    return await this.settingRepository.save(setting);
+    await this.settingRepository.save(setting);
+    await this.cacheManager.set(setting.name, setting);
+    return setting;
   }
 
-  async updateSetting(id: number, updateSettingDto: UpdateSettingDto) {
-    await this.settingRepository.update(id, updateSettingDto);
+  async updateSetting(
+    name: ServiceSettingsType,
+    updateSettingDto: UpdateSettingDto,
+  ) {
+    await this.settingRepository.update({ name }, updateSettingDto);
+
+    console.log(name);
+
+    await this.cacheManager.del(name);
+
+    const setting &#x3D; await this.settingRepository.findOne({ name });
+
+    switch (name) {
+      case ServicesSettings.BANK_SERVICE:
+        await this.cacheManager.del(&#x27;allBanks&#x27;);
+    }
+
+    await this.cacheManager.set(name, setting);
+
+    return setting;
+  }
+
+  async deleteSetting(name: ServiceSettingsType) {
+    await this.settingRepository.delete({ name });
+
+    await this.cacheManager.del(name);
+
+    return;
   }
 }
 </code></pre>

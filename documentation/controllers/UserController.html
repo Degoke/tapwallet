@@ -84,13 +84,30 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#approvekyc" >approvekyc</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
                                 <a href="#create" >create</a>
+                            </li>
+                            <li>
+                                <a href="#getCurrentUser" >getCurrentUser</a>
+                            </li>
+                            <li>
+                                <a href="#getPendingKyc" >getPendingKyc</a>
                             </li>
                             <li>
                                 <a href="#getUser" >getUser</a>
                             </li>
                             <li>
                                 <a href="#getUserByEmail" >getUserByEmail</a>
+                            </li>
+                            <li>
+                                <a href="#getUserById" >getUserById</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#verifyEmail" >verifyEmail</a>
                             </li>
                         </ul>
                     </td>
@@ -113,16 +130,16 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="create"></a>
+                    <a name="approvekyc"></a>
                     <span class="name">
-                        <span ><b>create</b></span>
-                        <a href="#create"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>approvekyc</b></span>
+                        <a href="#approvekyc"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>create(createUserDto: <a href="../classes/CreateUserDto.html" target="_self">CreateUserDto</a>)</code>
+<code>approvekyc(id)</code>
                 </td>
             </tr>
 
@@ -130,14 +147,88 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Post()<br /></code>
+                    <code>@Public()<br />@Patch(&#x27;kyc/approve&#x27;)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="23"
-                            class="link-to-prism">src/user/user.controller.ts:23</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="78"
+                            class="link-to-prism">src/user/user.controller.ts:78</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="create"></a>
+                    <span class="name">
+                        <span class="modifier">Async</span>
+                        <span ><b>create</b></span>
+                        <a href="#create"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>create(createUserDto: <a href="../classes/CreateUserDto.html" target="_self">CreateUserDto</a>)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@Public()<br />@Post(&#x27;signup&#x27;)<br /></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="35"
+                            class="link-to-prism">src/user/user.controller.ts:35</a></div>
                 </td>
             </tr>
 
@@ -175,11 +266,127 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                        <b>Returns : </b>    <code>unknown</code>
 
                     </div>
                     <div class="io-description">
                         
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getCurrentUser"></a>
+                    <span class="name">
+                        <span ><b>getCurrentUser</b></span>
+                        <a href="#getCurrentUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getCurrentUser(req)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@CheckAbilities(new ReadUserPermission())<br />@Get(&#x27;current&#x27;)<br /></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="44"
+                            class="link-to-prism">src/user/user.controller.ts:44</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>req</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>{ user: any; role: any; }</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getPendingKyc"></a>
+                    <span class="name">
+                        <span ><b>getPendingKyc</b></span>
+                        <a href="#getPendingKyc"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getPendingKyc()</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@Public()<br />@Get(&#x27;kyc/pending&#x27;)<br /></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="72"
+                            class="link-to-prism">src/user/user.controller.ts:72</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
                     </div>
                 </td>
             </tr>
@@ -206,14 +413,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@UseGuards(JwtAuthGaurd)<br />@Get()<br /></code>
+                    <code>@Public()<br />@Get()<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="29"
-                            class="link-to-prism">src/user/user.controller.ts:29</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="54"
+                            class="link-to-prism">src/user/user.controller.ts:54</a></div>
                 </td>
             </tr>
 
@@ -250,14 +457,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Get(&#x27;:email&#x27;)<br /></code>
+                    <code>@Get(&#x27;:email&#x27;)<br />@UseGuards(JwtAuthGaurd)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="34"
-                            class="link-to-prism">src/user/user.controller.ts:34</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="60"
+                            class="link-to-prism">src/user/user.controller.ts:60</a></div>
                 </td>
             </tr>
 
@@ -301,6 +508,156 @@
             </tr>
         </tbody>
     </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getUserById"></a>
+                    <span class="name">
+                        <span ><b>getUserById</b></span>
+                        <a href="#getUserById"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getUserById(id)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@Get(&#x27;byId/:id&#x27;)<br />@Public()<br /></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="66"
+                            class="link-to-prism">src/user/user.controller.ts:66</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="verifyEmail"></a>
+                    <span class="name">
+                        <span class="modifier">Async</span>
+                        <span ><b>verifyEmail</b></span>
+                        <a href="#verifyEmail"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>verifyEmail(verifyEmailDto: <a href="../classes/VerifyEmailDTO.html" target="_self">VerifyEmailDTO</a>)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@CheckAbilities(new EditUserPermission())<br />@Post(&#x27;verifyemail&#x27;)<br /></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="84"
+                            class="link-to-prism">src/user/user.controller.ts:84</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>verifyEmailDto</td>
+                                    <td>
+                                                <code><a href="../classes/VerifyEmailDTO.html" target="_self" >VerifyEmailDTO</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>unknown</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>    </div>
 
 
@@ -315,32 +672,120 @@
   Delete,
   UseGuards,
   ParseIntPipe,
+  Request,
+  Req,
 } from &#x27;@nestjs/common&#x27;;
 import { UserService } from &#x27;./user.service&#x27;;
 import { CreateUserDto } from &#x27;./dto/create-user.dto&#x27;;
 import { UpdateUserDto } from &#x27;./dto/update-user.dto&#x27;;
-import { UserInterface } from &#x27;./interfaces/User.interface&#x27;;
 import { JwtAuthGaurd } from &#x27;src/common/gaurds/jwt-auth.gaurd&#x27;;
+import { VerifyEmailDTO } from &#x27;./dto/verify-email.dto&#x27;;
+import { AddBankAccountDTO } from &#x27;../account/dto/add-bank-accoiunt.dto&#x27;;
+import { AbilitiesGuard } from &#x27;src/ability/abilities.guard&#x27;;
+import {
+  CheckAbilities,
+  EditUserPermission,
+  ReadUserPermission,
+  ReadWithdrawalPermission,
+} from &#x27;src/ability/abilities.decorator&#x27;;
+import { Public } from &#x27;src/common/decorators/jwt-auth-guard.decorator&#x27;;
 
 @Controller(&#x27;user&#x27;)
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.userService.create(createUserDto);
+  @Public()
+  @Post(&#x27;signup&#x27;)
+  async create(@Body() createUserDto: CreateUserDto) {
+    const user &#x3D; await this.userService.createCustomer(createUserDto);
+    return {
+      user,
+    };
   }
 
-  @UseGuards(JwtAuthGaurd)
+  @CheckAbilities(new ReadUserPermission())
+  @Get(&#x27;current&#x27;)
+  getCurrentUser(@Request() req) {
+    return {
+      user: req.user.user,
+      role: req.user.role,
+    };
+  }
+
+  //  @UseGuards(JwtAuthGaurd)
+  @Public()
   @Get()
   getUser() {
     return this.userService.find();
   }
 
   @Get(&#x27;:email&#x27;)
+  @UseGuards(JwtAuthGaurd)
   getUserByEmail(@Param(&#x27;email&#x27;) email) {
     return this.userService.findByEmail(email);
   }
+
+  @Get(&#x27;byId/:id&#x27;)
+  @Public()
+  getUserById(@Param(&#x27;id&#x27;) id) {
+    return this.userService.findById(id);
+  }
+
+  @Public()
+  @Get(&#x27;kyc/pending&#x27;)
+  getPendingKyc() {
+    return this.userService.findUnapprovedKyc();
+  }
+
+  @Public()
+  @Patch(&#x27;kyc/approve&#x27;)
+  approvekyc(@Param(&#x27;id&#x27;) id) {
+    return this.userService.approveKyc(id);
+  }
+
+  @CheckAbilities(new EditUserPermission())
+  @Post(&#x27;verifyemail&#x27;)
+  async verifyEmail(@Body() verifyEmailDto: VerifyEmailDTO) {
+    const { email, code } &#x3D; verifyEmailDto;
+    await this.userService.verifyEmail(code, email);
+    return {
+      message: &#x27;Email verification Success&#x27;,
+    };
+  }
+  /*
+  @CheckAbilities(new EditUserPermission())
+  @Post()
+  initiatePhoneVerification(@Body() body) {
+    const { phoneNumber } &#x3D; body;
+    return this.userService.initiatePhoneNumberVerification(phoneNumber);
+  }
+
+  @CheckAbilities(new EditUserPermission())
+  @Post()
+  verifyPhoneOtp(@Request() req, @Body() body) {
+    const { id } &#x3D; req;
+    const { phoneNumber, verificationCode } &#x3D; body;
+
+    return this.userService.verifyPhoneNumberOtp(
+      phoneNumber,
+      verificationCode,
+      id,
+    );
+  }*/
+
+  // @UseGuards(JwtAuthGaurd)
+  /*@Get()
+  getUser() {
+    return this.userService.find();
+  }
+
+  @Get(&#x27;:email&#x27;)
+  //  @UseGuards(AbilitiesGuard)
+  //  @UseGuards(JwtAuthGaurd)
+  //@CheckAbilities(new SEND_USER_PERMSSION())
+  getUserByEmail(@Param(&#x27;email&#x27;) email) {
+    return this.userService.findByEmail(email);
+  }*/
 }
 </code></pre>
     </div>

@@ -80,15 +80,19 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Async</span>
-                                <a href="#addNewSetting" >addNewSetting</a>
+                                <a href="#createNewAdmin" >createNewAdmin</a>
                             </li>
                             <li>
                                     <span class="modifier">Async</span>
-                                <a href="#editSetting" >editSetting</a>
+                                <a href="#getAllActivities" >getAllActivities</a>
                             </li>
                             <li>
                                     <span class="modifier">Async</span>
-                                <a href="#getSetting" >getSetting</a>
+                                <a href="#getSummary" >getSummary</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#getUserActivities" >getUserActivities</a>
                             </li>
                         </ul>
                     </td>
@@ -108,12 +112,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(settingsService: <a href="../injectables/SettingsService.html" target="_self">SettingsService</a>)</code>
+<code>constructor(activityRepository: Repository<Activity>, settingsService: <a href="../injectables/SettingsService.html" target="_self">SettingsService</a>, userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, walletService: <a href="../injectables/WalletService.html" target="_self">WalletService</a>, flutterwaveService: <a href="../injectables/FlutterwaveService.html" target="_self">FlutterwaveService</a>, transactionsService: <a href="../injectables/TransactionsService.html" target="_self">TransactionsService</a>, bankService: <a href="../injectables/BankService.html" target="_self">BankService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/admin/admin.service.ts:9</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/admin/admin.service.ts:16</a></div>
                             </td>
                         </tr>
 
@@ -131,10 +135,82 @@
                                         </thead>
                                         <tbody>
                                                 <tr>
+                                                        <td>activityRepository</td>
+                                                  
+                                                        <td>
+                                                                    <code>Repository&lt;Activity&gt;</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
                                                         <td>settingsService</td>
                                                   
                                                         <td>
                                                                         <code><a href="../injectables/SettingsService.html" target="_self" >SettingsService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>userService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>walletService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/WalletService.html" target="_self" >WalletService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>flutterwaveService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/FlutterwaveService.html" target="_self" >FlutterwaveService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>transactionsService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/TransactionsService.html" target="_self" >TransactionsService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>bankService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/BankService.html" target="_self" >BankService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -160,26 +236,26 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="addNewSetting"></a>
+                    <a name="createNewAdmin"></a>
                     <span class="name">
                         <span class="modifier">Async</span>
-                        <span ><b>addNewSetting</b></span>
-                        <a href="#addNewSetting"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>createNewAdmin</b></span>
+                        <a href="#createNewAdmin"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>addNewSetting(createSettingDto: <a href="../classes/CreateSettingDto.html" target="_self">CreateSettingDto</a>)</code>
+                    <code>createNewAdmin(payload)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="11"
-                            class="link-to-prism">src/admin/admin.service.ts:11</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="28"
+                            class="link-to-prism">src/admin/admin.service.ts:28</a></div>
                 </td>
             </tr>
 
@@ -194,16 +270,12 @@
                             <thead>
                                 <tr>
                                     <td>Name</td>
-                                    <td>Type</td>
                                     <td>Optional</td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>createSettingDto</td>
-                                    <td>
-                                                <code><a href="../classes/CreateSettingDto.html" target="_self" >CreateSettingDto</a></code>
-                                    </td>
+                                    <td>payload</td>
 
                                     <td>
                                         No
@@ -231,26 +303,104 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="editSetting"></a>
+                    <a name="getAllActivities"></a>
                     <span class="name">
                         <span class="modifier">Async</span>
-                        <span ><b>editSetting</b></span>
-                        <a href="#editSetting"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>getAllActivities</b></span>
+                        <a href="#getAllActivities"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>editSetting(updateSettingDto: <a href="../classes/UpdateSettingDto.html" target="_self">UpdateSettingDto</a>, id)</code>
+                    <code>getAllActivities()</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="19"
-                            class="link-to-prism">src/admin/admin.service.ts:19</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="94"
+                            class="link-to-prism">src/admin/admin.service.ts:94</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>unknown</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getSummary"></a>
+                    <span class="name">
+                        <span class="modifier">Async</span>
+                        <span ><b>getSummary</b></span>
+                        <a href="#getSummary"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getSummary()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="43"
+                            class="link-to-prism">src/admin/admin.service.ts:43</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>unknown</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getUserActivities"></a>
+                    <span class="name">
+                        <span class="modifier">Async</span>
+                        <span ><b>getUserActivities</b></span>
+                        <a href="#getUserActivities"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getUserActivities(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="86"
+                            class="link-to-prism">src/admin/admin.service.ts:86</a></div>
                 </td>
             </tr>
 
@@ -271,88 +421,10 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>updateSettingDto</td>
-                                    <td>
-                                                <code><a href="../classes/UpdateSettingDto.html" target="_self" >UpdateSettingDto</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
                                     <td>id</td>
                                     <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                     </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>    <code>unknown</code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getSetting"></a>
-                    <span class="name">
-                        <span class="modifier">Async</span>
-                        <span ><b>getSetting</b></span>
-                        <a href="#getSetting"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>getSetting(id)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="15"
-                            class="link-to-prism">src/admin/admin.service.ts:15</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>id</td>
 
                                     <td>
                                         No
@@ -383,25 +455,104 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@nestjs/common&#x27;;
+import { BankService } from &#x27;src/bank/bank.service&#x27;;
+import { FlutterwaveService } from &#x27;src/flutterwave/flutterwave.service&#x27;;
 import { CreateSettingDto } from &#x27;src/settings/dto/create-setting.dto&#x27;;
 import { UpdateSettingDto } from &#x27;src/settings/dto/update-setting.dto&#x27;;
 import { SettingsService } from &#x27;src/settings/settings.service&#x27;;
-import { CreateAdminDto } from &#x27;./dto/create-admin.dto&#x27;;
-import { UpdateAdminDto } from &#x27;./dto/update-admin.dto&#x27;;
+import { TransactionsService } from &#x27;src/transactions/transactions.service&#x27;;
+import { CreateUserDto } from &#x27;src/user/dto/create-user.dto&#x27;;
+import { UserService } from &#x27;src/user/user.service&#x27;;
+import { WalletService } from &#x27;src/wallet/wallet.service&#x27;;
+import { Connection, Repository } from &#x27;typeorm&#x27;;
+import { Activity } from &#x27;./entities/activity.entity&#x27;;
+import { InjectRepository } from &#x27;@nestjs/typeorm&#x27;;
 
 @Injectable()
 export class AdminService {
-  constructor(private readonly settingsService: SettingsService) {}
-  async addNewSetting(createSettingDto: CreateSettingDto) {
-    return await this.settingsService.addSetting(createSettingDto);
+  constructor(
+    @InjectRepository(Activity)
+    private readonly activityRepository: Repository&lt;Activity&gt;,
+    private readonly settingsService: SettingsService,
+    private readonly userService: UserService,
+    private readonly walletService: WalletService,
+    private readonly flutterwaveService: FlutterwaveService,
+    private readonly transactionsService: TransactionsService,
+    private readonly bankService: BankService,
+  ) {}
+
+  async createNewAdmin(payload) {
+    try {
+      const admin &#x3D; await this.userService.createAdmin(payload);
+
+      return {
+        message: &#x27;Admin created successfully&#x27;,
+        data: {
+          admin,
+        },
+      };
+    } catch (error) {
+      throw error;
+    }
   }
 
+  async getSummary() {
+    try {
+      const { totalUsers } &#x3D; await this.userService.getTotalNumberOfUsers();
+
+      const { totalUsersNaira } &#x3D; await this.walletService.getTotalUsersNaira();
+
+      const walletBalance &#x3D; await this.bankService.getNairaWalletBAlance();
+
+      const { totalDeposits } &#x3D;
+        await this.transactionsService.getTotalDepositsBalance();
+
+      const { totalWithdrawals } &#x3D;
+        await this.transactionsService.getTotalWithdrawalsBalance();
+
+      const totalTransactions &#x3D; totalDeposits + totalWithdrawals;
+
+      return {
+        message: &#x27;Success&#x27;,
+        data: {
+          totalUsers,
+          totalUsersNaira,
+          ...walletBalance,
+          totalDeposits,
+          totalTransactions,
+          totalWithdrawals,
+        },
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  /*async addNewSetting(createSettingDto: CreateSettingDto) {
+    return await this.settingsService.addSetting(createSettingDto);
+  }
   async getSetting(id) {
     return await this.settingsService.getSetting(id);
   }
 
   async editSetting(updateSettingDto: UpdateSettingDto, id) {
     return await this.settingsService.updateSetting(id, updateSettingDto);
+  }
+*/
+  async getUserActivities(id: string) {
+    try {
+      return await this.activityRepository.find({ userid: id });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getAllActivities() {
+    try {
+      return await this.activityRepository.find();
+    } catch (error) {
+      throw error;
+    }
   }
 }
 </code></pre>

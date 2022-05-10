@@ -18,11 +18,11 @@ import { AdminService } from './admin.service';
 export class AdminController {
   constructor(private readonly adminService: AdminService) {}
 
-  @Public()
-  @Post('create')
-  createAdmin(@Body() createAdminDto) {
-    return this.adminService.createNewAdmin(createAdminDto);
-  }
+  // @Public()
+  // @Post('create')
+  // createAdmin(@Body() createAdminDto) {
+  //   return this.adminService.createNewAdmin(createAdminDto);
+  // }
 
   @Public()
   @Get('summary')
