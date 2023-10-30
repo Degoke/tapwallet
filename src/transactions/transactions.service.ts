@@ -78,7 +78,7 @@ export class TransactionsService {
   //     const reference = await getTransactionReference();
   //     const mockReferencePass = 'dfs23fhr7ntg0293039_PMCKDU_1';
   //     const mockReferenceFail = 'dfs23fhr7ntg0293039_PMCK_ST_FDU_1';
-  //     const narration = 'Tapmoney Withdrawal';
+  //     const narration = 'tapwallet Withdrawal';
 
   //     let payload;
   //     let newTransaction;

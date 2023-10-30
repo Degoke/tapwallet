@@ -132,7 +132,7 @@
 //           amount: response.data.amount,
 //           ownerid: user.id,
 //           merchantReference: response.data.tx_ref,
-//           tapmoneyReference: reference,
+//           tapwalletReference: reference,
 //           service: Services.FLUTTERWAVE,
 //           status: TransactionStatus.PENDING,
 //           details: response.data,
